@@ -1,0 +1,25 @@
+<h1 id="sequence-simulator-of-quantum-network-communication">SeQUeNCe: Simulator of QUantum Network Communication</h1>
+<p>SeQUeNCe is an open source, discrete-event simulator for quantum networks. As described in our paper, the simulator includes 5 modules on top of a simulation kernel: * Hardware * Entanglement Management * Resource Management * Network Management * Application</p>
+<p>These modules can be edited by users to define additional functionality and test protocol schemes, or may be used as-is to test network parameters and topologies.</p>
+<h2 id="installing">Installing</h2>
+<p>SeQUeNCe requires an installation of Python 3.7. this can be found at the <a href="https://www.python.org/downloads/">Python Website</a>. Then, simply download the package, navigate to its directory, and install with</p>
+<pre><code>$ pip install .</code></pre>
+<p>Or, using the included makefile,</p>
+<pre><code>$ make install</code></pre>
+<p>This will install the sequence library as well as the numpy, json5, and pandas dependancies.</p>
+<h2 id="usage-examples">Usage Examples</h2>
+<p>Many examples of SeQUeNCe in action can be found in the example folder. These include both quantum key distribution and entanglement distribution examples.</p>
+<h3 id="starlight-experiments">Starlight Experiments</h3>
+<p>Code for the experiments performed in our paper can be found in the file <code>starlight_experiments.py</code>. This script uses the <code>starlight.json</code> file (also within the example folder) to specify the network topology.</p>
+<h3 id="jupyter-notebook-examples">Jupyter Notebook Examples</h3>
+<p>The example folder contains several scripts that can be run with jupyter notebook for easy editing and visualization. These files require that the notebook package be installed:</p>
+<pre><code>$ pip install notebook</code></pre>
+<p>To run each file, simply run</p>
+<pre><code>$ jupyter notebook &lt;filename&gt;</code></pre>
+<p>These examples include: * <code>BB84_eg.ipynb</code>, which uses the BB84 protocol to distribute secure keys between two quantum nodes * <code>two_node_eg.ipynb</code>, which performs entanglement generation between two adjacent quantum routers * <code>three_node_eg_ep_es.ipynb</code>, which performs entanglement generation, purification, and swapping for a linear network of three quantum routers</p>
+<h2 id="additional-tools">Additional Tools</h2>
+<h3 id="network-visualization">Network Visualization</h3>
+<p>The example directory contains an example json file <code>starlight.json</code> to specify a network topology, and the utils directory contains the script <code>draw_topo.py</code> to visualize json files. To use this script, the Graphviz library must be installed. Installation information can be found on the <a href="https://www.graphviz.org/download/">Graphviz website</a>.</p>
+<p>To view a network, simply run the script and specify the relative location of your json file:</p>
+<pre><code>$ python utils/draw_topo.py example/starlight.json</code></pre>
+<p>This script also supports a flag <code>-m</code> to visualize BSM nodes created by default on quantum links between routers.</p>
