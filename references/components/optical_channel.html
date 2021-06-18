@@ -1,0 +1,492 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optical Channel &#8212; SeQUeNCe 0.2.3 documentation</title>
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Photon" href="photon.html" />
+    <link rel="prev" title="Memory" href="memory.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="photon.html" title="Photon"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="memory.html" title="Memory"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.2.3 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="top.html" accesskey="U">Components</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Optical Channel</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-src.components.optical_channel">
+<span id="optical-channel"></span><h1>Optical Channel<a class="headerlink" href="#module-src.components.optical_channel" title="Permalink to this headline">¶</a></h1>
+<p>Models for simulation of optical fiber channels.</p>
+<p>This module introduces the abstract OpticalChannel class for general optical fibers.
+It also defines the QuantumChannel class for transmission of qubits/photons and the ClassicalChannel class for transmission of classical control messages.
+OpticalChannels must be attached to nodes on both ends.</p>
+<dl class="py class">
+<dt id="src.components.optical_channel.ClassicalChannel">
+<em class="property">class </em><code class="sig-prename descclassname">src.components.optical_channel.</code><code class="sig-name descname">ClassicalChannel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">timeline</span><span class="p">:</span> <span class="n">Timeline</span></em>, <em class="sig-param"><span class="n">distance</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">delay</span><span class="o">=</span><span class="default_value">- 1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.optical_channel.ClassicalChannel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Optical channel for transmission of classical messages.</p>
+<p>Classical message transmission is assumed to be lossless.</p>
+<dl class="py attribute">
+<dt id="src.components.optical_channel.ClassicalChannel.name">
+<code class="sig-name descname">name</code><a class="headerlink" href="#src.components.optical_channel.ClassicalChannel.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>label for channel instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.optical_channel.ClassicalChannel.timeline">
+<code class="sig-name descname">timeline</code><a class="headerlink" href="#src.components.optical_channel.ClassicalChannel.timeline" title="Permalink to this definition">¶</a></dt>
+<dd><p>timeline for simulation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../kernel/timeline.html#src.kernel.timeline.Timeline" title="src.kernel.timeline.Timeline">Timeline</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.optical_channel.ClassicalChannel.sender">
+<code class="sig-name descname">sender</code><a class="headerlink" href="#src.components.optical_channel.ClassicalChannel.sender" title="Permalink to this definition">¶</a></dt>
+<dd><p>node at sending end of optical channel.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../topology/node.html#src.topology.node.Node" title="src.topology.node.Node">Node</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.optical_channel.ClassicalChannel.receiver">
+<code class="sig-name descname">receiver</code><a class="headerlink" href="#src.components.optical_channel.ClassicalChannel.receiver" title="Permalink to this definition">¶</a></dt>
+<dd><p>node at receiving end of optical channel.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../topology/node.html#src.topology.node.Node" title="src.topology.node.Node">Node</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.optical_channel.ClassicalChannel.distance">
+<code class="sig-name descname">distance</code><a class="headerlink" href="#src.components.optical_channel.ClassicalChannel.distance" title="Permalink to this definition">¶</a></dt>
+<dd><p>length of the fiber (in m).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.optical_channel.ClassicalChannel.light_speed">
+<code class="sig-name descname">light_speed</code><a class="headerlink" href="#src.components.optical_channel.ClassicalChannel.light_speed" title="Permalink to this definition">¶</a></dt>
+<dd><p>speed of light within the fiber (in m/ps).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.optical_channel.ClassicalChannel.delay">
+<code class="sig-name descname">delay</code><a class="headerlink" href="#src.components.optical_channel.ClassicalChannel.delay" title="Permalink to this definition">¶</a></dt>
+<dd><p>delay in message transmission (default distance / light_speed).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.components.optical_channel.ClassicalChannel.transmit">
+<code class="sig-name descname">transmit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">message</span><span class="p">:</span> <span class="n">Message</span></em>, <em class="sig-param"><span class="n">source</span><span class="p">:</span> <span class="n">Node</span></em>, <em class="sig-param"><span class="n">priority</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.components.optical_channel.ClassicalChannel.transmit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to transmit classical messages.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>message</strong> (<a class="reference internal" href="../misc/message.html#src.message.Message" title="src.message.Message"><em>Message</em></a>) – message to be transmitted.</p></li>
+<li><p><strong>source</strong> (<a class="reference internal" href="../topology/node.html#src.topology.node.Node" title="src.topology.node.Node"><em>Node</em></a>) – node sending the message.</p></li>
+<li><p><strong>priority</strong> (<em>int</em>) – priority of transmitted message (to resolve message reception conflicts).</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Side Effects:</dt><dd><p>Receiver node may receive the qubit (via the <cite>receive_qubit</cite> method).</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="src.components.optical_channel.OpticalChannel">
+<em class="property">class </em><code class="sig-prename descclassname">src.components.optical_channel.</code><code class="sig-name descname">OpticalChannel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">timeline</span><span class="p">:</span> <span class="n">Timeline</span></em>, <em class="sig-param"><span class="n">attenuation</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">distance</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">polarization_fidelity</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">light_speed</span><span class="p">:</span> <span class="n">float</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.optical_channel.OpticalChannel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parent class for optical fibers.</p>
+<dl class="py attribute">
+<dt id="src.components.optical_channel.OpticalChannel.name">
+<code class="sig-name descname">name</code><a class="headerlink" href="#src.components.optical_channel.OpticalChannel.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>label for channel instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.optical_channel.OpticalChannel.timeline">
+<code class="sig-name descname">timeline</code><a class="headerlink" href="#src.components.optical_channel.OpticalChannel.timeline" title="Permalink to this definition">¶</a></dt>
+<dd><p>timeline for simulation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../kernel/timeline.html#src.kernel.timeline.Timeline" title="src.kernel.timeline.Timeline">Timeline</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.optical_channel.OpticalChannel.sender">
+<code class="sig-name descname">sender</code><a class="headerlink" href="#src.components.optical_channel.OpticalChannel.sender" title="Permalink to this definition">¶</a></dt>
+<dd><p>node at sending end of optical channel.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../topology/node.html#src.topology.node.Node" title="src.topology.node.Node">Node</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.optical_channel.OpticalChannel.receiver">
+<code class="sig-name descname">receiver</code><a class="headerlink" href="#src.components.optical_channel.OpticalChannel.receiver" title="Permalink to this definition">¶</a></dt>
+<dd><p>node at receiving end of optical channel.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../topology/node.html#src.topology.node.Node" title="src.topology.node.Node">Node</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.optical_channel.OpticalChannel.atteunuation">
+<code class="sig-name descname">atteunuation</code><a class="headerlink" href="#src.components.optical_channel.OpticalChannel.atteunuation" title="Permalink to this definition">¶</a></dt>
+<dd><p>attenuation of the fiber (in dB/km).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.optical_channel.OpticalChannel.distance">
+<code class="sig-name descname">distance</code><a class="headerlink" href="#src.components.optical_channel.OpticalChannel.distance" title="Permalink to this definition">¶</a></dt>
+<dd><p>length of the fiber (in m).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.optical_channel.OpticalChannel.polarization_fidelity">
+<code class="sig-name descname">polarization_fidelity</code><a class="headerlink" href="#src.components.optical_channel.OpticalChannel.polarization_fidelity" title="Permalink to this definition">¶</a></dt>
+<dd><p>probability of no polarization error for a transmitted qubit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.optical_channel.OpticalChannel.light_speed">
+<code class="sig-name descname">light_speed</code><a class="headerlink" href="#src.components.optical_channel.OpticalChannel.light_speed" title="Permalink to this definition">¶</a></dt>
+<dd><p>speed of light within the fiber (in m/ps).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.components.optical_channel.OpticalChannel.init">
+<code class="sig-name descname">init</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.components.optical_channel.OpticalChannel.init" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to initialize entity (abstract).</p>
+<p>Entity <cite>init</cite> methods are invoked for all timeline entities when the timeline is initialized.
+This method can be used to perform any necessary functions before simulation.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="src.components.optical_channel.QuantumChannel">
+<em class="property">class </em><code class="sig-prename descclassname">src.components.optical_channel.</code><code class="sig-name descname">QuantumChannel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">timeline</span><span class="p">:</span> <span class="n">Timeline</span></em>, <em class="sig-param"><span class="n">attenuation</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">distance</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">polarization_fidelity</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">light_speed</span><span class="o">=</span><span class="default_value">0.0002</span></em>, <em class="sig-param"><span class="n">frequency</span><span class="o">=</span><span class="default_value">80000000.0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.optical_channel.QuantumChannel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Optical channel for transmission of photons/qubits.</p>
+<dl class="py attribute">
+<dt id="src.components.optical_channel.QuantumChannel.name">
+<code class="sig-name descname">name</code><a class="headerlink" href="#src.components.optical_channel.QuantumChannel.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>label for channel instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.optical_channel.QuantumChannel.timeline">
+<code class="sig-name descname">timeline</code><a class="headerlink" href="#src.components.optical_channel.QuantumChannel.timeline" title="Permalink to this definition">¶</a></dt>
+<dd><p>timeline for simulation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../kernel/timeline.html#src.kernel.timeline.Timeline" title="src.kernel.timeline.Timeline">Timeline</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.optical_channel.QuantumChannel.sender">
+<code class="sig-name descname">sender</code><a class="headerlink" href="#src.components.optical_channel.QuantumChannel.sender" title="Permalink to this definition">¶</a></dt>
+<dd><p>node at sending end of optical channel.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../topology/node.html#src.topology.node.Node" title="src.topology.node.Node">Node</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.optical_channel.QuantumChannel.receiver">
+<code class="sig-name descname">receiver</code><a class="headerlink" href="#src.components.optical_channel.QuantumChannel.receiver" title="Permalink to this definition">¶</a></dt>
+<dd><p>node at receiving end of optical channel.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../topology/node.html#src.topology.node.Node" title="src.topology.node.Node">Node</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.optical_channel.QuantumChannel.atteunuation">
+<code class="sig-name descname">atteunuation</code><a class="headerlink" href="#src.components.optical_channel.QuantumChannel.atteunuation" title="Permalink to this definition">¶</a></dt>
+<dd><p>attenuation of the fiber (in dB/km).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.optical_channel.QuantumChannel.distance">
+<code class="sig-name descname">distance</code><a class="headerlink" href="#src.components.optical_channel.QuantumChannel.distance" title="Permalink to this definition">¶</a></dt>
+<dd><p>length of the fiber (in m).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.optical_channel.QuantumChannel.polarization_fidelity">
+<code class="sig-name descname">polarization_fidelity</code><a class="headerlink" href="#src.components.optical_channel.QuantumChannel.polarization_fidelity" title="Permalink to this definition">¶</a></dt>
+<dd><p>probability of no polarization error for a transmitted qubit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.optical_channel.QuantumChannel.light_speed">
+<code class="sig-name descname">light_speed</code><a class="headerlink" href="#src.components.optical_channel.QuantumChannel.light_speed" title="Permalink to this definition">¶</a></dt>
+<dd><p>speed of light within the fiber (in m/ps).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.optical_channel.QuantumChannel.loss">
+<code class="sig-name descname">loss</code><a class="headerlink" href="#src.components.optical_channel.QuantumChannel.loss" title="Permalink to this definition">¶</a></dt>
+<dd><p>loss rate for transmitted photons (determined by attenuation).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.optical_channel.QuantumChannel.delay">
+<code class="sig-name descname">delay</code><a class="headerlink" href="#src.components.optical_channel.QuantumChannel.delay" title="Permalink to this definition">¶</a></dt>
+<dd><p>delay (in ps) of photon transmission (determined by light speed, distance).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.optical_channel.QuantumChannel.frequency">
+<code class="sig-name descname">frequency</code><a class="headerlink" href="#src.components.optical_channel.QuantumChannel.frequency" title="Permalink to this definition">¶</a></dt>
+<dd><p>maximum frequency of qubit transmission (in Hz).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.components.optical_channel.QuantumChannel.init">
+<code class="sig-name descname">init</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.components.optical_channel.QuantumChannel.init" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implementation of Entity interface (see base class).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.components.optical_channel.QuantumChannel.schedule_transmit">
+<code class="sig-name descname">schedule_transmit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">min_time</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#src.components.optical_channel.QuantumChannel.schedule_transmit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to schedule a time for photon transmission.</p>
+<p>Quantum Channels are limited by a frequency of transmission.
+This method returns the next available time for transmitting a photon.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>min_time</strong> (<em>int</em>) – minimum simulation time for transmission.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>simulation time for next available transmission window.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.components.optical_channel.QuantumChannel.transmit">
+<code class="sig-name descname">transmit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">qubit</span><span class="p">:</span> <span class="n">Photon</span></em>, <em class="sig-param"><span class="n">source</span><span class="p">:</span> <span class="n">Node</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.components.optical_channel.QuantumChannel.transmit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to transmit photon-encoded qubits.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>qubit</strong> (<a class="reference internal" href="photon.html#src.components.photon.Photon" title="src.components.photon.Photon"><em>Photon</em></a>) – photon to be transmitted.</p></li>
+<li><p><strong>source</strong> (<a class="reference internal" href="../topology/node.html#src.topology.node.Node" title="src.topology.node.Node"><em>Node</em></a>) – source node sending the qubit.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Side Effects:</dt><dd><p>Receiver node may receive the qubit (via the <cite>receive_qubit</cite> method).</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="memory.html"
+                        title="previous chapter">Memory</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="photon.html"
+                        title="next chapter">Photon</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/references/components/optical_channel.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="photon.html" title="Photon"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="memory.html" title="Memory"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.2.3 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="top.html" >Components</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Optical Channel</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+    </div>
+  </body>
+</html>

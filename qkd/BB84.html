@@ -1,0 +1,408 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BB84 &#8212; SeQUeNCe 0.2.0 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Cascade" href="cascade.html" />
+    <link rel="prev" title="Quantum Key Distribution" href="top.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="cascade.html" title="Cascade"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="top.html" title="Quantum Key Distribution"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">SeQUeNCe 0.2.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="top.html" accesskey="U">Quantum Key Distribution</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">BB84</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-src.qkd.BB84">
+<span id="bb84"></span><h1>BB84<a class="headerlink" href="#module-src.qkd.BB84" title="Permalink to this headline">¶</a></h1>
+<p>Definition of BB84 protocol implementation.</p>
+<p>This module provides an implementation of the BB84 protocol for quantum key distribution.
+The BB84 class must be attachedd to a node with suitable hardware, such as a QKDNode.
+Also included in this module are a function to pair protocol instances (required before the start of transmission) and the message type used by the protocol.</p>
+<dl class="py class">
+<dt id="src.qkd.BB84.BB84">
+<em class="property">class </em><code class="sig-prename descclassname">src.qkd.BB84.</code><code class="sig-name descname">BB84</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">own</span><span class="p">:</span> <span class="n">QKDNode</span></em>, <em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.qkd.BB84.BB84" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implementation of BB84 protocol.</p>
+<p>The BB84 protocol uses photons to create a secure key between two QKD Nodes.</p>
+<dl class="py attribute">
+<dt id="src.qkd.BB84.BB84.own">
+<code class="sig-name descname">own</code><a class="headerlink" href="#src.qkd.BB84.BB84.own" title="Permalink to this definition">¶</a></dt>
+<dd><p>node that protocol instance is attached to.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../topology/node.html#src.topology.node.QKDNode" title="src.topology.node.QKDNode">QKDNode</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.qkd.BB84.BB84.name">
+<code class="sig-name descname">name</code><a class="headerlink" href="#src.qkd.BB84.BB84.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>label for protocol instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.qkd.BB84.BB84.role">
+<code class="sig-name descname">role</code><a class="headerlink" href="#src.qkd.BB84.BB84.role" title="Permalink to this definition">¶</a></dt>
+<dd><p>determines if instance is “alice” or “bob” node.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.qkd.BB84.BB84.working">
+<code class="sig-name descname">working</code><a class="headerlink" href="#src.qkd.BB84.BB84.working" title="Permalink to this definition">¶</a></dt>
+<dd><p>shows if protocol is currently working on a key.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.qkd.BB84.BB84.ready">
+<code class="sig-name descname">ready</code><a class="headerlink" href="#src.qkd.BB84.BB84.ready" title="Permalink to this definition">¶</a></dt>
+<dd><p>used by alice to show if protocol currently processing a generate_key request.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.qkd.BB84.BB84.light_time">
+<code class="sig-name descname">light_time</code><a class="headerlink" href="#src.qkd.BB84.BB84.light_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>time to use laser (in s).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.qkd.BB84.BB84.start_time">
+<code class="sig-name descname">start_time</code><a class="headerlink" href="#src.qkd.BB84.BB84.start_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>simulation start time of key generation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.qkd.BB84.BB84.photon_delay">
+<code class="sig-name descname">photon_delay</code><a class="headerlink" href="#src.qkd.BB84.BB84.photon_delay" title="Permalink to this definition">¶</a></dt>
+<dd><p>time delay of photon (ps).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.qkd.BB84.BB84.basis_lists">
+<code class="sig-name descname">basis_lists</code><a class="headerlink" href="#src.qkd.BB84.BB84.basis_lists" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of bases that qubits are sent in.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>List[int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.qkd.BB84.BB84.bit_lists">
+<code class="sig-name descname">bit_lists</code><a class="headerlink" href="#src.qkd.BB84.BB84.bit_lists" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of 0/1 qubits sent (in bases from basis_lists).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>List[int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.qkd.BB84.BB84.key">
+<code class="sig-name descname">key</code><a class="headerlink" href="#src.qkd.BB84.BB84.key" title="Permalink to this definition">¶</a></dt>
+<dd><p>generated key as an integer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.qkd.BB84.BB84.key_bits">
+<code class="sig-name descname">key_bits</code><a class="headerlink" href="#src.qkd.BB84.BB84.key_bits" title="Permalink to this definition">¶</a></dt>
+<dd><p>generated key as a list of 0/1 bits.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>List[int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.qkd.BB84.BB84.another">
+<code class="sig-name descname">another</code><a class="headerlink" href="#src.qkd.BB84.BB84.another" title="Permalink to this definition">¶</a></dt>
+<dd><p>other BB84 protocol instance (on opposite node).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#src.qkd.BB84.BB84" title="src.qkd.BB84.BB84">BB84</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.qkd.BB84.BB84.key_lenghts">
+<code class="sig-name descname">key_lenghts</code><a class="headerlink" href="#src.qkd.BB84.BB84.key_lenghts" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of desired key lengths.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>List[int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.qkd.BB84.BB84.self.keys_left_list">
+<code class="sig-prename descclassname">self.</code><code class="sig-name descname">keys_left_list</code><a class="headerlink" href="#src.qkd.BB84.BB84.self.keys_left_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of desired number of keys.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>List[int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.qkd.BB84.BB84.self.end_run_times">
+<code class="sig-prename descclassname">self.</code><code class="sig-name descname">end_run_times</code><a class="headerlink" href="#src.qkd.BB84.BB84.self.end_run_times" title="Permalink to this definition">¶</a></dt>
+<dd><p>simulation time for end of each request.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>List[int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.qkd.BB84.BB84.received_message">
+<code class="sig-name descname">received_message</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">src</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">msg</span><span class="p">:</span> <span class="n"><a class="reference internal" href="../misc/message.html#src.message.Message" title="src.message.Message">src.message.Message</a></span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.qkd.BB84.BB84.received_message" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receive classical message from another node.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="src.qkd.BB84.BB84Message">
+<em class="property">class </em><code class="sig-prename descclassname">src.qkd.BB84.</code><code class="sig-name descname">BB84Message</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">msg_type</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#src.qkd.BB84.BB84MsgType" title="src.qkd.BB84.BB84MsgType">src.qkd.BB84.BB84MsgType</a></span></em>, <em class="sig-param"><span class="n">receiver</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.qkd.BB84.BB84Message" title="Permalink to this definition">¶</a></dt>
+<dd><p>Message used by BB84 protocols.</p>
+<p>This message contains all information passed between BB84 protocol instances.
+Messages of different types contain different information.</p>
+<dl class="py attribute">
+<dt id="src.qkd.BB84.BB84Message.msg_type">
+<code class="sig-name descname">msg_type</code><a class="headerlink" href="#src.qkd.BB84.BB84Message.msg_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>defines the message type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#src.qkd.BB84.BB84MsgType" title="src.qkd.BB84.BB84MsgType">BB84MsgType</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.qkd.BB84.BB84Message.receiver">
+<code class="sig-name descname">receiver</code><a class="headerlink" href="#src.qkd.BB84.BB84Message.receiver" title="Permalink to this definition">¶</a></dt>
+<dd><p>name of destination protocol instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.qkd.BB84.BB84Message.frequency">
+<code class="sig-name descname">frequency</code><a class="headerlink" href="#src.qkd.BB84.BB84Message.frequency" title="Permalink to this definition">¶</a></dt>
+<dd><p>frequency for qubit generation (if <cite>msg_type == BEGIN_PHOTON_PULSE</cite>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.qkd.BB84.BB84Message.light_time">
+<code class="sig-name descname">light_time</code><a class="headerlink" href="#src.qkd.BB84.BB84Message.light_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>lenght of time to send qubits (if <cite>msg_type == BEGIN_PHOTON_PULSE</cite>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.qkd.BB84.BB84Message.start_time">
+<code class="sig-name descname">start_time</code><a class="headerlink" href="#src.qkd.BB84.BB84Message.start_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>simulation start time of qubit pulse (if <cite>msg_type == BEGIN_PHOTON_PULSE</cite>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.qkd.BB84.BB84Message.wavelenght">
+<code class="sig-name descname">wavelenght</code><a class="headerlink" href="#src.qkd.BB84.BB84Message.wavelenght" title="Permalink to this definition">¶</a></dt>
+<dd><p>wavelength (in nm) of photons (if <cite>msg_type == BEGIN_PHOTON_PULSE</cite>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.qkd.BB84.BB84Message.bases">
+<code class="sig-name descname">bases</code><a class="headerlink" href="#src.qkd.BB84.BB84Message.bases" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of measurement bases (if <cite>msg_type == BASIS_LIST</cite>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>List[int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.qkd.BB84.BB84Message.indices">
+<code class="sig-name descname">indices</code><a class="headerlink" href="#src.qkd.BB84.BB84Message.indices" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of indices for matching bases (if <cite>msg_type == MATCHING_INDICES</cite>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>List[int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="src.qkd.BB84.BB84MsgType">
+<em class="property">class </em><code class="sig-prename descclassname">src.qkd.BB84.</code><code class="sig-name descname">BB84MsgType</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.qkd.BB84.BB84MsgType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines possible message types for BB84.</p>
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="top.html"
+                        title="previous chapter">Quantum Key Distribution</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="cascade.html"
+                        title="next chapter">Cascade</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/qkd/BB84.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="cascade.html" title="Cascade"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="top.html" title="Quantum Key Distribution"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">SeQUeNCe 0.2.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="top.html" >Quantum Key Distribution</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">BB84</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+    </div>
+  </body>
+</html>

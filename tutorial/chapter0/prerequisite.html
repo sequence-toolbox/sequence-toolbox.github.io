@@ -1,0 +1,171 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prerequisites &amp; Installation &#8212; SeQUeNCe 0.2.3 documentation</title>
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Chapter 1: Discrete Event Simulation" href="../chapter1/discrete-event-simulation.html" />
+    <link rel="prev" title="Welcome to the SeQUeNCe documentation page" href="../../index.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../chapter1/discrete-event-simulation.html" title="Chapter 1: Discrete Event Simulation"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../../index.html" title="Welcome to the SeQUeNCe documentation page"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.2.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Prerequisites &amp; Installation</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="prerequisites-installation">
+<h1>Prerequisites &amp; Installation<a class="headerlink" href="#prerequisites-installation" title="Permalink to this headline">¶</a></h1>
+<p>Thank you for downloading SeQUeNCe and welcome to the tutorial section of the documentation. The following 6 chapters will give an overview of the modules available in the simulator and how they can be used to build network simulations. In this first chapter we will review how to set up a working environment for SeQUeNCe.</p>
+<div class="section" id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="python-version">
+<h3>Python Version<a class="headerlink" href="#python-version" title="Permalink to this headline">¶</a></h3>
+<p>The simulator requires at least version 3.7 of Python. This can be found at the <a class="reference external" href="https://www.python.org/downloads/">Python Website</a>.</p>
+</div>
+<div class="section" id="dependencies">
+<h3>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h3>
+<p>The simulator requires the following Python libraries:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">numpy</span></code>, for mathematical computing tasks</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">json5</span></code> version 0.8.4, for interpretation of json configuration files</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pandas</span></code> version 0.24.2, for data processing</p></li>
+</ul>
+<p>These will be installed automatically with the simulator if they are not already present. Also note that the <code class="docutils literal notranslate"><span class="pre">sequence</span></code> library found on PyPI cannot be installed, as it will conflict with the simulator library.</p>
+</div>
+</div>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="create-virtual-environment">
+<h3>Create virtual environment<a class="headerlink" href="#create-virtual-environment" title="Permalink to this headline">¶</a></h3>
+<p>It is often useful to create a clean working directory from which to run the simulator. This can be easily achieved with the Python <code class="docutils literal notranslate"><span class="pre">venv</span></code> module. A new virtual environment can be created as</p>
+<div class="highlight-shell script notranslate"><div class="highlight"><pre><span></span>$ python3 -m venv path-to-venv
+</pre></div>
+</div>
+<p>which will create a new virtual environment at the specified path. It can then be activated with</p>
+<div class="highlight-shell script notranslate"><div class="highlight"><pre><span></span>$ source path-to-venv/bin/activate
+</pre></div>
+</div>
+<p>The shell prompt should now show the name of the virtual environment.</p>
+</div>
+<div class="section" id="install-sequence">
+<h3>Install SeQUeNCe<a class="headerlink" href="#install-sequence" title="Permalink to this headline">¶</a></h3>
+<p>We can now download and install the simulator. The code can be cloned easily using <code class="docutils literal notranslate"><span class="pre">git</span></code>, and installed with the native python installer <code class="docutils literal notranslate"><span class="pre">pip</span></code>:</p>
+<div class="highlight-shell script notranslate"><div class="highlight"><pre><span></span>$ git clone https://xgitlab.cels.anl.gov/xiaoliang/sequence-python.git
+$ cd Sequence-python
+$ pip install .
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span></code> will use the <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> file to install necessary dependencies and the <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> file to build the <code class="docutils literal notranslate"><span class="pre">sequence</span></code> library. The simulator is now ready to use.</p>
+</div>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Prerequisites &amp; Installation</a><ul>
+<li><a class="reference internal" href="#prerequisites">Prerequisites</a><ul>
+<li><a class="reference internal" href="#python-version">Python Version</a></li>
+<li><a class="reference internal" href="#dependencies">Dependencies</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#installation">Installation</a><ul>
+<li><a class="reference internal" href="#create-virtual-environment">Create virtual environment</a></li>
+<li><a class="reference internal" href="#install-sequence">Install SeQUeNCe</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../../index.html"
+                        title="previous chapter">Welcome to the SeQUeNCe documentation page</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../chapter1/discrete-event-simulation.html"
+                        title="next chapter">Chapter 1: Discrete Event Simulation</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/tutorial/chapter0/prerequisite.md.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../chapter1/discrete-event-simulation.html" title="Chapter 1: Discrete Event Simulation"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../../index.html" title="Welcome to the SeQUeNCe documentation page"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.2.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Prerequisites &amp; Installation</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+    </div>
+  </body>
+</html>

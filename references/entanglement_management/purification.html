@@ -1,0 +1,346 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entanglement Purification &#8212; SeQUeNCe 0.2.3 documentation</title>
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Entanglement Swapping" href="swapping.html" />
+    <link rel="prev" title="Entanglement Generation" href="generation.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="swapping.html" title="Entanglement Swapping"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="generation.html" title="Entanglement Generation"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.2.3 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="top.html" accesskey="U">Entanglement Management</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Entanglement Purification</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-src.entanglement_management.purification">
+<span id="entanglement-purification"></span><h1>Entanglement Purification<a class="headerlink" href="#module-src.entanglement_management.purification" title="Permalink to this headline">¶</a></h1>
+<p>Code for BBPSSW entanglement purification.</p>
+<p>This module defines code to support the BBPSSW protocol for entanglement purification.
+Success results are pre-determined based on network parameters.
+Also defined is the message type used by the BBPSSW code.</p>
+<dl class="py class">
+<dt id="src.entanglement_management.purification.BBPSSW">
+<em class="property">class </em><code class="sig-prename descclassname">src.entanglement_management.purification.</code><code class="sig-name descname">BBPSSW</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">own</span><span class="p">:</span> <span class="n">Node</span></em>, <em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">kept_memo</span><span class="p">:</span> <span class="n">Memory</span></em>, <em class="sig-param"><span class="n">meas_memo</span><span class="p">:</span> <span class="n">Memory</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.entanglement_management.purification.BBPSSW" title="Permalink to this definition">¶</a></dt>
+<dd><p>Purification protocol instance.</p>
+<p>This class provides an implementation of the BBPSSW purification protocol.
+It should be instantiated on a quantum router node.</p>
+<dl class="simple">
+<dt>Variables:</dt><dd><p>BBPSSW.circuit (Circuit): circuit that purifies entangled memories.</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="src.entanglement_management.purification.BBPSSW.own">
+<code class="sig-name descname">own</code><a class="headerlink" href="#src.entanglement_management.purification.BBPSSW.own" title="Permalink to this definition">¶</a></dt>
+<dd><p>node that protocol instance is attached to.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../topology/node.html#src.topology.node.QuantumRouter" title="src.topology.node.QuantumRouter">QuantumRouter</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.entanglement_management.purification.BBPSSW.name">
+<code class="sig-name descname">name</code><a class="headerlink" href="#src.entanglement_management.purification.BBPSSW.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>label for protocol instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.entanglement_management.purification.BBPSSW.kept_memo">
+<code class="sig-name descname">kept_memo</code><a class="headerlink" href="#src.entanglement_management.purification.BBPSSW.kept_memo" title="Permalink to this definition">¶</a></dt>
+<dd><p>memory to be purified by the protocol (should already be entangled).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.entanglement_management.purification.BBPSSW.meas_memo">
+<code class="sig-name descname">meas_memo</code><a class="headerlink" href="#src.entanglement_management.purification.BBPSSW.meas_memo" title="Permalink to this definition">¶</a></dt>
+<dd><p>memory to measure and discart (should already be entangled).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.entanglement_management.purification.BBPSSW.another">
+<code class="sig-name descname">another</code><a class="headerlink" href="#src.entanglement_management.purification.BBPSSW.another" title="Permalink to this definition">¶</a></dt>
+<dd><p>pointer of BBPSSW on another side (may be removed in the future).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#src.entanglement_management.purification.BBPSSW" title="src.entanglement_management.purification.BBPSSW">BBPSSW</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.entanglement_management.purification.BBPSSW.meas_res">
+<code class="sig-name descname">meas_res</code><a class="headerlink" href="#src.entanglement_management.purification.BBPSSW.meas_res" title="Permalink to this definition">¶</a></dt>
+<dd><p>measurement result from circuit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.entanglement_management.purification.BBPSSW.improved_fidelity">
+<em class="property">static </em><code class="sig-name descname">improved_fidelity</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">F</span><span class="p">:</span> <span class="n">float</span></em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#src.entanglement_management.purification.BBPSSW.improved_fidelity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to calculate fidelity after purification.</p>
+<p>Formula comes from Dur and Briegel (2007) formula (18) page 14.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>F</strong> (<em>float</em>) – fidelity of entanglement.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.entanglement_management.purification.BBPSSW.is_ready">
+<code class="sig-name descname">is_ready</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#src.entanglement_management.purification.BBPSSW.is_ready" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to check if protocol is ready to start (abstract).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>if protocol is ready or not.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.entanglement_management.purification.BBPSSW.memory_expire">
+<code class="sig-name descname">memory_expire</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">memory</span><span class="p">:</span> <span class="n">Memory</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.entanglement_management.purification.BBPSSW.memory_expire" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to receive memory expiration events.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>memory</strong> (<a class="reference internal" href="../components/memory.html#src.components.memory.Memory" title="src.components.memory.Memory"><em>Memory</em></a>) – memory that has expired.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Side Effects:</dt><dd><p>Will call <cite>update_resource_manager</cite> method.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.entanglement_management.purification.BBPSSW.received_message">
+<code class="sig-name descname">received_message</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">src</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">msg</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#src.entanglement_management.purification.BBPSSWMessage" title="src.entanglement_management.purification.BBPSSWMessage">src.entanglement_management.purification.BBPSSWMessage</a></span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.entanglement_management.purification.BBPSSW.received_message" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to receive messages.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>src</strong> (<em>str</em>) – name of node that sent the message.</p></li>
+<li><p><strong>msg</strong> (<em>BBPSSW message</em>) – message received.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Side Effects:</dt><dd><p>Will call <cite>update_resource_manager</cite> method.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.entanglement_management.purification.BBPSSW.release">
+<code class="sig-name descname">release</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.entanglement_management.purification.BBPSSW.release" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to release attached memories.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.entanglement_management.purification.BBPSSW.set_others">
+<code class="sig-name descname">set_others</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">another</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#src.entanglement_management.purification.BBPSSW" title="src.entanglement_management.purification.BBPSSW">src.entanglement_management.purification.BBPSSW</a></span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.entanglement_management.purification.BBPSSW.set_others" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to set other entanglement protocol instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>another</strong> (<a class="reference internal" href="#src.entanglement_management.purification.BBPSSW" title="src.entanglement_management.purification.BBPSSW"><em>BBPSSW</em></a>) – other purification protocol instance.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.entanglement_management.purification.BBPSSW.start">
+<code class="sig-name descname">start</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.entanglement_management.purification.BBPSSW.start" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to start entanglement purification.</p>
+<p>Run the circuit below on two pairs of entangled memories on both sides of protocol.</p>
+<p>o ——-(x)———-| M |
+.         |
+.   o —-.—————-
+.   .
+.   .
+.   o
+.
+o</p>
+<p>The overall circuit is shown below:</p>
+<blockquote>
+<div><p>o ——-(x)———-| M |
+.         |
+.   o —-.—————-
+.   .
+.   .
+.   o —-.—————-
+.         |
+o ——-(x)———-| M |</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Side Effects:</dt><dd><p>May update parameters of kept memory.
+Will send message to other protocol instance.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.entanglement_management.purification.BBPSSW.success_probability">
+<em class="property">static </em><code class="sig-name descname">success_probability</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">F</span><span class="p">:</span> <span class="n">float</span></em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#src.entanglement_management.purification.BBPSSW.success_probability" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to calculate probability of purification success.</p>
+<p>Formula comes from Dur and Briegel (2007) page 14.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>F</strong> (<em>float</em>) – fidelity of entanglement.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="src.entanglement_management.purification.BBPSSWMessage">
+<em class="property">class </em><code class="sig-prename descclassname">src.entanglement_management.purification.</code><code class="sig-name descname">BBPSSWMessage</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">msg_type</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#src.entanglement_management.purification.BBPSSWMsgType" title="src.entanglement_management.purification.BBPSSWMsgType">src.entanglement_management.purification.BBPSSWMsgType</a></span></em>, <em class="sig-param"><span class="n">receiver</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.entanglement_management.purification.BBPSSWMessage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Message used by entanglement purification protocols.</p>
+<p>This message contains all information passed between purification protocol instances.</p>
+<dl class="py attribute">
+<dt id="src.entanglement_management.purification.BBPSSWMessage.msg_type">
+<code class="sig-name descname">msg_type</code><a class="headerlink" href="#src.entanglement_management.purification.BBPSSWMessage.msg_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>defines the message type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#src.entanglement_management.purification.BBPSSWMsgType" title="src.entanglement_management.purification.BBPSSWMsgType">BBPSSWMsgType</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.entanglement_management.purification.BBPSSWMessage.receiver">
+<code class="sig-name descname">receiver</code><a class="headerlink" href="#src.entanglement_management.purification.BBPSSWMessage.receiver" title="Permalink to this definition">¶</a></dt>
+<dd><p>name of destination protocol instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="src.entanglement_management.purification.BBPSSWMsgType">
+<em class="property">class </em><code class="sig-prename descclassname">src.entanglement_management.purification.</code><code class="sig-name descname">BBPSSWMsgType</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.entanglement_management.purification.BBPSSWMsgType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines possible message types for entanglement purification</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="src.entanglement_management.purification.random">
+<code class="sig-prename descclassname">src.entanglement_management.purification.</code><code class="sig-name descname">random</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">size</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.entanglement_management.purification.random" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return random floats in the half-open interval [0.0, 1.0). Alias for
+<cite>random_sample</cite> to ease forward-porting to the new random API.</p>
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="generation.html"
+                        title="previous chapter">Entanglement Generation</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="swapping.html"
+                        title="next chapter">Entanglement Swapping</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/references/entanglement_management/purification.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="swapping.html" title="Entanglement Swapping"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="generation.html" title="Entanglement Generation"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.2.3 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="top.html" >Entanglement Management</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Entanglement Purification</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+    </div>
+  </body>
+</html>

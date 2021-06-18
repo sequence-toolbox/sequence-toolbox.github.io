@@ -1,0 +1,289 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beam Splitter &#8212; SeQUeNCe 0.2.3 documentation</title>
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="BSM" href="bsm.html" />
+    <link rel="prev" title="Components" href="top.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="bsm.html" title="BSM"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="top.html" title="Components"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.2.3 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="top.html" accesskey="U">Components</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Beam Splitter</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-src.components.beam_splitter">
+<span id="beam-splitter"></span><h1>Beam Splitter<a class="headerlink" href="#module-src.components.beam_splitter" title="Permalink to this headline">¶</a></h1>
+<p>Models for simulation of a polarization beam splitter.</p>
+<p>This module defines the class BeamSplitter, which is used for simulating polarization beam splitters.
+The beam splitter receives photons with polarization encoding and forwards photons to one of two
+attached receivers (which can be any entity).</p>
+<dl class="py class">
+<dt id="src.components.beam_splitter.BeamSplitter">
+<em class="property">class </em><code class="sig-prename descclassname">src.components.beam_splitter.</code><code class="sig-name descname">BeamSplitter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">timeline</span><span class="p">:</span> <span class="n">Timeline</span></em>, <em class="sig-param"><span class="n">fidelity</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.beam_splitter.BeamSplitter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class modeling a polarization beamsplitter.</p>
+<p>Simulates operation of a polarization beam splitter (PBS).
+The BeamSplitter class can be configured to measure polarization in different bases at different times.</p>
+<dl class="py attribute">
+<dt id="src.components.beam_splitter.BeamSplitter.name">
+<code class="sig-name descname">name</code><a class="headerlink" href="#src.components.beam_splitter.BeamSplitter.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>label for beamsplitter instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.beam_splitter.BeamSplitter.timeline">
+<code class="sig-name descname">timeline</code><a class="headerlink" href="#src.components.beam_splitter.BeamSplitter.timeline" title="Permalink to this definition">¶</a></dt>
+<dd><p>timeline for simulation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../kernel/timeline.html#src.kernel.timeline.Timeline" title="src.kernel.timeline.Timeline">Timeline</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.beam_splitter.BeamSplitter.fidelity">
+<code class="sig-name descname">fidelity</code><a class="headerlink" href="#src.components.beam_splitter.BeamSplitter.fidelity" title="Permalink to this definition">¶</a></dt>
+<dd><p>probability of transmitting a received photon.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.beam_splitter.BeamSplitter.receivers">
+<code class="sig-name descname">receivers</code><a class="headerlink" href="#src.components.beam_splitter.BeamSplitter.receivers" title="Permalink to this definition">¶</a></dt>
+<dd><p>entities to receive transmitted photons.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>List[Entities]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.beam_splitter.BeamSplitter.start_time">
+<code class="sig-name descname">start_time</code><a class="headerlink" href="#src.components.beam_splitter.BeamSplitter.start_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>start time (in ps) of photon interaction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.beam_splitter.BeamSplitter.frequency">
+<code class="sig-name descname">frequency</code><a class="headerlink" href="#src.components.beam_splitter.BeamSplitter.frequency" title="Permalink to this definition">¶</a></dt>
+<dd><p>frequency with which to switch measurement bases.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.beam_splitter.BeamSplitter.basis_list">
+<code class="sig-name descname">basis_list</code><a class="headerlink" href="#src.components.beam_splitter.BeamSplitter.basis_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>0/1 indices of measurement bases over time.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>List[int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.components.beam_splitter.BeamSplitter.get">
+<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">photon</span><span class="p">:</span> <span class="n"><a class="reference internal" href="photon.html#src.components.photon.Photon" title="src.components.photon.Photon">src.components.photon.Photon</a></span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.components.beam_splitter.BeamSplitter.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to receive a photon for measurement.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>photon</strong> (<a class="reference internal" href="photon.html#src.components.photon.Photon" title="src.components.photon.Photon"><em>Photon</em></a>) – photon to measure (must have polarization encoding)</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Side Effects:</dt><dd><p>May call get method of one receiver from the receivers attribute if start_time, frequency, and basis_list attributes are set up properly.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.components.beam_splitter.BeamSplitter.init">
+<code class="sig-name descname">init</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.components.beam_splitter.BeamSplitter.init" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implementation of Entity interface (see base class).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.components.beam_splitter.BeamSplitter.set_basis_list">
+<code class="sig-name descname">set_basis_list</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">basis_list</span><span class="p">:</span> <span class="n">List<span class="p">[</span>int<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">start_time</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">frequency</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.components.beam_splitter.BeamSplitter.set_basis_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the basis_list, start_time, and frequency attributes.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.components.beam_splitter.BeamSplitter.set_receiver">
+<code class="sig-name descname">set_receiver</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">index</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">receiver</span><span class="p">:</span> <span class="n"><a class="reference internal" href="../kernel/entity.html#src.kernel.entity.Entity" title="src.kernel.entity.Entity">src.kernel.entity.Entity</a></span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.components.beam_splitter.BeamSplitter.set_receiver" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the receivers attribute at the specified index.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="src.components.beam_splitter.random_sample">
+<code class="sig-prename descclassname">src.components.beam_splitter.</code><code class="sig-name descname">random_sample</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">size</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.beam_splitter.random_sample" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return random floats in the half-open interval [0.0, 1.0).</p>
+<p>Results are from the “continuous uniform” distribution over the
+stated interval.  To sample <span class="math notranslate nohighlight">\(Unif[a, b), b &gt; a\)</span> multiply
+the output of <cite>random_sample</cite> by <cite>(b-a)</cite> and add <cite>a</cite>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span> <span class="o">*</span> <span class="n">random_sample</span><span class="p">()</span> <span class="o">+</span> <span class="n">a</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>New code should use the <code class="docutils literal notranslate"><span class="pre">random</span></code> method of a <code class="docutils literal notranslate"><span class="pre">default_rng()</span></code>
+instance instead; see <cite>random-quick-start</cite>.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>size</strong> (<em>int</em><em> or </em><em>tuple of ints</em><em>, </em><em>optional</em>) – Output shape.  If the given shape is, e.g., <code class="docutils literal notranslate"><span class="pre">(m,</span> <span class="pre">n,</span> <span class="pre">k)</span></code>, then
+<code class="docutils literal notranslate"><span class="pre">m</span> <span class="pre">*</span> <span class="pre">n</span> <span class="pre">*</span> <span class="pre">k</span></code> samples are drawn.  Default is None, in which case a
+single value is returned.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>out</strong> – Array of random floats of shape <cite>size</cite> (unless <code class="docutils literal notranslate"><span class="pre">size=None</span></code>, in which
+case a single float is returned).</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float or ndarray of floats</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><code class="xref py py-func docutils literal notranslate"><span class="pre">Generator.random()</span></code></dt><dd><p>which should be used for new code.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random_sample</span><span class="p">()</span>
+<span class="go">0.47108547995356098 # random</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random_sample</span><span class="p">())</span>
+<span class="go">&lt;class &#39;float&#39;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random_sample</span><span class="p">((</span><span class="mi">5</span><span class="p">,))</span>
+<span class="go">array([ 0.30220482,  0.86820401,  0.1654503 ,  0.11659149,  0.54323428]) # random</span>
+</pre></div>
+</div>
+<p>Three-by-two array of random numbers from [-5, 0):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="mi">5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random_sample</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span> <span class="o">-</span> <span class="mi">5</span>
+<span class="go">array([[-3.99149989, -0.52338984], # random</span>
+<span class="go">       [-2.99091858, -0.79479508],</span>
+<span class="go">       [-1.23204345, -1.75224494]])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="top.html"
+                        title="previous chapter">Components</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="bsm.html"
+                        title="next chapter">BSM</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/references/components/beam_splitter.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="bsm.html" title="BSM"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="top.html" title="Components"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.2.3 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="top.html" >Components</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Beam Splitter</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+    </div>
+  </body>
+</html>

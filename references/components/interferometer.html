@@ -1,0 +1,208 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interferometer &#8212; SeQUeNCe 0.2.3 documentation</title>
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Light Source" href="light_source.html" />
+    <link rel="prev" title="Detector" href="detector.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="light_source.html" title="Light Source"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="detector.html" title="Detector"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.2.3 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="top.html" accesskey="U">Components</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Interferometer</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-src.components.interferometer">
+<span id="interferometer"></span><h1>Interferometer<a class="headerlink" href="#module-src.components.interferometer" title="Permalink to this headline">¶</a></h1>
+<p>Model for simulation of a Mach-Zehnder interferometer.</p>
+<p>This module introduces a model for simulation of a Mach-Zehnder interferometer (MZI), used to measure time bin encoded qubits in the X-basis.
+Interferometers are usually instantiated as part of a QSDetector object, defined in the <cite>detector.py</cite> module.</p>
+<dl class="py class">
+<dt id="src.components.interferometer.Interferometer">
+<em class="property">class </em><code class="sig-prename descclassname">src.components.interferometer.</code><code class="sig-name descname">Interferometer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">timeline</span><span class="p">:</span> <span class="n">Timeline</span></em>, <em class="sig-param"><span class="n">path_diff</span></em>, <em class="sig-param"><span class="n">phase_error</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.interferometer.Interferometer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class modeling a Mach-Zehnder interferometer (MZI).</p>
+<p>Useful for measurement of time bin encoded photons in the X-basis.</p>
+<dl class="py attribute">
+<dt id="src.components.interferometer.Interferometer.name">
+<code class="sig-name descname">name</code><a class="headerlink" href="#src.components.interferometer.Interferometer.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>label for beamsplitter instance</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.interferometer.Interferometer.timeline">
+<code class="sig-name descname">timeline</code><a class="headerlink" href="#src.components.interferometer.Interferometer.timeline" title="Permalink to this definition">¶</a></dt>
+<dd><p>timeline for simulation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../kernel/timeline.html#src.kernel.timeline.Timeline" title="src.kernel.timeline.Timeline">Timeline</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.interferometer.Interferometer.path_difference">
+<code class="sig-name descname">path_difference</code><a class="headerlink" href="#src.components.interferometer.Interferometer.path_difference" title="Permalink to this definition">¶</a></dt>
+<dd><p>difference (in ps) of photon transit time in interferometer branches</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.interferometer.Interferometer.phase_error">
+<code class="sig-name descname">phase_error</code><a class="headerlink" href="#src.components.interferometer.Interferometer.phase_error" title="Permalink to this definition">¶</a></dt>
+<dd><p>phase error applied to measurement</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.interferometer.Interferometer.receivers">
+<code class="sig-name descname">receivers</code><a class="headerlink" href="#src.components.interferometer.Interferometer.receivers" title="Permalink to this definition">¶</a></dt>
+<dd><p>entities to receive transmitted photons</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>List[Entities]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.components.interferometer.Interferometer.get">
+<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">photon</span><span class="p">:</span> <span class="n">Photon</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.components.interferometer.Interferometer.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to receive a photon for measurement.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>photon</strong> (<a class="reference internal" href="photon.html#src.components.photon.Photon" title="src.components.photon.Photon"><em>Photon</em></a>) – photon to measure (must have polarization encoding)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Side Effects:</dt><dd><p>May call get method of one attached receiver from the receivers attribute.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.components.interferometer.Interferometer.init">
+<code class="sig-name descname">init</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.components.interferometer.Interferometer.init" title="Permalink to this definition">¶</a></dt>
+<dd><p>See base class.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.components.interferometer.Interferometer.set_receiver">
+<code class="sig-name descname">set_receiver</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">index</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">receiver</span><span class="p">:</span> <span class="n">Detector</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.components.interferometer.Interferometer.set_receiver" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the receivers attribute at the specified index.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="detector.html"
+                        title="previous chapter">Detector</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="light_source.html"
+                        title="next chapter">Light Source</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/references/components/interferometer.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="light_source.html" title="Light Source"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="detector.html" title="Detector"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.2.3 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="top.html" >Components</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Interferometer</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+    </div>
+  </body>
+</html>

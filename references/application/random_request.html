@@ -1,0 +1,321 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Request &#8212; SeQUeNCe 0.2.3 documentation</title>
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Topology" href="../topology/top.html" />
+    <link rel="prev" title="Application" href="top.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../topology/top.html" title="Topology"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="top.html" title="Application"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.2.3 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="top.html" accesskey="U">Application</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Random Request</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-src.app.random_request">
+<span id="random-request"></span><h1>Random Request<a class="headerlink" href="#module-src.app.random_request" title="Permalink to this headline">¶</a></h1>
+<p>Code for a randomozed application</p>
+<p>This module defines the RandomRequestApp, which will create random entanglement requests repeatedly.
+Useful for testing network properties and throughputs.</p>
+<dl class="py class">
+<dt id="src.app.random_request.RandomRequestApp">
+<em class="property">class </em><code class="sig-prename descclassname">src.app.random_request.</code><code class="sig-name descname">RandomRequestApp</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">node</span><span class="p">:</span> <span class="n"><a class="reference internal" href="../topology/node.html#src.topology.node.QuantumRouter" title="src.topology.node.QuantumRouter">src.topology.node.QuantumRouter</a></span></em>, <em class="sig-param"><span class="n">others</span><span class="p">:</span> <span class="n">List<span class="p">[</span>str<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">seed</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.app.random_request.RandomRequestApp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Code for the random request application.</p>
+<p>This application will create a request for entanglement with a random node (and with other random parameters).
+If the request is accepted, a new request will be made once it has expired.
+Otherwise, a new request will be made immediately.
+The responder and fidelity of failed request will be kept in the new request.</p>
+<dl class="py attribute">
+<dt id="src.app.random_request.RandomRequestApp.node">
+<code class="sig-name descname">node</code><a class="headerlink" href="#src.app.random_request.RandomRequestApp.node" title="Permalink to this definition">¶</a></dt>
+<dd><p>Node that code is attached to.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../topology/node.html#src.topology.node.QuantumRouter" title="src.topology.node.QuantumRouter">QuantumRouter</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.app.random_request.RandomRequestApp.others">
+<code class="sig-name descname">others</code><a class="headerlink" href="#src.app.random_request.RandomRequestApp.others" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of names for available other nodes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>List[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.app.random_request.RandomRequestApp.rg">
+<code class="sig-name descname">rg</code><a class="headerlink" href="#src.app.random_request.RandomRequestApp.rg" title="Permalink to this definition">¶</a></dt>
+<dd><p>random number generator for application.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>numpy.random.default_rng</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.app.random_request.RandomRequestApp.cur_reserve">
+<code class="sig-name descname">cur_reserve</code><a class="headerlink" href="#src.app.random_request.RandomRequestApp.cur_reserve" title="Permalink to this definition">¶</a></dt>
+<dd><p>list describing current reservation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>List[any]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.app.random_request.RandomRequestApp.request_time">
+<code class="sig-name descname">request_time</code><a class="headerlink" href="#src.app.random_request.RandomRequestApp.request_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>simulation time at which current reservation requested.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.app.random_request.RandomRequestApp.memory_counter">
+<code class="sig-name descname">memory_counter</code><a class="headerlink" href="#src.app.random_request.RandomRequestApp.memory_counter" title="Permalink to this definition">¶</a></dt>
+<dd><p>number of successfully received memories.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.app.random_request.RandomRequestApp.wait_time">
+<code class="sig-name descname">wait_time</code><a class="headerlink" href="#src.app.random_request.RandomRequestApp.wait_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>aggregates times between request and accepted reservation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>List[int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.app.random_request.RandomRequestApp.throughput">
+<code class="sig-name descname">throughput</code><a class="headerlink" href="#src.app.random_request.RandomRequestApp.throughput" title="Permalink to this definition">¶</a></dt>
+<dd><p>aggregates average rate of memory entanglement per reservation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>List[float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.app.random_request.RandomRequestApp.reserves">
+<code class="sig-name descname">reserves</code><a class="headerlink" href="#src.app.random_request.RandomRequestApp.reserves" title="Permalink to this definition">¶</a></dt>
+<dd><p>aggregates previous reservations</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>List[List[any]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.app.random_request.RandomRequestApp.memo_to_reserve">
+<code class="sig-name descname">memo_to_reserve</code><a class="headerlink" href="#src.app.random_request.RandomRequestApp.memo_to_reserve" title="Permalink to this definition">¶</a></dt>
+<dd><p>mapping of memory index to corresponding reservation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Dict[int, <a class="reference internal" href="../network_management/reservation.html#src.network_management.reservation.Reservation" title="src.network_management.reservation.Reservation">Reservation</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.app.random_request.RandomRequestApp.get_memory">
+<code class="sig-name descname">get_memory</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">info</span><span class="p">:</span> <span class="n">MemoryInfo</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.app.random_request.RandomRequestApp.get_memory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to receive entangled memories.</p>
+<p>Will check if the received memory is qualified.
+If it’s a qualified memory, the application sets memory to RAW state and release back to resource manager.
+The counter of entanglement memories, ‘memory_counter’, is added.
+Otherwise, the application does not modify the state of memory and release back to the resource manager.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>info</strong> (<a class="reference internal" href="../resource_management/memory_manager.html#src.resource_management.memory_manager.MemoryInfo" title="src.resource_management.memory_manager.MemoryInfo"><em>MemoryInfo</em></a>) – info on the qualified entangled memory.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.app.random_request.RandomRequestApp.get_other_reservation">
+<code class="sig-name descname">get_other_reservation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">reservation</span><span class="p">:</span> <span class="n">Reservation</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.app.random_request.RandomRequestApp.get_other_reservation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to add the approved reservation that is requested by other nodes</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>reservation</strong> (<a class="reference internal" href="../network_management/reservation.html#src.network_management.reservation.Reservation" title="src.network_management.reservation.Reservation"><em>Reservation</em></a>) – reservation that uses the node of application as the responder</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Side Effects:</dt><dd><p>Will add calls to <cite>add_memo_reserve_map</cite> and <cite>remove_memo_reserve_map</cite> methods.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.app.random_request.RandomRequestApp.get_reserve_res">
+<code class="sig-name descname">get_reserve_res</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">reservation</span><span class="p">:</span> <span class="n">Reservation</span></em>, <em class="sig-param"><span class="n">result</span><span class="p">:</span> <span class="n">bool</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.app.random_request.RandomRequestApp.get_reserve_res" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to receive reservation result from network manager.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>reservation</strong> (<a class="reference internal" href="../network_management/reservation.html#src.network_management.reservation.Reservation" title="src.network_management.reservation.Reservation"><em>Reservation</em></a>) – reservation that has been completed.</p></li>
+<li><p><strong>result</strong> (<em>bool</em>) – result of the request (approved/rejected).</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Side Effects:</dt><dd><p>May schedule a start/retry event based on reservation result.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.app.random_request.RandomRequestApp.retry">
+<code class="sig-name descname">retry</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">responder</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">fidelity</span><span class="p">:</span> <span class="n">float</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.app.random_request.RandomRequestApp.retry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to retry a failed request.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>responder</strong> (<em>str</em>) – responder node of failed request.</p></li>
+<li><p><strong>fidelity</strong> (<em>float</em>) – fidelity of failed request.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Side Effects:</dt><dd><p>Will create request for network manager on node.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.app.random_request.RandomRequestApp.start">
+<code class="sig-name descname">start</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.app.random_request.RandomRequestApp.start" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to start the application.</p>
+<p>This method will:</p>
+<ol class="arabic simple">
+<li><p>Choose a random destination node from the <cite>others</cite> list.</p></li>
+<li><p>Choose a start time between 1-2 seconds in the future.</p></li>
+<li><p>Choose an end time 10-20 seconds after the start time.</p></li>
+<li><p>Pick a number of memories to request between 10 and half the max memory size.</p></li>
+<li><p>Pick a random fidelity between 0.8 and 1.</p></li>
+<li><p>Create a request and start recording metrics.</p></li>
+</ol>
+<dl class="simple">
+<dt>Side Effects:</dt><dd><p>Will create request for network manager on node.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="top.html"
+                        title="previous chapter">Application</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../topology/top.html"
+                        title="next chapter">Topology</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/references/application/random_request.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../topology/top.html" title="Topology"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="top.html" title="Application"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.2.3 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="top.html" >Application</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Random Request</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+    </div>
+  </body>
+</html>

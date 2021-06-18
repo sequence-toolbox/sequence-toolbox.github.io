@@ -1,0 +1,294 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Manager &#8212; SeQUeNCe 0.2.3 documentation</title>
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Reservation" href="reservation.html" />
+    <link rel="prev" title="Network Management" href="top.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="reservation.html" title="Reservation"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="top.html" title="Network Management"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.2.3 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="top.html" accesskey="U">Network Management</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Network Manager</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-src.network_management.network_manager">
+<span id="network-manager"></span><h1>Network Manager<a class="headerlink" href="#module-src.network_management.network_manager" title="Permalink to this headline">¶</a></h1>
+<p>Definition of the Network Manager.</p>
+<p>This module defines the NetworkManager class, an implementation of the SeQUeNCe network management module.
+Also included in this module is the message type used by the network manager and a function for generating network managers with default protocols.</p>
+<dl class="py class">
+<dt id="src.network_management.network_manager.NetworkManager">
+<em class="property">class </em><code class="sig-prename descclassname">src.network_management.network_manager.</code><code class="sig-name descname">NetworkManager</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">owner</span><span class="p">:</span> <span class="n">QuantumRouter</span></em>, <em class="sig-param"><span class="n">protocol_stack</span><span class="p">:</span> <span class="n">List<span class="p">[</span>StackProtocol<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.network_management.network_manager.NetworkManager" title="Permalink to this definition">¶</a></dt>
+<dd><p>Network manager implementation class.</p>
+<p>The network manager is responsible for the operations of a node within a broader quantum network.
+This is done through a <cite>protocol_stack</cite> of protocols, which messages are passed and packaged through.</p>
+<dl class="py attribute">
+<dt id="src.network_management.network_manager.NetworkManager.name">
+<code class="sig-name descname">name</code><a class="headerlink" href="#src.network_management.network_manager.NetworkManager.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>name of the network manager instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.network_management.network_manager.NetworkManager.owner">
+<code class="sig-name descname">owner</code><a class="headerlink" href="#src.network_management.network_manager.NetworkManager.owner" title="Permalink to this definition">¶</a></dt>
+<dd><p>node that protocol instance is attached to.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../topology/node.html#src.topology.node.QuantumRouter" title="src.topology.node.QuantumRouter">QuantumRouter</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.network_management.network_manager.NetworkManager.protocol_stack">
+<code class="sig-name descname">protocol_stack</code><a class="headerlink" href="#src.network_management.network_manager.NetworkManager.protocol_stack" title="Permalink to this definition">¶</a></dt>
+<dd><p>network manager protocol stack.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>List[<a class="reference internal" href="../misc/protocol.html#src.protocol.StackProtocol" title="src.protocol.StackProtocol">StackProtocol</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.network_management.network_manager.NetworkManager.load_stack">
+<code class="sig-name descname">load_stack</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">stack</span><span class="p">:</span> <span class="n">List<span class="p">[</span>StackProtocol<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.network_management.network_manager.NetworkManager.load_stack" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to load a defined protocol stack.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>stack</strong> (<em>List</em><em>[</em><a class="reference internal" href="../misc/protocol.html#src.protocol.StackProtocol" title="src.protocol.StackProtocol"><em>StackProtocol</em></a><em>]</em>) – new protocol stack.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.network_management.network_manager.NetworkManager.pop">
+<code class="sig-name descname">pop</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.network_management.network_manager.NetworkManager.pop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to receive pops from highest protocol in protocol stack.</p>
+<p>Will get reservation from message and attempt to meet it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Keyword Arguments</dt>
+<dd class="field-odd"><p><strong>msg</strong> (<em>any</em>) – message containing reservation.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.network_management.network_manager.NetworkManager.push">
+<code class="sig-name descname">push</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.network_management.network_manager.NetworkManager.push" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to receive pushes from lowest protocol in protocol stack.</p>
+<p>Will create message to send to another node.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Keyword Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>msg</strong> (<em>any</em>) – message to deliver.</p></li>
+<li><p><strong>dst</strong> (<em>str</em>) – name of destination node.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.network_management.network_manager.NetworkManager.received_message">
+<code class="sig-name descname">received_message</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">src</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">msg</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#src.network_management.network_manager.NetworkManagerMessage" title="src.network_management.network_manager.NetworkManagerMessage">src.network_management.network_manager.NetworkManagerMessage</a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.network_management.network_manager.NetworkManager.received_message" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to receive transmitted network reservation method.</p>
+<p>Will pop message to lowest protocol in protocol stack.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>src</strong> (<em>str</em>) – name of source node for message.</p></li>
+<li><p><strong>msg</strong> (<a class="reference internal" href="#src.network_management.network_manager.NetworkManagerMessage" title="src.network_management.network_manager.NetworkManagerMessage"><em>NetworkManagerMessage</em></a>) – message received.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Side Effects:</dt><dd><p>Will invoke <cite>pop</cite> method of 0 indexed protocol in <cite>protocol_stack</cite>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.network_management.network_manager.NetworkManager.request">
+<code class="sig-name descname">request</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">responder</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">start_time</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">end_time</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">memory_size</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">target_fidelity</span><span class="p">:</span> <span class="n">float</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.network_management.network_manager.NetworkManager.request" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to make an entanglement request.</p>
+<p>Will defer request to top protocol in protocol stack.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>responder</strong> (<em>str</em>) – name of node to establish entanglement with.</p></li>
+<li><p><strong>start_time</strong> (<em>int</em>) – simulation start time of entanglement.</p></li>
+<li><p><strong>end_time</strong> (<em>int</em>) – simulation end time of entanglement.</p></li>
+<li><p><strong>memory_size</strong> (<em>int</em>) – number of entangledd memory pairs to create.</p></li>
+<li><p><strong>target_fidelity</strong> (<em>float</em>) – desired fidelity of entanglement.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Side Effects:</dt><dd><p>Will invoke <cite>push</cite> method of -1 indexed protocol in <cite>protocol_stack</cite>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="src.network_management.network_manager.NetworkManagerMessage">
+<em class="property">class </em><code class="sig-prename descclassname">src.network_management.network_manager.</code><code class="sig-name descname">NetworkManagerMessage</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">msg_type</span><span class="p">:</span> <span class="n">enum.Enum</span></em>, <em class="sig-param"><span class="n">receiver</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">payload</span><span class="p">:</span> <span class="n"><a class="reference internal" href="../misc/message.html#src.message.Message" title="src.message.Message">src.message.Message</a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.network_management.network_manager.NetworkManagerMessage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Message used by the network manager.</p>
+<dl class="py attribute">
+<dt id="src.network_management.network_manager.NetworkManagerMessage.message_type">
+<code class="sig-name descname">message_type</code><a class="headerlink" href="#src.network_management.network_manager.NetworkManagerMessage.message_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>message type required by base message type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Enum</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.network_management.network_manager.NetworkManagerMessage.receiver">
+<code class="sig-name descname">receiver</code><a class="headerlink" href="#src.network_management.network_manager.NetworkManagerMessage.receiver" title="Permalink to this definition">¶</a></dt>
+<dd><p>name of destination protocol instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.network_management.network_manager.NetworkManagerMessage.payload">
+<code class="sig-name descname">payload</code><a class="headerlink" href="#src.network_management.network_manager.NetworkManagerMessage.payload" title="Permalink to this definition">¶</a></dt>
+<dd><p>message to be passed through destination network manager.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../misc/message.html#src.message.Message" title="src.message.Message">Message</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="src.network_management.network_manager.NewNetworkManager">
+<code class="sig-prename descclassname">src.network_management.network_manager.</code><code class="sig-name descname">NewNetworkManager</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">owner</span><span class="p">:</span> <span class="n">QuantumRouter</span></em><span class="sig-paren">)</span> &#x2192; NetworkManager<a class="headerlink" href="#src.network_management.network_manager.NewNetworkManager" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to create a new network manager.</p>
+<p>Will create a network manager with default protocol stack.
+This stack inclused a reservation and routing protocol.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>owner</strong> (<a class="reference internal" href="../topology/node.html#src.topology.node.QuantumRouter" title="src.topology.node.QuantumRouter"><em>QuantumRouter</em></a>) – node to attach network manager to.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>network manager object created.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#src.network_management.network_manager.NetworkManager" title="src.network_management.network_manager.NetworkManager">NetworkManager</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="top.html"
+                        title="previous chapter">Network Management</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="reservation.html"
+                        title="next chapter">Reservation</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/references/network_management/network_manager.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="reservation.html" title="Reservation"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="top.html" title="Network Management"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.2.3 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="top.html" >Network Management</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Network Manager</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+    </div>
+  </body>
+</html>

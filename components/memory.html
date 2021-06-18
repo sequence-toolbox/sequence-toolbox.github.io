@@ -1,0 +1,274 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory &#8212; SeQUeNCe 0.2.0 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Optical Channel" href="optical_channel.html" />
+    <link rel="prev" title="Light Source" href="light_source.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="optical_channel.html" title="Optical Channel"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="light_source.html" title="Light Source"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">SeQUeNCe 0.2.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="top.html" accesskey="U">Components</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Memory</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-src.components.memory">
+<span id="memory"></span><h1>Memory<a class="headerlink" href="#module-src.components.memory" title="Permalink to this headline">¶</a></h1>
+<p>Models for simulation of quantum memories.</p>
+<p>This module defines the Memory class to simulate single atom memories as well as the MemoryArray class to aggregate memories.
+Memories will attempt to send photons through the <cite>send_qubit</cite> interface of nodes.
+Photons should be routed to a BSM device for entanglement generation, or through optical hardware for purification and swapping.</p>
+<dl class="py class">
+<dt id="src.components.memory.Memory">
+<em class="property">class </em><code class="sig-prename descclassname">src.components.memory.</code><code class="sig-name descname">Memory</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">timeline</span><span class="p">:</span> <span class="n">Timeline</span></em>, <em class="sig-param"><span class="n">fidelity</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">frequency</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">efficiency</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">coherence_time</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">wavelength</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.memory.Memory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Individual single-atom memory.</p>
+<p>This class models a single-atom memory, where the quantum state is stored as the spin of a single ion.</p>
+<dl class="py attribute">
+<dt id="src.components.memory.Memory.name">
+<code class="sig-name descname">name</code><a class="headerlink" href="#src.components.memory.Memory.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>label for memory instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.memory.Memory.timeline">
+<code class="sig-name descname">timeline</code><a class="headerlink" href="#src.components.memory.Memory.timeline" title="Permalink to this definition">¶</a></dt>
+<dd><p>timeline for simulation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../kernel/timeline.html#src.kernel.timeline.Timeline" title="src.kernel.timeline.Timeline">Timeline</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.memory.Memory.fidelity">
+<code class="sig-name descname">fidelity</code><a class="headerlink" href="#src.components.memory.Memory.fidelity" title="Permalink to this definition">¶</a></dt>
+<dd><p>(current) fidelity of memory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.memory.Memory.raw_fidelity">
+<code class="sig-name descname">raw_fidelity</code><a class="headerlink" href="#src.components.memory.Memory.raw_fidelity" title="Permalink to this definition">¶</a></dt>
+<dd><p>fidelity of memory in the RAW (unentangled) state.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.memory.Memory.frequency">
+<code class="sig-name descname">frequency</code><a class="headerlink" href="#src.components.memory.Memory.frequency" title="Permalink to this definition">¶</a></dt>
+<dd><p>maximum frequency at which memory can be excited.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.memory.Memory.efficiency">
+<code class="sig-name descname">efficiency</code><a class="headerlink" href="#src.components.memory.Memory.efficiency" title="Permalink to this definition">¶</a></dt>
+<dd><p>probability of emitting a photon when excited.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.memory.Memory.coherence_time">
+<code class="sig-name descname">coherence_time</code><a class="headerlink" href="#src.components.memory.Memory.coherence_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>average usable lifetime of memory (in seconds).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.memory.Memory.wavelength">
+<code class="sig-name descname">wavelength</code><a class="headerlink" href="#src.components.memory.Memory.wavelength" title="Permalink to this definition">¶</a></dt>
+<dd><p>wavelength (in nm) of emitted photons.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.memory.Memory.qstate">
+<code class="sig-name descname">qstate</code><a class="headerlink" href="#src.components.memory.Memory.qstate" title="Permalink to this definition">¶</a></dt>
+<dd><p>quantum state of memory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>QuantumState</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.memory.Memory.entangled_memory">
+<code class="sig-name descname">entangled_memory</code><a class="headerlink" href="#src.components.memory.Memory.entangled_memory" title="Permalink to this definition">¶</a></dt>
+<dd><p>tracks entanglement state of memory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="src.components.memory.MemoryArray">
+<em class="property">class </em><code class="sig-prename descclassname">src.components.memory.</code><code class="sig-name descname">MemoryArray</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">timeline</span><span class="p">:</span> <span class="n">Timeline</span></em>, <em class="sig-param"><span class="n">num_memories</span><span class="o">=</span><span class="default_value">10</span></em>, <em class="sig-param"><span class="n">fidelity</span><span class="o">=</span><span class="default_value">0.85</span></em>, <em class="sig-param"><span class="n">frequency</span><span class="o">=</span><span class="default_value">80000000.0</span></em>, <em class="sig-param"><span class="n">efficiency</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">coherence_time</span><span class="o">=</span><span class="default_value">- 1</span></em>, <em class="sig-param"><span class="n">wavelength</span><span class="o">=</span><span class="default_value">500</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.memory.MemoryArray" title="Permalink to this definition">¶</a></dt>
+<dd><p>Aggregator for Memory objects.</p>
+<p>The MemoryArray can be accessed as a list to get individual memories.</p>
+<dl class="py attribute">
+<dt id="src.components.memory.MemoryArray.name">
+<code class="sig-name descname">name</code><a class="headerlink" href="#src.components.memory.MemoryArray.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>label for memory array instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.memory.MemoryArray.timeline">
+<code class="sig-name descname">timeline</code><a class="headerlink" href="#src.components.memory.MemoryArray.timeline" title="Permalink to this definition">¶</a></dt>
+<dd><p>timeline for simulation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../kernel/timeline.html#src.kernel.timeline.Timeline" title="src.kernel.timeline.Timeline">Timeline</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.memory.MemoryArray.memories">
+<code class="sig-name descname">memories</code><a class="headerlink" href="#src.components.memory.MemoryArray.memories" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of all memories.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>List[<a class="reference internal" href="#src.components.memory.Memory" title="src.components.memory.Memory">Memory</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="light_source.html"
+                        title="previous chapter">Light Source</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="optical_channel.html"
+                        title="next chapter">Optical Channel</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/components/memory.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="optical_channel.html" title="Optical Channel"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="light_source.html" title="Light Source"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">SeQUeNCe 0.2.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="top.html" >Components</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Memory</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+    </div>
+  </body>
+</html>

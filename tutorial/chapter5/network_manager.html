@@ -1,0 +1,331 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 5: Network Manager &#8212; SeQUeNCe 0.2.3 documentation</title>
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Chapter 6: Application" href="../chapter6/application.html" />
+    <link rel="prev" title="Chapter 4: Resource Management" href="../chapter4/resource_management.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../chapter6/application.html" title="Chapter 6: Application"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../chapter4/resource_management.html" title="Chapter 4: Resource Management"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.2.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Chapter 5: Network Manager</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="chapter-5-network-manager">
+<h1>Chapter 5: Network Manager<a class="headerlink" href="#chapter-5-network-manager" title="Permalink to this headline">¶</a></h1>
+<p>In this tutorial, we will showcase the Network Management module of SeQUeNCe and show its operation on a typical network. The goal of this tutorial is to</p>
+<ul class="simple">
+<li><p>Gain familiarity with the <code class="docutils literal notranslate"><span class="pre">network_management</span></code> module</p></li>
+<li><p>Gain familiarity with the <code class="docutils literal notranslate"><span class="pre">topology.topology</span></code> module, including</p></li>
+<li><p>Using external files to build networks</p></li>
+</ul>
+<p>To achieve this, we will be using an example json file to build our network and will use the network manager on <code class="docutils literal notranslate"><span class="pre">QuantumRouter</span></code> nodes to request entanglement pairs. The json file will create the network topology shown below:</p>
+<p><img alt="topo" src="../../_images/star_network.png" /></p>
+<p>This example is similar to the example jupyter notebook script <code class="docutils literal notranslate"><span class="pre">random_request_network.ipynb</span></code>, without applications and with slightly different paramters. The notebook can be viewed in the <code class="docutils literal notranslate"><span class="pre">example</span></code> directory of the SeQUeNCe download, including already written code and interactive input.</p>
+<div class="section" id="background">
+<h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h2>
+<p>The Network Management module of sequence is responsible for coordinating the protocols of network nodes, ensuring the proper and efficient completion of application requests. This is done with an internal protocol stack, as shown below:</p>
+<p><img alt="nm" src="../../_images/net_manager.png" /></p>
+<p>When a request is received, the network manager with first push a message to the <strong>reservation</strong> protocol, which determines if the request can be met on the local node. If so, the protocol reserves hardware resources and passes the request to the <strong>routing</strong> protocol, which determines the next router in an optimal path between the requested nodes (this optimal path is determined when building the topology by finding the shortest quantum connection path between nodes). Nodes in the path receive reservation requests and either reserve local resources or reject the request. If rejected on any node or accepted by all nodes, the request is sent back to the originating node by the reverse path. If accepted, appropriate rules are automatically generated and installed in the resource manager as well.</p>
+<p>When constructing the network manager, the <code class="docutils literal notranslate"><span class="pre">NewNetworkManager</span></code> function of the <code class="docutils literal notranslate"><span class="pre">sequence.network_management.network_manager</span></code> module is used. This function will automatically create the default reservation and routing protocol stack and install it into the network manager.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">NewNetworkManager</span><span class="p">(</span><span class="n">owner</span><span class="p">:</span> <span class="s2">&quot;QuantumRouter&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;NetworkManager&quot;</span><span class="p">:</span>
+    <span class="n">manager</span> <span class="o">=</span> <span class="n">NetworkManager</span><span class="p">(</span><span class="n">owner</span><span class="p">,</span> <span class="p">[])</span>
+    <span class="n">routing</span> <span class="o">=</span> <span class="n">StaticRoutingProtocol</span><span class="p">(</span><span class="n">owner</span><span class="p">,</span> <span class="n">owner</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;.StaticRoutingProtocol&quot;</span><span class="p">,</span> <span class="p">{})</span>
+    <span class="n">rsvp</span> <span class="o">=</span> <span class="n">ResourceReservationProtocol</span><span class="p">(</span><span class="n">owner</span><span class="p">,</span> <span class="n">owner</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;.RSVP&quot;</span><span class="p">)</span>
+    <span class="n">routing</span><span class="o">.</span><span class="n">upper_protocols</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rsvp</span><span class="p">)</span>
+    <span class="n">rsvp</span><span class="o">.</span><span class="n">lower_protocols</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">routing</span><span class="p">)</span>
+    <span class="n">manager</span><span class="o">.</span><span class="n">load_stack</span><span class="p">([</span><span class="n">routing</span><span class="p">,</span> <span class="n">rsvp</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">manager</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="step-1-create-the-network-configuration-file">
+<h2>Step 1: Create the Network Configuration File<a class="headerlink" href="#step-1-create-the-network-configuration-file" title="Permalink to this headline">¶</a></h2>
+<p>For this example, we will be using a json file to specify the nodes and connectivity of the network. The json file should be structured as a dictionary with the following keys:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">nodes</span></code>, giving a list of node specifications,</p></li>
+<li><p>One of the following:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">qchannels</span></code>, giving a list of quantum channel specifications,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">qconnections</span></code>, giving a list of two-way quantum connection specifications, and</p></li>
+</ul>
+</li>
+<li><p>One of the following:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">cchannels</span></code>, giving a list of classical channel specifications (similar to <code class="docutils literal notranslate"><span class="pre">qchannels</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cconnections</span></code>, giving a list of two-way classical connection specifications, and</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cconnections_table</span></code>, giving a specially formatted round-trip connection time for nodes on a complete classical network</p></li>
+</ul>
+</li>
+</ul>
+<p>We will first make the <code class="docutils literal notranslate"><span class="pre">nodes</span></code> entry. All fields of the list will have the <code class="docutils literal notranslate"><span class="pre">name</span></code> field required by the node constructor and a specification of the node type, along with any more arguments (optional or not) specified by the specific node type. We will be using the <code class="docutils literal notranslate"><span class="pre">QuantumRouter</span></code> node type for this tutorial, which already includes all of the necessary hardware for entanglement distribution as well as all necessary modules (including network management).</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span>&quot;nodes&quot;: [
+    {
+        &quot;name&quot;: &quot;center&quot;,
+        &quot;type&quot;: &quot;QuantumRouter&quot;
+    },
+    {
+        &quot;name&quot;: &quot;end1&quot;,
+        &quot;type&quot;: &quot;QuantumRouter&quot;,
+        &quot;memo_size&quot;: 25
+    },
+    {
+        &quot;name&quot;: &quot;end2&quot;,
+        &quot;type&quot;: &quot;QuantumRouter&quot;,
+        &quot;memo_size&quot;: 25
+    },
+    {
+        &quot;name&quot;: &quot;end3&quot;,
+        &quot;type&quot;: &quot;QuantumRouter&quot;,
+        &quot;memo_size&quot;: 25
+    },
+    {
+        &quot;name&quot;: &quot;end4&quot;,
+        &quot;type&quot;: &quot;QuantumRouter&quot;,
+        &quot;memo_size&quot;: 25
+    }
+]
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">qconnections</span></code> entry should have multiple entries specifying the name of the two connected nodes and at least the attenuation and length of the fiber (plus any additional keyword arguments):</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span>&quot;qconnections&quot;: [
+    {
+        &quot;node1&quot;: &quot;center&quot;,
+        &quot;node2&quot;: &quot;end1&quot;,
+        &quot;attenuation&quot;: 1e-5,
+        &quot;distance&quot;: 500
+    },
+    {
+        &quot;node1&quot;: &quot;center&quot;,
+        &quot;node2&quot;: &quot;end2&quot;,
+        &quot;attenuation&quot;: 1e-5,
+        &quot;distance&quot;: 500
+    },
+    {
+        &quot;node1&quot;: &quot;center&quot;,
+        &quot;node2&quot;: &quot;end3&quot;,
+        &quot;attenuation&quot;: 1e-5,
+        &quot;distance&quot;: 500
+    },
+    {
+        &quot;node1&quot;: &quot;center&quot;,
+        &quot;node2&quot;: &quot;end4&quot;,
+        &quot;attenuation&quot;: 1e-5,
+        &quot;distance&quot;: 500
+    }
+]
+</pre></div>
+</div>
+<p>Finally, for the classical channels, we will be using the round trip delay table option. We will thus need to label the section as <code class="docutils literal notranslate"><span class="pre">cchannels_table</span></code> and specify the <code class="docutils literal notranslate"><span class="pre">type</span></code> field as <code class="docutils literal notranslate"><span class="pre">RT</span></code>. We then specify the <code class="docutils literal notranslate"><span class="pre">labels</span></code> field, which gives the labels of the round trip table rows and columns (specifically, the names of the network nodes). Finally, we construct the table itself, which is a two-dimensional array with rows specifying the sending node and columns specifying the receiving node:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span>&quot;cchannels_table&quot;: {
+    &quot;type&quot;: &quot;RT&quot;,
+    &quot;labels&quot;: [&quot;center&quot;, &quot;end1&quot;, &quot;end2&quot;, &quot;end3&quot;, &quot;end4&quot;],
+    &quot;table&quot;: [[0,   1e9, 1e9, 1e9, 1e9],
+              [1e9, 0,   2e9, 2e9, 2e9],
+              [1e9, 2e9, 0,   2e9, 2e9],
+              [1e9, 2e9, 2e9, 0,   2e9],
+              [1e9, 2e9, 2e9, 2e9, 0]]
+}
+</pre></div>
+</div>
+<p>Note that diagonal entries are 0, as these represent connections of nodes to themselves.</p>
+</div>
+<div class="section" id="step-2-build-the-network">
+<h2>Step 2: Build the Network<a class="headerlink" href="#step-2-build-the-network" title="Permalink to this headline">¶</a></h2>
+<p>Now, we can move to our script and begin building the experiment from our json file. The file can be loaded with the <code class="docutils literal notranslate"><span class="pre">topology.load_config</span></code> method. Note that we have the json file saved as <code class="docutils literal notranslate"><span class="pre">star_network.json</span></code> here. We will also create a timeline with 2 seconds of simulation time to allow for requests and entanglement to be processed.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">random</span>
+<span class="kn">from</span> <span class="nn">sequence.kernel.timeline</span> <span class="kn">import</span> <span class="n">Timeline</span>
+<span class="kn">from</span> <span class="nn">sequence.topology.topology</span> <span class="kn">import</span> <span class="n">Topology</span>
+
+<span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">network_config</span> <span class="o">=</span> <span class="s2">&quot;star_network.json&quot;</span>
+
+<span class="n">tl</span> <span class="o">=</span> <span class="n">Timeline</span><span class="p">(</span><span class="mf">2e12</span><span class="p">)</span>
+<span class="n">network_topo</span> <span class="o">=</span> <span class="n">Topology</span><span class="p">(</span><span class="s2">&quot;network_topo&quot;</span><span class="p">,</span> <span class="n">tl</span><span class="p">)</span>
+<span class="n">network_topo</span><span class="o">.</span><span class="n">load_config</span><span class="p">(</span><span class="n">network_config</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To edit network parameters quickly, we can define a custom function to interact with the topology. This function will take one argument:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">topology</span></code>, the <code class="docutils literal notranslate"><span class="pre">Topology</span></code> object we wish to update.</p></li>
+</ul>
+<p>We will edit a few hardware objects by accessing the hardware fields of network nodes. To access all nodes of a specific type in the network, we can use the <code class="docutils literal notranslate"><span class="pre">topology.get_nodes_by_type</span></code> method. This is useful for editing hardware objects that may only be found on one node type, e.g. memories only found on <code class="docutils literal notranslate"><span class="pre">QuantumRouter</span></code> nodes.</p>
+<p>We may also wish to edit parameters of our entanglement protocols. Since these are created by a node’s resource manager, we will need to edit the appropriate fields of the resource manager on each node. This is achieved in much the same way as hardware elements.</p>
+<p>For quantum and classical connections, the <code class="docutils literal notranslate"><span class="pre">qchannels</span></code> and <code class="docutils literal notranslate"><span class="pre">cchannels</span></code> fields of the topology may be directly accessed. These provide an iterable list of all connections in the network that may be edited directly.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">set_parameters</span><span class="p">(</span><span class="n">topology</span><span class="p">:</span> <span class="n">Topology</span><span class="p">):</span>
+    <span class="c1"># set memory parameters</span>
+    <span class="n">MEMO_FREQ</span> <span class="o">=</span> <span class="mf">2e3</span>
+    <span class="n">MEMO_EXPIRE</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">MEMO_EFFICIENCY</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">MEMO_FIDELITY</span> <span class="o">=</span> <span class="mf">0.9349367588934053</span>
+    <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">topology</span><span class="o">.</span><span class="n">get_nodes_by_type</span><span class="p">(</span><span class="s2">&quot;QuantumRouter&quot;</span><span class="p">):</span>
+        <span class="n">node</span><span class="o">.</span><span class="n">memory_array</span><span class="o">.</span><span class="n">update_memory_params</span><span class="p">(</span><span class="s2">&quot;frequency&quot;</span><span class="p">,</span> <span class="n">MEMO_FREQ</span><span class="p">)</span>
+        <span class="n">node</span><span class="o">.</span><span class="n">memory_array</span><span class="o">.</span><span class="n">update_memory_params</span><span class="p">(</span><span class="s2">&quot;coherence_time&quot;</span><span class="p">,</span> <span class="n">MEMO_EXPIRE</span><span class="p">)</span>
+        <span class="n">node</span><span class="o">.</span><span class="n">memory_array</span><span class="o">.</span><span class="n">update_memory_params</span><span class="p">(</span><span class="s2">&quot;efficiency&quot;</span><span class="p">,</span> <span class="n">MEMO_EFFICIENCY</span><span class="p">)</span>
+        <span class="n">node</span><span class="o">.</span><span class="n">memory_array</span><span class="o">.</span><span class="n">update_memory_params</span><span class="p">(</span><span class="s2">&quot;raw_fidelity&quot;</span><span class="p">,</span> <span class="n">MEMO_FIDELITY</span><span class="p">)</span>
+
+    <span class="c1"># set detector parameters</span>
+    <span class="n">DETECTOR_EFFICIENCY</span> <span class="o">=</span> <span class="mf">0.9</span>
+    <span class="n">DETECTOR_COUNT_RATE</span> <span class="o">=</span> <span class="mf">5e7</span>
+    <span class="n">DETECTOR_RESOLUTION</span> <span class="o">=</span> <span class="mi">100</span>
+    <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">topology</span><span class="o">.</span><span class="n">get_nodes_by_type</span><span class="p">(</span><span class="s2">&quot;BSMNode&quot;</span><span class="p">):</span>
+        <span class="n">node</span><span class="o">.</span><span class="n">bsm</span><span class="o">.</span><span class="n">update_detectors_params</span><span class="p">(</span><span class="s2">&quot;efficiency&quot;</span><span class="p">,</span> <span class="n">DETECTOR_EFFICIENCY</span><span class="p">)</span>
+        <span class="n">node</span><span class="o">.</span><span class="n">bsm</span><span class="o">.</span><span class="n">update_detectors_params</span><span class="p">(</span><span class="s2">&quot;count_rate&quot;</span><span class="p">,</span> <span class="n">DETECTOR_COUNT_RATE</span><span class="p">)</span>
+        <span class="n">node</span><span class="o">.</span><span class="n">bsm</span><span class="o">.</span><span class="n">update_detectors_params</span><span class="p">(</span><span class="s2">&quot;time_resolution&quot;</span><span class="p">,</span> <span class="n">DETECTOR_RESOLUTION</span><span class="p">)</span>
+        
+    <span class="c1"># set entanglement swapping parameters</span>
+    <span class="n">SWAP_SUCC_PROB</span> <span class="o">=</span> <span class="mf">0.90</span>
+    <span class="n">SWAP_DEGRADATION</span> <span class="o">=</span> <span class="mf">0.99</span>
+    <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">topology</span><span class="o">.</span><span class="n">get_nodes_by_type</span><span class="p">(</span><span class="s2">&quot;QuantumRouter&quot;</span><span class="p">):</span>
+        <span class="n">node</span><span class="o">.</span><span class="n">network_manager</span><span class="o">.</span><span class="n">protocol_stack</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_swapping_success_rate</span><span class="p">(</span><span class="n">SWAP_SUCC_PROB</span><span class="p">)</span>
+        <span class="n">node</span><span class="o">.</span><span class="n">network_manager</span><span class="o">.</span><span class="n">protocol_stack</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_swapping_degradation</span><span class="p">(</span><span class="n">SWAP_DEGRADATION</span><span class="p">)</span>
+        
+    <span class="c1"># set quantum channel parameters</span>
+    <span class="n">ATTENUATION</span> <span class="o">=</span> <span class="mf">1e-5</span>
+    <span class="n">QC_FREQ</span> <span class="o">=</span> <span class="mf">1e11</span>
+    <span class="k">for</span> <span class="n">qc</span> <span class="ow">in</span> <span class="n">topology</span><span class="o">.</span><span class="n">qchannels</span><span class="p">:</span>
+        <span class="n">qc</span><span class="o">.</span><span class="n">attenuation</span> <span class="o">=</span> <span class="n">ATTENUATION</span>
+        <span class="n">qc</span><span class="o">.</span><span class="n">frequency</span> <span class="o">=</span> <span class="n">QC_FREQ</span>
+</pre></div>
+</div>
+<p>We can then insert this into our script and call our function with the <code class="docutils literal notranslate"><span class="pre">network_topo</span></code> object:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">set_parameters</span><span class="p">(</span><span class="n">network_topo</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="step-3-making-requests">
+<h2>Step 3: Making Requests<a class="headerlink" href="#step-3-making-requests" title="Permalink to this headline">¶</a></h2>
+<p>With the network built, we are now ready to make requests of the network manager and start entanglement. The <code class="docutils literal notranslate"><span class="pre">request</span></code> method of the network manager can be used for this. When invoked, it will automatically start the reservation process and create rules as required (see the background section). The method has 5 arguments:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">responder</span></code>, a string name of the other node with whitch to generate entangled pairs</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">start_time</span></code>, the simulation time (in <strong>picoseconds</strong>) at which entanglement should begin</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">end_time</span></code>, the simulation time at which entanglement may end and reserved resources released</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">memory_size</span></code>, the number of entangled memory pairs requested</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">target_fidelity</span></code>, the desired fidelity of entanglement for all pairs</p></li>
+</ul>
+<p>We will make one request at one network node, asking for 25 memories to be entangled starting at 1 second and ending at 2 seconds (the end of our simulation). At the end of the simulation we will print out the entanglement state of memories in a manner similar to chapter 4.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># the start and end nodes may be edited as desired </span>
+<span class="n">node1</span> <span class="o">=</span> <span class="s2">&quot;end1&quot;</span>
+<span class="n">node2</span> <span class="o">=</span> <span class="s2">&quot;end2&quot;</span>
+<span class="n">nm</span> <span class="o">=</span> <span class="n">network_topo</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node1</span><span class="p">]</span><span class="o">.</span><span class="n">network_manager</span>
+<span class="n">nm</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="n">node2</span><span class="p">,</span> <span class="n">start_time</span><span class="o">=</span><span class="mf">1e12</span><span class="p">,</span> <span class="n">end_time</span><span class="o">=</span><span class="mf">10e12</span><span class="p">,</span> <span class="n">memory_size</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">target_fidelity</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
+
+<span class="n">tl</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">tl</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">node1</span><span class="p">,</span> <span class="s2">&quot;memories&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Index:</span><span class="se">\t</span><span class="s2">Entangled Node:</span><span class="se">\t</span><span class="s2">Fidelity:</span><span class="se">\t</span><span class="s2">Entanglement Time:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">info</span> <span class="ow">in</span> <span class="n">network_topo</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node1</span><span class="p">]</span><span class="o">.</span><span class="n">resource_manager</span><span class="o">.</span><span class="n">memory_manager</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:6}</span><span class="se">\t</span><span class="si">{:15}</span><span class="se">\t</span><span class="si">{:9}</span><span class="se">\t</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">info</span><span class="o">.</span><span class="n">index</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">info</span><span class="o">.</span><span class="n">remote_node</span><span class="p">),</span>
+                                         <span class="nb">str</span><span class="p">(</span><span class="n">info</span><span class="o">.</span><span class="n">fidelity</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">info</span><span class="o">.</span><span class="n">entangle_time</span> <span class="o">*</span> <span class="mf">1e-12</span><span class="p">)))</span>
+</pre></div>
+</div>
+<p>We should notice that all memories are entangled with the specified distant node, that they have fidelity above our specified threshold, and that the entangled time is between 1 and 2 seconds.</p>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Chapter 5: Network Manager</a><ul>
+<li><a class="reference internal" href="#background">Background</a></li>
+<li><a class="reference internal" href="#step-1-create-the-network-configuration-file">Step 1: Create the Network Configuration File</a></li>
+<li><a class="reference internal" href="#step-2-build-the-network">Step 2: Build the Network</a></li>
+<li><a class="reference internal" href="#step-3-making-requests">Step 3: Making Requests</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../chapter4/resource_management.html"
+                        title="previous chapter">Chapter 4: Resource Management</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../chapter6/application.html"
+                        title="next chapter">Chapter 6: Application</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/tutorial/chapter5/network_manager.md.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../chapter6/application.html" title="Chapter 6: Application"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../chapter4/resource_management.html" title="Chapter 4: Resource Management"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.2.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Chapter 5: Network Manager</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+    </div>
+  </body>
+</html>

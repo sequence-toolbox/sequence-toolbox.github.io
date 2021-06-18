@@ -1,0 +1,480 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entanglement Generation &#8212; SeQUeNCe 0.2.3 documentation</title>
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Entanglement Purification" href="purification.html" />
+    <link rel="prev" title="Entanglement Protocol" href="entanglement_protocol.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="purification.html" title="Entanglement Purification"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="entanglement_protocol.html" title="Entanglement Protocol"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.2.3 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="top.html" accesskey="U">Entanglement Management</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Entanglement Generation</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-src.entanglement_management.generation">
+<span id="entanglement-generation"></span><h1>Entanglement Generation<a class="headerlink" href="#module-src.entanglement_management.generation" title="Permalink to this headline">¶</a></h1>
+<p>Code for Barrett-Kok entanglement Generation protocol</p>
+<p>This module defines code to support entanglement generation between single-atom memories on distant nodes.
+Also defined is the message type used by this implementation.
+Entanglement generation is asymmetric:</p>
+<ul class="simple">
+<li><p>EntanglementGenerationA should be used on the QuantumRouter (with one node set as the primary) and should be started via the “start” method</p></li>
+<li><p>EntanglementGeneraitonB should be used on the BSMNode and does not need to be started</p></li>
+</ul>
+<dl class="py class">
+<dt id="src.entanglement_management.generation.EntanglementGenerationA">
+<em class="property">class </em><code class="sig-prename descclassname">src.entanglement_management.generation.</code><code class="sig-name descname">EntanglementGenerationA</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">own</span><span class="p">:</span> <span class="n">Node</span></em>, <em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">middle</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">other</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">memory</span><span class="p">:</span> <span class="n">Memory</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.entanglement_management.generation.EntanglementGenerationA" title="Permalink to this definition">¶</a></dt>
+<dd><p>Entanglement generation protocol for quantum router.</p>
+<p>The EntanglementGenerationA protocol should be instantiated on a quantum router node.
+Instances will communicate with each other (and with the B instance on a BSM node) to generate entanglement.</p>
+<dl class="py attribute">
+<dt id="src.entanglement_management.generation.EntanglementGenerationA.own">
+<code class="sig-name descname">own</code><a class="headerlink" href="#src.entanglement_management.generation.EntanglementGenerationA.own" title="Permalink to this definition">¶</a></dt>
+<dd><p>node that protocol instance is attached to.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../topology/node.html#src.topology.node.QuantumRouter" title="src.topology.node.QuantumRouter">QuantumRouter</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.entanglement_management.generation.EntanglementGenerationA.name">
+<code class="sig-name descname">name</code><a class="headerlink" href="#src.entanglement_management.generation.EntanglementGenerationA.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>label for protocol instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.entanglement_management.generation.EntanglementGenerationA.middle">
+<code class="sig-name descname">middle</code><a class="headerlink" href="#src.entanglement_management.generation.EntanglementGenerationA.middle" title="Permalink to this definition">¶</a></dt>
+<dd><p>name of BSM measurement node where emitted photons should be directed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.entanglement_management.generation.EntanglementGenerationA.other">
+<code class="sig-name descname">other</code><a class="headerlink" href="#src.entanglement_management.generation.EntanglementGenerationA.other" title="Permalink to this definition">¶</a></dt>
+<dd><p>name of distant QuantumRouter node, containing a memory to be entangled with local memory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.entanglement_management.generation.EntanglementGenerationA.memory">
+<code class="sig-name descname">memory</code><a class="headerlink" href="#src.entanglement_management.generation.EntanglementGenerationA.memory" title="Permalink to this definition">¶</a></dt>
+<dd><p>quantum memory object to attempt entanglement for.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../components/memory.html#src.components.memory.Memory" title="src.components.memory.Memory">Memory</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.entanglement_management.generation.EntanglementGenerationA.emit_event">
+<code class="sig-name descname">emit_event</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.entanglement_management.generation.EntanglementGenerationA.emit_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to setup memory and emit photons.</p>
+<p>If the protocol is in round 1, the memory will be first set to the |+&gt; state.
+Otherwise, it will apply an x_gate to the memory.
+Regardless of the round, the memory <cite>excite</cite> method will be invoked.</p>
+<dl class="simple">
+<dt>Side Effects:</dt><dd><p>May change state of attached memory.
+May cause attached memory to emit photon.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.entanglement_management.generation.EntanglementGenerationA.end">
+<code class="sig-name descname">end</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.entanglement_management.generation.EntanglementGenerationA.end" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to end entanglement generation protocol.</p>
+<p>Checks the measurement results received to determine if valid entanglement achieved, and what the state is.
+If entanglement is achieved, the memory fidelity will be increased to equal the <cite>fidelity</cite> field.
+Otherwise, it will be set to 0.
+Also performs corrections to map psi+ and psi- states to phi+.</p>
+<dl class="simple">
+<dt>Side Effects:</dt><dd><p>Will call <cite>update_resource_manager</cite> method of base class.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.entanglement_management.generation.EntanglementGenerationA.is_ready">
+<code class="sig-name descname">is_ready</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#src.entanglement_management.generation.EntanglementGenerationA.is_ready" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to check if protocol is ready to start (abstract).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>if protocol is ready or not.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.entanglement_management.generation.EntanglementGenerationA.memory_expire">
+<code class="sig-name descname">memory_expire</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">memory</span><span class="p">:</span> <span class="n">Memory</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.entanglement_management.generation.EntanglementGenerationA.memory_expire" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to receive expired memories.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.entanglement_management.generation.EntanglementGenerationA.next_round">
+<code class="sig-name descname">next_round</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.entanglement_management.generation.EntanglementGenerationA.next_round" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets entanglement generation to next round.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.entanglement_management.generation.EntanglementGenerationA.received_message">
+<code class="sig-name descname">received_message</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">src</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">msg</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#src.entanglement_management.generation.EntanglementGenerationMessage" title="src.entanglement_management.generation.EntanglementGenerationMessage">src.entanglement_management.generation.EntanglementGenerationMessage</a></span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.entanglement_management.generation.EntanglementGenerationA.received_message" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to receive messages.</p>
+<p>This method receives messages from other entanglement generation protocols.
+Depending on the message, different actions may be taken by the protocol.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>src</strong> (<em>str</em>) – name of the source node sending the message.</p></li>
+<li><p><strong>msg</strong> (<a class="reference internal" href="#src.entanglement_management.generation.EntanglementGenerationMessage" title="src.entanglement_management.generation.EntanglementGenerationMessage"><em>EntanglementGenerationMessage</em></a>) – message received.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Side Effects:</dt><dd><p>May schedule various internal and hardware events.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.entanglement_management.generation.EntanglementGenerationA.set_others">
+<code class="sig-name descname">set_others</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">other</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#src.entanglement_management.generation.EntanglementGenerationA" title="src.entanglement_management.generation.EntanglementGenerationA">src.entanglement_management.generation.EntanglementGenerationA</a></span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.entanglement_management.generation.EntanglementGenerationA.set_others" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to set other entanglement protocol instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>other</strong> (<a class="reference internal" href="#src.entanglement_management.generation.EntanglementGenerationA" title="src.entanglement_management.generation.EntanglementGenerationA"><em>EntanglementGenerationA</em></a>) – other protocol instance.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.entanglement_management.generation.EntanglementGenerationA.start">
+<code class="sig-name descname">start</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.entanglement_management.generation.EntanglementGenerationA.start" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to start entanglement generation protocol.</p>
+<p>Will start negotiations with other protocol (if primary).</p>
+<dl class="simple">
+<dt>Side Effects:</dt><dd><p>Will send message through attached node.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="src.entanglement_management.generation.EntanglementGenerationB">
+<em class="property">class </em><code class="sig-prename descclassname">src.entanglement_management.generation.</code><code class="sig-name descname">EntanglementGenerationB</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">own</span><span class="p">:</span> <span class="n">Node</span></em>, <em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">others</span><span class="p">:</span> <span class="n">List<span class="p">[</span>str<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.entanglement_management.generation.EntanglementGenerationB" title="Permalink to this definition">¶</a></dt>
+<dd><p>Entanglement generation protocol for BSM node.</p>
+<p>The EntanglementGenerationB protocol should be instantiated on a BSM node.
+Instances will communicate with the A instance on neighboring quantum router nodes to generate entanglement.</p>
+<dl class="py attribute">
+<dt id="src.entanglement_management.generation.EntanglementGenerationB.own">
+<code class="sig-name descname">own</code><a class="headerlink" href="#src.entanglement_management.generation.EntanglementGenerationB.own" title="Permalink to this definition">¶</a></dt>
+<dd><p>node that protocol instance is attached to.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../topology/node.html#src.topology.node.BSMNode" title="src.topology.node.BSMNode">BSMNode</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.entanglement_management.generation.EntanglementGenerationB.name">
+<code class="sig-name descname">name</code><a class="headerlink" href="#src.entanglement_management.generation.EntanglementGenerationB.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>label for protocol instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.entanglement_management.generation.EntanglementGenerationB.others">
+<code class="sig-name descname">others</code><a class="headerlink" href="#src.entanglement_management.generation.EntanglementGenerationB.others" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of neighboring quantum router nodes</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>List[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.entanglement_management.generation.EntanglementGenerationB.bsm_update">
+<code class="sig-name descname">bsm_update</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">bsm</span><span class="p">:</span> <span class="n">SingleAtomBSM</span></em>, <em class="sig-param"><span class="n">info</span><span class="p">:</span> <span class="n">Dict<span class="p">[</span>str<span class="p">, </span>Any<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.entanglement_management.generation.EntanglementGenerationB.bsm_update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to receive detection events from BSM on node.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bsm</strong> (<a class="reference internal" href="../components/bsm.html#src.components.bsm.SingleAtomBSM" title="src.components.bsm.SingleAtomBSM"><em>SingleAtomBSM</em></a>) – bsm object calling method.</p></li>
+<li><p><strong>info</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>any</em><em>]</em>) – information passed from bsm.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.entanglement_management.generation.EntanglementGenerationB.is_ready">
+<code class="sig-name descname">is_ready</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#src.entanglement_management.generation.EntanglementGenerationB.is_ready" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to check if protocol is ready to start (abstract).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>if protocol is ready or not.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.entanglement_management.generation.EntanglementGenerationB.memory_expire">
+<code class="sig-name descname">memory_expire</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.entanglement_management.generation.EntanglementGenerationB.memory_expire" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to receive a memory expiration event (abstract).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.entanglement_management.generation.EntanglementGenerationB.received_message">
+<code class="sig-name descname">received_message</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">src</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">msg</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#src.entanglement_management.generation.EntanglementGenerationMessage" title="src.entanglement_management.generation.EntanglementGenerationMessage">src.entanglement_management.generation.EntanglementGenerationMessage</a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.entanglement_management.generation.EntanglementGenerationB.received_message" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receive classical message from another node.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.entanglement_management.generation.EntanglementGenerationB.set_others">
+<code class="sig-name descname">set_others</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">other</span><span class="p">:</span> <span class="n"><a class="reference internal" href="entanglement_protocol.html#src.entanglement_management.entanglement_protocol.EntanglementProtocol" title="src.entanglement_management.entanglement_protocol.EntanglementProtocol">src.entanglement_management.entanglement_protocol.EntanglementProtocol</a></span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.entanglement_management.generation.EntanglementGenerationB.set_others" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to set reference to paired protocol (abstract).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>other</strong> (<a class="reference internal" href="entanglement_protocol.html#src.entanglement_management.entanglement_protocol.EntanglementProtocol" title="src.entanglement_management.entanglement_protocol.EntanglementProtocol"><em>EntanglementProtocol</em></a>) – paired protocol.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.entanglement_management.generation.EntanglementGenerationB.start">
+<code class="sig-name descname">start</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.entanglement_management.generation.EntanglementGenerationB.start" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to start entanglement protocol process (abstract).</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="src.entanglement_management.generation.EntanglementGenerationMessage">
+<em class="property">class </em><code class="sig-prename descclassname">src.entanglement_management.generation.</code><code class="sig-name descname">EntanglementGenerationMessage</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">msg_type</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#src.entanglement_management.generation.GenerationMsgType" title="src.entanglement_management.generation.GenerationMsgType">src.entanglement_management.generation.GenerationMsgType</a></span></em>, <em class="sig-param"><span class="n">receiver</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.entanglement_management.generation.EntanglementGenerationMessage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Message used by entanglement generation protocols.</p>
+<p>This message contains all information passed between generation protocol instances.
+Messages of different types contain different information.</p>
+<dl class="py attribute">
+<dt id="src.entanglement_management.generation.EntanglementGenerationMessage.msg_type">
+<code class="sig-name descname">msg_type</code><a class="headerlink" href="#src.entanglement_management.generation.EntanglementGenerationMessage.msg_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>defines the message type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#src.entanglement_management.generation.GenerationMsgType" title="src.entanglement_management.generation.GenerationMsgType">GenerationMsgType</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.entanglement_management.generation.EntanglementGenerationMessage.receiver">
+<code class="sig-name descname">receiver</code><a class="headerlink" href="#src.entanglement_management.generation.EntanglementGenerationMessage.receiver" title="Permalink to this definition">¶</a></dt>
+<dd><p>name of destination protocol instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.entanglement_management.generation.EntanglementGenerationMessage.qc_delay">
+<code class="sig-name descname">qc_delay</code><a class="headerlink" href="#src.entanglement_management.generation.EntanglementGenerationMessage.qc_delay" title="Permalink to this definition">¶</a></dt>
+<dd><p>quantum channel delay to BSM node (if <cite>msg_type == NEGOTIATE</cite>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.entanglement_management.generation.EntanglementGenerationMessage.frequency">
+<code class="sig-name descname">frequency</code><a class="headerlink" href="#src.entanglement_management.generation.EntanglementGenerationMessage.frequency" title="Permalink to this definition">¶</a></dt>
+<dd><p>frequency with which local memory can be excited (if <cite>msg_type == NEGOTIATE</cite>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.entanglement_management.generation.EntanglementGenerationMessage.emit_time">
+<code class="sig-name descname">emit_time</code><a class="headerlink" href="#src.entanglement_management.generation.EntanglementGenerationMessage.emit_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>time to emit photon for measurement (if <cite>msg_type == NEGOTIATE_ACK</cite>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.entanglement_management.generation.EntanglementGenerationMessage.res">
+<code class="sig-name descname">res</code><a class="headerlink" href="#src.entanglement_management.generation.EntanglementGenerationMessage.res" title="Permalink to this definition">¶</a></dt>
+<dd><p>detector number at BSM node (if <cite>msg_type == MEAS_RES</cite>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.entanglement_management.generation.EntanglementGenerationMessage.time">
+<code class="sig-name descname">time</code><a class="headerlink" href="#src.entanglement_management.generation.EntanglementGenerationMessage.time" title="Permalink to this definition">¶</a></dt>
+<dd><p>detection time at BSM node (if <cite>msg_type == MEAS_RES</cite>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.entanglement_management.generation.EntanglementGenerationMessage.resolution">
+<code class="sig-name descname">resolution</code><a class="headerlink" href="#src.entanglement_management.generation.EntanglementGenerationMessage.resolution" title="Permalink to this definition">¶</a></dt>
+<dd><p>time resolution of BSM detectors (if <cite>msg_type == MEAS_RES</cite>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="src.entanglement_management.generation.GenerationMsgType">
+<em class="property">class </em><code class="sig-prename descclassname">src.entanglement_management.generation.</code><code class="sig-name descname">GenerationMsgType</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.entanglement_management.generation.GenerationMsgType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines possible message types for entanglement generation.</p>
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="entanglement_protocol.html"
+                        title="previous chapter">Entanglement Protocol</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="purification.html"
+                        title="next chapter">Entanglement Purification</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/references/entanglement_management/generation.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="purification.html" title="Entanglement Purification"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="entanglement_protocol.html" title="Entanglement Protocol"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.2.3 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="top.html" >Entanglement Management</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Entanglement Generation</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+    </div>
+  </body>
+</html>

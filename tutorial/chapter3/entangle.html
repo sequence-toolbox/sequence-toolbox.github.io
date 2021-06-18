@@ -1,0 +1,597 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 3: Entanglement Management &#8212; SeQUeNCe 0.2.3 documentation</title>
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Chapter 4: Resource Management" href="../chapter4/resource_management.html" />
+    <link rel="prev" title="Chapter 2: Hardware Module" href="../chapter2/hardware.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../chapter4/resource_management.html" title="Chapter 4: Resource Management"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../chapter2/hardware.html" title="Chapter 2: Hardware Module"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.2.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Chapter 3: Entanglement Management</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="chapter-3-entanglement-management">
+<h1>Chapter 3: Entanglement Management<a class="headerlink" href="#chapter-3-entanglement-management" title="Permalink to this headline">¶</a></h1>
+<p>In previous chapters, we introduced the usage of hardware models.
+In this chapter, we will use protocols in the entanglement management module to control these hardware devices and change the entanglement state of quantum memories.
+We will show</p>
+<ul class="simple">
+<li><p>how to use <code class="docutils literal notranslate"><span class="pre">EntanglementGenerationA</span></code> (Barret-Kok generation protocol) to entangle memories on different nodes</p></li>
+<li><p>how to use <code class="docutils literal notranslate"><span class="pre">BBPSSW</span></code> (BBPSSW purification protocol) to improve the fidelity of entanglement</p></li>
+<li><p>how to use <code class="docutils literal notranslate"><span class="pre">EntanglementSwappingA</span></code> and <code class="docutils literal notranslate"><span class="pre">EntanglementSwappingB</span></code> (swapping protocol) to extend the distance of entanglement</p></li>
+</ul>
+<div class="section" id="example-use-entanglementgenerationa-and-bsmnode-to-generate-entanglement">
+<h2>Example: Use <code class="docutils literal notranslate"><span class="pre">EntanglementGenerationA</span></code> and <code class="docutils literal notranslate"><span class="pre">BSMNode</span></code> to generate entanglement<a class="headerlink" href="#example-use-entanglementgenerationa-and-bsmnode-to-generate-entanglement" title="Permalink to this headline">¶</a></h2>
+<p><img alt="eg_topo" src="../../_images/EG_topo.png" /></p>
+<p>The above figure shows the network topology used in this example.
+The network includes three nodes: one <code class="docutils literal notranslate"><span class="pre">BSMNode</span></code> node and two <code class="docutils literal notranslate"><span class="pre">EntangleGenNode</span></code> nodes.
+The <code class="docutils literal notranslate"><span class="pre">BSMNode</span></code> node comes from SeQUeNCe.
+We will build the custom node <code class="docutils literal notranslate"><span class="pre">EntangleGenNode</span></code> that inherits the <code class="docutils literal notranslate"><span class="pre">Node</span></code> class from SeQUeNCe.
+Two quantum channels connect the <code class="docutils literal notranslate"><span class="pre">BSMNode</span></code> with the two <code class="docutils literal notranslate"><span class="pre">EntangleGenNode</span></code>.
+Classical channels and nodes create a complete classical graph, which is not shown in the figure.</p>
+<p><code class="docutils literal notranslate"><span class="pre">BSMNode</span></code> includes:</p>
+<ul class="simple">
+<li><p><strong>Hardware</strong>: two detectors in a bell state measurement device (BSM) to record the arrival time of photons.</p></li>
+<li><p><strong>Software</strong>: the <code class="docutils literal notranslate"><span class="pre">EntanglementGenerationB</span></code> protocol to collect the arrival time of photons and notify the <code class="docutils literal notranslate"><span class="pre">EntanglementGenerationA</span></code> protocols on the other nodes.</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">EntangleGenNode</span></code> includes:</p>
+<ul class="simple">
+<li><p><strong>Hardware</strong>: one quantum memory in the |+⟩ state, prepared to entangle with the remote memory.</p></li>
+<li><p><strong>Software</strong>: the <code class="docutils literal notranslate"><span class="pre">EntanglementGenerationA</span></code> prtocol to excite the controlled memory and determine the quantum state via messages from <code class="docutils literal notranslate"><span class="pre">EntanglementGenerationB</span></code>;
+the <code class="docutils literal notranslate"><span class="pre">SimpleManager</span></code> uses the <code class="docutils literal notranslate"><span class="pre">update</span></code> function to get the state of memory after the procedures in <code class="docutils literal notranslate"><span class="pre">EntanglementGenerationA</span></code>.</p></li>
+</ul>
+<div class="section" id="step-1-customize-node">
+<h3>Step 1: Customize Node<a class="headerlink" href="#step-1-customize-node" title="Permalink to this headline">¶</a></h3>
+<p>We can import <code class="docutils literal notranslate"><span class="pre">BSMNode</span></code> from SeQUeNCe package and thus only need to define the <code class="docutils literal notranslate"><span class="pre">EntangleGenNode</span></code> class.
+The code of <code class="docutils literal notranslate"><span class="pre">EntangleGenNode</span></code> class is shown below:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sequence.topology.node</span> <span class="kn">import</span> <span class="n">Node</span>
+<span class="kn">from</span> <span class="nn">sequence.components.memory</span> <span class="kn">import</span> <span class="n">Memory</span>
+<span class="kn">from</span> <span class="nn">sequence.entanglement_management.generation</span> <span class="kn">import</span> <span class="n">EntanglementGenerationA</span>
+
+
+<span class="k">class</span> <span class="nc">SimpleManager</span><span class="p">():</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">raw_counter</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ent_counter</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">protocol</span><span class="p">,</span> <span class="n">memory</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">state</span> <span class="o">==</span> <span class="s1">&#39;RAW&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">raw_counter</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ent_counter</span> <span class="o">+=</span> <span class="mi">1</span>
+
+
+<span class="k">class</span> <span class="nc">EntangleGenNode</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">tl</span><span class="p">:</span> <span class="n">Timeline</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">tl</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">memory</span> <span class="o">=</span> <span class="n">Memory</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">.memo&#39;</span><span class="o">%</span><span class="n">name</span><span class="p">,</span> <span class="n">tl</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">memory</span><span class="o">.</span><span class="n">owner</span> <span class="o">=</span> <span class="bp">self</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">resource_manager</span> <span class="o">=</span> <span class="n">SimpleManager</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">protocols</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="nf">receive_message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">src</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">msg</span><span class="p">:</span> <span class="s2">&quot;Message&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">received_message</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">create_protocol</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">middle</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">protocols</span> <span class="o">=</span> <span class="p">[</span><span class="n">EntanglementGenerationA</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">.eg&#39;</span><span class="o">%</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">middle</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">memory</span><span class="p">)]</span>
+</pre></div>
+</div>
+<p>In this customized <code class="docutils literal notranslate"><span class="pre">Node</span></code> class, we inherit most functions and only overwrite the <code class="docutils literal notranslate"><span class="pre">receive_message</span></code> function.
+A node will use this function to receive the a classical message <code class="docutils literal notranslate"><span class="pre">msg</span></code> from the source node <code class="docutils literal notranslate"><span class="pre">src</span></code>.</p>
+<p>We also add a new function <code class="docutils literal notranslate"><span class="pre">create_protocol(self,</span> <span class="pre">middle:</span> <span class="pre">str,</span> <span class="pre">other:</span> <span class="pre">str)</span></code> to create the instance of the generation protocol.
+The <code class="docutils literal notranslate"><span class="pre">middle</span></code> and <code class="docutils literal notranslate"><span class="pre">other</span></code> parameters declare the name of the <code class="docutils literal notranslate"><span class="pre">BSMNode</span></code> and <code class="docutils literal notranslate"><span class="pre">EntangleGenNode</span></code>, respectively, used for generating entanglement.</p>
+<p>The constructor function of <code class="docutils literal notranslate"><span class="pre">EntanglementGenerationA</span></code> needs five arguments:</p>
+<ol class="simple">
+<li><p>the node that holds the protocol instance</p></li>
+<li><p>the identity (name) of the protocol instance</p></li>
+<li><p>the name of the <code class="docutils literal notranslate"><span class="pre">BSMNode</span></code> involved in entanglement generation</p></li>
+<li><p>the name of the remote <code class="docutils literal notranslate"><span class="pre">EntangleGenNode</span></code> involved in entanglement generation</p></li>
+<li><p>the memory used for generating entanglement</p></li>
+</ol>
+<div class="section" id="q-a">
+<h4>Q&amp;A<a class="headerlink" href="#q-a" title="Permalink to this headline">¶</a></h4>
+<p>Q: Why is the <code class="docutils literal notranslate"><span class="pre">SimpleManager</span></code> necessary?</p>
+<p>A: We have cembedded code that calls the <code class="docutils literal notranslate"><span class="pre">update</span></code> function of a <code class="docutils literal notranslate"><span class="pre">resource_manager</span></code> into our current implementations of entanglement protocols.</p>
+<p>Q: Why does the constructor of <code class="docutils literal notranslate"><span class="pre">EntangleGenNen</span></code> set the <code class="docutils literal notranslate"><span class="pre">Memory.owner</span></code> field?</p>
+<p>A: The <code class="docutils literal notranslate"><span class="pre">Memory</span></code> class should contain a pointer to a <code class="docutils literal notranslate"><span class="pre">Node</span></code> object, as nodes provide the interface for <code class="docutils literal notranslate"><span class="pre">QuantumChannel</span></code> objects to send photons to the desired destination.</p>
+<p>Q: Why is the <code class="docutils literal notranslate"><span class="pre">EntanglementGenerationA</span></code> object placed in the list <code class="docutils literal notranslate"><span class="pre">EntangleGenNode.protocols</span></code>?</p>
+<p>A: The implementation of <code class="docutils literal notranslate"><span class="pre">EntanglementGenerationA</span></code> assumes it has been placed in the <code class="docutils literal notranslate"><span class="pre">Node.protocols</span></code> list when it starts.</p>
+</div>
+</div>
+<div class="section" id="step-2-create-network">
+<h3>Step 2: Create Network<a class="headerlink" href="#step-2-create-network" title="Permalink to this headline">¶</a></h3>
+<p>As introduced in the previous chapter, we create nodes and channels to define the network.
+To avoid unnecessary errors, we will set the efficiency of our detectors to 1.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sequence.kernel.timeline</span> <span class="kn">import</span> <span class="n">Timeline</span>
+<span class="kn">from</span> <span class="nn">sequence.topology.node</span> <span class="kn">import</span> <span class="n">BSMNode</span>
+<span class="kn">from</span> <span class="nn">sequence.components.optical_channel</span> <span class="kn">import</span> <span class="n">QuantumChannel</span><span class="p">,</span> <span class="n">ClassicalChannel</span>
+
+
+<span class="n">tl</span> <span class="o">=</span> <span class="n">Timeline</span><span class="p">()</span>
+
+<span class="n">node1</span> <span class="o">=</span> <span class="n">EntangleGenNode</span><span class="p">(</span><span class="s1">&#39;node1&#39;</span><span class="p">,</span> <span class="n">tl</span><span class="p">)</span>
+<span class="n">node2</span> <span class="o">=</span> <span class="n">EntangleGenNode</span><span class="p">(</span><span class="s1">&#39;node2&#39;</span><span class="p">,</span> <span class="n">tl</span><span class="p">)</span>
+<span class="n">bsm_node</span> <span class="o">=</span> <span class="n">BSMNode</span><span class="p">(</span><span class="s1">&#39;bsm_node&#39;</span><span class="p">,</span> <span class="n">tl</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;node1&#39;</span><span class="p">,</span> <span class="s1">&#39;node2&#39;</span><span class="p">])</span>
+
+<span class="n">bsm_node</span><span class="o">.</span><span class="n">bsm</span><span class="o">.</span><span class="n">update_detectors_params</span><span class="p">(</span><span class="s1">&#39;efficiency&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">qc1</span> <span class="o">=</span> <span class="n">QuantumChannel</span><span class="p">(</span><span class="s1">&#39;qc1&#39;</span><span class="p">,</span> <span class="n">tl</span><span class="p">,</span> <span class="n">attenuation</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">qc2</span> <span class="o">=</span> <span class="n">QuantumChannel</span><span class="p">(</span><span class="s1">&#39;qc2&#39;</span><span class="p">,</span> <span class="n">tl</span><span class="p">,</span> <span class="n">attenuation</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">qc1</span><span class="o">.</span><span class="n">set_ends</span><span class="p">(</span><span class="n">node1</span><span class="p">,</span> <span class="n">bsm_node</span><span class="p">)</span>
+<span class="n">qc2</span><span class="o">.</span><span class="n">set_ends</span><span class="p">(</span><span class="n">node2</span><span class="p">,</span> <span class="n">bsm_node</span><span class="p">)</span>
+
+<span class="n">nodes</span> <span class="o">=</span> <span class="p">[</span><span class="n">node1</span><span class="p">,</span> <span class="n">node2</span><span class="p">,</span> <span class="n">bsm_node</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+        <span class="n">cc</span><span class="o">=</span> <span class="n">ClassicalChannel</span><span class="p">(</span><span class="s1">&#39;cc_</span><span class="si">%s</span><span class="s1">_</span><span class="si">%s</span><span class="s1">&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">nodes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">nodes</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">),</span> <span class="n">tl</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mf">1e8</span><span class="p">)</span>
+        <span class="n">cc</span><span class="o">.</span><span class="n">set_ends</span><span class="p">(</span><span class="n">nodes</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">nodes</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="step-3-configure-and-start-the-entanglementgenerationa-protocol">
+<h3>Step 3: Configure and Start the <code class="docutils literal notranslate"><span class="pre">EntanglementGenerationA</span></code> Protocol<a class="headerlink" href="#step-3-configure-and-start-the-entanglementgenerationa-protocol" title="Permalink to this headline">¶</a></h3>
+<p>First, we will use <code class="docutils literal notranslate"><span class="pre">create_protocol</span></code> to create the instance of the protocol on the node.
+Before we start the protocol, we need to pair the protocols on the two nodes.
+The function <code class="docutils literal notranslate"><span class="pre">pair_protocol</span></code> defined here uses two <code class="docutils literal notranslate"><span class="pre">EntangleGenNode</span></code> as the input and will pair all necessary protocols.
+The protocols in <code class="docutils literal notranslate"><span class="pre">EntangleGenNode.protocols</span></code> are paired with the <code class="docutils literal notranslate"><span class="pre">set_others</span></code> method.</p>
+<p>Now, the protocols are ready to start generating entanglement and we can start our experiment.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sequence.entanglement_management.entanglement_protocol</span> <span class="kn">import</span> <span class="n">EntanglementProtocol</span>
+
+
+<span class="k">def</span> <span class="nf">pair_protocol</span><span class="p">(</span><span class="n">p1</span><span class="p">:</span> <span class="n">EntanglementProtocol</span><span class="p">,</span> <span class="n">p2</span><span class="p">:</span> <span class="n">EntanglementProtocol</span><span class="p">):</span>
+    <span class="n">p1</span><span class="o">.</span><span class="n">set_others</span><span class="p">(</span><span class="n">p2</span><span class="p">)</span>
+    <span class="n">p2</span><span class="o">.</span><span class="n">set_others</span><span class="p">(</span><span class="n">p1</span><span class="p">)</span>
+
+
+<span class="n">node1</span><span class="o">.</span><span class="n">create_protocol</span><span class="p">(</span><span class="s1">&#39;bsm_node&#39;</span><span class="p">,</span> <span class="s1">&#39;node2&#39;</span><span class="p">)</span>
+<span class="n">node2</span><span class="o">.</span><span class="n">create_protocol</span><span class="p">(</span><span class="s1">&#39;bsm_node&#39;</span><span class="p">,</span> <span class="s1">&#39;node1&#39;</span><span class="p">)</span>
+<span class="n">pair_protocol</span><span class="p">(</span><span class="n">node1</span><span class="o">.</span><span class="n">protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">node2</span><span class="o">.</span><span class="n">protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;before&#39;</span><span class="p">,</span> <span class="n">node1</span><span class="o">.</span><span class="n">memory</span><span class="o">.</span><span class="n">entangled_memory</span><span class="p">,</span> <span class="n">node1</span><span class="o">.</span><span class="n">memory</span><span class="o">.</span><span class="n">fidelity</span><span class="p">)</span>
+<span class="c1"># &quot;before node1.memo {&#39;node_id&#39;: None, &#39;memo_id&#39;: None} 0&quot;</span>
+
+<span class="n">node1</span><span class="o">.</span><span class="n">protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="n">node2</span><span class="o">.</span><span class="n">protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+<span class="n">tl</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">tl</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;after&#39;</span><span class="p">,</span> <span class="n">node1</span><span class="o">.</span><span class="n">memory</span><span class="o">.</span><span class="n">entangled_memory</span><span class="p">,</span> <span class="n">node1</span><span class="o">.</span><span class="n">memory</span><span class="o">.</span><span class="n">fidelity</span><span class="p">)</span>
+<span class="c1"># (if the generation fails) &quot;after node1.memo {&#39;node_id&#39;: None, &#39;memo_id&#39;: None} 0&quot;</span>
+<span class="c1"># (if the generation succeeds) &quot;after node1.memo {&#39;node_id&#39;: &#39;node2&#39;, &#39;memo_id&#39;: &#39;node2.memo&#39;} 0.9&quot;</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">start</span></code> method starts the protocol. The <code class="docutils literal notranslate"><span class="pre">run</span></code> mehtod starts the simulation.
+After the simulation, we can observe two possible states of memory based on the result of entanglement generation.
+If the protocol generates entanglement successfully, the <code class="docutils literal notranslate"><span class="pre">Memory.entangled_memory</span></code> will present information about the entangled memory.
+The fidelity of entanglements equal <code class="docutils literal notranslate"><span class="pre">0.9</span></code>, as set in the constructor function of <code class="docutils literal notranslate"><span class="pre">Memory</span></code>.
+If the protocol fails, the fidelity of entanglement is <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+</div>
+<div class="section" id="step-4-try-to-generate-entanglement-multiple-times">
+<h3>Step 4: Try to Generate Entanglement Multiple Times<a class="headerlink" href="#step-4-try-to-generate-entanglement-multiple-times" title="Permalink to this headline">¶</a></h3>
+<p>The mechanism of the Barrett-Kok generation protocol can achieve at most 50% success rate.
+We can, however, set the protocol to try multiple times and observe the success rate of protocol.
+We will use the <code class="docutils literal notranslate"><span class="pre">Memory.reset()</span></code> method to reset the state of quantum memories before restarting protocols.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
+    <span class="n">tl</span><span class="o">.</span><span class="n">time</span> <span class="o">=</span> <span class="n">tl</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">+</span> <span class="mf">1e11</span>
+    <span class="n">node1</span><span class="o">.</span><span class="n">create_protocol</span><span class="p">(</span><span class="s1">&#39;bsm_node&#39;</span><span class="p">,</span> <span class="s1">&#39;node2&#39;</span><span class="p">)</span>
+    <span class="n">node2</span><span class="o">.</span><span class="n">create_protocol</span><span class="p">(</span><span class="s1">&#39;bsm_node&#39;</span><span class="p">,</span> <span class="s1">&#39;node1&#39;</span><span class="p">)</span>
+    <span class="n">pair_protocol</span><span class="p">(</span><span class="n">node1</span><span class="o">.</span><span class="n">protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">node2</span><span class="o">.</span><span class="n">protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="n">node1</span><span class="o">.</span><span class="n">memory</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+    <span class="n">node2</span><span class="o">.</span><span class="n">memory</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+
+    <span class="n">node1</span><span class="o">.</span><span class="n">protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="n">node2</span><span class="o">.</span><span class="n">protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+    <span class="n">tl</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+    <span class="n">tl</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">node1</span><span class="o">.</span><span class="n">resource_manager</span><span class="o">.</span><span class="n">ent_counter</span><span class="p">,</span> <span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="n">node1</span><span class="o">.</span><span class="n">resource_manager</span><span class="o">.</span><span class="n">raw_counter</span><span class="p">)</span>
+<span class="c1"># (around 500:500; the exact number depends on the seed of numpy.random)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="example-use-bbpssw-to-improve-the-fidelity-of-entanglement">
+<h2>Example: Use <code class="docutils literal notranslate"><span class="pre">BBPSSW</span></code> to improve the fidelity of entanglement<a class="headerlink" href="#example-use-bbpssw-to-improve-the-fidelity-of-entanglement" title="Permalink to this headline">¶</a></h2>
+<p><img alt="EP_topo" src="../../_images/EP_topo.png" /></p>
+<p>The above figure shows the network topology of this example.
+The network is composed of two <code class="docutils literal notranslate"><span class="pre">PurifyNode</span></code> nodes and one <code class="docutils literal notranslate"><span class="pre">ClassicalChannel</span></code>.
+Two pairs of entangled memories are located at two nodes.
+The <code class="docutils literal notranslate"><span class="pre">BBPSSW</span></code> purification protocol will consume one entanglement to improve the fidelity of the other entanglement.</p>
+<div class="section" id="step-1-customized-node">
+<h3>Step 1: Customized Node<a class="headerlink" href="#step-1-customized-node" title="Permalink to this headline">¶</a></h3>
+<p>The custom <code class="docutils literal notranslate"><span class="pre">PurifyNode</span></code> class will inherit the <code class="docutils literal notranslate"><span class="pre">Node</span></code> class from SeQUeNCe.
+Similar to <code class="docutils literal notranslate"><span class="pre">EntangleGenNode</span></code>, we need to define a <code class="docutils literal notranslate"><span class="pre">SimpleManager</span></code> and rewrite the <code class="docutils literal notranslate"><span class="pre">receive_message</span></code> method.
+The <code class="docutils literal notranslate"><span class="pre">PurifyNode.kept_memo</span></code> is the memory whose fidelity will be improved by the purification protocol.
+If the protocol purifies <code class="docutils literal notranslate"><span class="pre">kept_memo</span></code> successfully, we will keep the <code class="docutils literal notranslate"><span class="pre">kept_memo</span></code>.
+Otherwise, we will discard it.
+The <code class="docutils literal notranslate"><span class="pre">PurifyNode.meas_memo</span></code> is the consumed memory.
+We will always discard the <code class="docutils literal notranslate"><span class="pre">meas_memo</span></code> after the completion of the purification protocol.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sequence.entanglement_management.purification</span> <span class="kn">import</span> <span class="n">BBPSSW</span>
+
+
+<span class="k">class</span> <span class="nc">PurifyNode</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">tl</span><span class="p">:</span> <span class="n">Timeline</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">tl</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kept_memo</span> <span class="o">=</span> <span class="n">Memory</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">.memoA&#39;</span> <span class="o">%</span> <span class="n">name</span><span class="p">,</span> <span class="n">tl</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kept_memo</span><span class="o">.</span><span class="n">owner</span> <span class="o">=</span> <span class="bp">self</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">meas_memo</span> <span class="o">=</span> <span class="n">Memory</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">.memoB&#39;</span> <span class="o">%</span> <span class="n">name</span><span class="p">,</span> <span class="n">tl</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">meas_memo</span><span class="o">.</span><span class="n">owner</span> <span class="o">=</span> <span class="bp">self</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">resource_manager</span> <span class="o">=</span> <span class="n">SimpleManager</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">protocols</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="nf">receive_message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">src</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">msg</span><span class="p">:</span> <span class="s2">&quot;Message&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">received_message</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">create_protocol</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">protocols</span> <span class="o">=</span> <span class="p">[</span><span class="n">BBPSSW</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;purification_protocol&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">kept_memo</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">meas_memo</span><span class="p">)]</span>
+</pre></div>
+</div>
+<p>The constructor function of BBPSSW requires four arguments:</p>
+<ol class="simple">
+<li><p>The node that holds the protocol instance</p></li>
+<li><p>The identity of the protocol instance</p></li>
+<li><p>The memory used as the <code class="docutils literal notranslate"><span class="pre">kept_memo</span></code></p></li>
+<li><p>the memory used as the <code class="docutils literal notranslate"><span class="pre">meas_memo</span></code></p></li>
+</ol>
+</div>
+<div class="section" id="id1">
+<h3>Step 2: Create Network<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>We can now use the code below to create the simulated network.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tl</span> <span class="o">=</span> <span class="n">Timeline</span><span class="p">()</span>
+
+<span class="n">node1</span> <span class="o">=</span> <span class="n">PurifyNode</span><span class="p">(</span><span class="s1">&#39;node1&#39;</span><span class="p">,</span> <span class="n">tl</span><span class="p">)</span>
+<span class="n">node2</span> <span class="o">=</span> <span class="n">PurifyNode</span><span class="p">(</span><span class="s1">&#39;node2&#39;</span><span class="p">,</span> <span class="n">tl</span><span class="p">)</span>
+
+<span class="n">cc0</span> <span class="o">=</span> <span class="n">ClassicalChannel</span><span class="p">(</span><span class="s1">&#39;cc0&#39;</span><span class="p">,</span> <span class="n">tl</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mf">1e9</span><span class="p">)</span>
+<span class="n">cc1</span> <span class="o">=</span> <span class="n">ClassicalChannel</span><span class="p">(</span><span class="s1">&#39;cc1&#39;</span><span class="p">,</span> <span class="n">tl</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mf">1e9</span><span class="p">)</span>
+<span class="n">cc0</span><span class="o">.</span><span class="n">set_ends</span><span class="p">(</span><span class="n">node1</span><span class="p">,</span> <span class="n">node2</span><span class="p">)</span>
+<span class="n">cc1</span><span class="o">.</span><span class="n">set_ends</span><span class="p">(</span><span class="n">node2</span><span class="p">,</span> <span class="n">node1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="step-3-manually-set-entanglement-states">
+<h3>Step 3: Manually Set Entanglement States<a class="headerlink" href="#step-3-manually-set-entanglement-states" title="Permalink to this headline">¶</a></h3>
+<p>To avoid unnecessary modules and operations, we will manually modify the memories to create an entangled state.
+First, we use the <code class="docutils literal notranslate"><span class="pre">Memory.reset()</span></code> to reset the state of memory.
+Then, we assign the identity of the node and memory to which we are entangled in <code class="docutils literal notranslate"><span class="pre">Memory.entangled_memory</span></code> (implemented as a dictionary <code class="docutils literal notranslate"><span class="pre">{'node_id':</span> <span class="pre">str,</span> <span class="pre">'memo_id':</span> <span class="pre">str}</span></code>).
+Finally, we set the fidelity of entanglement.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">entangle_memory</span><span class="p">(</span><span class="n">memo1</span><span class="p">:</span> <span class="n">Memory</span><span class="p">,</span> <span class="n">memo2</span><span class="p">:</span> <span class="n">Memory</span><span class="p">,</span> <span class="n">fidelity</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+    <span class="n">memo1</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+    <span class="n">memo2</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+
+    <span class="n">memo1</span><span class="o">.</span><span class="n">entangled_memory</span><span class="p">[</span><span class="s1">&#39;node_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">memo2</span><span class="o">.</span><span class="n">owner</span><span class="o">.</span><span class="n">name</span>
+    <span class="n">memo1</span><span class="o">.</span><span class="n">entangled_memory</span><span class="p">[</span><span class="s1">&#39;memo_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">memo2</span><span class="o">.</span><span class="n">name</span>
+    <span class="n">memo2</span><span class="o">.</span><span class="n">entangled_memory</span><span class="p">[</span><span class="s1">&#39;node_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">memo1</span><span class="o">.</span><span class="n">owner</span><span class="o">.</span><span class="n">name</span>
+    <span class="n">memo2</span><span class="o">.</span><span class="n">entangled_memory</span><span class="p">[</span><span class="s1">&#39;memo_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">memo1</span><span class="o">.</span><span class="n">name</span>
+
+    <span class="n">memo1</span><span class="o">.</span><span class="n">fidelity</span> <span class="o">=</span> <span class="n">memo2</span><span class="o">.</span><span class="n">fidelity</span> <span class="o">=</span> <span class="n">fidelity</span>
+
+
+<span class="n">entangle_memory</span><span class="p">(</span><span class="n">node1</span><span class="o">.</span><span class="n">kept_memo</span><span class="p">,</span> <span class="n">node2</span><span class="o">.</span><span class="n">kept_memo</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">)</span>
+<span class="n">entangle_memory</span><span class="p">(</span><span class="n">node1</span><span class="o">.</span><span class="n">meas_memo</span><span class="p">,</span> <span class="n">node2</span><span class="o">.</span><span class="n">meas_memo</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="step-4-configure-and-start-bbpssw-protocol">
+<h3>Step 4: Configure and Start BBPSSW Protocol<a class="headerlink" href="#step-4-configure-and-start-bbpssw-protocol" title="Permalink to this headline">¶</a></h3>
+<p>Similar to the previous example, we create, pair, and start the protocols.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">pair_protocol</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">):</span>
+    <span class="n">p1</span><span class="o">.</span><span class="n">set_others</span><span class="p">(</span><span class="n">p2</span><span class="p">)</span>
+    <span class="n">p2</span><span class="o">.</span><span class="n">set_others</span><span class="p">(</span><span class="n">p1</span><span class="p">)</span>
+
+
+<span class="n">node1</span><span class="o">.</span><span class="n">create_protocol</span><span class="p">()</span>
+<span class="n">node2</span><span class="o">.</span><span class="n">create_protocol</span><span class="p">()</span>
+
+<span class="n">pair_protocol</span><span class="p">(</span><span class="n">node1</span><span class="o">.</span><span class="n">protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">node2</span><span class="o">.</span><span class="n">protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="n">node1</span><span class="o">.</span><span class="n">protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="n">node2</span><span class="o">.</span><span class="n">protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+<span class="n">tl</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">tl</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">node1</span><span class="o">.</span><span class="n">kept_memo</span><span class="o">.</span><span class="n">entangled_memory</span><span class="p">,</span> <span class="n">node2</span><span class="o">.</span><span class="n">kept_memo</span><span class="o">.</span><span class="n">fidelity</span><span class="p">)</span>
+<span class="c1"># &#39;node1.kept_memo {&#39;node_id&#39;: &#39;node2&#39;, &#39;memo_id&#39;: &#39;node2.kept_memo&#39;} 0.9263959390862945&#39;</span>
+<span class="c1"># or &#39;node1.kept_memo {&#39;node_id&#39;: &#39;node2&#39;, &#39;memo_id&#39;: &#39;node2.kept_memo&#39;} 0.9&#39;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">node1</span><span class="o">.</span><span class="n">meas_memo</span><span class="o">.</span><span class="n">entangled_memory</span><span class="p">,</span> <span class="n">node2</span><span class="o">.</span><span class="n">meas_memo</span><span class="o">.</span><span class="n">fidelity</span><span class="p">)</span>
+<span class="c1"># &#39;node1.meas_memo {&#39;node_id&#39;: &#39;node2&#39;, &#39;memo_id&#39;: node2.meas_memo&#39;} 0.9&#39;</span>
+</pre></div>
+</div>
+<p>After the simulation, the first print statement produces one of two possible outputs.
+The first output (the first comment) shows a successful purification operation.
+The second output (the second comment) shows the failure of purification.
+Note that the entanglement fields and fidelity will be reset by the resource manager, discussed in the next chapter.
+The success rate of purificaiton depends on the fidelity of entanglement.
+Entanglements with higher fidelities have a higher success rate.</p>
+<p><strong>Note</strong>: The BBPSSW protocol assumes the fidelity of the two entangled pairs are the same.</p>
+<p><strong>Note</strong>: You can inherit the BBPSSW class and overwrite <code class="docutils literal notranslate"><span class="pre">BBPSSW.success_probability(F:</span> <span class="pre">float)</span></code>
+and <code class="docutils literal notranslate"><span class="pre">BBPSSW.improved_fidelity(F:</span> <span class="pre">float)</span></code> to customize the success probability and fidelity improvement of the purification protocol.</p>
+</div>
+<div class="section" id="step-5-try-to-purify-entanglement-multiple-times">
+<h3>Step 5: Try to Purify Entanglement Multiple Times<a class="headerlink" href="#step-5-try-to-purify-entanglement-multiple-times" title="Permalink to this headline">¶</a></h3>
+<p>We can run the purification protocol multiple times to observe the state of memory with different purification results.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">entangle_memory</span><span class="p">(</span><span class="n">node1</span><span class="o">.</span><span class="n">kept_memo</span><span class="p">,</span> <span class="n">node2</span><span class="o">.</span><span class="n">kept_memo</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">)</span>
+    <span class="n">entangle_memory</span><span class="p">(</span><span class="n">node1</span><span class="o">.</span><span class="n">meas_memo</span><span class="p">,</span> <span class="n">node2</span><span class="o">.</span><span class="n">meas_memo</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">)</span>
+
+    <span class="n">node1</span><span class="o">.</span><span class="n">create_protocol</span><span class="p">()</span>
+    <span class="n">node2</span><span class="o">.</span><span class="n">create_protocol</span><span class="p">()</span>
+
+    <span class="n">pair_protocol</span><span class="p">(</span><span class="n">node1</span><span class="o">.</span><span class="n">protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">node2</span><span class="o">.</span><span class="n">protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="n">node1</span><span class="o">.</span><span class="n">protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="n">node2</span><span class="o">.</span><span class="n">protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+    <span class="n">tl</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+    <span class="n">tl</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="n">node1</span><span class="o">.</span><span class="n">kept_memo</span><span class="o">.</span><span class="n">entangled_memory</span><span class="p">,</span> <span class="n">node2</span><span class="o">.</span><span class="n">kept_memo</span><span class="o">.</span><span class="n">fidelity</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">node1</span><span class="o">.</span><span class="n">meas_memo</span><span class="o">.</span><span class="n">entangled_memory</span><span class="p">,</span> <span class="n">node2</span><span class="o">.</span><span class="n">meas_memo</span><span class="o">.</span><span class="n">fidelity</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="example-use-entanglementswappinga-and-entanglementswappingb-to-extend-entanglement">
+<h2>Example: Use <code class="docutils literal notranslate"><span class="pre">EntanglementSwappingA</span></code> and <code class="docutils literal notranslate"><span class="pre">EntanglementSwappingB</span></code> to Extend Entanglement<a class="headerlink" href="#example-use-entanglementswappinga-and-entanglementswappingb-to-extend-entanglement" title="Permalink to this headline">¶</a></h2>
+<p><img alt="ES_topo" src="../../_images/ES_topo.png" /></p>
+<p>The above figure shows the network topology of this example.
+The network consists of two <code class="docutils literal notranslate"><span class="pre">SwapNodeB</span></code> and one <code class="docutils literal notranslate"><span class="pre">SwapNodeA</span></code> connected by classical channels.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">SwapNodeB</span></code> node has:</p>
+<ul class="simple">
+<li><p><strong>Hardware</strong>: one quantum memory entangled with one memory on <code class="docutils literal notranslate"><span class="pre">SwapNodeA</span></code></p></li>
+<li><p><strong>Software</strong>: <code class="docutils literal notranslate"><span class="pre">EntanglementSwappingB</span></code> swapping protocol</p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">SwapNodeA</span></code> node has:</p>
+<ul class="simple">
+<li><p><strong>Hardware</strong>: two entangled memories</p></li>
+<li><p><strong>Software</strong>: <code class="docutils literal notranslate"><span class="pre">EntanglementSwappingA</span></code> swapping protocol</p></li>
+</ul>
+<p>The swapping protocols on the three nodes use these two pairs of entangled memories to generate the entanglement between two <code class="docutils literal notranslate"><span class="pre">SwapNodeB</span></code> nodes.
+After the swapping protocol, the two memories on <code class="docutils literal notranslate"><span class="pre">SwapNodeA</span></code> are no longer entangled with the memories on each <code class="docutils literal notranslate"><span class="pre">SwapNodeB</span></code>.</p>
+<div class="section" id="id2">
+<h3>Step 1: Customized Node<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>We reuse the <code class="docutils literal notranslate"><span class="pre">SimpleManager</span></code> defined in the previous example to create the <code class="docutils literal notranslate"><span class="pre">SwapNodeA</span></code> and <code class="docutils literal notranslate"><span class="pre">SwapNodeB</span></code> protocols.</p>
+<p>The code below shows the implementation of <code class="docutils literal notranslate"><span class="pre">SwapNodeA</span></code>.
+The <code class="docutils literal notranslate"><span class="pre">SwapNodeA.left_memo</span></code> is the memory entangled with the memory on the left <code class="docutils literal notranslate"><span class="pre">SwapNodeB</span></code>.
+The <code class="docutils literal notranslate"><span class="pre">SwapNodeA.right_memo</span></code> is the memory entangled with the memory on the right <code class="docutils literal notranslate"><span class="pre">SwapNodeB</span></code>.
+The <code class="docutils literal notranslate"><span class="pre">create_protocol()</span></code> function creates the <code class="docutils literal notranslate"><span class="pre">EntanglementSwappingA</span></code> protocol instances.
+The <code class="docutils literal notranslate"><span class="pre">EntanglementSwappingA</span></code> constructor requires six arguments:</p>
+<ol class="simple">
+<li><p>The node that holds the protocol instance</p></li>
+<li><p>The identity of protocol instance</p></li>
+<li><p>The first memory used for the swapping operation</p></li>
+<li><p>The second memory used for the swapping operation</p></li>
+<li><p>The success rate of swapping</p></li>
+<li><p>The degradation rate of swapping</p></li>
+</ol>
+<p><strong>Note</strong>: the fidelity of entanglement after swapping is <code class="docutils literal notranslate"><span class="pre">f1</span> <span class="pre">*</span> <span class="pre">f2</span> <span class="pre">*</span> <span class="pre">fd</span></code>, where <code class="docutils literal notranslate"><span class="pre">f1</span></code>, <code class="docutils literal notranslate"><span class="pre">f2</span></code> denote the fidelity of the two entangled pairs and <code class="docutils literal notranslate"><span class="pre">fd</span></code> denotes the degradation rate.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sequence.entanglement_management.swapping</span> <span class="kn">import</span> <span class="n">EntanglementSwappingA</span><span class="p">,</span> <span class="n">EntanglementSwappingB</span>
+
+
+<span class="k">class</span> <span class="nc">SwapNodeA</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">tl</span><span class="p">:</span> <span class="n">Timeline</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">tl</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">left_memo</span> <span class="o">=</span> <span class="n">Memory</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">.left_memo&#39;</span> <span class="o">%</span> <span class="n">name</span><span class="p">,</span> <span class="n">tl</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">left_memo</span><span class="o">.</span><span class="n">owner</span> <span class="o">=</span> <span class="bp">self</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">right_memo</span> <span class="o">=</span> <span class="n">Memory</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">.right_memo&#39;</span> <span class="o">%</span> <span class="n">name</span><span class="p">,</span> <span class="n">tl</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">right_memo</span><span class="o">.</span><span class="n">owner</span> <span class="o">=</span> <span class="bp">self</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">resource_manager</span> <span class="o">=</span> <span class="n">SimpleManager</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">protocols</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="nf">receive_message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">src</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">msg</span><span class="p">:</span> <span class="s2">&quot;Message&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">received_message</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">create_protocol</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">protocols</span> <span class="o">=</span> <span class="p">[</span><span class="n">EntanglementSwappingA</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;ESA&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">left_memo</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">right_memo</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.99</span><span class="p">)]</span>
+</pre></div>
+</div>
+<p>The code for <code class="docutils literal notranslate"><span class="pre">SwapNodeB</span></code> has two differences from <code class="docutils literal notranslate"><span class="pre">SwapNodeA</span></code>:</p>
+<ol class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">SwapNodeB</span></code> only has one quantum memory.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">create_protocol()</span></code> function creates an instance of <code class="docutils literal notranslate"><span class="pre">EntanglementSwappingB</span></code>.</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SwapNodeB</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">tl</span><span class="p">:</span> <span class="n">Timeline</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">tl</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">memo</span> <span class="o">=</span> <span class="n">Memory</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">.memo&#39;</span> <span class="o">%</span> <span class="n">name</span><span class="p">,</span> <span class="n">tl</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">memo</span><span class="o">.</span><span class="n">owner</span> <span class="o">=</span> <span class="bp">self</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">resource_manager</span> <span class="o">=</span> <span class="n">SimpleManager</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">protocols</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="nf">receive_message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">src</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">msg</span><span class="p">:</span> <span class="s2">&quot;Message&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">received_message</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">create_protocol</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">protocols</span> <span class="o">=</span> <span class="p">[</span><span class="n">EntanglementSwappingB</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">.ESB&#39;</span><span class="o">%</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">memo</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h3>Step 2: Create Network<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>We create the three nodes and connect them with classical channels.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tl</span> <span class="o">=</span> <span class="n">Timeline</span><span class="p">()</span>
+
+<span class="n">left_node</span> <span class="o">=</span> <span class="n">SwapNodeB</span><span class="p">(</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">tl</span><span class="p">)</span>
+<span class="n">right_node</span> <span class="o">=</span> <span class="n">SwapNodeB</span><span class="p">(</span><span class="s1">&#39;right&#39;</span><span class="p">,</span> <span class="n">tl</span><span class="p">)</span>
+<span class="n">mid_node</span> <span class="o">=</span> <span class="n">SwapNodeA</span><span class="p">(</span><span class="s1">&#39;mid&#39;</span><span class="p">,</span> <span class="n">tl</span><span class="p">)</span>
+
+<span class="n">nodes</span> <span class="o">=</span> <span class="p">[</span><span class="n">left_node</span><span class="p">,</span> <span class="n">right_node</span><span class="p">,</span> <span class="n">mid_node</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+        <span class="n">cc</span> <span class="o">=</span> <span class="n">ClassicalChannel</span><span class="p">(</span><span class="s1">&#39;cc_</span><span class="si">%s</span><span class="s1">_</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">nodes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">nodes</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">),</span> <span class="n">tl</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mf">1e9</span><span class="p">)</span>
+        <span class="n">cc</span><span class="o">.</span><span class="n">set_ends</span><span class="p">(</span><span class="n">nodes</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">nodes</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="step-3-manually-set-entanglement-state-and-start-protocol">
+<h3>Step 3: Manually Set Entanglement State and Start Protocol<a class="headerlink" href="#step-3-manually-set-entanglement-state-and-start-protocol" title="Permalink to this headline">¶</a></h3>
+<p>We will reuse the code for <code class="docutils literal notranslate"><span class="pre">entangle_memory</span></code> and <code class="docutils literal notranslate"><span class="pre">pair_protocol</span></code> from the previous examples to configure the states of hardware and software.
+Because we set the success probability to 1, we can guaruntee a successful result after running the simulation.
+The fidelity of entanglement after swapping will be <code class="docutils literal notranslate"><span class="pre">0.9*0.9*0.99=0.8019</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">entangle_memory</span><span class="p">(</span><span class="n">left_node</span><span class="o">.</span><span class="n">memo</span><span class="p">,</span> <span class="n">mid_node</span><span class="o">.</span><span class="n">left_memo</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">)</span>
+<span class="n">entangle_memory</span><span class="p">(</span><span class="n">right_node</span><span class="o">.</span><span class="n">memo</span><span class="p">,</span> <span class="n">mid_node</span><span class="o">.</span><span class="n">right_memo</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">:</span>
+    <span class="n">node</span><span class="o">.</span><span class="n">create_protocol</span><span class="p">()</span>
+
+<span class="n">pair_protocol</span><span class="p">(</span><span class="n">left_node</span><span class="o">.</span><span class="n">protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">mid_node</span><span class="o">.</span><span class="n">protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">pair_protocol</span><span class="p">(</span><span class="n">right_node</span><span class="o">.</span><span class="n">protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">mid_node</span><span class="o">.</span><span class="n">protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">:</span>
+    <span class="n">node</span><span class="o">.</span><span class="n">protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+<span class="n">tl</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">tl</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">left_node</span><span class="o">.</span><span class="n">memo</span><span class="o">.</span><span class="n">entangled_memory</span><span class="p">)</span>
+<span class="c1"># {&#39;node_id&#39;: &#39;right&#39;, &#39;memo_id&#39;: &#39;right.memo&#39;}</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">mid_node</span><span class="o">.</span><span class="n">left_memo</span><span class="o">.</span><span class="n">entangled_memory</span><span class="p">)</span>
+<span class="c1"># {&#39;node_id&#39;: None, &#39;memo_id&#39;: None}</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">mid_node</span><span class="o">.</span><span class="n">right_memo</span><span class="o">.</span><span class="n">entangled_memory</span><span class="p">)</span>
+<span class="c1"># {&#39;node_id&#39;: None, &#39;memo_id&#39;: None}</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">right_node</span><span class="o">.</span><span class="n">memo</span><span class="o">.</span><span class="n">entangled_memory</span><span class="p">)</span>
+<span class="c1"># {&#39;node_id&#39;: &#39;left&#39;, &#39;memo_id&#39;: &#39;left.memo&#39;}</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">left_node</span><span class="o">.</span><span class="n">memo</span><span class="o">.</span><span class="n">fidelity</span><span class="p">)</span>
+<span class="c1"># 0.8019000000000001</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Chapter 3: Entanglement Management</a><ul>
+<li><a class="reference internal" href="#example-use-entanglementgenerationa-and-bsmnode-to-generate-entanglement">Example: Use <code class="docutils literal notranslate"><span class="pre">EntanglementGenerationA</span></code> and <code class="docutils literal notranslate"><span class="pre">BSMNode</span></code> to generate entanglement</a><ul>
+<li><a class="reference internal" href="#step-1-customize-node">Step 1: Customize Node</a><ul>
+<li><a class="reference internal" href="#q-a">Q&amp;A</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#step-2-create-network">Step 2: Create Network</a></li>
+<li><a class="reference internal" href="#step-3-configure-and-start-the-entanglementgenerationa-protocol">Step 3: Configure and Start the <code class="docutils literal notranslate"><span class="pre">EntanglementGenerationA</span></code> Protocol</a></li>
+<li><a class="reference internal" href="#step-4-try-to-generate-entanglement-multiple-times">Step 4: Try to Generate Entanglement Multiple Times</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#example-use-bbpssw-to-improve-the-fidelity-of-entanglement">Example: Use <code class="docutils literal notranslate"><span class="pre">BBPSSW</span></code> to improve the fidelity of entanglement</a><ul>
+<li><a class="reference internal" href="#step-1-customized-node">Step 1: Customized Node</a></li>
+<li><a class="reference internal" href="#id1">Step 2: Create Network</a></li>
+<li><a class="reference internal" href="#step-3-manually-set-entanglement-states">Step 3: Manually Set Entanglement States</a></li>
+<li><a class="reference internal" href="#step-4-configure-and-start-bbpssw-protocol">Step 4: Configure and Start BBPSSW Protocol</a></li>
+<li><a class="reference internal" href="#step-5-try-to-purify-entanglement-multiple-times">Step 5: Try to Purify Entanglement Multiple Times</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#example-use-entanglementswappinga-and-entanglementswappingb-to-extend-entanglement">Example: Use <code class="docutils literal notranslate"><span class="pre">EntanglementSwappingA</span></code> and <code class="docutils literal notranslate"><span class="pre">EntanglementSwappingB</span></code> to Extend Entanglement</a><ul>
+<li><a class="reference internal" href="#id2">Step 1: Customized Node</a></li>
+<li><a class="reference internal" href="#id3">Step 2: Create Network</a></li>
+<li><a class="reference internal" href="#step-3-manually-set-entanglement-state-and-start-protocol">Step 3: Manually Set Entanglement State and Start Protocol</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../chapter2/hardware.html"
+                        title="previous chapter">Chapter 2: Hardware Module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../chapter4/resource_management.html"
+                        title="next chapter">Chapter 4: Resource Management</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/tutorial/chapter3/entangle.md.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../chapter4/resource_management.html" title="Chapter 4: Resource Management"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../chapter2/hardware.html" title="Chapter 2: Hardware Module"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.2.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Chapter 3: Entanglement Management</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+    </div>
+  </body>
+</html>

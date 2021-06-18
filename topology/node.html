@@ -1,0 +1,395 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nodes &#8212; SeQUeNCe 0.2.0 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Topology" href="topology.html" />
+    <link rel="prev" title="Topology" href="top.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="topology.html" title="Topology"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="top.html" title="Topology"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">SeQUeNCe 0.2.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="top.html" accesskey="U">Topology</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Nodes</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-src.topology.node">
+<span id="nodes"></span><h1>Nodes<a class="headerlink" href="#module-src.topology.node" title="Permalink to this headline">¶</a></h1>
+<p>Definitions of node types.</p>
+<p>This module provides definitions for various types of quantum network nodes.
+All node types inherit from the base Node type, which inherits from Entity.
+Node types can be used to collect all the necessary hardware and software for a network usage scenario.</p>
+<dl class="py class">
+<dt id="src.topology.node.BSMNode">
+<em class="property">class </em><code class="sig-prename descclassname">src.topology.node.</code><code class="sig-name descname">BSMNode</code><span class="sig-paren">(</span><em class="sig-param">name: str, timeline: Timeline, other_nodes: [&lt;class 'str'&gt;]</em><span class="sig-paren">)</span><a class="headerlink" href="#src.topology.node.BSMNode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bell state measurement node.</p>
+<p>This node provides bell state measurement and the EntanglementGenerationB protocol for entanglement generation.</p>
+<dl class="py attribute">
+<dt id="src.topology.node.BSMNode.name">
+<code class="sig-name descname">name</code><a class="headerlink" href="#src.topology.node.BSMNode.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>label for node instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.topology.node.BSMNode.timeline">
+<code class="sig-name descname">timeline</code><a class="headerlink" href="#src.topology.node.BSMNode.timeline" title="Permalink to this definition">¶</a></dt>
+<dd><p>timeline for simulation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../kernel/timeline.html#src.kernel.timeline.Timeline" title="src.kernel.timeline.Timeline">Timeline</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.topology.node.BSMNode.bsm">
+<code class="sig-name descname">bsm</code><a class="headerlink" href="#src.topology.node.BSMNode.bsm" title="Permalink to this definition">¶</a></dt>
+<dd><p>BSM instance object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../components/bsm.html#src.components.bsm.SingleAtomBSM" title="src.components.bsm.SingleAtomBSM">SingleAtomBSM</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.topology.node.BSMNode.eg">
+<code class="sig-name descname">eg</code><a class="headerlink" href="#src.topology.node.BSMNode.eg" title="Permalink to this definition">¶</a></dt>
+<dd><p>entanglement generation protocol instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../entanglement_management/generation.html#src.entanglement_management.generation.EntanglementGenerationB" title="src.entanglement_management.generation.EntanglementGenerationB">EntanglementGenerationB</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="src.topology.node.Node">
+<em class="property">class </em><code class="sig-prename descclassname">src.topology.node.</code><code class="sig-name descname">Node</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">timeline</span><span class="p">:</span> <span class="n">Timeline</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.topology.node.Node" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base node type.</p>
+<p>Provides default interfaces for network.</p>
+<dl class="py attribute">
+<dt id="src.topology.node.Node.name">
+<code class="sig-name descname">name</code><a class="headerlink" href="#src.topology.node.Node.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>label for node instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.topology.node.Node.timeline">
+<code class="sig-name descname">timeline</code><a class="headerlink" href="#src.topology.node.Node.timeline" title="Permalink to this definition">¶</a></dt>
+<dd><p>timeline for simulation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../kernel/timeline.html#src.kernel.timeline.Timeline" title="src.kernel.timeline.Timeline">Timeline</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.topology.node.Node.cchannels">
+<code class="sig-name descname">cchannels</code><a class="headerlink" href="#src.topology.node.Node.cchannels" title="Permalink to this definition">¶</a></dt>
+<dd><p>mapping of destination node names to classical channel instances.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.topology.node.Node.qchannels">
+<code class="sig-name descname">qchannels</code><a class="headerlink" href="#src.topology.node.Node.qchannels" title="Permalink to this definition">¶</a></dt>
+<dd><p>mapping of destination node names to quantum channel instances.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.topology.node.Node.protocols">
+<code class="sig-name descname">protocols</code><a class="headerlink" href="#src.topology.node.Node.protocols" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of attached protocols.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>List[<a class="reference internal" href="../misc/protocol.html#src.protocol.Protocol" title="src.protocol.Protocol">Protocol</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="src.topology.node.QKDNode">
+<em class="property">class </em><code class="sig-prename descclassname">src.topology.node.</code><code class="sig-name descname">QKDNode</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">timeline</span><span class="p">:</span> <span class="n">timeline</span></em>, <em class="sig-param"><span class="n">encoding</span><span class="o">=</span><span class="default_value">{'bases': [[[1 + 0j, 0j], [0j, 1 + 0j]], [[0.7071067811865476 + 0j, 0.7071067811865476 + 0j], [- 0.7071067811865476 + 0j, 0.7071067811865476 + 0j]]], 'name': 'polarization'}</span></em>, <em class="sig-param"><span class="n">stack_size</span><span class="o">=</span><span class="default_value">5</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.topology.node.QKDNode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Node for quantum key distribution.</p>
+<p>QKDNodes include a protocol stack to create keys.
+The protocol stack follows the “BBN QKD Protocol Suite” introduced in the DARPA quantum network
+(<a class="reference external" href="https://arxiv.org/pdf/quant-ph/0412029.pdf">https://arxiv.org/pdf/quant-ph/0412029.pdf</a> page 24).
+The protocol stack is:</p>
+<p>4. Authentication &lt;= No implementation
+3. Privacy Amplification  &lt;= No implementation
+2. Entropy Estimation &lt;= No implementation
+1. Error Correction &lt;= implemented by cascade
+0. Sifting &lt;= implemented by BB84</p>
+<dl class="py attribute">
+<dt id="src.topology.node.QKDNode.name">
+<code class="sig-name descname">name</code><a class="headerlink" href="#src.topology.node.QKDNode.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>label for node instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.topology.node.QKDNode.timeline">
+<code class="sig-name descname">timeline</code><a class="headerlink" href="#src.topology.node.QKDNode.timeline" title="Permalink to this definition">¶</a></dt>
+<dd><p>timeline for simulation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../kernel/timeline.html#src.kernel.timeline.Timeline" title="src.kernel.timeline.Timeline">Timeline</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.topology.node.QKDNode.encoding">
+<code class="sig-name descname">encoding</code><a class="headerlink" href="#src.topology.node.QKDNode.encoding" title="Permalink to this definition">¶</a></dt>
+<dd><p>encoding type for qkd qubits (from encoding module).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.topology.node.QKDNode.lightsource">
+<code class="sig-name descname">lightsource</code><a class="headerlink" href="#src.topology.node.QKDNode.lightsource" title="Permalink to this definition">¶</a></dt>
+<dd><p>laser light source to generate keys.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../components/light_source.html#src.components.light_source.LightSource" title="src.components.light_source.LightSource">LightSource</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.topology.node.QKDNode.qsdetector">
+<code class="sig-name descname">qsdetector</code><a class="headerlink" href="#src.topology.node.QKDNode.qsdetector" title="Permalink to this definition">¶</a></dt>
+<dd><p>quantum state detector for qubit measurement.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../components/detector.html#src.components.detector.QSDetector" title="src.components.detector.QSDetector">QSDetector</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.topology.node.QKDNode.protocol_stack">
+<code class="sig-name descname">protocol_stack</code><a class="headerlink" href="#src.topology.node.QKDNode.protocol_stack" title="Permalink to this definition">¶</a></dt>
+<dd><p>protocols for qkdd process.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>List[<a class="reference internal" href="../misc/protocol.html#src.protocol.StackProtocol" title="src.protocol.StackProtocol">StackProtocol</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="src.topology.node.QuantumRouter">
+<em class="property">class </em><code class="sig-prename descclassname">src.topology.node.</code><code class="sig-name descname">QuantumRouter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">tl</span></em>, <em class="sig-param"><span class="n">memo_size</span><span class="o">=</span><span class="default_value">50</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.topology.node.QuantumRouter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Node for entanglement distribution networks.</p>
+<p>This node type comes pre-equipped with memory hardware, along with the default SeQUeNCe modules (sans application).</p>
+<dl class="py attribute">
+<dt id="src.topology.node.QuantumRouter.name">
+<code class="sig-name descname">name</code><a class="headerlink" href="#src.topology.node.QuantumRouter.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>label for node instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.topology.node.QuantumRouter.timeline">
+<code class="sig-name descname">timeline</code><a class="headerlink" href="#src.topology.node.QuantumRouter.timeline" title="Permalink to this definition">¶</a></dt>
+<dd><p>timeline for simulation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../kernel/timeline.html#src.kernel.timeline.Timeline" title="src.kernel.timeline.Timeline">Timeline</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.topology.node.QuantumRouter.memory_array">
+<code class="sig-name descname">memory_array</code><a class="headerlink" href="#src.topology.node.QuantumRouter.memory_array" title="Permalink to this definition">¶</a></dt>
+<dd><p>internal memory array object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../components/memory.html#src.components.memory.MemoryArray" title="src.components.memory.MemoryArray">MemoryArray</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.topology.node.QuantumRouter.resource_manager">
+<code class="sig-name descname">resource_manager</code><a class="headerlink" href="#src.topology.node.QuantumRouter.resource_manager" title="Permalink to this definition">¶</a></dt>
+<dd><p>resource management module.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../resource_management/resource_manager.html#src.resource_management.resource_manager.ResourceManager" title="src.resource_management.resource_manager.ResourceManager">ResourceManager</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.topology.node.QuantumRouter.network_manager">
+<code class="sig-name descname">network_manager</code><a class="headerlink" href="#src.topology.node.QuantumRouter.network_manager" title="Permalink to this definition">¶</a></dt>
+<dd><p>network management module.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../network_management/network_manager.html#src.network_management.network_manager.NetworkManager" title="src.network_management.network_manager.NetworkManager">NetworkManager</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.topology.node.QuantumRouter.map_to_middle_node">
+<code class="sig-name descname">map_to_middle_node</code><a class="headerlink" href="#src.topology.node.QuantumRouter.map_to_middle_node" title="Permalink to this definition">¶</a></dt>
+<dd><p>mapping of router names to intermediate bsm node names.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.topology.node.QuantumRouter.app">
+<code class="sig-name descname">app</code><a class="headerlink" href="#src.topology.node.QuantumRouter.app" title="Permalink to this definition">¶</a></dt>
+<dd><p>application in use on node.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>any</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="top.html"
+                        title="previous chapter">Topology</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="topology.html"
+                        title="next chapter">Topology</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/topology/node.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="topology.html" title="Topology"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="top.html" title="Topology"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">SeQUeNCe 0.2.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="top.html" >Topology</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Nodes</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+    </div>
+  </body>
+</html>

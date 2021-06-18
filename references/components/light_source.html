@@ -1,0 +1,386 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Light Source &#8212; SeQUeNCe 0.2.3 documentation</title>
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Memory" href="memory.html" />
+    <link rel="prev" title="Interferometer" href="interferometer.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="memory.html" title="Memory"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="interferometer.html" title="Interferometer"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.2.3 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="top.html" accesskey="U">Components</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Light Source</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-src.components.light_source">
+<span id="light-source"></span><h1>Light Source<a class="headerlink" href="#module-src.components.light_source" title="Permalink to this headline">¶</a></h1>
+<p>Models for simulation of photon emission devices.</p>
+<p>This module defines the LightSource class to supply individual photons and the SPDCSource class to supply pre-entangled photons.
+These classes should be connected to one or two entities, respectively, that are capable of receiving photons.</p>
+<dl class="py class">
+<dt id="src.components.light_source.LightSource">
+<em class="property">class </em><code class="sig-prename descclassname">src.components.light_source.</code><code class="sig-name descname">LightSource</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">timeline</span></em>, <em class="sig-param"><span class="n">frequency</span><span class="o">=</span><span class="default_value">80000000.0</span></em>, <em class="sig-param"><span class="n">wavelength</span><span class="o">=</span><span class="default_value">1550</span></em>, <em class="sig-param"><span class="n">bandwidth</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">mean_photon_num</span><span class="o">=</span><span class="default_value">0.1</span></em>, <em class="sig-param"><span class="n">encoding_type</span><span class="o">=</span><span class="default_value">{'bases': [1 + 0j, 0j, 0j, 1 + 0j, 0.7071067811865476 + 0j, 0.7071067811865476 + 0j, - 0.7071067811865476 + 0j, 0.7071067811865476 + 0j], 'name': 'polarization'}</span></em>, <em class="sig-param"><span class="n">phase_error</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.light_source.LightSource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Model for a laser light source.</p>
+<p>The LightSource component acts as a simple low intensity laser, providing photon clusters at a set frequency.</p>
+<dl class="py attribute">
+<dt id="src.components.light_source.LightSource.name">
+<code class="sig-name descname">name</code><a class="headerlink" href="#src.components.light_source.LightSource.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>label for beamsplitter instance</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.light_source.LightSource.timeline">
+<code class="sig-name descname">timeline</code><a class="headerlink" href="#src.components.light_source.LightSource.timeline" title="Permalink to this definition">¶</a></dt>
+<dd><p>timeline for simulation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../kernel/timeline.html#src.kernel.timeline.Timeline" title="src.kernel.timeline.Timeline">Timeline</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.light_source.LightSource.frequency">
+<code class="sig-name descname">frequency</code><a class="headerlink" href="#src.components.light_source.LightSource.frequency" title="Permalink to this definition">¶</a></dt>
+<dd><p>frequency (in Hz) of photon creation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.light_source.LightSource.wavelength">
+<code class="sig-name descname">wavelength</code><a class="headerlink" href="#src.components.light_source.LightSource.wavelength" title="Permalink to this definition">¶</a></dt>
+<dd><p>wavelength (in nm) of emitted photons.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.light_source.LightSource.linewidth">
+<code class="sig-name descname">linewidth</code><a class="headerlink" href="#src.components.light_source.LightSource.linewidth" title="Permalink to this definition">¶</a></dt>
+<dd><p>st. dev. in photon wavelength (in nm).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.light_source.LightSource.mean_photon_num">
+<code class="sig-name descname">mean_photon_num</code><a class="headerlink" href="#src.components.light_source.LightSource.mean_photon_num" title="Permalink to this definition">¶</a></dt>
+<dd><p>mean number of photons emitted each period.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.light_source.LightSource.encoding_type">
+<code class="sig-name descname">encoding_type</code><a class="headerlink" href="#src.components.light_source.LightSource.encoding_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>encoding scheme of emitted photons (as defined in the encoding module).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Dict[str, Any]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.light_source.LightSource.phase_error">
+<code class="sig-name descname">phase_error</code><a class="headerlink" href="#src.components.light_source.LightSource.phase_error" title="Permalink to this definition">¶</a></dt>
+<dd><p>phase error applied to qubits.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.light_source.LightSource.photon_counter">
+<code class="sig-name descname">photon_counter</code><a class="headerlink" href="#src.components.light_source.LightSource.photon_counter" title="Permalink to this definition">¶</a></dt>
+<dd><p>counter for number of photons emitted.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.components.light_source.LightSource.emit">
+<code class="sig-name descname">emit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">state_list</span></em>, <em class="sig-param"><span class="n">dst</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.components.light_source.LightSource.emit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to emit photons.</p>
+<p>Will emit photons for a length of time determined by the <cite>state_list</cite> parameter.
+The number of photons emitted per period is calculated as a poisson random variable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>state_list</strong> (<em>List</em><em>[</em><em>List</em><em>[</em><em>complex</em><em>]</em><em>]</em>) – list of complex coefficient arrays to send as photon-encoded qubits.</p></li>
+<li><p><strong>dst</strong> (<em>str</em>) – name of destination node to receive photons.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.components.light_source.LightSource.init">
+<code class="sig-name descname">init</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.components.light_source.LightSource.init" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implementation of Entity interface (see base class).</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="src.components.light_source.SPDCSource">
+<em class="property">class </em><code class="sig-prename descclassname">src.components.light_source.</code><code class="sig-name descname">SPDCSource</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">timeline</span></em>, <em class="sig-param"><span class="n">direct_receiver</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">another_receiver</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">wavelengths</span><span class="o">=</span><span class="default_value">[]</span></em>, <em class="sig-param"><span class="n">frequency</span><span class="o">=</span><span class="default_value">80000000.0</span></em>, <em class="sig-param"><span class="n">wavelength</span><span class="o">=</span><span class="default_value">1550</span></em>, <em class="sig-param"><span class="n">bandwidth</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">mean_photon_num</span><span class="o">=</span><span class="default_value">0.1</span></em>, <em class="sig-param"><span class="n">encoding_type</span><span class="o">=</span><span class="default_value">{'bases': [1 + 0j, 0j, 0j, 1 + 0j, 0.7071067811865476 + 0j, 0.7071067811865476 + 0j, - 0.7071067811865476 + 0j, 0.7071067811865476 + 0j], 'name': 'polarization'}</span></em>, <em class="sig-param"><span class="n">phase_error</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.light_source.SPDCSource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Model for a laser light source for entangled photons (via SPDC).</p>
+<p>The SPDCLightSource component acts as a simple low intensity laser with an SPDC lens.
+It provides entangled photon clusters at a set frequency.</p>
+<dl class="py attribute">
+<dt id="src.components.light_source.SPDCSource.name">
+<code class="sig-name descname">name</code><a class="headerlink" href="#src.components.light_source.SPDCSource.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>label for beamsplitter instance</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.light_source.SPDCSource.timeline">
+<code class="sig-name descname">timeline</code><a class="headerlink" href="#src.components.light_source.SPDCSource.timeline" title="Permalink to this definition">¶</a></dt>
+<dd><p>timeline for simulation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../kernel/timeline.html#src.kernel.timeline.Timeline" title="src.kernel.timeline.Timeline">Timeline</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.light_source.SPDCSource.frequency">
+<code class="sig-name descname">frequency</code><a class="headerlink" href="#src.components.light_source.SPDCSource.frequency" title="Permalink to this definition">¶</a></dt>
+<dd><p>frequency (in Hz) of photon creation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.light_source.SPDCSource.wavelengths">
+<code class="sig-name descname">wavelengths</code><a class="headerlink" href="#src.components.light_source.SPDCSource.wavelengths" title="Permalink to this definition">¶</a></dt>
+<dd><p>wavelengths (in nm) of emitted entangled photons.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.light_source.SPDCSource.linewidth">
+<code class="sig-name descname">linewidth</code><a class="headerlink" href="#src.components.light_source.SPDCSource.linewidth" title="Permalink to this definition">¶</a></dt>
+<dd><p>st. dev. in photon wavelength (in nm).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.light_source.SPDCSource.mean_photon_num">
+<code class="sig-name descname">mean_photon_num</code><a class="headerlink" href="#src.components.light_source.SPDCSource.mean_photon_num" title="Permalink to this definition">¶</a></dt>
+<dd><p>mean number of photons emitted each period.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.light_source.SPDCSource.encoding_type">
+<code class="sig-name descname">encoding_type</code><a class="headerlink" href="#src.components.light_source.SPDCSource.encoding_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>encoding scheme of emitted photons (as defined in the encoding module).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.light_source.SPDCSource.phase_error">
+<code class="sig-name descname">phase_error</code><a class="headerlink" href="#src.components.light_source.SPDCSource.phase_error" title="Permalink to this definition">¶</a></dt>
+<dd><p>phase error applied to qubits.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.light_source.SPDCSource.photon_counter">
+<code class="sig-name descname">photon_counter</code><a class="headerlink" href="#src.components.light_source.SPDCSource.photon_counter" title="Permalink to this definition">¶</a></dt>
+<dd><p>counter for number of photons emitted.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.light_source.SPDCSource.direct_receiver">
+<code class="sig-name descname">direct_receiver</code><a class="headerlink" href="#src.components.light_source.SPDCSource.direct_receiver" title="Permalink to this definition">¶</a></dt>
+<dd><p>device to receive one entangled photon.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../kernel/entity.html#src.kernel.entity.Entity" title="src.kernel.entity.Entity">Entity</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.light_source.SPDCSource.another_receiver">
+<code class="sig-name descname">another_receiver</code><a class="headerlink" href="#src.components.light_source.SPDCSource.another_receiver" title="Permalink to this definition">¶</a></dt>
+<dd><p>device to receive another entangled photon.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../kernel/entity.html#src.kernel.entity.Entity" title="src.kernel.entity.Entity">Entity</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.components.light_source.SPDCSource.emit">
+<code class="sig-name descname">emit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">state_list</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.light_source.SPDCSource.emit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to emit photons.</p>
+<p>Will emit photons for a length of time determined by the <cite>state_list</cite> parameter.
+The number of photons emitted per period is calculated as a poisson random variable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>state_list</strong> (<em>List</em><em>[</em><em>List</em><em>[</em><em>complex</em><em>]</em><em>]</em>) – list of complex coefficient arrays to send as photon-encoded qubits.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="interferometer.html"
+                        title="previous chapter">Interferometer</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="memory.html"
+                        title="next chapter">Memory</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/references/components/light_source.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="memory.html" title="Memory"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="interferometer.html" title="Interferometer"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.2.3 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="top.html" >Components</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Light Source</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+    </div>
+  </body>
+</html>

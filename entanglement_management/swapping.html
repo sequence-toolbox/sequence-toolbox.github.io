@@ -1,0 +1,349 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entanglement Swapping &#8212; SeQUeNCe 0.2.0 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Resource Management" href="../resource_management/top.html" />
+    <link rel="prev" title="Entanglement Purification" href="purification.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../resource_management/top.html" title="Resource Management"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="purification.html" title="Entanglement Purification"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">SeQUeNCe 0.2.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="top.html" accesskey="U">Entanglement Management</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Entanglement Swapping</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-src.entanglement_management.swapping">
+<span id="entanglement-swapping"></span><h1>Entanglement Swapping<a class="headerlink" href="#module-src.entanglement_management.swapping" title="Permalink to this headline">¶</a></h1>
+<p>Code for entanglement swapping.</p>
+<p>This module defines code for entanglement swapping.
+Success is pre-determined based on network parameters.
+The entanglement swapping protocol is an asymmetric protocol:</p>
+<ul class="simple">
+<li><p>The EntanglementSwappingA instance initiates the protocol and performs the swapping operation.</p></li>
+<li><p>The EntanglementSwappingB instance waits for the swapping result from EntanglementSwappingA.</p></li>
+</ul>
+<p>The swapping results decides the following operations of EntanglementSwappingB.
+Also defined in this module is the message type used by these protocols.</p>
+<dl class="py class">
+<dt id="src.entanglement_management.swapping.EntanglementSwappingA">
+<em class="property">class </em><code class="sig-prename descclassname">src.entanglement_management.swapping.</code><code class="sig-name descname">EntanglementSwappingA</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">own</span><span class="p">:</span> <span class="n">Node</span></em>, <em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">left_memo</span><span class="p">:</span> <span class="n">Memory</span></em>, <em class="sig-param"><span class="n">right_memo</span><span class="p">:</span> <span class="n">Memory</span></em>, <em class="sig-param"><span class="n">success_prob</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">degradation</span><span class="o">=</span><span class="default_value">0.95</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.entanglement_management.swapping.EntanglementSwappingA" title="Permalink to this definition">¶</a></dt>
+<dd><p>Entanglement swapping protocol for middle router.</p>
+<p>The entanglement swapping protocol is an asymmetric protocol.
+EntanglementSwappingA should be instantiated on the middle node, where it measures a memory from each pair to be swapped.
+Results of measurement and swapping are sent to the end routers.</p>
+<dl class="py attribute">
+<dt id="src.entanglement_management.swapping.EntanglementSwappingA.own">
+<code class="sig-name descname">own</code><a class="headerlink" href="#src.entanglement_management.swapping.EntanglementSwappingA.own" title="Permalink to this definition">¶</a></dt>
+<dd><p>node that protocol instance is attached to.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../topology/node.html#src.topology.node.QuantumRouter" title="src.topology.node.QuantumRouter">QuantumRouter</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.entanglement_management.swapping.EntanglementSwappingA.name">
+<code class="sig-name descname">name</code><a class="headerlink" href="#src.entanglement_management.swapping.EntanglementSwappingA.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>label for protocol instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.entanglement_management.swapping.EntanglementSwappingA.left_memo">
+<code class="sig-name descname">left_memo</code><a class="headerlink" href="#src.entanglement_management.swapping.EntanglementSwappingA.left_memo" title="Permalink to this definition">¶</a></dt>
+<dd><p>a memory from one pair to be swapped.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../components/memory.html#src.components.memory.Memory" title="src.components.memory.Memory">Memory</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.entanglement_management.swapping.EntanglementSwappingA.right_memo">
+<code class="sig-name descname">right_memo</code><a class="headerlink" href="#src.entanglement_management.swapping.EntanglementSwappingA.right_memo" title="Permalink to this definition">¶</a></dt>
+<dd><p>a memory from the other pair to be swapped.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../components/memory.html#src.components.memory.Memory" title="src.components.memory.Memory">Memory</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.entanglement_management.swapping.EntanglementSwappingA.success_prob">
+<code class="sig-name descname">success_prob</code><a class="headerlink" href="#src.entanglement_management.swapping.EntanglementSwappingA.success_prob" title="Permalink to this definition">¶</a></dt>
+<dd><p>probability of a successful swapping operation (default 1).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.entanglement_management.swapping.EntanglementSwappingA.degradation">
+<code class="sig-name descname">degradation</code><a class="headerlink" href="#src.entanglement_management.swapping.EntanglementSwappingA.degradation" title="Permalink to this definition">¶</a></dt>
+<dd><p>degradation factor of memory fidelity after the swapping operation (default 0.95).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.entanglement_management.swapping.EntanglementSwappingA.received_message">
+<code class="sig-name descname">received_message</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">src</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">msg</span><span class="p">:</span> <span class="n">src.message.Message</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.entanglement_management.swapping.EntanglementSwappingA.received_message" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receive classical message from another node.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.entanglement_management.swapping.EntanglementSwappingA.success_probability">
+<code class="sig-name descname">success_probability</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#src.entanglement_management.swapping.EntanglementSwappingA.success_probability" title="Permalink to this definition">¶</a></dt>
+<dd><p>A simple model for BSM success probability</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.entanglement_management.swapping.EntanglementSwappingA.updated_fidelity">
+<code class="sig-name descname">updated_fidelity</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f1</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">f2</span><span class="p">:</span> <span class="n">float</span></em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#src.entanglement_management.swapping.EntanglementSwappingA.updated_fidelity" title="Permalink to this definition">¶</a></dt>
+<dd><p>A simple model updating fidelity of entanglement</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="src.entanglement_management.swapping.EntanglementSwappingB">
+<em class="property">class </em><code class="sig-prename descclassname">src.entanglement_management.swapping.</code><code class="sig-name descname">EntanglementSwappingB</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">own</span><span class="p">:</span> <span class="n">Node</span></em>, <em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">hold_memo</span><span class="p">:</span> <span class="n">Memory</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.entanglement_management.swapping.EntanglementSwappingB" title="Permalink to this definition">¶</a></dt>
+<dd><p>Entanglement swapping protocol for middle router.</p>
+<p>The entanglement swapping protocol is an asymmetric protocol.
+EntanglementSwappingB should be instantiated on the end nodes, where it waits for swapping results from the middle node.</p>
+<dl class="py attribute">
+<dt id="src.entanglement_management.swapping.EntanglementSwappingB.own">
+<code class="sig-name descname">own</code><a class="headerlink" href="#src.entanglement_management.swapping.EntanglementSwappingB.own" title="Permalink to this definition">¶</a></dt>
+<dd><p>node that protocol instance is attached to.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../topology/node.html#src.topology.node.QuantumRouter" title="src.topology.node.QuantumRouter">QuantumRouter</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.entanglement_management.swapping.EntanglementSwappingB.name">
+<code class="sig-name descname">name</code><a class="headerlink" href="#src.entanglement_management.swapping.EntanglementSwappingB.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>label for protocol instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.entanglement_management.swapping.EntanglementSwappingB.hold_memory">
+<code class="sig-name descname">hold_memory</code><a class="headerlink" href="#src.entanglement_management.swapping.EntanglementSwappingB.hold_memory" title="Permalink to this definition">¶</a></dt>
+<dd><p>quantum memory to be swapped.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../components/memory.html#src.components.memory.Memory" title="src.components.memory.Memory">Memory</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.entanglement_management.swapping.EntanglementSwappingB.received_message">
+<code class="sig-name descname">received_message</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">src</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">msg</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#src.entanglement_management.swapping.EntanglementSwappingMessage" title="src.entanglement_management.swapping.EntanglementSwappingMessage">src.entanglement_management.swapping.EntanglementSwappingMessage</a></span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.entanglement_management.swapping.EntanglementSwappingB.received_message" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receive classical message from another node.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="src.entanglement_management.swapping.EntanglementSwappingMessage">
+<em class="property">class </em><code class="sig-prename descclassname">src.entanglement_management.swapping.</code><code class="sig-name descname">EntanglementSwappingMessage</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">msg_type</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">receiver</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.entanglement_management.swapping.EntanglementSwappingMessage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Message used by entanglement swapping protocols.</p>
+<p>This message contains all information passed between swapping protocol instances.</p>
+<dl class="py attribute">
+<dt id="src.entanglement_management.swapping.EntanglementSwappingMessage.msg_type">
+<code class="sig-name descname">msg_type</code><a class="headerlink" href="#src.entanglement_management.swapping.EntanglementSwappingMessage.msg_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>defines the message type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#src.entanglement_management.swapping.SwappingMsgType" title="src.entanglement_management.swapping.SwappingMsgType">SwappingMsgType</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.entanglement_management.swapping.EntanglementSwappingMessage.receiver">
+<code class="sig-name descname">receiver</code><a class="headerlink" href="#src.entanglement_management.swapping.EntanglementSwappingMessage.receiver" title="Permalink to this definition">¶</a></dt>
+<dd><p>name of destination protocol instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.entanglement_management.swapping.EntanglementSwappingMessage.fidelity">
+<code class="sig-name descname">fidelity</code><a class="headerlink" href="#src.entanglement_management.swapping.EntanglementSwappingMessage.fidelity" title="Permalink to this definition">¶</a></dt>
+<dd><p>fidelity of the newly swapped memory pair.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.entanglement_management.swapping.EntanglementSwappingMessage.remote_node">
+<code class="sig-name descname">remote_node</code><a class="headerlink" href="#src.entanglement_management.swapping.EntanglementSwappingMessage.remote_node" title="Permalink to this definition">¶</a></dt>
+<dd><p>name of the distant node holding the entangled memory of the new pair.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.entanglement_management.swapping.EntanglementSwappingMessage.remote_memo">
+<code class="sig-name descname">remote_memo</code><a class="headerlink" href="#src.entanglement_management.swapping.EntanglementSwappingMessage.remote_memo" title="Permalink to this definition">¶</a></dt>
+<dd><p>index of the entangled memory on the remote node.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.entanglement_management.swapping.EntanglementSwappingMessage.expire_time">
+<code class="sig-name descname">expire_time</code><a class="headerlink" href="#src.entanglement_management.swapping.EntanglementSwappingMessage.expire_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>expiration time of the new memory pair.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="src.entanglement_management.swapping.SwappingMsgType">
+<em class="property">class </em><code class="sig-prename descclassname">src.entanglement_management.swapping.</code><code class="sig-name descname">SwappingMsgType</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.entanglement_management.swapping.SwappingMsgType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines possible message types for entanglement generation.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="src.entanglement_management.swapping.random">
+<code class="sig-prename descclassname">src.entanglement_management.swapping.</code><code class="sig-name descname">random</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">size</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.entanglement_management.swapping.random" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return random floats in the half-open interval [0.0, 1.0). Alias for
+<cite>random_sample</cite> to ease forward-porting to the new random API.</p>
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="purification.html"
+                        title="previous chapter">Entanglement Purification</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../resource_management/top.html"
+                        title="next chapter">Resource Management</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/entanglement_management/swapping.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../resource_management/top.html" title="Resource Management"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="purification.html" title="Entanglement Purification"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">SeQUeNCe 0.2.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="top.html" >Entanglement Management</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Entanglement Swapping</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+    </div>
+  </body>
+</html>

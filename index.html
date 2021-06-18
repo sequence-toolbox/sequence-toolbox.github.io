@@ -1,25 +1,143 @@
-<h1 id="sequence-simulator-of-quantum-network-communication">SeQUeNCe: Simulator of QUantum Network Communication</h1>
-<p>SeQUeNCe is an open source, discrete-event simulator for quantum networks. As described in our paper, the simulator includes 5 modules on top of a simulation kernel: * Hardware * Entanglement Management * Resource Management * Network Management * Application</p>
-<p>These modules can be edited by users to define additional functionality and test protocol schemes, or may be used as-is to test network parameters and topologies.</p>
-<h2 id="installing">Installing</h2>
-<p>SeQUeNCe requires an installation of Python 3.7. this can be found at the <a href="https://www.python.org/downloads/">Python Website</a>. Then, simply download the package, navigate to its directory, and install with</p>
-<pre><code>$ pip install .</code></pre>
-<p>Or, using the included makefile,</p>
-<pre><code>$ make install</code></pre>
-<p>This will install the sequence library as well as the numpy, json5, and pandas dependancies.</p>
-<h2 id="usage-examples">Usage Examples</h2>
-<p>Many examples of SeQUeNCe in action can be found in the example folder. These include both quantum key distribution and entanglement distribution examples.</p>
-<h3 id="starlight-experiments">Starlight Experiments</h3>
-<p>Code for the experiments performed in our paper can be found in the file <code>starlight_experiments.py</code>. This script uses the <code>starlight.json</code> file (also within the example folder) to specify the network topology.</p>
-<h3 id="jupyter-notebook-examples">Jupyter Notebook Examples</h3>
-<p>The example folder contains several scripts that can be run with jupyter notebook for easy editing and visualization. These files require that the notebook package be installed:</p>
-<pre><code>$ pip install notebook</code></pre>
-<p>To run each file, simply run</p>
-<pre><code>$ jupyter notebook &lt;filename&gt;</code></pre>
-<p>These examples include: * <code>BB84_eg.ipynb</code>, which uses the BB84 protocol to distribute secure keys between two quantum nodes * <code>two_node_eg.ipynb</code>, which performs entanglement generation between two adjacent quantum routers * <code>three_node_eg_ep_es.ipynb</code>, which performs entanglement generation, purification, and swapping for a linear network of three quantum routers</p>
-<h2 id="additional-tools">Additional Tools</h2>
-<h3 id="network-visualization">Network Visualization</h3>
-<p>The example directory contains an example json file <code>starlight.json</code> to specify a network topology, and the utils directory contains the script <code>draw_topo.py</code> to visualize json files. To use this script, the Graphviz library must be installed. Installation information can be found on the <a href="https://www.graphviz.org/download/">Graphviz website</a>.</p>
-<p>To view a network, simply run the script and specify the relative location of your json file:</p>
-<pre><code>$ python utils/draw_topo.py example/starlight.json</code></pre>
-<p>This script also supports a flag <code>-m</code> to visualize BSM nodes created by default on quantum links between routers.</p>
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to the SeQUeNCe documentation page &#8212; SeQUeNCe 0.2.3 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Prerequisites &amp; Installation" href="tutorial/chapter0/prerequisite.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="tutorial/chapter0/prerequisite.html" title="Prerequisites &amp; Installation"
+             accesskey="N">next</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">SeQUeNCe 0.2.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Welcome to the SeQUeNCe documentation page</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="welcome-to-the-sequence-documentation-page">
+<h1>Welcome to the SeQUeNCe documentation page<a class="headerlink" href="#welcome-to-the-sequence-documentation-page" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Tutorials:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/chapter0/prerequisite.html">Prerequisites &amp; Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/chapter1/discrete-event-simulation.html">Chapter 1: Discrete Event Simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/chapter2/hardware.html">Chapter 2: Hardware Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/chapter3/entangle.html">Chapter 3: Entanglement Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/chapter4/resource_management.html">Chapter 4: Resource Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/chapter5/network_manager.html">Chapter 5: Network Manager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/chapter6/application.html">Chapter 6: Application</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Module References:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="references/kernel/top.html">Kernel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references/components/top.html">Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references/entanglement_management/top.html">Entanglement Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references/resource_management/top.html">Resource Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references/network_management/top.html">Network Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references/application/top.html">Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references/topology/top.html">Topology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references/qkd/top.html">Quantum Key Distribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references/misc/top.html">Miscellaneous</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="#">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Welcome to the SeQUeNCe documentation page</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+
+  <h4>Next topic</h4>
+  <p class="topless"><a href="tutorial/chapter0/prerequisite.html"
+                        title="next chapter">Prerequisites &amp; Installation</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="tutorial/chapter0/prerequisite.html" title="Prerequisites &amp; Installation"
+             >next</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">SeQUeNCe 0.2.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Welcome to the SeQUeNCe documentation page</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+    </div>
+  </body>
+</html>

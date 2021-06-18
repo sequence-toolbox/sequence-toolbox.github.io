@@ -1,0 +1,533 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservation &#8212; SeQUeNCe 0.2.3 documentation</title>
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Routing" href="routing.html" />
+    <link rel="prev" title="Network Manager" href="network_manager.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="routing.html" title="Routing"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="network_manager.html" title="Network Manager"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.2.3 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="top.html" accesskey="U">Network Management</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Reservation</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-src.network_management.reservation">
+<span id="reservation"></span><h1>Reservation<a class="headerlink" href="#module-src.network_management.reservation" title="Permalink to this headline">¶</a></h1>
+<p>Definition of Reservation protocol and related tools.</p>
+<p>This module provides a definition for the reservation protocol used by the network manager.
+This includes the Reservation, MemoryTimeCard, and QCap classes, which are used by the network manager to track reservations.
+Also included is the definition of the message type used by the reservation protocol.</p>
+<dl class="py class">
+<dt id="src.network_management.reservation.MemoryTimeCard">
+<em class="property">class </em><code class="sig-prename descclassname">src.network_management.reservation.</code><code class="sig-name descname">MemoryTimeCard</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">memory_index</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.network_management.reservation.MemoryTimeCard" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class for tracking reservations on a specific memory.</p>
+<dl class="py attribute">
+<dt id="src.network_management.reservation.MemoryTimeCard.memory_index">
+<code class="sig-name descname">memory_index</code><a class="headerlink" href="#src.network_management.reservation.MemoryTimeCard.memory_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>index of memory being tracked (in memory array).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.network_management.reservation.MemoryTimeCard.reservations">
+<code class="sig-name descname">reservations</code><a class="headerlink" href="#src.network_management.reservation.MemoryTimeCard.reservations" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of reservations for the memory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>List[<a class="reference internal" href="#src.network_management.reservation.Reservation" title="src.network_management.reservation.Reservation">Reservation</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.network_management.reservation.MemoryTimeCard.add">
+<code class="sig-name descname">add</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">reservation</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#src.network_management.reservation.Reservation" title="src.network_management.reservation.Reservation">src.network_management.reservation.Reservation</a></span></em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#src.network_management.reservation.MemoryTimeCard.add" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to add reservation.</p>
+<p>Will use <cite>schedule_reservation</cite> method to determine index to insert reservation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>reservation</strong> (<a class="reference internal" href="#src.network_management.reservation.Reservation" title="src.network_management.reservation.Reservation"><em>Reservation</em></a>) – reservation to add.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>whether or not reservation was inserted successfully.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.network_management.reservation.MemoryTimeCard.remove">
+<code class="sig-name descname">remove</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">reservation</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#src.network_management.reservation.Reservation" title="src.network_management.reservation.Reservation">src.network_management.reservation.Reservation</a></span></em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#src.network_management.reservation.MemoryTimeCard.remove" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to remove a reservation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>reservation</strong> (<a class="reference internal" href="#src.network_management.reservation.Reservation" title="src.network_management.reservation.Reservation"><em>Reservation</em></a>) – reservation to remove.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>if reservation was already on the memory or not.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.network_management.reservation.MemoryTimeCard.schedule_reservation">
+<code class="sig-name descname">schedule_reservation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">resv</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#src.network_management.reservation.Reservation" title="src.network_management.reservation.Reservation">src.network_management.reservation.Reservation</a></span></em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#src.network_management.reservation.MemoryTimeCard.schedule_reservation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to add reservation to a memory.</p>
+<p>Will return index at which reservation can be inserted into memory reservation list.
+If no space found for reservation, will raise an exception.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>resv</strong> (<a class="reference internal" href="#src.network_management.reservation.Reservation" title="src.network_management.reservation.Reservation"><em>Reservation</em></a>) – reservation to schedule.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>index to insert reservation in reservation list.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>Exception</strong> – no valid index to insert reservation.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="src.network_management.reservation.QCap">
+<em class="property">class </em><code class="sig-prename descclassname">src.network_management.reservation.</code><code class="sig-name descname">QCap</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">node</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.network_management.reservation.QCap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to collect local information for the reservation protocol</p>
+<dl class="py attribute">
+<dt id="src.network_management.reservation.QCap.node">
+<code class="sig-name descname">node</code><a class="headerlink" href="#src.network_management.reservation.QCap.node" title="Permalink to this definition">¶</a></dt>
+<dd><p>name of current node.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="src.network_management.reservation.RSVPMsgType">
+<em class="property">class </em><code class="sig-prename descclassname">src.network_management.reservation.</code><code class="sig-name descname">RSVPMsgType</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.network_management.reservation.RSVPMsgType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines possible message types for the reservation protocol.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="src.network_management.reservation.Reservation">
+<em class="property">class </em><code class="sig-prename descclassname">src.network_management.reservation.</code><code class="sig-name descname">Reservation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">initiator</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">responder</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">start_time</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">end_time</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">memory_size</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">fidelity</span><span class="p">:</span> <span class="n">float</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.network_management.reservation.Reservation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tracking of reservation parameters for the network manager.</p>
+<dl class="py attribute">
+<dt id="src.network_management.reservation.Reservation.initiator">
+<code class="sig-name descname">initiator</code><a class="headerlink" href="#src.network_management.reservation.Reservation.initiator" title="Permalink to this definition">¶</a></dt>
+<dd><p>name of the node that created the reservation request.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.network_management.reservation.Reservation.responder">
+<code class="sig-name descname">responder</code><a class="headerlink" href="#src.network_management.reservation.Reservation.responder" title="Permalink to this definition">¶</a></dt>
+<dd><p>name of distant node with witch entanglement is requested.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.network_management.reservation.Reservation.start_time">
+<code class="sig-name descname">start_time</code><a class="headerlink" href="#src.network_management.reservation.Reservation.start_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>simulation time at which entanglement should be attempted.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.network_management.reservation.Reservation.end_time">
+<code class="sig-name descname">end_time</code><a class="headerlink" href="#src.network_management.reservation.Reservation.end_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>simulation time at which resources may be released.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.network_management.reservation.Reservation.memory_size">
+<code class="sig-name descname">memory_size</code><a class="headerlink" href="#src.network_management.reservation.Reservation.memory_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>number of entangled memory pairs requested.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="src.network_management.reservation.ResourceReservationMessage">
+<em class="property">class </em><code class="sig-prename descclassname">src.network_management.reservation.</code><code class="sig-name descname">ResourceReservationMessage</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">msg_type</span><span class="p">:</span> <span class="n">any</span></em>, <em class="sig-param"><span class="n">receiver</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">reservation</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#src.network_management.reservation.Reservation" title="src.network_management.reservation.Reservation">src.network_management.reservation.Reservation</a></span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.network_management.reservation.ResourceReservationMessage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Message used by resource reservation protocol.</p>
+<p>This message contains all information passed between reservation protocol instances.
+Messages of different types contain different information.</p>
+<dl class="py attribute">
+<dt id="src.network_management.reservation.ResourceReservationMessage.msg_type">
+<code class="sig-name descname">msg_type</code><a class="headerlink" href="#src.network_management.reservation.ResourceReservationMessage.msg_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>defines the message type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../entanglement_management/generation.html#src.entanglement_management.generation.GenerationMsgType" title="src.entanglement_management.generation.GenerationMsgType">GenerationMsgType</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.network_management.reservation.ResourceReservationMessage.receiver">
+<code class="sig-name descname">receiver</code><a class="headerlink" href="#src.network_management.reservation.ResourceReservationMessage.receiver" title="Permalink to this definition">¶</a></dt>
+<dd><p>name of destination protocol instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.network_management.reservation.ResourceReservationMessage.reservation">
+<code class="sig-name descname">reservation</code><a class="headerlink" href="#src.network_management.reservation.ResourceReservationMessage.reservation" title="Permalink to this definition">¶</a></dt>
+<dd><p>reservation object relayed between nodes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#src.network_management.reservation.Reservation" title="src.network_management.reservation.Reservation">Reservation</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.network_management.reservation.ResourceReservationMessage.qcaps">
+<code class="sig-name descname">qcaps</code><a class="headerlink" href="#src.network_management.reservation.ResourceReservationMessage.qcaps" title="Permalink to this definition">¶</a></dt>
+<dd><p>cumulative quantum capacity object list (if <cite>msg_type == REQUEST</cite>)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>List[QCaps]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.network_management.reservation.ResourceReservationMessage.path">
+<code class="sig-name descname">path</code><a class="headerlink" href="#src.network_management.reservation.ResourceReservationMessage.path" title="Permalink to this definition">¶</a></dt>
+<dd><p>cumulative node list for entanglement path (if <cite>msg_type == APPROVE</cite>)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>List[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="src.network_management.reservation.ResourceReservationProtocol">
+<em class="property">class </em><code class="sig-prename descclassname">src.network_management.reservation.</code><code class="sig-name descname">ResourceReservationProtocol</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">own</span><span class="p">:</span> <span class="n">QuantumRouter</span></em>, <em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.network_management.reservation.ResourceReservationProtocol" title="Permalink to this definition">¶</a></dt>
+<dd><p>ReservationProtocol for  node resources.</p>
+<p>The reservation protocol receives network entanglement requests and attempts to reserve local resources.
+If successful, it will forward the request to another node in the entanglement path and create local rules.
+These rules are passed to the node’s resource manager.
+If unsuccessful, the protocol will notify the network manager of failure.</p>
+<dl class="py attribute">
+<dt id="src.network_management.reservation.ResourceReservationProtocol.own">
+<code class="sig-name descname">own</code><a class="headerlink" href="#src.network_management.reservation.ResourceReservationProtocol.own" title="Permalink to this definition">¶</a></dt>
+<dd><p>node that protocol instance is attached to.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../topology/node.html#src.topology.node.QuantumRouter" title="src.topology.node.QuantumRouter">QuantumRouter</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.network_management.reservation.ResourceReservationProtocol.name">
+<code class="sig-name descname">name</code><a class="headerlink" href="#src.network_management.reservation.ResourceReservationProtocol.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>label for protocol instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.network_management.reservation.ResourceReservationProtocol.timecards">
+<code class="sig-name descname">timecards</code><a class="headerlink" href="#src.network_management.reservation.ResourceReservationProtocol.timecards" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of reservation cards for all memories on node.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>List[<a class="reference internal" href="#src.network_management.reservation.MemoryTimeCard" title="src.network_management.reservation.MemoryTimeCard">MemoryTimeCard</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.network_management.reservation.ResourceReservationProtocol.es_succ_prob">
+<code class="sig-name descname">es_succ_prob</code><a class="headerlink" href="#src.network_management.reservation.ResourceReservationProtocol.es_succ_prob" title="Permalink to this definition">¶</a></dt>
+<dd><p>sets <cite>success_probability</cite> of <cite>EntanglementSwappingA</cite> protocols created by rules.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.network_management.reservation.ResourceReservationProtocol.es_degredation">
+<code class="sig-name descname">es_degredation</code><a class="headerlink" href="#src.network_management.reservation.ResourceReservationProtocol.es_degredation" title="Permalink to this definition">¶</a></dt>
+<dd><p>sets <cite>degredation</cite> of <cite>EntanglementSwappingA</cite> protocols created by rules.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.network_management.reservation.ResourceReservationProtocol.accepted_reservation">
+<code class="sig-name descname">accepted_reservation</code><a class="headerlink" href="#src.network_management.reservation.ResourceReservationProtocol.accepted_reservation" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of all approved reservation requests.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>List[<a class="reference internal" href="#src.network_management.reservation.Reservation" title="src.network_management.reservation.Reservation">Reservation</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.network_management.reservation.ResourceReservationProtocol.create_rules">
+<code class="sig-name descname">create_rules</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span><span class="p">:</span> <span class="n">List<span class="p">[</span>str<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">reservation</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#src.network_management.reservation.Reservation" title="src.network_management.reservation.Reservation">src.network_management.reservation.Reservation</a></span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference internal" href="../resource_management/rule_manager.html#src.resource_management.rule_manager.Rule" title="src.resource_management.rule_manager.Rule">src.resource_management.rule_manager.Rule</a><span class="p">]</span><a class="headerlink" href="#src.network_management.reservation.ResourceReservationProtocol.create_rules" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to create rules for a successful request.</p>
+<p>Rules are used to direct the flow of information/entanglement in the resource manager.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – list of node names in entanglement path.</p></li>
+<li><p><strong>reservation</strong> (<a class="reference internal" href="#src.network_management.reservation.Reservation" title="src.network_management.reservation.Reservation"><em>Reservation</em></a>) – approved reservation.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>list of rules created by the method.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>List[<a class="reference internal" href="../resource_management/rule_manager.html#src.resource_management.rule_manager.Rule" title="src.resource_management.rule_manager.Rule">Rule</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.network_management.reservation.ResourceReservationProtocol.load_rules">
+<code class="sig-name descname">load_rules</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">rules</span><span class="p">:</span> <span class="n">List<span class="p">[</span>Rule<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">reservation</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#src.network_management.reservation.Reservation" title="src.network_management.reservation.Reservation">src.network_management.reservation.Reservation</a></span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.network_management.reservation.ResourceReservationProtocol.load_rules" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to add created rules to resource manager.</p>
+<p>This method will schedule the resource manager to load all rules at the reservation start time.
+The rules will be set to expire at the reservation end time.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rules</strong> (<em>List</em><em>[</em><em>Rules</em><em>]</em>) – rules to add.</p></li>
+<li><p><strong>reservation</strong> (<a class="reference internal" href="#src.network_management.reservation.Reservation" title="src.network_management.reservation.Reservation"><em>Reservation</em></a>) – reservation that created the rules.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.network_management.reservation.ResourceReservationProtocol.pop">
+<code class="sig-name descname">pop</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">src</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">msg</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#src.network_management.reservation.ResourceReservationMessage" title="src.network_management.reservation.ResourceReservationMessage">src.network_management.reservation.ResourceReservationMessage</a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.network_management.reservation.ResourceReservationProtocol.pop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to receive messages from lower protocols.</p>
+<p>Messages may be of 3 types, causing different network manager behavior:</p>
+<ol class="arabic simple">
+<li><p>REQUEST: requests are evaluated, and forwarded along the path if accepted. Otherwise a REJECT message is sent back.</p></li>
+<li><p>REJECT: any reserved resources are released and the message forwarded back towards the initializer.</p></li>
+<li><p>APPROVE: rules are created to achieve the approved request. The message is forwarded back towards the initializer.</p></li>
+</ol>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>src</strong> (<em>str</em>) – source node of the message.</p></li>
+<li><p><strong>msg</strong> (<a class="reference internal" href="#src.network_management.reservation.ResourceReservationMessage" title="src.network_management.reservation.ResourceReservationMessage"><em>ResourceReservationMessage</em></a>) – message received.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Side Effects:</dt><dd><p>May push/pop to lower/upper attached protocols (or network manager).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.network_management.reservation.ResourceReservationProtocol.push">
+<code class="sig-name descname">push</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">responder</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">start_time</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">end_time</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">memory_size</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">target_fidelity</span><span class="p">:</span> <span class="n">float</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.network_management.reservation.ResourceReservationProtocol.push" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to receive reservation requests from higher level protocol.</p>
+<p>Will evaluate request and determine if node can meet it.
+If it can, it will push the request down to a lower protocol.
+Otherwise, it will pop the request back up.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>responder</strong> (<em>str</em>) – node that entanglement is requested with.</p></li>
+<li><p><strong>start_time</strong> (<em>int</em>) – simulation time at which entanglement should start.</p></li>
+<li><p><strong>end_time</strong> (<em>int</em>) – simulation time at which entanglement should cease.</p></li>
+<li><p><strong>memory_size</strong> (<em>int</em>) – number of memories to be entangled.</p></li>
+<li><p><strong>target_fidelity</strong> (<em>float</em>) – desired fidelity of entanglement.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Side Effects:</dt><dd><p>May push/pop to lower/upper attached protocols (or network manager).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.network_management.reservation.ResourceReservationProtocol.received_message">
+<code class="sig-name descname">received_message</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">src</span></em>, <em class="sig-param"><span class="n">msg</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.network_management.reservation.ResourceReservationProtocol.received_message" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to receive messages directly (should not be used; receive through network manager).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.network_management.reservation.ResourceReservationProtocol.schedule">
+<code class="sig-name descname">schedule</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">reservation</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#src.network_management.reservation.Reservation" title="src.network_management.reservation.Reservation">src.network_management.reservation.Reservation</a></span></em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#src.network_management.reservation.ResourceReservationProtocol.schedule" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to attempt reservation request.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>reservation</strong> (<a class="reference internal" href="#src.network_management.reservation.Reservation" title="src.network_management.reservation.Reservation"><em>Reservation</em></a>) – reservation to approve or reject.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>if reservation can be met or not.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="network_manager.html"
+                        title="previous chapter">Network Manager</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="routing.html"
+                        title="next chapter">Routing</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/references/network_management/reservation.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="routing.html" title="Routing"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="network_manager.html" title="Network Manager"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.2.3 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="top.html" >Network Management</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Reservation</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,190 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timeline &#8212; SeQUeNCe 0.2.0 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Process" href="process.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="process.html" title="Process"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">SeQUeNCe 0.2.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="top.html" accesskey="U">Kernel</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Timeline</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-src.kernel.timeline">
+<span id="timeline"></span><h1>Timeline<a class="headerlink" href="#module-src.kernel.timeline" title="Permalink to this headline">¶</a></h1>
+<p>Definition of main Timeline class.</p>
+<p>This module defines the Timeline class, which provides an interface for the simulation kernel and drives event execution.
+All entities are required to have an attached timeline for simulation.</p>
+<dl class="py class">
+<dt id="src.kernel.timeline.Timeline">
+<em class="property">class </em><code class="sig-prename descclassname">src.kernel.timeline.</code><code class="sig-name descname">Timeline</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">stop_time</span><span class="o">=</span><span class="default_value">inf</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.kernel.timeline.Timeline" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class of timeline
+Timeline holds entities, which is configured before the simulation. Before the start of simulation, timeline must
+initialize all controlled entities. The initialization of entities may schedule events. The timeline pushes these
+events to its event list. The timeline starts simulation by popping the top event in the event list repeatedly. The
+time of popped event becomes current simulation time of timeline. The process of popped event is executed. The
+simulation stops if the timestamp on popped event is equal or larger than the stop time.</p>
+<p>To monitor the progress of simulation, people could change the value of Timeline.show_progress to show/hide progress
+bar.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>stop_time</strong> (<em>int</em>) – the stop time of simulation</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="src.kernel.timeline.Timeline.events">
+<code class="sig-name descname">events</code><a class="headerlink" href="#src.kernel.timeline.Timeline.events" title="Permalink to this definition">¶</a></dt>
+<dd><p>the event list of timeline</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="eventlist.html#src.kernel.eventlist.EventList" title="src.kernel.eventlist.EventList">EventList</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.kernel.timeline.Timeline.entities">
+<code class="sig-name descname">entities</code><a class="headerlink" href="#src.kernel.timeline.Timeline.entities" title="Permalink to this definition">¶</a></dt>
+<dd><p>the entity list of timeline used for initialization</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>List[<a class="reference internal" href="entity.html#src.kernel.entity.Entity" title="src.kernel.entity.Entity">Entity</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.kernel.timeline.Timeline.time">
+<code class="sig-name descname">time</code><a class="headerlink" href="#src.kernel.timeline.Timeline.time" title="Permalink to this definition">¶</a></dt>
+<dd><p>current simulation time (picoseconds)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.kernel.timeline.Timeline.stop_time">
+<code class="sig-name descname">stop_time</code><a class="headerlink" href="#src.kernel.timeline.Timeline.stop_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>the stop (simulation) time of simulation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.kernel.timeline.Timeline.show_progress">
+<code class="sig-name descname">show_progress</code><a class="headerlink" href="#src.kernel.timeline.Timeline.show_progress" title="Permalink to this definition">¶</a></dt>
+<dd><p>show/hide the progress bar of simulation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.kernel.timeline.Timeline.is_running">
+<code class="sig-name descname">is_running</code><a class="headerlink" href="#src.kernel.timeline.Timeline.is_running" title="Permalink to this definition">¶</a></dt>
+<dd><p>if the simulation stops executing event</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="process.html"
+                        title="previous chapter">Process</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/kernel/timeline.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="process.html" title="Process"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">SeQUeNCe 0.2.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="top.html" >Kernel</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Timeline</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+    </div>
+  </body>
+</html>
