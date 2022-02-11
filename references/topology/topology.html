@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Topology &#8212; SeQUeNCe 0.2.3 documentation</title>
+    <title>Topology &#8212; SeQUeNCe 0.3.0 documentation</title>
     <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     
@@ -14,7 +14,6 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/language_data.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -36,7 +35,7 @@
         <li class="right" >
           <a href="node.html" title="Nodes"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.2.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" accesskey="U">Topology</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Topology</a></li> 
       </ul>
@@ -50,43 +49,23 @@
   <div class="section" id="module-src.topology.topology">
 <span id="topology"></span><h1>Topology<a class="headerlink" href="#module-src.topology.topology" title="Permalink to this headline">¶</a></h1>
 <p>Definition of the Topology class.</p>
-<p>This module provides a definition of the Topology class, which can be used to manage a network’s structure.
+<p>This module provides a definition of the Topology class, which can be used to
+manage a network’s structure.
 Topology instances automatically perform many useful network functions.</p>
 <dl class="py class">
 <dt id="src.topology.topology.Topology">
-<em class="property">class </em><code class="sig-prename descclassname">src.topology.topology.</code><code class="sig-name descname">Topology</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">timeline</span><span class="p">:</span> <span class="n">Timeline</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.topology.topology.Topology" title="Permalink to this definition">¶</a></dt>
-<dd><p>Class for managing network topologies.</p>
-<p>The topology class provies a simple interface for managing the nodes and connections in a network.
+<em class="property">class </em><code class="sig-prename descclassname">src.topology.topology.</code><code class="sig-name descname">Topology</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">conf_file_name</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.topology.topology.Topology" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class for generating network from configuration file.</p>
+<p>The topology class provides a simple interface for managing the nodes
+and connections in a network.
 A network may also be generated using an external json file.</p>
-<dl class="py attribute">
-<dt id="src.topology.topology.Topology.name">
-<code class="sig-name descname">name</code><a class="headerlink" href="#src.topology.topology.Topology.name" title="Permalink to this definition">¶</a></dt>
-<dd><p>label for topology.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="src.topology.topology.Topology.timeline">
-<code class="sig-name descname">timeline</code><a class="headerlink" href="#src.topology.topology.Topology.timeline" title="Permalink to this definition">¶</a></dt>
-<dd><p>timeline to be used for all objects in network.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="../kernel/timeline.html#src.kernel.timeline.Timeline" title="src.kernel.timeline.Timeline">Timeline</a></p>
-</dd>
-</dl>
-</dd></dl>
-
 <dl class="py attribute">
 <dt id="src.topology.topology.Topology.nodes">
 <code class="sig-name descname">nodes</code><a class="headerlink" href="#src.topology.topology.Topology.nodes" title="Permalink to this definition">¶</a></dt>
-<dd><p>mapping of node names to node objects.</p>
+<dd><p>mapping of type of node to a list of same type node.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>Dict[str, <a class="reference internal" href="node.html#src.topology.node.Node" title="src.topology.node.Node">Node</a>]</p>
+<dd class="field-odd"><p>Dict[str, List[<a class="reference internal" href="node.html#src.topology.node.Node" title="src.topology.node.Node">Node</a>]]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -114,108 +93,12 @@ A network may also be generated using an external json file.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="src.topology.topology.Topology.graph">
-<code class="sig-name descname">graph</code><a class="headerlink" href="#src.topology.topology.Topology.graph" title="Permalink to this definition">¶</a></dt>
-<dd><p>(Dict[str, Dict[str, float]]): internal representation of quantum graph.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="src.topology.topology.Topology.add_classical_channel">
-<code class="sig-name descname">add_classical_channel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">node1</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">node2</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.topology.topology.Topology.add_classical_channel" title="Permalink to this definition">¶</a></dt>
-<dd><p>Method to add a one-way classical channel between nodes.</p>
-<p>NOTE: kwargs are passed to constructor for classical channel, may be used to specify channel parameters.</p>
+<dt id="src.topology.topology.Topology.tl">
+<code class="sig-name descname">tl</code><a class="headerlink" href="#src.topology.topology.Topology.tl" title="Permalink to this definition">¶</a></dt>
+<dd><p>the timeline used for simulation</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>node1</strong> (<em>str</em>) – first node in pair to connect.</p></li>
-<li><p><strong>node2</strong> (<em>str</em>) – second node in pair to connect.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="src.topology.topology.Topology.add_classical_connection">
-<code class="sig-name descname">add_classical_connection</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">node1</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">node2</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.topology.topology.Topology.add_classical_connection" title="Permalink to this definition">¶</a></dt>
-<dd><p>Method to add a two-way classical channel between nodes.</p>
-<p>NOTE: kwargs are passed to constructor for classical channel, may be used to specify channel parameters.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>node1</strong> (<em>str</em>) – first node in pair to connect.</p></li>
-<li><p><strong>node2</strong> (<em>str</em>) – second node in pair to connect.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="src.topology.topology.Topology.add_node">
-<code class="sig-name descname">add_node</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">node</span><span class="p">:</span> <span class="n"><a class="reference internal" href="node.html#src.topology.node.Node" title="src.topology.node.Node">src.topology.node.Node</a></span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.topology.topology.Topology.add_node" title="Permalink to this definition">¶</a></dt>
-<dd><p>Method to add a node to the network.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>node</strong> (<a class="reference internal" href="node.html#src.topology.node.Node" title="src.topology.node.Node"><em>Node</em></a>) – node to add.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="src.topology.topology.Topology.add_quantum_channel">
-<code class="sig-name descname">add_quantum_channel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">node1</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">node2</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.topology.topology.Topology.add_quantum_channel" title="Permalink to this definition">¶</a></dt>
-<dd><p>Method to add a one-way quantum channel connection.</p>
-<p>NOTE: kwargs are passed to constructor for quantum channel, may be used to specify channel parameters.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>node1</strong> (<em>str</em>) – first node in pair to connect (sender).</p></li>
-<li><p><strong>node2</strong> (<em>str</em>) – second node in pair to connect (receiver).</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="src.topology.topology.Topology.add_quantum_connection">
-<code class="sig-name descname">add_quantum_connection</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">node1</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">node2</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.topology.topology.Topology.add_quantum_connection" title="Permalink to this definition">¶</a></dt>
-<dd><p>Method to add a two-way quantum channel connection between nodes.</p>
-<p>NOTE: kwargs are passed to constructor for quantum channel, may be used to specify channel parameters.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>node1</strong> (<em>str</em>) – first node in pair to connect.</p></li>
-<li><p><strong>node2</strong> (<em>str</em>) – second node in pair to connect.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="src.topology.topology.Topology.generate_forwarding_table">
-<code class="sig-name descname">generate_forwarding_table</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">starting_node</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#src.topology.topology.Topology.generate_forwarding_table" title="Permalink to this definition">¶</a></dt>
-<dd><p>Method to create forwarding table for static routing protocol.</p>
-<p>Generates a mapping of destination nodes to next node for routing using Dijkstra’s algorithm.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>node</strong> (<em>str</em>) – name of node for which to generate table.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="src.topology.topology.Topology.load_config">
-<code class="sig-name descname">load_config</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config_file</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.topology.topology.Topology.load_config" title="Permalink to this definition">¶</a></dt>
-<dd><p>Method to load a network configuration file.</p>
-<p>Network should be specified in json format.
-Will populate nodes, qchannels, cchannels, and graph fields.
-Will also generate and install forwarding tables for quantum router nodes.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>config_file</strong> (<em>str</em>) – path to json file specifying network.</p>
-</dd>
-</dl>
-<dl class="simple">
-<dt>Side Effects:</dt><dd><p>Will modify graph, graph_no_middle, qchannels, and cchannels attributes.</p>
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../kernel/timeline.html#src.kernel.timeline.Timeline" title="src.kernel.timeline.Timeline">Timeline</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -273,7 +156,7 @@ Will also generate and install forwarding tables for quantum router nodes.</p>
         <li class="right" >
           <a href="node.html" title="Nodes"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.2.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" >Topology</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Topology</a></li> 
       </ul>

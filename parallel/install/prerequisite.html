@@ -1,0 +1,186 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prerequisites &amp; Installation &#8212; SeQUeNCe 0.3.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Explanation: Parallel Timelines and the Quantum Manager" href="../explanation/parallel_tl_qm.html" />
+    <link rel="prev" title="Chapter 6: Application" href="../../tutorial/chapter6/application.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../explanation/parallel_tl_qm.html" title="Explanation: Parallel Timelines and the Quantum Manager"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../../tutorial/chapter6/application.html" title="Chapter 6: Application"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Prerequisites &amp; Installation</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="prerequisites-installation">
+<h1>Prerequisites &amp; Installation<a class="headerlink" href="#prerequisites-installation" title="Permalink to this headline">¶</a></h1>
+<p>This set of three pages will go through the setup and usage of SeQUeNCe’s parallel simulation capabilities. In this first page, we will review how to install the necessary requirements for parallel simulation.</p>
+<div class="section" id="additional-required-installations">
+<h2>Additional Required Installations<a class="headerlink" href="#additional-required-installations" title="Permalink to this headline">¶</a></h2>
+<p>To run the parallel simulations fully in Python, only the MPI for Python library must be installed. The rest of the parallel simulation will work with installation of the SeQUeNCe library.</p>
+<div class="section" id="mpi-for-python">
+<h3>MPI for Python<a class="headerlink" href="#mpi-for-python" title="Permalink to this headline">¶</a></h3>
+<p>Before installing MPI for Python, an implementation of MPI must be installed on your system. Most working MPI implementations can be used, preferably those supporting MPI-3 and built with shared/dynamic libraries. For a few options listed by the MPI for python package, please see <a class="reference external" href="https://mpi4py.readthedocs.io/en/stable/appendix.html#building-mpi">this documentation page</a>.</p>
+<p>After this has been completed, the Python library may be installed as</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip install mpi4py
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="c-quantum-manager-server">
+<h2>C++ Quantum Manager Server<a class="headerlink" href="#c-quantum-manager-server" title="Permalink to this headline">¶</a></h2>
+<p>In addition to the Quantum Manager Server written in Python, SeQUeNCe also provides a version of the server written in C++. This version also provides multithreading to support the processing of multiple Quantum Manager Client requests, and generally results in performance increases (see our paper TODO: add link). To run this version, a few additional steps must be taken:</p>
+<ul class="simple">
+<li><p>Installing CMake, a tool for managing and compiling the Quantum Manager Server code,</p></li>
+<li><p>Installing Eigen, a linear algebra library for C++, and</p></li>
+<li><p>Building the executable from the C++ source files.</p></li>
+</ul>
+<p>Please also note that your C++ compiler should be using version C++17 or later. Checking and updating the compiler version is not covered on this page.</p>
+<div class="section" id="installing-cmake">
+<h3>Installing CMake<a class="headerlink" href="#installing-cmake" title="Permalink to this headline">¶</a></h3>
+<p>SeQUeNCe uses CMake to efficiently manage the quantum server build and library dependencies. Instructions on how to install CMake can be found on the <a class="reference external" href="https://cmake.org/install/">CMake website</a>. If you have CMake already installed on your system, make sure it is version 3.10 or later using the command</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cmake --version
+</pre></div>
+</div>
+</div>
+<div class="section" id="installing-eigen">
+<h3>Installing Eigen<a class="headerlink" href="#installing-eigen" title="Permalink to this headline">¶</a></h3>
+<p>Eigen may be downloaded from the <a class="reference external" href="http://eigen.tuxfamily.org/index.php?title=Main_Page#Download">Eigen wiki</a>. Once downladed, the library should be built using CMake. To do this, create another directory named <code class="docutils literal notranslate"><span class="pre">build_dir</span></code> and build the library as such:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ mkdir build_dir
+$ cd build_dir
+$ cmake source_dir
+$ make install
+</pre></div>
+</div>
+<p>Where <code class="docutils literal notranslate"><span class="pre">source_dir</span></code> is the path to the downloaded Eigen files. The <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">install</span></code> step may require administrator privileges. For future reference, these instructions may be viewed in the <code class="docutils literal notranslate"><span class="pre">INSTALL</span></code> file included with the Eigen library download.</p>
+</div>
+<div class="section" id="building-the-quantum-manager-server">
+<h3>Building the Quantum Manager Server<a class="headerlink" href="#building-the-quantum-manager-server" title="Permalink to this headline">¶</a></h3>
+<p>After installing CMake and Eigen, we can build and run the Quantum Manager Server. First, navigate to the cpp_server directory and create a build directory:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd cpp_server
+$ mkdir cpp_server_build
+</pre></div>
+</div>
+<p>Next, use CMake to configure the project and generate makefiles:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd cpp_server_build
+$ cmake ..
+</pre></div>
+</div>
+<p>And finally, build the executable for the Quantum Manager Server:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cmake --build . --target quantum_server_cpp
+</pre></div>
+</div>
+<p>To build additional executables used for testing, omit the <code class="docutils literal notranslate"><span class="pre">--target</span> <span class="pre">quantum_server_cpp</span></code> specification from the above command.</p>
+</div>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Prerequisites &amp; Installation</a><ul>
+<li><a class="reference internal" href="#additional-required-installations">Additional Required Installations</a><ul>
+<li><a class="reference internal" href="#mpi-for-python">MPI for Python</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#c-quantum-manager-server">C++ Quantum Manager Server</a><ul>
+<li><a class="reference internal" href="#installing-cmake">Installing CMake</a></li>
+<li><a class="reference internal" href="#installing-eigen">Installing Eigen</a></li>
+<li><a class="reference internal" href="#building-the-quantum-manager-server">Building the Quantum Manager Server</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../../tutorial/chapter6/application.html"
+                        title="previous chapter">Chapter 6: Application</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../explanation/parallel_tl_qm.html"
+                        title="next chapter">Explanation: Parallel Timelines and the Quantum Manager</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/parallel/install/prerequisite.md.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../explanation/parallel_tl_qm.html" title="Explanation: Parallel Timelines and the Quantum Manager"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../../tutorial/chapter6/application.html" title="Chapter 6: Application"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Prerequisites &amp; Installation</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+    </div>
+  </body>
+</html>

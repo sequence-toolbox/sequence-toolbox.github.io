@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chapter 3: Entanglement Management &#8212; SeQUeNCe 0.2.3 documentation</title>
+    <title>Chapter 3: Entanglement Management &#8212; SeQUeNCe 0.3.0 documentation</title>
     <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     
@@ -14,7 +14,6 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/language_data.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -36,7 +35,7 @@
         <li class="right" >
           <a href="../chapter2/hardware.html" title="Chapter 2: Hardware Module"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.2.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.0 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Chapter 3: Entanglement Management</a></li> 
       </ul>
     </div>  
@@ -93,6 +92,7 @@ The code of <code class="docutils literal notranslate"><span class="pre">Entangl
     <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">protocol</span><span class="p">,</span> <span class="n">memory</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">state</span> <span class="o">==</span> <span class="s1">&#39;RAW&#39;</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">raw_counter</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">memory</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">ent_counter</span> <span class="o">+=</span> <span class="mi">1</span>
 
@@ -137,31 +137,36 @@ The <code class="docutils literal notranslate"><span class="pre">middle</span></
 <div class="section" id="step-2-create-network">
 <h3>Step 2: Create Network<a class="headerlink" href="#step-2-create-network" title="Permalink to this headline">¶</a></h3>
 <p>As introduced in the previous chapter, we create nodes and channels to define the network.
-To avoid unnecessary errors, we will set the efficiency of our detectors to 1.</p>
+To avoid unnecessary errors, we will set the efficiency of our detectors to 1.
+Also note that we will set the timeline <code class="docutils literal notranslate"><span class="pre">show_progress</span></code> attribute to 0, since we will be calling the run method multiple times.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sequence.kernel.timeline</span> <span class="kn">import</span> <span class="n">Timeline</span>
 <span class="kn">from</span> <span class="nn">sequence.topology.node</span> <span class="kn">import</span> <span class="n">BSMNode</span>
 <span class="kn">from</span> <span class="nn">sequence.components.optical_channel</span> <span class="kn">import</span> <span class="n">QuantumChannel</span><span class="p">,</span> <span class="n">ClassicalChannel</span>
 
 
 <span class="n">tl</span> <span class="o">=</span> <span class="n">Timeline</span><span class="p">()</span>
+<span class="n">tl</span><span class="o">.</span><span class="n">show_progress</span> <span class="o">=</span> <span class="kc">False</span>
 
 <span class="n">node1</span> <span class="o">=</span> <span class="n">EntangleGenNode</span><span class="p">(</span><span class="s1">&#39;node1&#39;</span><span class="p">,</span> <span class="n">tl</span><span class="p">)</span>
 <span class="n">node2</span> <span class="o">=</span> <span class="n">EntangleGenNode</span><span class="p">(</span><span class="s1">&#39;node2&#39;</span><span class="p">,</span> <span class="n">tl</span><span class="p">)</span>
 <span class="n">bsm_node</span> <span class="o">=</span> <span class="n">BSMNode</span><span class="p">(</span><span class="s1">&#39;bsm_node&#39;</span><span class="p">,</span> <span class="n">tl</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;node1&#39;</span><span class="p">,</span> <span class="s1">&#39;node2&#39;</span><span class="p">])</span>
+<span class="n">node1</span><span class="o">.</span><span class="n">set_seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">node2</span><span class="o">.</span><span class="n">set_seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">bsm_node</span><span class="o">.</span><span class="n">set_seed</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 
 <span class="n">bsm_node</span><span class="o">.</span><span class="n">bsm</span><span class="o">.</span><span class="n">update_detectors_params</span><span class="p">(</span><span class="s1">&#39;efficiency&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 
 <span class="n">qc1</span> <span class="o">=</span> <span class="n">QuantumChannel</span><span class="p">(</span><span class="s1">&#39;qc1&#39;</span><span class="p">,</span> <span class="n">tl</span><span class="p">,</span> <span class="n">attenuation</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
 <span class="n">qc2</span> <span class="o">=</span> <span class="n">QuantumChannel</span><span class="p">(</span><span class="s1">&#39;qc2&#39;</span><span class="p">,</span> <span class="n">tl</span><span class="p">,</span> <span class="n">attenuation</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
-<span class="n">qc1</span><span class="o">.</span><span class="n">set_ends</span><span class="p">(</span><span class="n">node1</span><span class="p">,</span> <span class="n">bsm_node</span><span class="p">)</span>
-<span class="n">qc2</span><span class="o">.</span><span class="n">set_ends</span><span class="p">(</span><span class="n">node2</span><span class="p">,</span> <span class="n">bsm_node</span><span class="p">)</span>
+<span class="n">qc1</span><span class="o">.</span><span class="n">set_ends</span><span class="p">(</span><span class="n">node1</span><span class="p">,</span> <span class="n">bsm_node</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="n">qc2</span><span class="o">.</span><span class="n">set_ends</span><span class="p">(</span><span class="n">node2</span><span class="p">,</span> <span class="n">bsm_node</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 
 <span class="n">nodes</span> <span class="o">=</span> <span class="p">[</span><span class="n">node1</span><span class="p">,</span> <span class="n">node2</span><span class="p">,</span> <span class="n">bsm_node</span><span class="p">]</span>
 
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
         <span class="n">cc</span><span class="o">=</span> <span class="n">ClassicalChannel</span><span class="p">(</span><span class="s1">&#39;cc_</span><span class="si">%s</span><span class="s1">_</span><span class="si">%s</span><span class="s1">&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">nodes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">nodes</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">),</span> <span class="n">tl</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mf">1e8</span><span class="p">)</span>
-        <span class="n">cc</span><span class="o">.</span><span class="n">set_ends</span><span class="p">(</span><span class="n">nodes</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">nodes</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+        <span class="n">cc</span><span class="o">.</span><span class="n">set_ends</span><span class="p">(</span><span class="n">nodes</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">nodes</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -175,14 +180,16 @@ The protocols in <code class="docutils literal notranslate"><span class="pre">En
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sequence.entanglement_management.entanglement_protocol</span> <span class="kn">import</span> <span class="n">EntanglementProtocol</span>
 
 
-<span class="k">def</span> <span class="nf">pair_protocol</span><span class="p">(</span><span class="n">p1</span><span class="p">:</span> <span class="n">EntanglementProtocol</span><span class="p">,</span> <span class="n">p2</span><span class="p">:</span> <span class="n">EntanglementProtocol</span><span class="p">):</span>
-    <span class="n">p1</span><span class="o">.</span><span class="n">set_others</span><span class="p">(</span><span class="n">p2</span><span class="p">)</span>
-    <span class="n">p2</span><span class="o">.</span><span class="n">set_others</span><span class="p">(</span><span class="n">p1</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">pair_protocol</span><span class="p">(</span><span class="n">node1</span><span class="p">:</span> <span class="n">Node</span><span class="p">,</span> <span class="n">node2</span><span class="p">:</span> <span class="n">Node</span><span class="p">):</span>
+    <span class="n">p1</span> <span class="o">=</span> <span class="n">node1</span><span class="o">.</span><span class="n">protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">p2</span> <span class="o">=</span> <span class="n">node2</span><span class="o">.</span><span class="n">protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">p1</span><span class="o">.</span><span class="n">set_others</span><span class="p">(</span><span class="n">p2</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">node2</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="p">[</span><span class="n">node2</span><span class="o">.</span><span class="n">memory</span><span class="o">.</span><span class="n">name</span><span class="p">])</span>
+    <span class="n">p2</span><span class="o">.</span><span class="n">set_others</span><span class="p">(</span><span class="n">p1</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">node1</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="p">[</span><span class="n">node1</span><span class="o">.</span><span class="n">memory</span><span class="o">.</span><span class="n">name</span><span class="p">])</span>
 
 
 <span class="n">node1</span><span class="o">.</span><span class="n">create_protocol</span><span class="p">(</span><span class="s1">&#39;bsm_node&#39;</span><span class="p">,</span> <span class="s1">&#39;node2&#39;</span><span class="p">)</span>
 <span class="n">node2</span><span class="o">.</span><span class="n">create_protocol</span><span class="p">(</span><span class="s1">&#39;bsm_node&#39;</span><span class="p">,</span> <span class="s1">&#39;node1&#39;</span><span class="p">)</span>
-<span class="n">pair_protocol</span><span class="p">(</span><span class="n">node1</span><span class="o">.</span><span class="n">protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">node2</span><span class="o">.</span><span class="n">protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">pair_protocol</span><span class="p">(</span><span class="n">node1</span><span class="p">,</span> <span class="n">node2</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;before&#39;</span><span class="p">,</span> <span class="n">node1</span><span class="o">.</span><span class="n">memory</span><span class="o">.</span><span class="n">entangled_memory</span><span class="p">,</span> <span class="n">node1</span><span class="o">.</span><span class="n">memory</span><span class="o">.</span><span class="n">fidelity</span><span class="p">)</span>
 <span class="c1"># &quot;before node1.memo {&#39;node_id&#39;: None, &#39;memo_id&#39;: None} 0&quot;</span>
@@ -199,6 +206,7 @@ The protocols in <code class="docutils literal notranslate"><span class="pre">En
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">start</span></code> method starts the protocol. The <code class="docutils literal notranslate"><span class="pre">run</span></code> mehtod starts the simulation.
+Note that the <code class="docutils literal notranslate"><span class="pre">start</span></code> method must be called after the timeline <code class="docutils literal notranslate"><span class="pre">init</span></code> method.
 After the simulation, we can observe two possible states of memory based on the result of entanglement generation.
 If the protocol generates entanglement successfully, the <code class="docutils literal notranslate"><span class="pre">Memory.entangled_memory</span></code> will present information about the entangled memory.
 The fidelity of entanglements equal <code class="docutils literal notranslate"><span class="pre">0.9</span></code>, as set in the constructor function of <code class="docutils literal notranslate"><span class="pre">Memory</span></code>.
@@ -213,15 +221,14 @@ We will use the <code class="docutils literal notranslate"><span class="pre">Mem
     <span class="n">tl</span><span class="o">.</span><span class="n">time</span> <span class="o">=</span> <span class="n">tl</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">+</span> <span class="mf">1e11</span>
     <span class="n">node1</span><span class="o">.</span><span class="n">create_protocol</span><span class="p">(</span><span class="s1">&#39;bsm_node&#39;</span><span class="p">,</span> <span class="s1">&#39;node2&#39;</span><span class="p">)</span>
     <span class="n">node2</span><span class="o">.</span><span class="n">create_protocol</span><span class="p">(</span><span class="s1">&#39;bsm_node&#39;</span><span class="p">,</span> <span class="s1">&#39;node1&#39;</span><span class="p">)</span>
-    <span class="n">pair_protocol</span><span class="p">(</span><span class="n">node1</span><span class="o">.</span><span class="n">protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">node2</span><span class="o">.</span><span class="n">protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">pair_protocol</span><span class="p">(</span><span class="n">node1</span><span class="p">,</span> <span class="n">node2</span><span class="p">)</span>
 
     <span class="n">node1</span><span class="o">.</span><span class="n">memory</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
     <span class="n">node2</span><span class="o">.</span><span class="n">memory</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
 
+    <span class="n">tl</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
     <span class="n">node1</span><span class="o">.</span><span class="n">protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
     <span class="n">node2</span><span class="o">.</span><span class="n">protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-
-    <span class="n">tl</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
     <span class="n">tl</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">node1</span><span class="o">.</span><span class="n">resource_manager</span><span class="o">.</span><span class="n">ent_counter</span><span class="p">,</span> <span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="n">node1</span><span class="o">.</span><span class="n">resource_manager</span><span class="o">.</span><span class="n">raw_counter</span><span class="p">)</span>
@@ -278,14 +285,17 @@ We will always discard the <code class="docutils literal notranslate"><span clas
 <h3>Step 2: Create Network<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <p>We can now use the code below to create the simulated network.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tl</span> <span class="o">=</span> <span class="n">Timeline</span><span class="p">()</span>
+<span class="n">tl</span><span class="o">.</span><span class="n">show_progress</span> <span class="o">=</span> <span class="kc">False</span>
 
 <span class="n">node1</span> <span class="o">=</span> <span class="n">PurifyNode</span><span class="p">(</span><span class="s1">&#39;node1&#39;</span><span class="p">,</span> <span class="n">tl</span><span class="p">)</span>
 <span class="n">node2</span> <span class="o">=</span> <span class="n">PurifyNode</span><span class="p">(</span><span class="s1">&#39;node2&#39;</span><span class="p">,</span> <span class="n">tl</span><span class="p">)</span>
+<span class="n">node1</span><span class="o">.</span><span class="n">set_seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">node2</span><span class="o">.</span><span class="n">set_seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="n">cc0</span> <span class="o">=</span> <span class="n">ClassicalChannel</span><span class="p">(</span><span class="s1">&#39;cc0&#39;</span><span class="p">,</span> <span class="n">tl</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mf">1e9</span><span class="p">)</span>
 <span class="n">cc1</span> <span class="o">=</span> <span class="n">ClassicalChannel</span><span class="p">(</span><span class="s1">&#39;cc1&#39;</span><span class="p">,</span> <span class="n">tl</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mf">1e9</span><span class="p">)</span>
-<span class="n">cc0</span><span class="o">.</span><span class="n">set_ends</span><span class="p">(</span><span class="n">node1</span><span class="p">,</span> <span class="n">node2</span><span class="p">)</span>
-<span class="n">cc1</span><span class="o">.</span><span class="n">set_ends</span><span class="p">(</span><span class="n">node2</span><span class="p">,</span> <span class="n">node1</span><span class="p">)</span>
+<span class="n">cc0</span><span class="o">.</span><span class="n">set_ends</span><span class="p">(</span><span class="n">node1</span><span class="p">,</span> <span class="n">node2</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="n">cc1</span><span class="o">.</span><span class="n">set_ends</span><span class="p">(</span><span class="n">node2</span><span class="p">,</span> <span class="n">node1</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -315,20 +325,21 @@ Finally, we set the fidelity of entanglement.</p>
 <div class="section" id="step-4-configure-and-start-bbpssw-protocol">
 <h3>Step 4: Configure and Start BBPSSW Protocol<a class="headerlink" href="#step-4-configure-and-start-bbpssw-protocol" title="Permalink to this headline">¶</a></h3>
 <p>Similar to the previous example, we create, pair, and start the protocols.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">pair_protocol</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">):</span>
-    <span class="n">p1</span><span class="o">.</span><span class="n">set_others</span><span class="p">(</span><span class="n">p2</span><span class="p">)</span>
-    <span class="n">p2</span><span class="o">.</span><span class="n">set_others</span><span class="p">(</span><span class="n">p1</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">pair_protocol</span><span class="p">(</span><span class="n">node1</span><span class="p">:</span> <span class="n">Node</span><span class="p">,</span> <span class="n">node2</span><span class="p">:</span> <span class="n">Node</span><span class="p">):</span>
+    <span class="n">p1</span> <span class="o">=</span> <span class="n">node1</span><span class="o">.</span><span class="n">protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">p2</span> <span class="o">=</span> <span class="n">node2</span><span class="o">.</span><span class="n">protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">p1</span><span class="o">.</span><span class="n">set_others</span><span class="p">(</span><span class="n">p2</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">node2</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="p">[</span><span class="n">node2</span><span class="o">.</span><span class="n">kept_memo</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">node2</span><span class="o">.</span><span class="n">meas_memo</span><span class="o">.</span><span class="n">name</span><span class="p">])</span>
+    <span class="n">p2</span><span class="o">.</span><span class="n">set_others</span><span class="p">(</span><span class="n">p1</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">node1</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="p">[</span><span class="n">node1</span><span class="o">.</span><span class="n">kept_memo</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">node1</span><span class="o">.</span><span class="n">meas_memo</span><span class="o">.</span><span class="n">name</span><span class="p">])</span>
 
 
 <span class="n">node1</span><span class="o">.</span><span class="n">create_protocol</span><span class="p">()</span>
 <span class="n">node2</span><span class="o">.</span><span class="n">create_protocol</span><span class="p">()</span>
 
-<span class="n">pair_protocol</span><span class="p">(</span><span class="n">node1</span><span class="o">.</span><span class="n">protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">node2</span><span class="o">.</span><span class="n">protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-
-<span class="n">node1</span><span class="o">.</span><span class="n">protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-<span class="n">node2</span><span class="o">.</span><span class="n">protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="n">pair_protocol</span><span class="p">(</span><span class="n">node1</span><span class="p">,</span> <span class="n">node2</span><span class="p">)</span>
 
 <span class="n">tl</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">node1</span><span class="o">.</span><span class="n">protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="n">node2</span><span class="o">.</span><span class="n">protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
 <span class="n">tl</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">node1</span><span class="o">.</span><span class="n">kept_memo</span><span class="o">.</span><span class="n">entangled_memory</span><span class="p">,</span> <span class="n">node2</span><span class="o">.</span><span class="n">kept_memo</span><span class="o">.</span><span class="n">fidelity</span><span class="p">)</span>
@@ -352,19 +363,18 @@ and <code class="docutils literal notranslate"><span class="pre">BBPSSW.improved
 <div class="section" id="step-5-try-to-purify-entanglement-multiple-times">
 <h3>Step 5: Try to Purify Entanglement Multiple Times<a class="headerlink" href="#step-5-try-to-purify-entanglement-multiple-times" title="Permalink to this headline">¶</a></h3>
 <p>We can run the purification protocol multiple times to observe the state of memory with different purification results.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tl</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
     <span class="n">entangle_memory</span><span class="p">(</span><span class="n">node1</span><span class="o">.</span><span class="n">kept_memo</span><span class="p">,</span> <span class="n">node2</span><span class="o">.</span><span class="n">kept_memo</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">)</span>
     <span class="n">entangle_memory</span><span class="p">(</span><span class="n">node1</span><span class="o">.</span><span class="n">meas_memo</span><span class="p">,</span> <span class="n">node2</span><span class="o">.</span><span class="n">meas_memo</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">)</span>
 
     <span class="n">node1</span><span class="o">.</span><span class="n">create_protocol</span><span class="p">()</span>
     <span class="n">node2</span><span class="o">.</span><span class="n">create_protocol</span><span class="p">()</span>
 
-    <span class="n">pair_protocol</span><span class="p">(</span><span class="n">node1</span><span class="o">.</span><span class="n">protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">node2</span><span class="o">.</span><span class="n">protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">pair_protocol</span><span class="p">(</span><span class="n">node1</span><span class="p">,</span> <span class="n">node2</span><span class="p">)</span>
 
     <span class="n">node1</span><span class="o">.</span><span class="n">protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
     <span class="n">node2</span><span class="o">.</span><span class="n">protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-
-    <span class="n">tl</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
     <span class="n">tl</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 
     <span class="nb">print</span><span class="p">(</span><span class="n">node1</span><span class="o">.</span><span class="n">kept_memo</span><span class="o">.</span><span class="n">entangled_memory</span><span class="p">,</span> <span class="n">node2</span><span class="o">.</span><span class="n">kept_memo</span><span class="o">.</span><span class="n">fidelity</span><span class="p">)</span>
@@ -456,22 +466,36 @@ The <code class="docutils literal notranslate"><span class="pre">EntanglementSwa
 <span class="n">left_node</span> <span class="o">=</span> <span class="n">SwapNodeB</span><span class="p">(</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">tl</span><span class="p">)</span>
 <span class="n">right_node</span> <span class="o">=</span> <span class="n">SwapNodeB</span><span class="p">(</span><span class="s1">&#39;right&#39;</span><span class="p">,</span> <span class="n">tl</span><span class="p">)</span>
 <span class="n">mid_node</span> <span class="o">=</span> <span class="n">SwapNodeA</span><span class="p">(</span><span class="s1">&#39;mid&#39;</span><span class="p">,</span> <span class="n">tl</span><span class="p">)</span>
+<span class="n">left_node</span><span class="o">.</span><span class="n">set_seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">right_node</span><span class="o">.</span><span class="n">set_seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">mid_node</span><span class="o">.</span><span class="n">set_seed</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 
 <span class="n">nodes</span> <span class="o">=</span> <span class="p">[</span><span class="n">left_node</span><span class="p">,</span> <span class="n">right_node</span><span class="p">,</span> <span class="n">mid_node</span><span class="p">]</span>
 
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
         <span class="n">cc</span> <span class="o">=</span> <span class="n">ClassicalChannel</span><span class="p">(</span><span class="s1">&#39;cc_</span><span class="si">%s</span><span class="s1">_</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">nodes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">nodes</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">),</span> <span class="n">tl</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mf">1e9</span><span class="p">)</span>
-        <span class="n">cc</span><span class="o">.</span><span class="n">set_ends</span><span class="p">(</span><span class="n">nodes</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">nodes</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+        <span class="n">cc</span><span class="o">.</span><span class="n">set_ends</span><span class="p">(</span><span class="n">nodes</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">nodes</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="step-3-manually-set-entanglement-state-and-start-protocol">
 <h3>Step 3: Manually Set Entanglement State and Start Protocol<a class="headerlink" href="#step-3-manually-set-entanglement-state-and-start-protocol" title="Permalink to this headline">¶</a></h3>
-<p>We will reuse the code for <code class="docutils literal notranslate"><span class="pre">entangle_memory</span></code> and <code class="docutils literal notranslate"><span class="pre">pair_protocol</span></code> from the previous examples to configure the states of hardware and software.
+<p>We will reuse the code for <code class="docutils literal notranslate"><span class="pre">entangle_memory</span></code> from the previous examples to configure the states of hardware and software.
+The <code class="docutils literal notranslate"><span class="pre">pair_protocol</span></code> function is slightly more complicated, as there are more nodes to deal with.
 Because we set the success probability to 1, we can guaruntee a successful result after running the simulation.
 The fidelity of entanglement after swapping will be <code class="docutils literal notranslate"><span class="pre">0.9*0.9*0.99=0.8019</span></code>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">entangle_memory</span><span class="p">(</span><span class="n">left_node</span><span class="o">.</span><span class="n">memo</span><span class="p">,</span> <span class="n">mid_node</span><span class="o">.</span><span class="n">left_memo</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">pair_protocol</span><span class="p">(</span><span class="n">node1</span><span class="p">,</span> <span class="n">node2</span><span class="p">,</span> <span class="n">node_mid</span><span class="p">):</span>
+    <span class="n">p1</span> <span class="o">=</span> <span class="n">node1</span><span class="o">.</span><span class="n">protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">p2</span> <span class="o">=</span> <span class="n">node2</span><span class="o">.</span><span class="n">protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">pmid</span> <span class="o">=</span> <span class="n">node_mid</span><span class="o">.</span><span class="n">protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">p1</span><span class="o">.</span><span class="n">set_others</span><span class="p">(</span><span class="n">pmid</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">node_mid</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="p">[</span><span class="n">node_mid</span><span class="o">.</span><span class="n">left_memo</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">node_mid</span><span class="o">.</span><span class="n">right_memo</span><span class="o">.</span><span class="n">name</span><span class="p">])</span>
+    <span class="n">p2</span><span class="o">.</span><span class="n">set_others</span><span class="p">(</span><span class="n">pmid</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">node_mid</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="p">[</span><span class="n">node_mid</span><span class="o">.</span><span class="n">left_memo</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">node_mid</span><span class="o">.</span><span class="n">right_memo</span><span class="o">.</span><span class="n">name</span><span class="p">])</span>
+    <span class="n">pmid</span><span class="o">.</span><span class="n">set_others</span><span class="p">(</span><span class="n">p1</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">node1</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="p">[</span><span class="n">node1</span><span class="o">.</span><span class="n">memo</span><span class="o">.</span><span class="n">name</span><span class="p">])</span>
+    <span class="n">pmid</span><span class="o">.</span><span class="n">set_others</span><span class="p">(</span><span class="n">p2</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">node2</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="p">[</span><span class="n">node2</span><span class="o">.</span><span class="n">memo</span><span class="o">.</span><span class="n">name</span><span class="p">])</span>
+
+
+<span class="n">entangle_memory</span><span class="p">(</span><span class="n">left_node</span><span class="o">.</span><span class="n">memo</span><span class="p">,</span> <span class="n">mid_node</span><span class="o">.</span><span class="n">left_memo</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">)</span>
 <span class="n">entangle_memory</span><span class="p">(</span><span class="n">right_node</span><span class="o">.</span><span class="n">memo</span><span class="p">,</span> <span class="n">mid_node</span><span class="o">.</span><span class="n">right_memo</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">:</span>
@@ -585,7 +609,7 @@ The fidelity of entanglement after swapping will be <code class="docutils litera
         <li class="right" >
           <a href="../chapter2/hardware.html" title="Chapter 2: Hardware Module"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.2.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.0 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Chapter 3: Entanglement Management</a></li> 
       </ul>
     </div>

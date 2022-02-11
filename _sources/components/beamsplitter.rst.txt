@@ -1,5 +1,0 @@
-Beam Splitter
-=============
-
-.. automodule:: src.components.beamsplitter
-    :members:

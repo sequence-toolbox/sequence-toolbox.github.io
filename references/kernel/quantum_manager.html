@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quantum Manager &#8212; SeQUeNCe 0.2.3 documentation</title>
+    <title>Quantum Manager &#8212; SeQUeNCe 0.3.0 documentation</title>
     <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     
@@ -14,11 +14,10 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/language_data.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Components" href="../components/top.html" />
+    <link rel="next" title="Parallel Timeline" href="p_timeline.html" />
     <link rel="prev" title="Timeline" href="timeline.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -31,12 +30,12 @@
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="../components/top.html" title="Components"
+          <a href="p_timeline.html" title="Parallel Timeline"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="timeline.html" title="Timeline"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.2.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" accesskey="U">Kernel</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Quantum Manager</a></li> 
       </ul>
@@ -61,7 +60,8 @@
 <dl class="py class">
 <dt id="src.kernel.quantum_manager.DensityState">
 <em class="property">class </em><code class="sig-prename descclassname">src.kernel.quantum_manager.</code><code class="sig-name descname">DensityState</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">state</span><span class="p">:</span> <span class="n">List<span class="p">[</span>List<span class="p">[</span>complex<span class="p">]</span><span class="p">]</span></span></em>, <em class="sig-param"><span class="n">keys</span><span class="p">:</span> <span class="n">List<span class="p">[</span>int<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.kernel.quantum_manager.DensityState" title="Permalink to this definition">¶</a></dt>
-<dd><p>Class to represent an individual quantum state as a density matrix.</p>
+<dd><p>Class inheriting State class to represent an individual quantum state
+as a density matrix.</p>
 <dl class="py attribute">
 <dt id="src.kernel.quantum_manager.DensityState.state">
 <code class="sig-name descname">state</code><a class="headerlink" href="#src.kernel.quantum_manager.DensityState.state" title="Permalink to this definition">¶</a></dt>
@@ -89,7 +89,8 @@
 <dl class="py class">
 <dt id="src.kernel.quantum_manager.KetState">
 <em class="property">class </em><code class="sig-prename descclassname">src.kernel.quantum_manager.</code><code class="sig-name descname">KetState</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">amplitudes</span><span class="p">:</span> <span class="n">List<span class="p">[</span>complex<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">keys</span><span class="p">:</span> <span class="n">List<span class="p">[</span>int<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.kernel.quantum_manager.KetState" title="Permalink to this definition">¶</a></dt>
-<dd><p>Class to represent an individual quantum state as a ket vector.</p>
+<dd><p>Class inheriting State class to represent an individual quantum state
+as a ket vector.</p>
 <dl class="py attribute">
 <dt id="src.kernel.quantum_manager.KetState.state">
 <code class="sig-name descname">state</code><a class="headerlink" href="#src.kernel.quantum_manager.KetState.state" title="Permalink to this definition">¶</a></dt>
@@ -116,7 +117,7 @@
 
 <dl class="py class">
 <dt id="src.kernel.quantum_manager.QuantumManager">
-<em class="property">class </em><code class="sig-prename descclassname">src.kernel.quantum_manager.</code><code class="sig-name descname">QuantumManager</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">formalism</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.kernel.quantum_manager.QuantumManager" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">src.kernel.quantum_manager.</code><code class="sig-name descname">QuantumManager</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">formalism</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.kernel.quantum_manager.QuantumManager" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class to track and manage quantum states (abstract).</p>
 <p>All states stored are of a single formalism (by default as a ket vector).</p>
 <dl class="py attribute">
@@ -125,7 +126,18 @@
 <dd><p>mapping of state keys to quantum state objects.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>Dict[int, <a class="reference internal" href="#src.kernel.quantum_manager.KetState" title="src.kernel.quantum_manager.KetState">KetState</a>]</p>
+<dd class="field-odd"><p>Dict[int, <a class="reference internal" href="#src.kernel.quantum_manager.State" title="src.kernel.quantum_manager.State">State</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.kernel.quantum_manager.QuantumManager.formalism">
+<code class="sig-name descname">formalism</code><a class="headerlink" href="#src.kernel.quantum_manager.QuantumManager.formalism" title="Permalink to this definition">¶</a></dt>
+<dd><p>formalism used for local quantum state representation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
 </dd>
 </dl>
 </dd></dl>
@@ -142,18 +154,18 @@
 <dd class="field-even"><p>quantum state at supplied key.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>State</p>
+<dd class="field-odd"><p><a class="reference internal" href="#src.kernel.quantum_manager.State" title="src.kernel.quantum_manager.State">State</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt id="src.kernel.quantum_manager.QuantumManager.new">
-<em class="property">abstract </em><code class="sig-name descname">new</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">amplitudes</span><span class="p">:</span> <span class="n">any</span></em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#src.kernel.quantum_manager.QuantumManager.new" title="Permalink to this definition">¶</a></dt>
+<em class="property">abstract </em><code class="sig-name descname">new</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">state</span><span class="p">:</span> <span class="n">any</span></em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#src.kernel.quantum_manager.QuantumManager.new" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to create a new quantum state.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>amplitudes</strong> – complex amplitudes of new state. Type depends on type of subclass.</p>
+<dd class="field-odd"><p><strong>state</strong> (<em>any</em>) – complex amplitudes of new state. Type depends on type of subclass.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>key for new state generated.</p>
@@ -172,13 +184,14 @@
 
 <dl class="py method">
 <dt id="src.kernel.quantum_manager.QuantumManager.run_circuit">
-<em class="property">abstract </em><code class="sig-name descname">run_circuit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">circuit</span><span class="p">:</span> <span class="n">Circuit</span></em>, <em class="sig-param"><span class="n">keys</span><span class="p">:</span> <span class="n">List<span class="p">[</span>int<span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#src.kernel.quantum_manager.QuantumManager.run_circuit" title="Permalink to this definition">¶</a></dt>
+<em class="property">abstract </em><code class="sig-name descname">run_circuit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">circuit</span><span class="p">:</span> <span class="n">Circuit</span></em>, <em class="sig-param"><span class="n">keys</span><span class="p">:</span> <span class="n">List<span class="p">[</span>int<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">meas_samp</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; Dict<span class="p">[</span>int<span class="p">, </span>int<span class="p">]</span><a class="headerlink" href="#src.kernel.quantum_manager.QuantumManager.run_circuit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to run a circuit on a given set of quantum states.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>circuit</strong> (<em>Circuit</em>) – quantum circuit to apply.</p></li>
 <li><p><strong>keys</strong> (<em>List</em><em>[</em><em>int</em><em>]</em>) – list of keys for quantum states to apply circuit to.</p></li>
+<li><p><strong>meas_samp</strong> (<em>float</em>) – random sample used for measurement.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -198,7 +211,7 @@
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>keys</strong> (<em>List</em><em>[</em><em>int</em><em>]</em>) – key(s) of state(s) to change.</p></li>
-<li><p><strong>amplitudes</strong> – Amplitudes to set state to, type determined by type of subclass.</p></li>
+<li><p><strong>amplitudes</strong> (<em>any</em>) – Amplitudes to set state to, type determined by type of subclass.</p></li>
 </ul>
 </dd>
 </dl>
@@ -212,11 +225,11 @@
 <dd><p>Class to track and manage states with the density matrix formalism.</p>
 <dl class="py method">
 <dt id="src.kernel.quantum_manager.QuantumManagerDensity.new">
-<code class="sig-name descname">new</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">state</span><span class="o">=</span><span class="default_value">[[1 + 0j, 0j], [0j, 0j]]</span></em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#src.kernel.quantum_manager.QuantumManagerDensity.new" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">new</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">state</span><span class="o">=</span><span class="default_value">[1 + 0j, 0j], [0j, 0j]</span></em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#src.kernel.quantum_manager.QuantumManagerDensity.new" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to create a new quantum state.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>amplitudes</strong> – complex amplitudes of new state. Type depends on type of subclass.</p>
+<dd class="field-odd"><p><strong>state</strong> (<em>any</em>) – complex amplitudes of new state. Type depends on type of subclass.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>key for new state generated.</p>
@@ -229,13 +242,14 @@
 
 <dl class="py method">
 <dt id="src.kernel.quantum_manager.QuantumManagerDensity.run_circuit">
-<code class="sig-name descname">run_circuit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">circuit</span><span class="p">:</span> <span class="n">Circuit</span></em>, <em class="sig-param"><span class="n">keys</span><span class="p">:</span> <span class="n">List<span class="p">[</span>int<span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#src.kernel.quantum_manager.QuantumManagerDensity.run_circuit" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">run_circuit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">circuit</span><span class="p">:</span> <span class="n">Circuit</span></em>, <em class="sig-param"><span class="n">keys</span><span class="p">:</span> <span class="n">List<span class="p">[</span>int<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">meas_samp</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; Dict<span class="p">[</span>int<span class="p">, </span>int<span class="p">]</span><a class="headerlink" href="#src.kernel.quantum_manager.QuantumManagerDensity.run_circuit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to run a circuit on a given set of quantum states.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>circuit</strong> (<em>Circuit</em>) – quantum circuit to apply.</p></li>
 <li><p><strong>keys</strong> (<em>List</em><em>[</em><em>int</em><em>]</em>) – list of keys for quantum states to apply circuit to.</p></li>
+<li><p><strong>meas_samp</strong> (<em>float</em>) – random sample used for measurement.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -255,7 +269,7 @@
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>keys</strong> (<em>List</em><em>[</em><em>int</em><em>]</em>) – key(s) of state(s) to change.</p></li>
-<li><p><strong>amplitudes</strong> – Amplitudes to set state to, type determined by type of subclass.</p></li>
+<li><p><strong>amplitudes</strong> (<em>any</em>) – Amplitudes to set state to, type determined by type of subclass.</p></li>
 </ul>
 </dd>
 </dl>
@@ -269,11 +283,11 @@
 <dd><p>Class to track and manage quantum states with the ket vector formalism.</p>
 <dl class="py method">
 <dt id="src.kernel.quantum_manager.QuantumManagerKet.new">
-<code class="sig-name descname">new</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">amplitudes</span><span class="o">=</span><span class="default_value">[1 + 0j, 0j]</span></em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#src.kernel.quantum_manager.QuantumManagerKet.new" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">new</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">state</span><span class="o">=</span><span class="default_value">1 + 0j, 0j</span></em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#src.kernel.quantum_manager.QuantumManagerKet.new" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to create a new quantum state.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>amplitudes</strong> – complex amplitudes of new state. Type depends on type of subclass.</p>
+<dd class="field-odd"><p><strong>state</strong> (<em>any</em>) – complex amplitudes of new state. Type depends on type of subclass.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>key for new state generated.</p>
@@ -286,13 +300,14 @@
 
 <dl class="py method">
 <dt id="src.kernel.quantum_manager.QuantumManagerKet.run_circuit">
-<code class="sig-name descname">run_circuit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">circuit</span><span class="p">:</span> <span class="n">Circuit</span></em>, <em class="sig-param"><span class="n">keys</span><span class="p">:</span> <span class="n">List<span class="p">[</span>int<span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#src.kernel.quantum_manager.QuantumManagerKet.run_circuit" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">run_circuit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">circuit</span><span class="p">:</span> <span class="n">Circuit</span></em>, <em class="sig-param"><span class="n">keys</span><span class="p">:</span> <span class="n">List<span class="p">[</span>int<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">meas_samp</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; Dict<span class="p">[</span>int<span class="p">, </span>int<span class="p">]</span><a class="headerlink" href="#src.kernel.quantum_manager.QuantumManagerKet.run_circuit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to run a circuit on a given set of quantum states.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>circuit</strong> (<em>Circuit</em>) – quantum circuit to apply.</p></li>
 <li><p><strong>keys</strong> (<em>List</em><em>[</em><em>int</em><em>]</em>) – list of keys for quantum states to apply circuit to.</p></li>
+<li><p><strong>meas_samp</strong> (<em>float</em>) – random sample used for measurement.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -312,7 +327,7 @@
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>keys</strong> (<em>List</em><em>[</em><em>int</em><em>]</em>) – key(s) of state(s) to change.</p></li>
-<li><p><strong>amplitudes</strong> – Amplitudes to set state to, type determined by type of subclass.</p></li>
+<li><p><strong>amplitudes</strong> (<em>any</em>) – Amplitudes to set state to, type determined by type of subclass.</p></li>
 </ul>
 </dd>
 </dl>
@@ -320,143 +335,32 @@
 
 </dd></dl>
 
-<dl class="py function">
-<dt id="src.kernel.quantum_manager.choice">
-<code class="sig-prename descclassname">src.kernel.quantum_manager.</code><code class="sig-name descname">choice</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">a</span></em>, <em class="sig-param"><span class="n">size</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">replace</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">p</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.kernel.quantum_manager.choice" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generates a random sample from a given 1-D array</p>
-<blockquote>
-<div><div class="versionadded">
-<p><span class="versionmodified added">New in version 1.7.0.</span></p>
-</div>
-</div></blockquote>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>New code should use the <code class="docutils literal notranslate"><span class="pre">choice</span></code> method of a <code class="docutils literal notranslate"><span class="pre">default_rng()</span></code>
-instance instead; see <cite>random-quick-start</cite>.</p>
-</div>
+<dl class="py class">
+<dt id="src.kernel.quantum_manager.State">
+<em class="property">class </em><code class="sig-prename descclassname">src.kernel.quantum_manager.</code><code class="sig-name descname">State</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">state</span></em>, <em class="sig-param"><span class="n">keys</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.kernel.quantum_manager.State" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to represent state of qubits.</p>
+<dl class="py attribute">
+<dt id="src.kernel.quantum_manager.State.state">
+<code class="sig-name descname">state</code><a class="headerlink" href="#src.kernel.quantum_manager.State.state" title="Permalink to this definition">¶</a></dt>
+<dd><p>internal representation of qubit state. Varies based on formalism.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>a</strong> (<em>1-D array-like</em><em> or </em><em>int</em>) – If an ndarray, a random sample is generated from its elements.
-If an int, the random sample is generated as if a were np.arange(a)</p></li>
-<li><p><strong>size</strong> (<em>int</em><em> or </em><em>tuple of ints</em><em>, </em><em>optional</em>) – Output shape.  If the given shape is, e.g., <code class="docutils literal notranslate"><span class="pre">(m,</span> <span class="pre">n,</span> <span class="pre">k)</span></code>, then
-<code class="docutils literal notranslate"><span class="pre">m</span> <span class="pre">*</span> <span class="pre">n</span> <span class="pre">*</span> <span class="pre">k</span></code> samples are drawn.  Default is None, in which case a
-single value is returned.</p></li>
-<li><p><strong>replace</strong> (<em>boolean</em><em>, </em><em>optional</em>) – Whether the sample is with or without replacement</p></li>
-<li><p><strong>p</strong> (<em>1-D array-like</em><em>, </em><em>optional</em>) – The probabilities associated with each entry in a.
-If not given the sample assumes a uniform distribution over all
-entries in a.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>samples</strong> – The generated random samples</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>single item or ndarray</p>
-</dd>
-<dt class="field-even">Raises</dt>
-<dd class="field-even"><p><strong>ValueError</strong> – If a is an int and less than zero, if a or p are not 1-dimensional,
-    if a is an array-like of size 0, if p is not a vector of
-    probabilities, if a and p have different lengths, or if
-    replace=False and the sample size is greater than the population
-    size</p>
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>any</p>
 </dd>
 </dl>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<p><code class="xref py py-func docutils literal notranslate"><span class="pre">randint()</span></code>, <code class="xref py py-func docutils literal notranslate"><span class="pre">shuffle()</span></code>, <code class="xref py py-func docutils literal notranslate"><span class="pre">permutation()</span></code></p>
-<dl class="simple">
-<dt><code class="xref py py-func docutils literal notranslate"><span class="pre">Generator.choice()</span></code></dt><dd><p>which should be used in new code</p>
-</dd>
-</dl>
-</div>
-<p class="rubric">Examples</p>
-<p>Generate a uniform random sample from np.arange(5) of size 3:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-<span class="go">array([0, 3, 4]) # random</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1">#This is equivalent to np.random.randint(0,5,3)</span>
-</pre></div>
-</div>
-<p>Generate a non-uniform random sample from np.arange(5) of size 3:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
-<span class="go">array([3, 3, 0]) # random</span>
-</pre></div>
-</div>
-<p>Generate a uniform random sample from np.arange(5) of size 3 without
-replacement:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="go">array([3,1,0]) # random</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1">#This is equivalent to np.random.permutation(np.arange(5))[:3]</span>
-</pre></div>
-</div>
-<p>Generate a non-uniform random sample from np.arange(5) of size
-3 without replacement:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
-<span class="go">array([2, 3, 0]) # random</span>
-</pre></div>
-</div>
-<p>Any of the above can be repeated with an arbitrary array-like
-instead of just integers. For instance:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">aa_milne_arr</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;pooh&#39;</span><span class="p">,</span> <span class="s1">&#39;rabbit&#39;</span><span class="p">,</span> <span class="s1">&#39;piglet&#39;</span><span class="p">,</span> <span class="s1">&#39;Christopher&#39;</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">aa_milne_arr</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">])</span>
-<span class="go">array([&#39;pooh&#39;, &#39;pooh&#39;, &#39;pooh&#39;, &#39;Christopher&#39;, &#39;piglet&#39;], # random</span>
-<span class="go">      dtype=&#39;&lt;U11&#39;)</span>
-</pre></div>
-</div>
 </dd></dl>
 
-<dl class="py function">
-<dt id="src.kernel.quantum_manager.random_sample">
-<code class="sig-prename descclassname">src.kernel.quantum_manager.</code><code class="sig-name descname">random_sample</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">size</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.kernel.quantum_manager.random_sample" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return random floats in the half-open interval [0.0, 1.0).</p>
-<p>Results are from the “continuous uniform” distribution over the
-stated interval.  To sample <span class="math notranslate nohighlight">\(Unif[a, b), b &gt; a\)</span> multiply
-the output of <cite>random_sample</cite> by <cite>(b-a)</cite> and add <cite>a</cite>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span> <span class="o">*</span> <span class="n">random_sample</span><span class="p">()</span> <span class="o">+</span> <span class="n">a</span>
-</pre></div>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>New code should use the <code class="docutils literal notranslate"><span class="pre">random</span></code> method of a <code class="docutils literal notranslate"><span class="pre">default_rng()</span></code>
-instance instead; see <cite>random-quick-start</cite>.</p>
-</div>
+<dl class="py attribute">
+<dt id="src.kernel.quantum_manager.State.keys">
+<code class="sig-name descname">keys</code><a class="headerlink" href="#src.kernel.quantum_manager.State.keys" title="Permalink to this definition">¶</a></dt>
+<dd><p>associated keys for a quantum manager.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>size</strong> (<em>int</em><em> or </em><em>tuple of ints</em><em>, </em><em>optional</em>) – Output shape.  If the given shape is, e.g., <code class="docutils literal notranslate"><span class="pre">(m,</span> <span class="pre">n,</span> <span class="pre">k)</span></code>, then
-<code class="docutils literal notranslate"><span class="pre">m</span> <span class="pre">*</span> <span class="pre">n</span> <span class="pre">*</span> <span class="pre">k</span></code> samples are drawn.  Default is None, in which case a
-single value is returned.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>out</strong> – Array of random floats of shape <cite>size</cite> (unless <code class="docutils literal notranslate"><span class="pre">size=None</span></code>, in which
-case a single float is returned).</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>float or ndarray of floats</p>
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list[int]</p>
 </dd>
 </dl>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<dl class="simple">
-<dt><code class="xref py py-func docutils literal notranslate"><span class="pre">Generator.random()</span></code></dt><dd><p>which should be used for new code.</p>
-</dd>
-</dl>
-</div>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random_sample</span><span class="p">()</span>
-<span class="go">0.47108547995356098 # random</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random_sample</span><span class="p">())</span>
-<span class="go">&lt;class &#39;float&#39;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random_sample</span><span class="p">((</span><span class="mi">5</span><span class="p">,))</span>
-<span class="go">array([ 0.30220482,  0.86820401,  0.1654503 ,  0.11659149,  0.54323428]) # random</span>
-</pre></div>
-</div>
-<p>Three-by-two array of random numbers from [-5, 0):</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="mi">5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random_sample</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span> <span class="o">-</span> <span class="mi">5</span>
-<span class="go">array([[-3.99149989, -0.52338984], # random</span>
-<span class="go">       [-2.99091858, -0.79479508],</span>
-<span class="go">       [-1.23204345, -1.75224494]])</span>
-</pre></div>
-</div>
+</dd></dl>
+
 </dd></dl>
 
 </div>
@@ -472,8 +376,8 @@ case a single float is returned).</p>
   <p class="topless"><a href="timeline.html"
                         title="previous chapter">Timeline</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="../components/top.html"
-                        title="next chapter">Components</a></p>
+  <p class="topless"><a href="p_timeline.html"
+                        title="next chapter">Parallel Timeline</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -505,12 +409,12 @@ case a single float is returned).</p>
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="../components/top.html" title="Components"
+          <a href="p_timeline.html" title="Parallel Timeline"
              >next</a> |</li>
         <li class="right" >
           <a href="timeline.html" title="Timeline"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.2.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" >Kernel</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Quantum Manager</a></li> 
       </ul>

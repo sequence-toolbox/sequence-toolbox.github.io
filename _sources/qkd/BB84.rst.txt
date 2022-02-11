@@ -1,5 +1,0 @@
-BB84
-====
-
-.. automodule:: src.qkd.BB84
-    :members:

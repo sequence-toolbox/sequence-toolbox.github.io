@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resource Manager &#8212; SeQUeNCe 0.2.3 documentation</title>
+    <title>Resource Manager &#8212; SeQUeNCe 0.3.0 documentation</title>
     <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     
@@ -14,7 +14,6 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/language_data.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -36,7 +35,7 @@
         <li class="right" >
           <a href="top.html" title="Resource Management"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.2.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" accesskey="U">Resource Management</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Resource Manager</a></li> 
       </ul>
@@ -165,7 +164,7 @@ Will automatically execute rule action if conditions met.</p>
 
 <dl class="py method">
 <dt id="src.resource_management.resource_manager.ResourceManager.received_message">
-<code class="sig-name descname">received_message</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">src</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">msg</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#src.resource_management.resource_manager.ResourceManagerMessage" title="src.resource_management.resource_manager.ResourceManagerMessage">src.resource_management.resource_manager.ResourceManagerMessage</a></span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.resource_management.resource_manager.ResourceManager.received_message" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">received_message</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">src</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">msg</span><span class="p">:</span> <span class="n">ResourceManagerMessage</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.resource_management.resource_manager.ResourceManager.received_message" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to receive resoruce manager messages.</p>
 <p>Messages come in 4 types, as detailed in the <cite>ResourceManagerMessage</cite> class.</p>
 <dl class="field-list simple">
@@ -180,7 +179,7 @@ Will automatically execute rule action if conditions met.</p>
 
 <dl class="py method">
 <dt id="src.resource_management.resource_manager.ResourceManager.release_remote_memory">
-<code class="sig-name descname">release_remote_memory</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">init_protocol</span><span class="p">:</span> <span class="n"><a class="reference internal" href="../entanglement_management/entanglement_protocol.html#src.entanglement_management.entanglement_protocol.EntanglementProtocol" title="src.entanglement_management.entanglement_protocol.EntanglementProtocol">src.entanglement_management.entanglement_protocol.EntanglementProtocol</a></span></em>, <em class="sig-param"><span class="n">dst</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">memory_id</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.resource_management.resource_manager.ResourceManager.release_remote_memory" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">release_remote_memory</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dst</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">memory_id</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.resource_management.resource_manager.ResourceManager.release_remote_memory" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to release memories on distant nodes.</p>
 <p>Release the remote memory ‘memory_id’ on the node ‘dst’.
 The entanglement protocol of remote memory was paired with the local protocol ‘init_protocol’, but local
@@ -199,11 +198,13 @@ The resource manager needs to notify the remote node to release the occupied mem
 
 <dl class="py method">
 <dt id="src.resource_management.resource_manager.ResourceManager.release_remote_protocol">
-<code class="sig-name descname">release_remote_protocol</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dst</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">protocol</span><span class="p">:</span> <span class="n"><a class="reference internal" href="../entanglement_management/entanglement_protocol.html#src.entanglement_management.entanglement_protocol.EntanglementProtocol" title="src.entanglement_management.entanglement_protocol.EntanglementProtocol">src.entanglement_management.entanglement_protocol.EntanglementProtocol</a></span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.resource_management.resource_manager.ResourceManager.release_remote_protocol" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">release_remote_protocol</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dst</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">protocol</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.resource_management.resource_manager.ResourceManager.release_remote_protocol" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to release protocols from memories on distant nodes.</p>
 <p>Release the remote protocol ‘protocol’ on the remote node ‘dst’.
-The local protocol was paired with the remote protocol but local protocol becomes invalid.
-The resource manager needs to notify the remote node to cancel the paired protocol.</p>
+The local protocol was paired with the remote protocol but local
+protocol becomes invalid.
+The resource manager needs to notify the remote node to cancel the
+paired protocol.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -216,7 +217,7 @@ The resource manager needs to notify the remote node to cancel the paired protoc
 
 <dl class="py method">
 <dt id="src.resource_management.resource_manager.ResourceManager.send_request">
-<code class="sig-name descname">send_request</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">protocol</span><span class="p">:</span> <span class="n"><a class="reference internal" href="../entanglement_management/entanglement_protocol.html#src.entanglement_management.entanglement_protocol.EntanglementProtocol" title="src.entanglement_management.entanglement_protocol.EntanglementProtocol">src.entanglement_management.entanglement_protocol.EntanglementProtocol</a></span></em>, <em class="sig-param"><span class="n">req_dst</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">req_condition_func</span><span class="p">:</span> <span class="n">Callable<span class="p">[</span><span class="p">[</span>List<span class="p">[</span>EntanglementProtocol<span class="p">]</span><span class="p">]</span><span class="p">, </span>EntanglementProtocol<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.resource_management.resource_manager.ResourceManager.send_request" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">send_request</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">protocol</span><span class="p">:</span> <span class="n">‘EntanglementProtocol’</span></em>, <em class="sig-param"><span class="n">req_dst</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">req_condition_func</span><span class="p">:</span> <span class="n">RequestConditionFunc</span></em>, <em class="sig-param"><span class="n">req_args</span><span class="p">:</span> <span class="n">Arguments</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.resource_management.resource_manager.ResourceManager.send_request" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to send protocol request to another node.</p>
 <p>Send the request to pair the local ‘protocol’ with the protocol on the remote node ‘req_dst’.
 The function <cite>req_condition_func</cite> describes the desired protocol.</p>
@@ -264,8 +265,8 @@ The function <cite>req_condition_func</cite> describes the desired protocol.</p>
 <li><p>RELEASE_MEMORY: release the memory on the remote node</p></li>
 </ul>
 <dl class="py attribute">
-<dt id="src.resource_management.resource_manager.ResourceManagerMessage.ini_protocol">
-<code class="sig-name descname">ini_protocol</code><a class="headerlink" href="#src.resource_management.resource_manager.ResourceManagerMessage.ini_protocol" title="Permalink to this definition">¶</a></dt>
+<dt id="src.resource_management.resource_manager.ResourceManagerMessage.ini_protocol_name">
+<code class="sig-name descname">ini_protocol_name</code><a class="headerlink" href="#src.resource_management.resource_manager.ResourceManagerMessage.ini_protocol_name" title="Permalink to this definition">¶</a></dt>
 <dd><p>name of protocol that creates the original REQUEST message.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -366,7 +367,7 @@ The function <cite>req_condition_func</cite> describes the desired protocol.</p>
         <li class="right" >
           <a href="top.html" title="Resource Management"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.2.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" >Resource Management</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Resource Manager</a></li> 
       </ul>

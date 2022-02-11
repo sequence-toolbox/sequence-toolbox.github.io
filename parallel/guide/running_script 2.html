@@ -1,0 +1,272 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guide: Running a Parallel Script &#8212; SeQUeNCe 0.3.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Guide: Running a Parallel Script</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="guide-running-a-parallel-script">
+<h1>Guide: Running a Parallel Script<a class="headerlink" href="#guide-running-a-parallel-script" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="json-format">
+<h2>JSON Format<a class="headerlink" href="#json-format" title="Permalink to this headline">¶</a></h2>
+<p>A few additions will need to be made to the JSON file to designate a simulation as parallel and facilitate proper allocation of resources. As usual, the name of each field in the JSON is defined by a variable in the <code class="docutils literal notranslate"><span class="pre">Topology</span></code> class or one of its subclasses. For this guide, the <code class="docutils literal notranslate"><span class="pre">RouterNetTopo</span></code> class will be used (such that variable <code class="docutils literal notranslate"><span class="pre">VAR</span></code> refers to <code class="docutils literal notranslate"><span class="pre">RouterNetTopo.VAR</span></code>).</p>
+<p>First, the general parallel settings will need to be listed in the JSON. The variable name for each setting is listed first, followed by the default string value.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">IS_PARALLEL</span></code> (default <code class="docutils literal notranslate"><span class="pre">“is_parallel”</span></code>) should be set to true; if omitted or set to false, further settings will be ignored.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PROC_NUM</span></code> (default <code class="docutils literal notranslate"><span class="pre">“process_num”</span></code>) should be set to the desired number of processes for the simulation. If this differs from the MPI size at runtime, an assertion error will be raised.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IP</span></code> (default <code class="docutils literal notranslate"><span class="pre">“ip”</span></code>) should be set to the IP address of the quantum manager server; if run on the same machine, set to <code class="docutils literal notranslate"><span class="pre">“127.0.0.1”</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PORT</span></code> (default <code class="docutils literal notranslate"><span class="pre">“port”</span></code>) should be set to the port the quantum manager server will be listening on. The <code class="docutils literal notranslate"><span class="pre">get_port.py</span></code> script may be used to find an available port.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LOOKAHEAD</span></code> (default <code class="docutils literal notranslate"><span class="pre">“lookahead”</span></code>) should be set to the lookahead time (in picoseconds of simulation time).</p></li>
+</ul>
+<p>Finally, we will add a subfield to each node describing which process this node should belong to. The name of this field is <code class="docutils literal notranslate"><span class="pre">GROUP</span></code> (default <code class="docutils literal notranslate"><span class="pre">“group”</span></code>) and the process should be an integer referring to a specific (zero-indexed) process.</p>
+<p>Putting all of this together, an example JSON is shown below:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;nodes&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;router_0&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;QuantumRouter&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;seed&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">&quot;memo_size&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+            <span class="s2">&quot;group&quot;</span><span class="p">:</span> <span class="mi">0</span>
+        <span class="p">},</span>
+        <span class="o">...</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;router_7&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;QuantumRouter&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;seed&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">&quot;memo_size&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+            <span class="s2">&quot;group&quot;</span><span class="p">:</span> <span class="mi">7</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;qconnections&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="o">...</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;cchannels&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="o">...</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;stop_time&quot;</span><span class="p">:</span> <span class="n">Infinity</span><span class="p">,</span>
+    <span class="s2">&quot;is_parallel&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">&quot;process_num&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+    <span class="s2">&quot;ip&quot;</span><span class="p">:</span> <span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;port&quot;</span><span class="p">:</span> <span class="mi">6789</span><span class="p">,</span>
+    <span class="s2">&quot;lookahead&quot;</span><span class="p">:</span> <span class="mi">2500000</span><span class="p">,</span>
+    <span class="s2">&quot;groups&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;sync&quot;</span>
+        <span class="p">},</span>
+        <span class="o">...</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;sync&quot;</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="parallel-script-modifications">
+<h2>Parallel Script Modifications<a class="headerlink" href="#parallel-script-modifications" title="Permalink to this headline">¶</a></h2>
+<p>If a JSON file is being used to set up the simulation network, all that is required for a simulation script is that the method <code class="docutils literal notranslate"><span class="pre">ParallelTimeline.quantum_manager.disconnect_from_server()</span></code> is called after timeline execution finishes. This function closes the socket communication with the server, and allows the server program to record metrics and close once all clients have disconnected. Optionally, additional parallel performance metrics may be added to the script, as described below.</p>
+<div class="section" id="additional-parallel-simulation-metrics">
+<h3>Additional Parallel Simulation Metrics<a class="headerlink" href="#additional-parallel-simulation-metrics" title="Permalink to this headline">¶</a></h3>
+<p>In addition to the usual metrics, parallel timelines collect a series of metrics relating to parallel simulation. These are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">sync_counter</span></code>: a count of the number of synchronization events between timelines</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">exchange_counter</span></code>: a count of the number of cross-timeline events scheduled on the specific parallel timeline</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">computing_time</span></code>: wall clock time during which the timeline was executing local events</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">communication_time</span></code>: wall clock time during which the timeline was performing synchronization with other timelines.</p></li>
+</ul>
+<p>After simulation has completed, these fields may be read out from a parallel timeline object.</p>
+<p>Additionally, the Python version of the quantum manager server collects some metrics relating to its operation and will output these to a csv file:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">msg_counter</span></code>: a count of the total number of messages received by the server</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">traffic_counter</span></code>: a count of the total number of message packets received by the server</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">{message_type}_timer</span></code>: wall-clock time of computation time for each message type</p></li>
+</ul>
+<p>The next section contains information about how to specify the destination file for these metrics.</p>
+</div>
+<div class="section" id="simulations-with-no-json-configuration-file">
+<h3>Simulations with No JSON Configuration File<a class="headerlink" href="#simulations-with-no-json-configuration-file" title="Permalink to this headline">¶</a></h3>
+<p>If it is required to run a simulation with no input JSON file for network configuration, additional steps should be taken to ensure that the parallel timelines and simulation objects are set up correctly.</p>
+<ol>
+<li><p>Determine a scheme for allocating nodes to processes, and write a function that can determine the process a node should belong to by name during runtime:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">name_to_proc</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="c1"># insert code here</span>
+</pre></div>
+</div>
+</li>
+<li><p>Within the script, utilize the mpi rank and size to determine the number of processes and the id of the current process, respectively:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mpi4py</span> <span class="kn">import</span> <span class="n">MPI</span>
+
+<span class="n">mpi_rank</span> <span class="o">=</span> <span class="n">MPI</span><span class="o">.</span><span class="n">COMM_WORLD</span><span class="o">.</span><span class="n">Get_rank</span><span class="p">()</span>
+<span class="n">mpi_size</span> <span class="o">=</span> <span class="n">MPI</span><span class="o">.</span><span class="n">COMM_WORLD</span><span class="o">.</span><span class="n">Get_size</span><span class="p">()</span>
+</pre></div>
+</div>
+</li>
+<li><p>Create a parallel timeline instance for the current process:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sequence.kernel.p_timeline</span> <span class="kn">import</span> <span class="n">ParallelTimeline</span>
+
+<span class="n">p_tl</span> <span class="o">=</span> <span class="n">ParallelTimeline</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>When creating nodes, only create a node object for nodes that are on the current process (the MPI rank). If a node is not on the current process, add to the <code class="docutils literal notranslate"><span class="pre">ParallelTimeline.foreign_entities</span></code> dictionary with the key being the node name and the value being the id of the process containing the node:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">list_of_names</span> <span class="o">=</span> <span class="p">[</span><span class="o">...</span><span class="p">]</span> <span class="c1"># list of names for all nodes in the network</span>
+<span class="n">local_nodes</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">node_name</span> <span class="ow">in</span> <span class="n">list_of_names</span><span class="p">:</span>
+    <span class="n">proc</span> <span class="o">=</span> <span class="n">name_to_proc</span><span class="p">(</span><span class="n">node_name</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">proc</span> <span class="o">==</span> <span class="n">mpi_rank</span><span class="p">:</span>
+        <span class="n">node</span> <span class="o">=</span> <span class="n">QuantumRouter</span><span class="p">(</span><span class="n">node_name</span><span class="p">,</span> <span class="n">p_tl</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+        <span class="n">local_nodes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">p_tl</span><span class="o">.</span><span class="n">foreign_entities</span><span class="p">[</span><span class="n">node_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">proc</span>
+</pre></div>
+</div>
+</li>
+<li><p>When creating quantum and classical channel links, only generate links where the source node is on the current process. If the destination node is on a different process, use the name of the foreign node as the receiver as usual.</p></li>
+<li><p>Include a call to <code class="docutils literal notranslate"><span class="pre">ParallelTimeline.quantum_manager.disconnect_from_server()</span></code>, as mentioned previously.</p></li>
+</ol>
+<p>These steps will ensure the proper connectivity of the network without breaks or redundant network elements.</p>
+</div>
+</div>
+<div class="section" id="running-scripts-and-the-quantum-manager-server">
+<h2>Running Scripts and the Quantum Manager Server<a class="headerlink" href="#running-scripts-and-the-quantum-manager-server" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="python-version">
+<h3>Python Version<a class="headerlink" href="#python-version" title="Permalink to this headline">¶</a></h3>
+<p>To run the Quantum Manager Server in Python with a default configuration, the <code class="docutils literal notranslate"><span class="pre">qm_server.py</span></code> script has been provided. This script takes three arguments:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ip</span></code>: the IP address the server should use</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">port</span></code>: the port the server should connect to and listen on</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">client_num</span></code>: the number of quantum manager clients that will connect to the serve (this is the same as the number of MPI processes used for executing the desired simulation script).</p></li>
+</ul>
+<p>The default configuration includes using Ket vectors for storing quantum state information and writing the server output to the file <code class="docutils literal notranslate"><span class="pre">server_log.json</span></code>. If these parameters need to be changed, a script should be written that directly calls the <code class="docutils literal notranslate"><span class="pre">start_server</span></code> function of the <code class="docutils literal notranslate"><span class="pre">src.kernel.quantum_manager_server</span></code> module with the desired arguments (or the default <code class="docutils literal notranslate"><span class="pre">qm_server.py</span></code> file modified to do so).</p>
+</div>
+<div class="section" id="c-version">
+<h3>C++ Version<a class="headerlink" href="#c-version" title="Permalink to this headline">¶</a></h3>
+<p>To run the Quantum Manager Server written in C++, first compile and build the server as described in the parallel simulation prerequisites and Installation page. The server may then be run as an executable with the following args:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ip</span></code>: the IP address the server should use</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">port</span></code>: the port the server should connect to and listen on</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">client_num</span></code>: the number of quantum manager clients that will connect to the serve (this is the same as the number of MPI processes used for executing the desired simulation script).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">formalism</span></code>: the formalism to use for storing quantum states (so far, only Ket vectors are implemented and this field is ignored).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">log_file</span></code>: the output file for Quantum Manager Server log information.</p></li>
+</ul>
+</div>
+<div class="section" id="simulation-scripts">
+<h3>Simulation Scripts<a class="headerlink" href="#simulation-scripts" title="Permalink to this headline">¶</a></h3>
+<p>Simulation scripts themselves should be run as a separate program using the <code class="docutils literal notranslate"><span class="pre">mpiexec</span></code> command. The <code class="docutils literal notranslate"><span class="pre">-n</span></code> flag may be used to specify the number of processes to use for simulation. After this, the <code class="docutils literal notranslate"><span class="pre">python</span></code> or <code class="docutils literal notranslate"><span class="pre">python3</span></code> command should be entered in the usual manner to run the script:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ mpiexec -n 2 python3 my_script.py [args]
+</pre></div>
+</div>
+<p>Note that the Quantum Manager Server program should be started before the simulation script. Additionally, it should be confirmed that the following parameters match between the Quantum Manager Server and the individual script:</p>
+<ul class="simple">
+<li><p>The number of MPI processes used should match the <code class="docutils literal notranslate"><span class="pre">client_num</span></code> parameter for the server.</p></li>
+<li><p>The server IP and port written into the simulation script should match the parameters of the server.</p></li>
+<li><p>The formalism used for the parallel timelines should match that used for the server.</p>
+<ul>
+<li><p>The default formalism generated by using a JSON configuration file is to use ket vectors, and this is currently the only implemented formalism for the C++ server.</p></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Guide: Running a Parallel Script</a><ul>
+<li><a class="reference internal" href="#json-format">JSON Format</a></li>
+<li><a class="reference internal" href="#parallel-script-modifications">Parallel Script Modifications</a><ul>
+<li><a class="reference internal" href="#additional-parallel-simulation-metrics">Additional Parallel Simulation Metrics</a></li>
+<li><a class="reference internal" href="#simulations-with-no-json-configuration-file">Simulations with No JSON Configuration File</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#running-scripts-and-the-quantum-manager-server">Running Scripts and the Quantum Manager Server</a><ul>
+<li><a class="reference internal" href="#python-version">Python Version</a></li>
+<li><a class="reference internal" href="#c-version">C++ Version</a></li>
+<li><a class="reference internal" href="#simulation-scripts">Simulation Scripts</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/parallel/guide/running_script 2.md.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Guide: Running a Parallel Script</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+    </div>
+  </body>
+</html>

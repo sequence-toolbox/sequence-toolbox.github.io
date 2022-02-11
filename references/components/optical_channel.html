@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Optical Channel &#8212; SeQUeNCe 0.2.3 documentation</title>
+    <title>Optical Channel &#8212; SeQUeNCe 0.3.0 documentation</title>
     <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     
@@ -14,7 +14,6 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/language_data.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -36,7 +35,7 @@
         <li class="right" >
           <a href="memory.html" title="Memory"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.2.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" accesskey="U">Components</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Optical Channel</a></li> 
       </ul>
@@ -131,6 +130,21 @@ OpticalChannels must be attached to nodes on both ends.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.components.optical_channel.ClassicalChannel.set_ends">
+<code class="sig-name descname">set_ends</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sender</span><span class="p">:</span> <span class="n">Node</span></em>, <em class="sig-param"><span class="n">receiver</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.components.optical_channel.ClassicalChannel.set_ends" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to set endpoints for the classical channel.</p>
+<p>This must be performed before transmission.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sender</strong> (<a class="reference internal" href="../topology/node.html#src.topology.node.Node" title="src.topology.node.Node"><em>Node</em></a>) – node sending classical messages.</p></li>
+<li><p><strong>receiver</strong> (<em>str</em>) – name of node receiving classical messages.</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -409,6 +423,21 @@ This method returns the next available time for transmitting a photon.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt id="src.components.optical_channel.QuantumChannel.set_ends">
+<code class="sig-name descname">set_ends</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sender</span><span class="p">:</span> <span class="n">Node</span></em>, <em class="sig-param"><span class="n">receiver</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.components.optical_channel.QuantumChannel.set_ends" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to set endpoints for the quantum channel.</p>
+<p>This must be performed before transmission.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sender</strong> (<a class="reference internal" href="../topology/node.html#src.topology.node.Node" title="src.topology.node.Node"><em>Node</em></a>) – node sending qubits.</p></li>
+<li><p><strong>receiver</strong> (<em>str</em>) – name of node receiving qubits.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt id="src.components.optical_channel.QuantumChannel.transmit">
 <code class="sig-name descname">transmit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">qubit</span><span class="p">:</span> <span class="n">Photon</span></em>, <em class="sig-param"><span class="n">source</span><span class="p">:</span> <span class="n">Node</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.components.optical_channel.QuantumChannel.transmit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to transmit photon-encoded qubits.</p>
@@ -479,7 +508,7 @@ This method returns the next available time for transmitting a photon.</p>
         <li class="right" >
           <a href="memory.html" title="Memory"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.2.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" >Components</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Optical Channel</a></li> 
       </ul>

@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Entanglement Generation &#8212; SeQUeNCe 0.2.3 documentation</title>
+    <title>Entanglement Generation &#8212; SeQUeNCe 0.3.0 documentation</title>
     <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     
@@ -14,7 +14,6 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/language_data.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -36,7 +35,7 @@
         <li class="right" >
           <a href="entanglement_protocol.html" title="Entanglement Protocol"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.2.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" accesskey="U">Entanglement Management</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Entanglement Generation</a></li> 
       </ul>
@@ -61,8 +60,10 @@ Entanglement generation is asymmetric:</p>
 <dt id="src.entanglement_management.generation.EntanglementGenerationA">
 <em class="property">class </em><code class="sig-prename descclassname">src.entanglement_management.generation.</code><code class="sig-name descname">EntanglementGenerationA</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">own</span><span class="p">:</span> <span class="n">Node</span></em>, <em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">middle</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">other</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">memory</span><span class="p">:</span> <span class="n">Memory</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.entanglement_management.generation.EntanglementGenerationA" title="Permalink to this definition">¶</a></dt>
 <dd><p>Entanglement generation protocol for quantum router.</p>
-<p>The EntanglementGenerationA protocol should be instantiated on a quantum router node.
-Instances will communicate with each other (and with the B instance on a BSM node) to generate entanglement.</p>
+<p>The EntanglementGenerationA protocol should be instantiated on a quantum
+router node.
+Instances will communicate with each other (and with the B instance on a
+BSM node) to generate entanglement.</p>
 <dl class="py attribute">
 <dt id="src.entanglement_management.generation.EntanglementGenerationA.own">
 <code class="sig-name descname">own</code><a class="headerlink" href="#src.entanglement_management.generation.EntanglementGenerationA.own" title="Permalink to this definition">¶</a></dt>
@@ -97,8 +98,8 @@ Instances will communicate with each other (and with the B instance on a BSM nod
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="src.entanglement_management.generation.EntanglementGenerationA.other">
-<code class="sig-name descname">other</code><a class="headerlink" href="#src.entanglement_management.generation.EntanglementGenerationA.other" title="Permalink to this definition">¶</a></dt>
+<dt id="src.entanglement_management.generation.EntanglementGenerationA.remote_node_name">
+<code class="sig-name descname">remote_node_name</code><a class="headerlink" href="#src.entanglement_management.generation.EntanglementGenerationA.remote_node_name" title="Permalink to this definition">¶</a></dt>
 <dd><p>name of distant QuantumRouter node, containing a memory to be entangled with local memory.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -121,27 +122,13 @@ Instances will communicate with each other (and with the B instance on a BSM nod
 <dl class="py method">
 <dt id="src.entanglement_management.generation.EntanglementGenerationA.emit_event">
 <code class="sig-name descname">emit_event</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.entanglement_management.generation.EntanglementGenerationA.emit_event" title="Permalink to this definition">¶</a></dt>
-<dd><p>Method to setup memory and emit photons.</p>
+<dd><p>Method to set up memory and emit photons.</p>
 <p>If the protocol is in round 1, the memory will be first set to the |+&gt; state.
 Otherwise, it will apply an x_gate to the memory.
 Regardless of the round, the memory <cite>excite</cite> method will be invoked.</p>
 <dl class="simple">
 <dt>Side Effects:</dt><dd><p>May change state of attached memory.
 May cause attached memory to emit photon.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="src.entanglement_management.generation.EntanglementGenerationA.end">
-<code class="sig-name descname">end</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.entanglement_management.generation.EntanglementGenerationA.end" title="Permalink to this definition">¶</a></dt>
-<dd><p>Method to end entanglement generation protocol.</p>
-<p>Checks the measurement results received to determine if valid entanglement achieved, and what the state is.
-If entanglement is achieved, the memory fidelity will be increased to equal the <cite>fidelity</cite> field.
-Otherwise, it will be set to 0.
-Also performs corrections to map psi+ and psi- states to phi+.</p>
-<dl class="simple">
-<dt>Side Effects:</dt><dd><p>Will call <cite>update_resource_manager</cite> method of base class.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -167,12 +154,6 @@ Also performs corrections to map psi+ and psi- states to phi+.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="src.entanglement_management.generation.EntanglementGenerationA.next_round">
-<code class="sig-name descname">next_round</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.entanglement_management.generation.EntanglementGenerationA.next_round" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sets entanglement generation to next round.</p>
-</dd></dl>
-
-<dl class="py method">
 <dt id="src.entanglement_management.generation.EntanglementGenerationA.received_message">
 <code class="sig-name descname">received_message</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">src</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">msg</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#src.entanglement_management.generation.EntanglementGenerationMessage" title="src.entanglement_management.generation.EntanglementGenerationMessage">src.entanglement_management.generation.EntanglementGenerationMessage</a></span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.entanglement_management.generation.EntanglementGenerationA.received_message" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to receive messages.</p>
@@ -194,11 +175,15 @@ Depending on the message, different actions may be taken by the protocol.</p>
 
 <dl class="py method">
 <dt id="src.entanglement_management.generation.EntanglementGenerationA.set_others">
-<code class="sig-name descname">set_others</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">other</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#src.entanglement_management.generation.EntanglementGenerationA" title="src.entanglement_management.generation.EntanglementGenerationA">src.entanglement_management.generation.EntanglementGenerationA</a></span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.entanglement_management.generation.EntanglementGenerationA.set_others" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_others</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">protocol</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">node</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">memories</span><span class="p">:</span> <span class="n">List<span class="p">[</span>str<span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.entanglement_management.generation.EntanglementGenerationA.set_others" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to set other entanglement protocol instance.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>other</strong> (<a class="reference internal" href="#src.entanglement_management.generation.EntanglementGenerationA" title="src.entanglement_management.generation.EntanglementGenerationA"><em>EntanglementGenerationA</em></a>) – other protocol instance.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>protocol</strong> (<em>str</em>) – other protocol name.</p></li>
+<li><p><strong>node</strong> (<em>str</em>) – other node name.</p></li>
+<li><p><strong>memories</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – the list of memories name used on other node.</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -214,11 +199,32 @@ Depending on the message, different actions may be taken by the protocol.</p>
 </dl>
 </dd></dl>
 
+<dl class="py method">
+<dt id="src.entanglement_management.generation.EntanglementGenerationA.update_memory">
+<code class="sig-name descname">update_memory</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.entanglement_management.generation.EntanglementGenerationA.update_memory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to handle necessary memory operations.</p>
+<p>Called on both nodes.
+Will check the state of the memory and protocol.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>if current round was successfull.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Side Effects:</dt><dd><p>May change state of attached memory.
+May update memory state in the attached node’s resource manager.</p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="py class">
 <dt id="src.entanglement_management.generation.EntanglementGenerationB">
-<em class="property">class </em><code class="sig-prename descclassname">src.entanglement_management.generation.</code><code class="sig-name descname">EntanglementGenerationB</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">own</span><span class="p">:</span> <span class="n">Node</span></em>, <em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">others</span><span class="p">:</span> <span class="n">List<span class="p">[</span>str<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.entanglement_management.generation.EntanglementGenerationB" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">src.entanglement_management.generation.</code><code class="sig-name descname">EntanglementGenerationB</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">own</span><span class="p">:</span> <span class="n">BSMNode</span></em>, <em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">others</span><span class="p">:</span> <span class="n">List<span class="p">[</span>str<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.entanglement_management.generation.EntanglementGenerationB" title="Permalink to this definition">¶</a></dt>
 <dd><p>Entanglement generation protocol for BSM node.</p>
 <p>The EntanglementGenerationB protocol should be instantiated on a BSM node.
 Instances will communicate with the A instance on neighboring quantum router nodes to generate entanglement.</p>
@@ -285,7 +291,7 @@ Instances will communicate with the A instance on neighboring quantum router nod
 
 <dl class="py method">
 <dt id="src.entanglement_management.generation.EntanglementGenerationB.memory_expire">
-<code class="sig-name descname">memory_expire</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.entanglement_management.generation.EntanglementGenerationB.memory_expire" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">memory_expire</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">memory</span><span class="p">:</span> <span class="n">Memory</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.entanglement_management.generation.EntanglementGenerationB.memory_expire" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to receive a memory expiration event (abstract).</p>
 </dd></dl>
 
@@ -297,11 +303,15 @@ Instances will communicate with the A instance on neighboring quantum router nod
 
 <dl class="py method">
 <dt id="src.entanglement_management.generation.EntanglementGenerationB.set_others">
-<code class="sig-name descname">set_others</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">other</span><span class="p">:</span> <span class="n"><a class="reference internal" href="entanglement_protocol.html#src.entanglement_management.entanglement_protocol.EntanglementProtocol" title="src.entanglement_management.entanglement_protocol.EntanglementProtocol">src.entanglement_management.entanglement_protocol.EntanglementProtocol</a></span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.entanglement_management.generation.EntanglementGenerationB.set_others" title="Permalink to this definition">¶</a></dt>
-<dd><p>Method to set reference to paired protocol (abstract).</p>
+<code class="sig-name descname">set_others</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">protocol</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">node</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">memories</span><span class="p">:</span> <span class="n">List<span class="p">[</span>str<span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.entanglement_management.generation.EntanglementGenerationB.set_others" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to set other entanglement protocol instance.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>other</strong> (<a class="reference internal" href="entanglement_protocol.html#src.entanglement_management.entanglement_protocol.EntanglementProtocol" title="src.entanglement_management.entanglement_protocol.EntanglementProtocol"><em>EntanglementProtocol</em></a>) – paired protocol.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>protocol</strong> (<em>str</em>) – other protocol name.</p></li>
+<li><p><strong>node</strong> (<em>str</em>) – other node name.</p></li>
+<li><p><strong>memories</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – the list of memories name used on other node.</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -467,7 +477,7 @@ Messages of different types contain different information.</p>
         <li class="right" >
           <a href="entanglement_protocol.html" title="Entanglement Protocol"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.2.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" >Entanglement Management</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Entanglement Generation</a></li> 
       </ul>

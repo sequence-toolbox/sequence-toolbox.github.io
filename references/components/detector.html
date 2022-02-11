@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detector &#8212; SeQUeNCe 0.2.3 documentation</title>
+    <title>Detector &#8212; SeQUeNCe 0.3.0 documentation</title>
     <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     
@@ -14,7 +14,6 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/language_data.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -36,7 +35,7 @@
         <li class="right" >
           <a href="bsm.html" title="BSM"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.2.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" accesskey="U">Components</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Detector</a></li> 
       </ul>
@@ -231,6 +230,14 @@ If true, will ignore probability calculations (default false).</p>
 <dt id="src.components.detector.QSDetector.get">
 <em class="property">abstract </em><code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">photon</span><span class="p">:</span> <span class="n">Photon</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.components.detector.QSDetector.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>Abstract method for receiving photons for measurement.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.components.detector.QSDetector.init">
+<code class="sig-name descname">init</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.components.detector.QSDetector.init" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to initialize entity (abstract).</p>
+<p>Entity <cite>init</cite> methods are invoked for all timeline entities when the timeline is initialized.
+This method can be used to perform any necessary functions before simulation.</p>
 </dd></dl>
 
 </dd></dl>
@@ -468,7 +475,7 @@ The interferometer is connected to detectors[1] and detectors[2].</p>
         <li class="right" >
           <a href="bsm.html" title="BSM"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.2.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" >Components</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Detector</a></li> 
       </ul>

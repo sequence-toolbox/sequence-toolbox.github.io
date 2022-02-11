@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Entanglement Protocol &#8212; SeQUeNCe 0.2.3 documentation</title>
+    <title>Entanglement Protocol &#8212; SeQUeNCe 0.3.0 documentation</title>
     <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     
@@ -14,7 +14,6 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/language_data.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -36,7 +35,7 @@
         <li class="right" >
           <a href="top.html" title="Entanglement Management"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.2.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" accesskey="U">Entanglement Management</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Entanglement Protocol</a></li> 
       </ul>
@@ -127,11 +126,15 @@
 
 <dl class="py method">
 <dt id="src.entanglement_management.entanglement_protocol.EntanglementProtocol.set_others">
-<em class="property">abstract </em><code class="sig-name descname">set_others</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">other</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#src.entanglement_management.entanglement_protocol.EntanglementProtocol" title="src.entanglement_management.entanglement_protocol.EntanglementProtocol">src.entanglement_management.entanglement_protocol.EntanglementProtocol</a></span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.entanglement_management.entanglement_protocol.EntanglementProtocol.set_others" title="Permalink to this definition">¶</a></dt>
-<dd><p>Method to set reference to paired protocol (abstract).</p>
+<em class="property">abstract </em><code class="sig-name descname">set_others</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">remote_protocol</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">remote_node</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">memories</span><span class="p">:</span> <span class="n">List<span class="p">[</span>str<span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.entanglement_management.entanglement_protocol.EntanglementProtocol.set_others" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to set other entanglement protocol instance.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>other</strong> (<a class="reference internal" href="#src.entanglement_management.entanglement_protocol.EntanglementProtocol" title="src.entanglement_management.entanglement_protocol.EntanglementProtocol"><em>EntanglementProtocol</em></a>) – paired protocol.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>protocol</strong> (<em>str</em>) – other protocol name.</p></li>
+<li><p><strong>node</strong> (<em>str</em>) – other node name.</p></li>
+<li><p><strong>memories</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – the list of memories name used on other node.</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -213,7 +216,7 @@
         <li class="right" >
           <a href="top.html" title="Entanglement Management"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.2.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" >Entanglement Management</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Entanglement Protocol</a></li> 
       </ul>

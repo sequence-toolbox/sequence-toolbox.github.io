@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reservation &#8212; SeQUeNCe 0.2.3 documentation</title>
+    <title>Reservation &#8212; SeQUeNCe 0.3.0 documentation</title>
     <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     
@@ -14,7 +14,6 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/language_data.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -36,7 +35,7 @@
         <li class="right" >
           <a href="network_manager.html" title="Network Manager"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.2.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" accesskey="U">Network Management</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Reservation</a></li> 
       </ul>
@@ -50,9 +49,11 @@
   <div class="section" id="module-src.network_management.reservation">
 <span id="reservation"></span><h1>Reservation<a class="headerlink" href="#module-src.network_management.reservation" title="Permalink to this headline">¶</a></h1>
 <p>Definition of Reservation protocol and related tools.</p>
-<p>This module provides a definition for the reservation protocol used by the network manager.
-This includes the Reservation, MemoryTimeCard, and QCap classes, which are used by the network manager to track reservations.
-Also included is the definition of the message type used by the reservation protocol.</p>
+<p>This module provides a definition for the reservation protocol used by the
+network manager. This includes the Reservation, MemoryTimeCard, and QCap
+classes, which are used by the network manager to track reservations. Also
+included is the definition of the message type used by the reservation
+protocol.</p>
 <dl class="py class">
 <dt id="src.network_management.reservation.MemoryTimeCard">
 <em class="property">class </em><code class="sig-prename descclassname">src.network_management.reservation.</code><code class="sig-name descname">MemoryTimeCard</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">memory_index</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.network_management.reservation.MemoryTimeCard" title="Permalink to this definition">¶</a></dt>
@@ -83,7 +84,8 @@ Also included is the definition of the message type used by the reservation prot
 <dt id="src.network_management.reservation.MemoryTimeCard.add">
 <code class="sig-name descname">add</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">reservation</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#src.network_management.reservation.Reservation" title="src.network_management.reservation.Reservation">src.network_management.reservation.Reservation</a></span></em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#src.network_management.reservation.MemoryTimeCard.add" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to add reservation.</p>
-<p>Will use <cite>schedule_reservation</cite> method to determine index to insert reservation.</p>
+<p>Will use <cite>schedule_reservation</cite> method to determine index to insert
+reservation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>reservation</strong> (<a class="reference internal" href="#src.network_management.reservation.Reservation" title="src.network_management.reservation.Reservation"><em>Reservation</em></a>) – reservation to add.</p>
@@ -118,7 +120,8 @@ Also included is the definition of the message type used by the reservation prot
 <dt id="src.network_management.reservation.MemoryTimeCard.schedule_reservation">
 <code class="sig-name descname">schedule_reservation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">resv</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#src.network_management.reservation.Reservation" title="src.network_management.reservation.Reservation">src.network_management.reservation.Reservation</a></span></em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#src.network_management.reservation.MemoryTimeCard.schedule_reservation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to add reservation to a memory.</p>
-<p>Will return index at which reservation can be inserted into memory reservation list.
+<p>Will return index at which reservation can be inserted into memory
+reservation list.
 If no space found for reservation, will raise an exception.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -226,7 +229,8 @@ If no space found for reservation, will raise an exception.</p>
 <dt id="src.network_management.reservation.ResourceReservationMessage">
 <em class="property">class </em><code class="sig-prename descclassname">src.network_management.reservation.</code><code class="sig-name descname">ResourceReservationMessage</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">msg_type</span><span class="p">:</span> <span class="n">any</span></em>, <em class="sig-param"><span class="n">receiver</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">reservation</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#src.network_management.reservation.Reservation" title="src.network_management.reservation.Reservation">src.network_management.reservation.Reservation</a></span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.network_management.reservation.ResourceReservationMessage" title="Permalink to this definition">¶</a></dt>
 <dd><p>Message used by resource reservation protocol.</p>
-<p>This message contains all information passed between reservation protocol instances.
+<p>This message contains all information passed between reservation protocol
+instances.
 Messages of different types contain different information.</p>
 <dl class="py attribute">
 <dt id="src.network_management.reservation.ResourceReservationMessage.msg_type">
@@ -289,8 +293,10 @@ Messages of different types contain different information.</p>
 <dt id="src.network_management.reservation.ResourceReservationProtocol">
 <em class="property">class </em><code class="sig-prename descclassname">src.network_management.reservation.</code><code class="sig-name descname">ResourceReservationProtocol</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">own</span><span class="p">:</span> <span class="n">QuantumRouter</span></em>, <em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.network_management.reservation.ResourceReservationProtocol" title="Permalink to this definition">¶</a></dt>
 <dd><p>ReservationProtocol for  node resources.</p>
-<p>The reservation protocol receives network entanglement requests and attempts to reserve local resources.
-If successful, it will forward the request to another node in the entanglement path and create local rules.
+<p>The reservation protocol receives network entanglement requests and
+attempts to reserve local resources.
+If successful, it will forward the request to another node in the
+entanglement path and create local rules.
 These rules are passed to the node’s resource manager.
 If unsuccessful, the protocol will notify the network manager of failure.</p>
 <dl class="py attribute">
@@ -338,9 +344,9 @@ If unsuccessful, the protocol will notify the network manager of failure.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="src.network_management.reservation.ResourceReservationProtocol.es_degredation">
-<code class="sig-name descname">es_degredation</code><a class="headerlink" href="#src.network_management.reservation.ResourceReservationProtocol.es_degredation" title="Permalink to this definition">¶</a></dt>
-<dd><p>sets <cite>degredation</cite> of <cite>EntanglementSwappingA</cite> protocols created by rules.</p>
+<dt id="src.network_management.reservation.ResourceReservationProtocol.es_degradation">
+<code class="sig-name descname">es_degradation</code><a class="headerlink" href="#src.network_management.reservation.ResourceReservationProtocol.es_degradation" title="Permalink to this definition">¶</a></dt>
+<dd><p>sets <cite>degradation</cite> of <cite>EntanglementSwappingA</cite> protocols created by rules.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>float</p>
@@ -363,7 +369,8 @@ If unsuccessful, the protocol will notify the network manager of failure.</p>
 <dt id="src.network_management.reservation.ResourceReservationProtocol.create_rules">
 <code class="sig-name descname">create_rules</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span><span class="p">:</span> <span class="n">List<span class="p">[</span>str<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">reservation</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#src.network_management.reservation.Reservation" title="src.network_management.reservation.Reservation">src.network_management.reservation.Reservation</a></span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference internal" href="../resource_management/rule_manager.html#src.resource_management.rule_manager.Rule" title="src.resource_management.rule_manager.Rule">src.resource_management.rule_manager.Rule</a><span class="p">]</span><a class="headerlink" href="#src.network_management.reservation.ResourceReservationProtocol.create_rules" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to create rules for a successful request.</p>
-<p>Rules are used to direct the flow of information/entanglement in the resource manager.</p>
+<p>Rules are used to direct the flow of information/entanglement in the
+resource manager.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -384,7 +391,8 @@ If unsuccessful, the protocol will notify the network manager of failure.</p>
 <dt id="src.network_management.reservation.ResourceReservationProtocol.load_rules">
 <code class="sig-name descname">load_rules</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">rules</span><span class="p">:</span> <span class="n">List<span class="p">[</span>Rule<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">reservation</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#src.network_management.reservation.Reservation" title="src.network_management.reservation.Reservation">src.network_management.reservation.Reservation</a></span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.network_management.reservation.ResourceReservationProtocol.load_rules" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to add created rules to resource manager.</p>
-<p>This method will schedule the resource manager to load all rules at the reservation start time.
+<p>This method will schedule the resource manager to load all rules at the
+reservation start time.
 The rules will be set to expire at the reservation end time.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -417,6 +425,8 @@ The rules will be set to expire at the reservation end time.</p>
 <dl class="simple">
 <dt>Side Effects:</dt><dd><p>May push/pop to lower/upper attached protocols (or network manager).</p>
 </dd>
+<dt>Assumption:</dt><dd><p>the path initiator -&gt; responder is same as the reverse path</p>
+</dd>
 </dl>
 </dd></dl>
 
@@ -447,7 +457,8 @@ Otherwise, it will pop the request back up.</p>
 <dl class="py method">
 <dt id="src.network_management.reservation.ResourceReservationProtocol.received_message">
 <code class="sig-name descname">received_message</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">src</span></em>, <em class="sig-param"><span class="n">msg</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.network_management.reservation.ResourceReservationProtocol.received_message" title="Permalink to this definition">¶</a></dt>
-<dd><p>Method to receive messages directly (should not be used; receive through network manager).</p>
+<dd><p>Method to receive messages directly (should not be used; receive
+through network manager).</p>
 </dd></dl>
 
 <dl class="py method">
@@ -467,6 +478,101 @@ Otherwise, it will pop the request back up.</p>
 </dl>
 </dd></dl>
 
+</dd></dl>
+
+<dl class="py function">
+<dt id="src.network_management.reservation.eg_req_func">
+<code class="sig-prename descclassname">src.network_management.reservation.</code><code class="sig-name descname">eg_req_func</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">protocols</span><span class="p">:</span> <span class="n">List<span class="p">[</span>EntanglementProtocol<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">args</span><span class="p">:</span> <span class="n">Dict<span class="p">[</span>str<span class="p">, </span>Any<span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; EntanglementGenerationA<a class="headerlink" href="#src.network_management.reservation.eg_req_func" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function used by <cite>eg_rule_action2</cite> function for selecting generation
+protocols on the remote node</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="src.network_management.reservation.eg_rule_action1">
+<code class="sig-prename descclassname">src.network_management.reservation.</code><code class="sig-name descname">eg_rule_action1</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">memories_info</span><span class="p">:</span> <span class="n">List<span class="p">[</span>MemoryInfo<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">args</span><span class="p">:</span> <span class="n">Dict<span class="p">[</span>str<span class="p">, </span>Any<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.network_management.reservation.eg_rule_action1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Action function used by entanglement generation protocol on nodes except
+the initiator</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="src.network_management.reservation.eg_rule_action2">
+<code class="sig-prename descclassname">src.network_management.reservation.</code><code class="sig-name descname">eg_rule_action2</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">memories_info</span><span class="p">:</span> <span class="n">List<span class="p">[</span>MemoryInfo<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">args</span><span class="p">:</span> <span class="n">Dict<span class="p">[</span>str<span class="p">, </span>Any<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.network_management.reservation.eg_rule_action2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Action function used by entanglement generation protocol on nodes except
+the responder</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="src.network_management.reservation.eg_rule_condition">
+<code class="sig-prename descclassname">src.network_management.reservation.</code><code class="sig-name descname">eg_rule_condition</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">memory_info</span><span class="p">:</span> <span class="n">MemoryInfo</span></em>, <em class="sig-param"><span class="n">manager</span><span class="p">:</span> <span class="n">MemoryManager</span></em>, <em class="sig-param"><span class="n">args</span><span class="p">:</span> <span class="n">Dict<span class="p">[</span>str<span class="p">, </span>Any<span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span>MemoryInfo<span class="p">]</span><a class="headerlink" href="#src.network_management.reservation.eg_rule_condition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Condition function used by entanglement generation protocol on nodes</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="src.network_management.reservation.ep_req_func1">
+<code class="sig-prename descclassname">src.network_management.reservation.</code><code class="sig-name descname">ep_req_func1</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">protocols</span></em>, <em class="sig-param"><span class="n">args</span><span class="p">:</span> <span class="n">Dict<span class="p">[</span>str<span class="p">, </span>Any<span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="../entanglement_management/purification.html#src.entanglement_management.purification.BBPSSW" title="src.entanglement_management.purification.BBPSSW">src.entanglement_management.purification.BBPSSW</a><a class="headerlink" href="#src.network_management.reservation.ep_req_func1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function used by <cite>ep_rule_action1</cite> for selecting purification protocols
+on the remote node</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="src.network_management.reservation.ep_rule_action1">
+<code class="sig-prename descclassname">src.network_management.reservation.</code><code class="sig-name descname">ep_rule_action1</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">memories_info</span><span class="p">:</span> <span class="n">List<span class="p">[</span>MemoryInfo<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">args</span><span class="p">:</span> <span class="n">Dict<span class="p">[</span>str<span class="p">, </span>Any<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.network_management.reservation.ep_rule_action1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Action function used by BBPSSW protocol on nodes except the
+responder node</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="src.network_management.reservation.ep_rule_action2">
+<code class="sig-prename descclassname">src.network_management.reservation.</code><code class="sig-name descname">ep_rule_action2</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">memories_info</span><span class="p">:</span> <span class="n">List<span class="p">[</span>MemoryInfo<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">args</span><span class="p">:</span> <span class="n">Dict<span class="p">[</span>str<span class="p">, </span>Any<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.network_management.reservation.ep_rule_action2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Action function used by BBPSSW protocol on nodes except the responder</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="src.network_management.reservation.ep_rule_condition1">
+<code class="sig-prename descclassname">src.network_management.reservation.</code><code class="sig-name descname">ep_rule_condition1</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">memory_info</span><span class="p">:</span> <span class="n">MemoryInfo</span></em>, <em class="sig-param"><span class="n">manager</span><span class="p">:</span> <span class="n">MemoryManager</span></em>, <em class="sig-param"><span class="n">args</span><span class="p">:</span> <span class="n">Dict<span class="p">[</span>str<span class="p">, </span>Any<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.network_management.reservation.ep_rule_condition1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Condition function used by BBPSSW protocol on nodes except the initiator</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="src.network_management.reservation.ep_rule_condition2">
+<code class="sig-prename descclassname">src.network_management.reservation.</code><code class="sig-name descname">ep_rule_condition2</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">memory_info</span><span class="p">:</span> <span class="n">MemoryInfo</span></em>, <em class="sig-param"><span class="n">manager</span><span class="p">:</span> <span class="n">MemoryManager</span></em>, <em class="sig-param"><span class="n">args</span><span class="p">:</span> <span class="n">Dict<span class="p">[</span>str<span class="p">, </span>Any<span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span>MemoryInfo<span class="p">]</span><a class="headerlink" href="#src.network_management.reservation.ep_rule_condition2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Condition function used by BBPSSW protocol on nodes except the responder</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="src.network_management.reservation.es_req_func">
+<code class="sig-prename descclassname">src.network_management.reservation.</code><code class="sig-name descname">es_req_func</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">protocols</span><span class="p">:</span> <span class="n">List<span class="p">[</span>EntanglementProtocol<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">args</span><span class="p">:</span> <span class="n">Dict<span class="p">[</span>str<span class="p">, </span>Any<span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; EntanglementSwappingB<a class="headerlink" href="#src.network_management.reservation.es_req_func" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function used by <cite>es_rule_actionA</cite> for selecting swapping protocols on the remote node</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="src.network_management.reservation.es_rule_actionA">
+<code class="sig-prename descclassname">src.network_management.reservation.</code><code class="sig-name descname">es_rule_actionA</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">memories_info</span><span class="p">:</span> <span class="n">List<span class="p">[</span>MemoryInfo<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">args</span><span class="p">:</span> <span class="n">Dict<span class="p">[</span>str<span class="p">, </span>Any<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.network_management.reservation.es_rule_actionA" title="Permalink to this definition">¶</a></dt>
+<dd><p>Action function used by EntanglementSwappingA protocol on nodes</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="src.network_management.reservation.es_rule_actionB">
+<code class="sig-prename descclassname">src.network_management.reservation.</code><code class="sig-name descname">es_rule_actionB</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">memories_info</span><span class="p">:</span> <span class="n">List<span class="p">[</span>MemoryInfo<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">args</span><span class="p">:</span> <span class="n">Dict<span class="p">[</span>str<span class="p">, </span>Any<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.network_management.reservation.es_rule_actionB" title="Permalink to this definition">¶</a></dt>
+<dd><p>Action function used by EntanglementSwappingB protocol</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="src.network_management.reservation.es_rule_conditionA">
+<code class="sig-prename descclassname">src.network_management.reservation.</code><code class="sig-name descname">es_rule_conditionA</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">memory_info</span><span class="p">:</span> <span class="n">MemoryInfo</span></em>, <em class="sig-param"><span class="n">manager</span><span class="p">:</span> <span class="n">MemoryManager</span></em>, <em class="sig-param"><span class="n">args</span><span class="p">:</span> <span class="n">Dict<span class="p">[</span>str<span class="p">, </span>Any<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.network_management.reservation.es_rule_conditionA" title="Permalink to this definition">¶</a></dt>
+<dd><p>Condition function used by EntanglementSwappingA protocol on nodes</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="src.network_management.reservation.es_rule_conditionB1">
+<code class="sig-prename descclassname">src.network_management.reservation.</code><code class="sig-name descname">es_rule_conditionB1</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">memory_info</span><span class="p">:</span> <span class="n">MemoryInfo</span></em>, <em class="sig-param"><span class="n">manager</span><span class="p">:</span> <span class="n">MemoryManager</span></em>, <em class="sig-param"><span class="n">args</span><span class="p">:</span> <span class="n">Dict<span class="p">[</span>str<span class="p">, </span>Any<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.network_management.reservation.es_rule_conditionB1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Condition function used by EntanglementSwappingB protocol on nodes of either responder or initiator</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="src.network_management.reservation.es_rule_conditionB2">
+<code class="sig-prename descclassname">src.network_management.reservation.</code><code class="sig-name descname">es_rule_conditionB2</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">memory_info</span><span class="p">:</span> <span class="n">MemoryInfo</span></em>, <em class="sig-param"><span class="n">manager</span><span class="p">:</span> <span class="n">MemoryManager</span></em>, <em class="sig-param"><span class="n">args</span><span class="p">:</span> <span class="n">Dict<span class="p">[</span>str<span class="p">, </span>Any<span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span>MemoryInfo<span class="p">]</span><a class="headerlink" href="#src.network_management.reservation.es_rule_conditionB2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Condition function used by EntanglementSwappingB protocol on intermediate nodes of path</p>
 </dd></dl>
 
 </div>
@@ -520,7 +626,7 @@ Otherwise, it will pop the request back up.</p>
         <li class="right" >
           <a href="network_manager.html" title="Network Manager"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.2.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" >Network Management</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Reservation</a></li> 
       </ul>

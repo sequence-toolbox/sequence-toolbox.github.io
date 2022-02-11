@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Entanglement Purification &#8212; SeQUeNCe 0.2.3 documentation</title>
+    <title>Entanglement Purification &#8212; SeQUeNCe 0.3.0 documentation</title>
     <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     
@@ -14,7 +14,6 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/language_data.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -36,7 +35,7 @@
         <li class="right" >
           <a href="generation.html" title="Entanglement Generation"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.2.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" accesskey="U">Entanglement Management</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Entanglement Purification</a></li> 
       </ul>
@@ -98,23 +97,45 @@ It should be instantiated on a quantum router node.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="src.entanglement_management.purification.BBPSSW.another">
-<code class="sig-name descname">another</code><a class="headerlink" href="#src.entanglement_management.purification.BBPSSW.another" title="Permalink to this definition">¶</a></dt>
-<dd><p>pointer of BBPSSW on another side (may be removed in the future).</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="#src.entanglement_management.purification.BBPSSW" title="src.entanglement_management.purification.BBPSSW">BBPSSW</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
 <dt id="src.entanglement_management.purification.BBPSSW.meas_res">
 <code class="sig-name descname">meas_res</code><a class="headerlink" href="#src.entanglement_management.purification.BBPSSW.meas_res" title="Permalink to this definition">¶</a></dt>
 <dd><p>measurement result from circuit.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.entanglement_management.purification.BBPSSW.remote_node_name">
+<code class="sig-name descname">remote_node_name</code><a class="headerlink" href="#src.entanglement_management.purification.BBPSSW.remote_node_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>name of other node.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.entanglement_management.purification.BBPSSW.remote_protocol_name">
+<code class="sig-name descname">remote_protocol_name</code><a class="headerlink" href="#src.entanglement_management.purification.BBPSSW.remote_protocol_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>name of other protocol</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.entanglement_management.purification.BBPSSW.remote_memories">
+<code class="sig-name descname">remote_memories</code><a class="headerlink" href="#src.entanglement_management.purification.BBPSSW.remote_memories" title="Permalink to this definition">¶</a></dt>
+<dd><p>name of remote memories</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>List[str]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -186,11 +207,15 @@ It should be instantiated on a quantum router node.</p>
 
 <dl class="py method">
 <dt id="src.entanglement_management.purification.BBPSSW.set_others">
-<code class="sig-name descname">set_others</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">another</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#src.entanglement_management.purification.BBPSSW" title="src.entanglement_management.purification.BBPSSW">src.entanglement_management.purification.BBPSSW</a></span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.entanglement_management.purification.BBPSSW.set_others" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_others</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">protocol</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">node</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">memories</span><span class="p">:</span> <span class="n">List<span class="p">[</span>str<span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.entanglement_management.purification.BBPSSW.set_others" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to set other entanglement protocol instance.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>another</strong> (<a class="reference internal" href="#src.entanglement_management.purification.BBPSSW" title="src.entanglement_management.purification.BBPSSW"><em>BBPSSW</em></a>) – other purification protocol instance.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>protocol</strong> (<em>str</em>) – other protocol name.</p></li>
+<li><p><strong>node</strong> (<em>str</em>) – other node name.</p></li>
+<li><p><strong>memories</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – the list of memories name used on other node.</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -333,7 +358,7 @@ Will send message to other protocol instance.</p>
         <li class="right" >
           <a href="generation.html" title="Entanglement Generation"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.2.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" >Entanglement Management</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Entanglement Purification</a></li> 
       </ul>

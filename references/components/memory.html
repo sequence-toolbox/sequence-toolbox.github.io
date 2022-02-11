@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Memory &#8212; SeQUeNCe 0.2.3 documentation</title>
+    <title>Memory &#8212; SeQUeNCe 0.3.0 documentation</title>
     <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     
@@ -14,7 +14,6 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/language_data.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -36,7 +35,7 @@
         <li class="right" >
           <a href="light_source.html" title="Light Source"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.2.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" accesskey="U">Components</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Memory</a></li> 
       </ul>
@@ -137,23 +136,23 @@ This class will replace the older implementation once completed.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="src.components.memory.Memory.qstate">
-<code class="sig-name descname">qstate</code><a class="headerlink" href="#src.components.memory.Memory.qstate" title="Permalink to this definition">¶</a></dt>
-<dd><p>quantum state of memory.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="../misc/utils/quantum_state.html#src.utils.quantum_state.QuantumState" title="src.utils.quantum_state.QuantumState">QuantumState</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
 <dt id="src.components.memory.Memory.entangled_memory">
 <code class="sig-name descname">entangled_memory</code><a class="headerlink" href="#src.components.memory.Memory.entangled_memory" title="Permalink to this definition">¶</a></dt>
 <dd><p>tracks entanglement state of memory.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>Dict[str, Any]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.memory.Memory.qstate_key">
+<code class="sig-name descname">qstate_key</code><a class="headerlink" href="#src.components.memory.Memory.qstate_key" title="Permalink to this definition">¶</a></dt>
+<dd><p>key for associated quantum state in timeline’s quantum manager.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
@@ -405,23 +404,12 @@ original Memory class.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="src.components.memory.MemoryWithRandomCoherenceTime.qstate">
-<code class="sig-name descname">qstate</code><a class="headerlink" href="#src.components.memory.MemoryWithRandomCoherenceTime.qstate" title="Permalink to this definition">¶</a></dt>
-<dd><p>quantum state of memory.</p>
+<dt id="src.components.memory.MemoryWithRandomCoherenceTime.qstate_key">
+<code class="sig-name descname">qstate_key</code><a class="headerlink" href="#src.components.memory.MemoryWithRandomCoherenceTime.qstate_key" title="Permalink to this definition">¶</a></dt>
+<dd><p>key for associated quantum state in timeline’s quantum manager.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="../misc/utils/quantum_state.html#src.utils.quantum_state.QuantumState" title="src.utils.quantum_state.QuantumState">QuantumState</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="src.components.memory.MemoryWithRandomCoherenceTime.entangled_memory">
-<code class="sig-name descname">entangled_memory</code><a class="headerlink" href="#src.components.memory.MemoryWithRandomCoherenceTime.entangled_memory" title="Permalink to this definition">¶</a></dt>
-<dd><p>tracks entanglement state of memory.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>Dict[str, Any]</p>
+<dd class="field-odd"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
@@ -479,7 +467,7 @@ original Memory class.</p>
         <li class="right" >
           <a href="light_source.html" title="Light Source"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.2.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" >Components</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Memory</a></li> 
       </ul>

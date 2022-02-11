@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nodes &#8212; SeQUeNCe 0.2.3 documentation</title>
+    <title>Nodes &#8212; SeQUeNCe 0.3.0 documentation</title>
     <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     
@@ -14,7 +14,6 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/language_data.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -36,7 +35,7 @@
         <li class="right" >
           <a href="top.html" title="Topology"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.2.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" accesskey="U">Topology</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Nodes</a></li> 
       </ul>
@@ -55,7 +54,7 @@ All node types inherit from the base Node type, which inherits from Entity.
 Node types can be used to collect all the necessary hardware and software for a network usage scenario.</p>
 <dl class="py class">
 <dt id="src.topology.node.BSMNode">
-<em class="property">class </em><code class="sig-prename descclassname">src.topology.node.</code><code class="sig-name descname">BSMNode</code><span class="sig-paren">(</span><em class="sig-param">name: str, timeline: Timeline, other_nodes: [&lt;class 'str'&gt;]</em><span class="sig-paren">)</span><a class="headerlink" href="#src.topology.node.BSMNode" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">src.topology.node.</code><code class="sig-name descname">BSMNode</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">timeline</span><span class="p">:</span> <span class="n">Timeline</span></em>, <em class="sig-param"><span class="n">other_nodes</span><span class="p">:</span> <span class="n">List<span class="p">[</span>str<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.topology.node.BSMNode" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bell state measurement node.</p>
 <p>This node provides bell state measurement and the EntanglementGenerationB protocol for entanglement generation.</p>
 <dl class="py attribute">
@@ -147,7 +146,7 @@ Node types can be used to collect all the necessary hardware and software for a 
 
 <dl class="py class">
 <dt id="src.topology.node.Node">
-<em class="property">class </em><code class="sig-prename descclassname">src.topology.node.</code><code class="sig-name descname">Node</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">timeline</span><span class="p">:</span> <span class="n">Timeline</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.topology.node.Node" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">src.topology.node.</code><code class="sig-name descname">Node</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">timeline</span><span class="p">:</span> <span class="n">Timeline</span></em>, <em class="sig-param"><span class="n">seed</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.topology.node.Node" title="Permalink to this definition">¶</a></dt>
 <dd><p>Base node type.</p>
 <p>Provides default interfaces for network.</p>
 <dl class="py attribute">
@@ -205,6 +204,17 @@ Node types can be used to collect all the necessary hardware and software for a 
 </dl>
 </dd></dl>
 
+<dl class="py attribute">
+<dt id="src.topology.node.Node.generator">
+<code class="sig-name descname">generator</code><a class="headerlink" href="#src.topology.node.Node.generator" title="Permalink to this definition">¶</a></dt>
+<dd><p>random number generator used by node.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>np.random.Generator</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py method">
 <dt id="src.topology.node.Node.assign_cchannel">
 <code class="sig-name descname">assign_cchannel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cchannel</span><span class="p">:</span> <span class="n">ClassicalChannel</span></em>, <em class="sig-param"><span class="n">another</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.topology.node.Node.assign_cchannel" title="Permalink to this definition">¶</a></dt>
@@ -233,6 +243,13 @@ Node types can be used to collect all the necessary hardware and software for a 
 </ul>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.topology.node.Node.get_generator">
+<code class="sig-name descname">get_generator</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.topology.node.Node.get_generator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to get random generator of parent node.</p>
+<p>If entity is not attached to a node, return default generator.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -539,6 +556,20 @@ This method can be used to perform any necessary functions before simulation.</p
 </dd></dl>
 
 <dl class="py method">
+<dt id="src.topology.node.QuantumRouter.add_bsm_node">
+<code class="sig-name descname">add_bsm_node</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">bsm_name</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">router_name</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.topology.node.QuantumRouter.add_bsm_node" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to record connected BSM nodes</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bsm_name</strong> (<em>str</em>) – the BSM node between nodes self and router_name</p></li>
+<li><p><strong>router_name</strong> (<em>str</em>) – the name of another router connected with the BSM node</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt id="src.topology.node.QuantumRouter.get_idle_memory">
 <code class="sig-name descname">get_idle_memory</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">info</span><span class="p">:</span> <span class="n">MemoryInfo</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.topology.node.QuantumRouter.get_idle_memory" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method for application to receive available memories.</p>
@@ -560,7 +591,7 @@ This method can be used to perform any necessary functions before simulation.</p
 <dt id="src.topology.node.QuantumRouter.init">
 <code class="sig-name descname">init</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.topology.node.QuantumRouter.init" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to initialize quantum router node.</p>
-<p>Sets up map_to_middle_node dictionary.</p>
+<p>Inherit parent function</p>
 </dd></dl>
 
 <dl class="py method">
@@ -665,7 +696,7 @@ This method can be used to perform any necessary functions before simulation.</p
         <li class="right" >
           <a href="top.html" title="Topology"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.2.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" >Topology</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Nodes</a></li> 
       </ul>

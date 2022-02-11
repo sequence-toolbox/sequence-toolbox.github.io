@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Entanglement Swapping &#8212; SeQUeNCe 0.2.3 documentation</title>
+    <title>Entanglement Swapping &#8212; SeQUeNCe 0.3.0 documentation</title>
     <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     
@@ -14,7 +14,6 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/language_data.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -36,7 +35,7 @@
         <li class="right" >
           <a href="purification.html" title="Entanglement Purification"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.2.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" accesskey="U">Entanglement Management</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Entanglement Swapping</a></li> 
       </ul>
@@ -64,7 +63,8 @@ Also defined in this module is the message type used by these protocols.</p>
 <em class="property">class </em><code class="sig-prename descclassname">src.entanglement_management.swapping.</code><code class="sig-name descname">EntanglementSwappingA</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">own</span><span class="p">:</span> <span class="n">Node</span></em>, <em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">left_memo</span><span class="p">:</span> <span class="n">Memory</span></em>, <em class="sig-param"><span class="n">right_memo</span><span class="p">:</span> <span class="n">Memory</span></em>, <em class="sig-param"><span class="n">success_prob</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">degradation</span><span class="o">=</span><span class="default_value">0.95</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.entanglement_management.swapping.EntanglementSwappingA" title="Permalink to this definition">¶</a></dt>
 <dd><p>Entanglement swapping protocol for middle router.</p>
 <p>The entanglement swapping protocol is an asymmetric protocol.
-EntanglementSwappingA should be instantiated on the middle node, where it measures a memory from each pair to be swapped.
+EntanglementSwappingA should be instantiated on the middle node,
+where it measures a memory from each pair to be swapped.
 Results of measurement and swapping are sent to the end routers.</p>
 <dl class="simple">
 <dt>Variables:</dt><dd><p>EntanglementSwappingA.circuit (Circuit): circuit that does swapping operations.</p>
@@ -115,6 +115,50 @@ Results of measurement and swapping are sent to the end routers.</p>
 </dd></dl>
 
 <dl class="py attribute">
+<dt id="src.entanglement_management.swapping.EntanglementSwappingA.left_node">
+<code class="sig-name descname">left_node</code><a class="headerlink" href="#src.entanglement_management.swapping.EntanglementSwappingA.left_node" title="Permalink to this definition">¶</a></dt>
+<dd><p>name of node that contains memory entangling with left_memo.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.entanglement_management.swapping.EntanglementSwappingA.left_remote_memo">
+<code class="sig-name descname">left_remote_memo</code><a class="headerlink" href="#src.entanglement_management.swapping.EntanglementSwappingA.left_remote_memo" title="Permalink to this definition">¶</a></dt>
+<dd><p>name of memory that entangles with left_memo.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.entanglement_management.swapping.EntanglementSwappingA.right_node">
+<code class="sig-name descname">right_node</code><a class="headerlink" href="#src.entanglement_management.swapping.EntanglementSwappingA.right_node" title="Permalink to this definition">¶</a></dt>
+<dd><p>name of node that contains memory entangling with right_memo.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.entanglement_management.swapping.EntanglementSwappingA.right_remote_memo">
+<code class="sig-name descname">right_remote_memo</code><a class="headerlink" href="#src.entanglement_management.swapping.EntanglementSwappingA.right_remote_memo" title="Permalink to this definition">¶</a></dt>
+<dd><p>name of memory that entangles with right_memo.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
 <dt id="src.entanglement_management.swapping.EntanglementSwappingA.success_prob">
 <code class="sig-name descname">success_prob</code><a class="headerlink" href="#src.entanglement_management.swapping.EntanglementSwappingA.success_prob" title="Permalink to this definition">¶</a></dt>
 <dd><p>probability of a successful swapping operation.</p>
@@ -132,6 +176,39 @@ Results of measurement and swapping are sent to the end routers.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.entanglement_management.swapping.EntanglementSwappingA.is_success">
+<code class="sig-name descname">is_success</code><a class="headerlink" href="#src.entanglement_management.swapping.EntanglementSwappingA.is_success" title="Permalink to this definition">¶</a></dt>
+<dd><p>flag to show the result of swapping</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.entanglement_management.swapping.EntanglementSwappingA.left_protocol_name">
+<code class="sig-name descname">left_protocol_name</code><a class="headerlink" href="#src.entanglement_management.swapping.EntanglementSwappingA.left_protocol_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>name of left protocol.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.entanglement_management.swapping.EntanglementSwappingA.right_protocol_name">
+<code class="sig-name descname">right_protocol_name</code><a class="headerlink" href="#src.entanglement_management.swapping.EntanglementSwappingA.right_protocol_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>name of right protocol.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
 </dd>
 </dl>
 </dd></dl>
@@ -176,11 +253,15 @@ Will invoke <cite>release_remote_protocol</cite> or <cite>release_remote_memory<
 
 <dl class="py method">
 <dt id="src.entanglement_management.swapping.EntanglementSwappingA.set_others">
-<code class="sig-name descname">set_others</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">other</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#src.entanglement_management.swapping.EntanglementSwappingB" title="src.entanglement_management.swapping.EntanglementSwappingB">src.entanglement_management.swapping.EntanglementSwappingB</a></span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.entanglement_management.swapping.EntanglementSwappingA.set_others" title="Permalink to this definition">¶</a></dt>
-<dd><p>Method to set one other protocol.</p>
+<code class="sig-name descname">set_others</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">protocol</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">node</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">memories</span><span class="p">:</span> <span class="n">List<span class="p">[</span>str<span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.entanglement_management.swapping.EntanglementSwappingA.set_others" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to set other entanglement protocol instance.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>other</strong> (<a class="reference internal" href="#src.entanglement_management.swapping.EntanglementSwappingB" title="src.entanglement_management.swapping.EntanglementSwappingB"><em>EntanglementSwappingB</em></a>) – protocol to add to other list.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>protocol</strong> (<em>str</em>) – other protocol name.</p></li>
+<li><p><strong>node</strong> (<em>str</em>) – other node name.</p></li>
+<li><p><strong>memories</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – the list of memories name used on other node.</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -325,11 +406,15 @@ EntanglementSwappingB.x_z_cir (Circuit): circuit that corrects state with an x a
 
 <dl class="py method">
 <dt id="src.entanglement_management.swapping.EntanglementSwappingB.set_others">
-<code class="sig-name descname">set_others</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">another</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#src.entanglement_management.swapping.EntanglementSwappingA" title="src.entanglement_management.swapping.EntanglementSwappingA">src.entanglement_management.swapping.EntanglementSwappingA</a></span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.entanglement_management.swapping.EntanglementSwappingB.set_others" title="Permalink to this definition">¶</a></dt>
-<dd><p>Method to set one other protocol.</p>
+<code class="sig-name descname">set_others</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">protocol</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">node</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">memories</span><span class="p">:</span> <span class="n">List<span class="p">[</span>str<span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.entanglement_management.swapping.EntanglementSwappingB.set_others" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to set other entanglement protocol instance.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>other</strong> (<a class="reference internal" href="#src.entanglement_management.swapping.EntanglementSwappingA" title="src.entanglement_management.swapping.EntanglementSwappingA"><em>EntanglementSwappingA</em></a>) – protocol to set as other.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>protocol</strong> (<em>str</em>) – other protocol name.</p></li>
+<li><p><strong>node</strong> (<em>str</em>) – other node name.</p></li>
+<li><p><strong>memories</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – the list of memories name used on other node.</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -479,7 +564,7 @@ EntanglementSwappingB.x_z_cir (Circuit): circuit that corrects state with an x a
         <li class="right" >
           <a href="purification.html" title="Entanglement Purification"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.2.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" >Entanglement Management</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Entanglement Swapping</a></li> 
       </ul>

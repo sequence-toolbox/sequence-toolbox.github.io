@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rule Manager &#8212; SeQUeNCe 0.2.3 documentation</title>
+    <title>Rule Manager &#8212; SeQUeNCe 0.3.0 documentation</title>
     <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     
@@ -14,7 +14,6 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/language_data.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -36,7 +35,7 @@
         <li class="right" >
           <a href="memory_manager.html" title="Memory Manager"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.2.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" accesskey="U">Resource Management</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Rule Manager</a></li> 
       </ul>
@@ -54,7 +53,7 @@
 This is achieved through rules (also defined in this module), which if met define a set of actions to take.</p>
 <dl class="py class">
 <dt id="src.resource_management.rule_manager.Rule">
-<em class="property">class </em><code class="sig-prename descclassname">src.resource_management.rule_manager.</code><code class="sig-name descname">Rule</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">priority</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">action</span><span class="p">:</span> <span class="n">Callable<span class="p">[</span><span class="p">[</span>List<span class="p">[</span>MemoryInfo<span class="p">]</span><span class="p">]</span><span class="p">, </span>Tuple<span class="p">[</span>Protocol<span class="p">, </span>List<span class="p">[</span>str<span class="p">]</span><span class="p">, </span>List<span class="p">[</span>Callable<span class="p">[</span><span class="p">[</span>Protocol<span class="p">]</span><span class="p">, </span>bool<span class="p">]</span><span class="p">]</span><span class="p">]</span><span class="p">]</span></span></em>, <em class="sig-param"><span class="n">condition</span><span class="p">:</span> <span class="n">Callable<span class="p">[</span><span class="p">[</span>MemoryInfo<span class="p">, </span>MemoryManager<span class="p">]</span><span class="p">, </span>List<span class="p">[</span>MemoryInfo<span class="p">]</span><span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.resource_management.rule_manager.Rule" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">src.resource_management.rule_manager.</code><code class="sig-name descname">Rule</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">priority</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">action</span><span class="p">:</span> <span class="n">Callable<span class="p">[</span><span class="p">[</span>List<span class="p">[</span>MemoryInfo<span class="p">]</span><span class="p">, </span>Dict<span class="p">[</span>str<span class="p">, </span>Any<span class="p">]</span><span class="p">]</span><span class="p">, </span>Tuple<span class="p">[</span>EntanglementProtocol<span class="p">, </span>List<span class="p">[</span>str<span class="p">]</span><span class="p">, </span>List<span class="p">[</span>Callable<span class="p">[</span><span class="p">[</span>EntanglementProtocol<span class="p">]</span><span class="p">, </span>bool<span class="p">]</span><span class="p">]</span><span class="p">]</span><span class="p">]</span></span></em>, <em class="sig-param"><span class="n">condition</span><span class="p">:</span> <span class="n">typing.Callable[[ForwardRef(‘MemoryInfo’), ForwardRef(‘MemoryManager’), typing.Dict[str, typing.Any]], typing.List[ForwardRef(‘MemoryInfo’)]]</span></em>, <em class="sig-param"><span class="n">action_args</span><span class="p">:</span> <span class="n">Dict<span class="p">[</span>str<span class="p">, </span>Any<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">condition_args</span><span class="p">:</span> <span class="n">Dict<span class="p">[</span>str<span class="p">, </span>Any<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.resource_management.rule_manager.Rule" title="Permalink to this definition">¶</a></dt>
 <dd><p>Definition of rule for the rule manager.</p>
 <p>Rule objects are installed on and interacted with by the rule manager.</p>
 <dl class="py attribute">
@@ -183,7 +182,7 @@ Rules that are met have their action executed by the rule manager.</p>
 
 <dl class="py method">
 <dt id="src.resource_management.rule_manager.RuleManager.expire">
-<code class="sig-name descname">expire</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">rule</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#src.resource_management.rule_manager.Rule" title="src.resource_management.rule_manager.Rule">src.resource_management.rule_manager.Rule</a></span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference internal" href="../entanglement_management/entanglement_protocol.html#src.entanglement_management.entanglement_protocol.EntanglementProtocol" title="src.entanglement_management.entanglement_protocol.EntanglementProtocol">src.entanglement_management.entanglement_protocol.EntanglementProtocol</a><span class="p">]</span><a class="headerlink" href="#src.resource_management.rule_manager.RuleManager.expire" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">expire</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">rule</span><span class="p">:</span> <span class="n">Rule</span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span>EntanglementProtocol<span class="p">]</span><a class="headerlink" href="#src.resource_management.rule_manager.RuleManager.expire" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to remove expired protocol.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -280,7 +279,7 @@ Rules that are met have their action executed by the rule manager.</p>
         <li class="right" >
           <a href="memory_manager.html" title="Memory Manager"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.2.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" >Resource Management</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Rule Manager</a></li> 
       </ul>

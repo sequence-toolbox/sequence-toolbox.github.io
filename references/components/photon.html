@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Photon &#8212; SeQUeNCe 0.2.3 documentation</title>
+    <title>Photon &#8212; SeQUeNCe 0.3.0 documentation</title>
     <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     
@@ -14,7 +14,6 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/language_data.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -36,7 +35,7 @@
         <li class="right" >
           <a href="optical_channel.html" title="Optical Channel"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.2.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" accesskey="U">Components</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Photon</a></li> 
       </ul>
@@ -130,13 +129,14 @@ Photons may be encoded directly with polarization or time bin schemes, or may he
 
 <dl class="py method">
 <dt id="src.components.photon.Photon.measure">
-<em class="property">static </em><code class="sig-name descname">measure</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">basis</span></em>, <em class="sig-param"><span class="n">photon</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.photon.Photon.measure" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">measure</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">basis</span></em>, <em class="sig-param"><span class="n">photon</span></em>, <em class="sig-param"><span class="n">rng</span><span class="p">:</span> <span class="n">numpy.random._generator.Generator</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.photon.Photon.measure" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to measure a photon (see <cite>QuantumState</cite> module).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>basis</strong> (<em>List</em><em>[</em><em>List</em><em>[</em><em>complex</em><em>]</em><em>]</em>) – basis (given as lists of complex coefficients) with which to measure the photon.</p></li>
 <li><p><strong>photon</strong> (<a class="reference internal" href="#src.components.photon.Photon" title="src.components.photon.Photon"><em>Photon</em></a>) – photon to measure.</p></li>
+<li><p><strong>rng</strong> (<em>Generator</em>) – PRGN to use  for measurement results.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -150,13 +150,14 @@ Photons may be encoded directly with polarization or time bin schemes, or may he
 
 <dl class="py method">
 <dt id="src.components.photon.Photon.measure_multiple">
-<em class="property">static </em><code class="sig-name descname">measure_multiple</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">basis</span></em>, <em class="sig-param"><span class="n">photons</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.photon.Photon.measure_multiple" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">measure_multiple</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">basis</span></em>, <em class="sig-param"><span class="n">photons</span></em>, <em class="sig-param"><span class="n">rng</span><span class="p">:</span> <span class="n">numpy.random._generator.Generator</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.photon.Photon.measure_multiple" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to measure 2 entangled photons (see <cite>QuantumState</cite> module).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>basis</strong> (<em>List</em><em>[</em><em>List</em><em>[</em><em>complex</em><em>]</em><em>]</em>) – basis (given as lists of complex coefficients) with which to measure the photons.</p></li>
 <li><p><strong>photons</strong> (<em>List</em><em>[</em><a class="reference internal" href="#src.components.photon.Photon" title="src.components.photon.Photon"><em>Photon</em></a><em>]</em>) – list of 2 photons to measure.</p></li>
+<li><p><strong>rng</strong> (<em>Generator</em>) – PRGN to use  for measurement results.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -170,7 +171,7 @@ Photons may be encoded directly with polarization or time bin schemes, or may he
 
 <dl class="py method">
 <dt id="src.components.photon.Photon.random_noise">
-<code class="sig-name descname">random_noise</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.components.photon.Photon.random_noise" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">random_noise</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">rng</span><span class="p">:</span> <span class="n">numpy.random._generator.Generator</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.photon.Photon.random_noise" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to add random noise to photon’s state (see <cite>QuantumState</cite> module).</p>
 </dd></dl>
 
@@ -227,7 +228,7 @@ Photons may be encoded directly with polarization or time bin schemes, or may he
         <li class="right" >
           <a href="optical_channel.html" title="Optical Channel"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.2.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" >Components</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Photon</a></li> 
       </ul>
