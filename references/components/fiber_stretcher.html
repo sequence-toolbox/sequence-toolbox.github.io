@@ -1,0 +1,187 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiber Stretcher &#8212; SeQUeNCe 0.2.3 documentation</title>
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Interferometer" href="interferometer.html" />
+    <link rel="prev" title="Detector" href="detector.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="interferometer.html" title="Interferometer"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="detector.html" title="Detector"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.2.3 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="top.html" accesskey="U">Components</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Fiber Stretcher</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-src.components.fiber_stretcher">
+<span id="fiber-stretcher"></span><h1>Fiber Stretcher<a class="headerlink" href="#module-src.components.fiber_stretcher" title="Permalink to this headline">¶</a></h1>
+<p>Models for simulation of fiber stretching.</p>
+<p>This module introduces the FiberStretcher class.
+The fiber stretcher modifies the phase of incoming photons, but does not add additional delay.</p>
+<dl class="py class">
+<dt id="src.components.fiber_stretcher.FiberStretcher">
+<em class="property">class </em><code class="sig-prename descclassname">src.components.fiber_stretcher.</code><code class="sig-name descname">FiberStretcher</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">timeline</span></em>, <em class="sig-param"><span class="n">phase</span><span class="o">=</span><span class="default_value">0.0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.fiber_stretcher.FiberStretcher" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class implementing a simple fiber stretcher.</p>
+<dl class="py attribute">
+<dt id="src.components.fiber_stretcher.FiberStretcher.name">
+<code class="sig-name descname">name</code><a class="headerlink" href="#src.components.fiber_stretcher.FiberStretcher.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>name of the fiber stretcher instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.fiber_stretcher.FiberStretcher.timeline">
+<code class="sig-name descname">timeline</code><a class="headerlink" href="#src.components.fiber_stretcher.FiberStretcher.timeline" title="Permalink to this definition">¶</a></dt>
+<dd><p>simulation timeline.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../kernel/timeline.html#src.kernel.timeline.Timeline" title="src.kernel.timeline.Timeline">Timeline</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.fiber_stretcher.FiberStretcher._circuit">
+<code class="sig-name descname">_circuit</code><a class="headerlink" href="#src.components.fiber_stretcher.FiberStretcher._circuit" title="Permalink to this definition">¶</a></dt>
+<dd><p>quantum circuit used to apply a phase shift to incoming photons.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="circuit.html#src.components.circuit.Circuit" title="src.components.circuit.Circuit">Circuit</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.components.fiber_stretcher.FiberStretcher.get">
+<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">photon</span><span class="p">:</span> <span class="n">Photon</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.fiber_stretcher.FiberStretcher.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to receive a photon.</p>
+<p>Applies the local phase quantum circuit, then forwards to first receiver.
+This phase is only applied if the photon is using the absorptive encoding scheme.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>photon</strong> (<a class="reference internal" href="photon.html#src.components.photon.Photon" title="src.components.photon.Photon"><em>Photon</em></a>) – photon to transmit.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.components.fiber_stretcher.FiberStretcher.init">
+<code class="sig-name descname">init</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.components.fiber_stretcher.FiberStretcher.init" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to initialize entity (abstract).</p>
+<p>Entity <cite>init</cite> methods are invoked for all timeline entities when the timeline is initialized.
+This method can be used to perform any necessary functions before simulation.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.components.fiber_stretcher.FiberStretcher.set_phase">
+<code class="sig-name descname">set_phase</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">phase</span><span class="p">:</span> <span class="n">float</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.fiber_stretcher.FiberStretcher.set_phase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to change the phase applied to incoming photons.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>phase</strong> (<em>float</em>) – new phase to use.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="detector.html"
+                        title="previous chapter">Detector</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="interferometer.html"
+                        title="next chapter">Interferometer</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/references/components/fiber_stretcher.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="interferometer.html" title="Interferometer"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="detector.html" title="Detector"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.2.3 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="top.html" >Components</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Fiber Stretcher</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+    </div>
+  </body>
+</html>

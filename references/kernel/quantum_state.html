@@ -1,0 +1,350 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum State &#8212; SeQUeNCe 0.2.3 documentation</title>
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Components" href="../components/top.html" />
+    <link rel="prev" title="Quantum Manager" href="quantum_manager.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../components/top.html" title="Components"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="quantum_manager.html" title="Quantum Manager"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.2.3 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="top.html" accesskey="U">Kernel</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Quantum State</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-src.kernel.quantum_state">
+<span id="quantum-state"></span><h1>Quantum State<a class="headerlink" href="#module-src.kernel.quantum_state" title="Permalink to this headline">¶</a></h1>
+<p>Definition of the quantum state classes.</p>
+<p>This module defines the classes used to track quantum states in SeQUeNCe.
+These include 2 classes used by a quantum manager, and one used for individual photons:</p>
+<ol class="arabic simple">
+<li><p>The <cite>KetState</cite> class represents the ket vector formalism and is used by a quantum manager.</p></li>
+<li><p>The <cite>DensityState</cite> class represents the density matrix formalism and is also used by a quantum manager.</p></li>
+<li><p>The <cite>FreeQuantumState</cite> class uses the ket vector formalism, and is used by individual photons (not the quantum manager).</p></li>
+</ol>
+<dl class="py class">
+<dt id="src.kernel.quantum_state.DensityState">
+<em class="property">class </em><code class="sig-prename descclassname">src.kernel.quantum_state.</code><code class="sig-name descname">DensityState</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">state</span><span class="p">:</span> <span class="n">List<span class="p">[</span>List<span class="p">[</span>complex<span class="p">]</span><span class="p">]</span></span></em>, <em class="sig-param"><span class="n">keys</span><span class="p">:</span> <span class="n">List<span class="p">[</span>int<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.kernel.quantum_state.DensityState" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to represent an individual quantum state as a density matrix.</p>
+<dl class="py attribute">
+<dt id="src.kernel.quantum_state.DensityState.state">
+<code class="sig-name descname">state</code><a class="headerlink" href="#src.kernel.quantum_state.DensityState.state" title="Permalink to this definition">¶</a></dt>
+<dd><p>density matrix values. NxN matrix with N = 2 ** len(keys).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>np.array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.kernel.quantum_state.DensityState.keys">
+<code class="sig-name descname">keys</code><a class="headerlink" href="#src.kernel.quantum_state.DensityState.keys" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of keys (qubits) associated with this state.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>List[int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="src.kernel.quantum_state.FreeQuantumState">
+<em class="property">class </em><code class="sig-prename descclassname">src.kernel.quantum_state.</code><code class="sig-name descname">FreeQuantumState</code><a class="headerlink" href="#src.kernel.quantum_state.FreeQuantumState" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class used by photons to track internal quantum states.</p>
+<p>This is an alternative to tracking states in a dedicated quantum manager, which adds simulation overhead.
+It defines several operations, including entanglement and measurement.
+For memories with an internal quantum state and certain photons, such as those stored in a memory or in parallel
+simulation, this class should not be used.
+Quantum states stored in a quantum manager class should be used instead.
+This module uses the ket vector formalism for storing and manipulating states.</p>
+<dl class="py attribute">
+<dt id="src.kernel.quantum_state.FreeQuantumState.state">
+<code class="sig-name descname">state</code><a class="headerlink" href="#src.kernel.quantum_state.FreeQuantumState.state" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of complex coefficients in Z-basis.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Tuple[complex]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.kernel.quantum_state.FreeQuantumState.entangled_states">
+<code class="sig-name descname">entangled_states</code><a class="headerlink" href="#src.kernel.quantum_state.FreeQuantumState.entangled_states" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of entangled states (including self).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>List[QuantumState]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.kernel.quantum_state.FreeQuantumState.entangle">
+<code class="sig-name descname">entangle</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">another_state</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#src.kernel.quantum_state.FreeQuantumState" title="src.kernel.quantum_state.FreeQuantumState">src.kernel.quantum_state.FreeQuantumState</a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.kernel.quantum_state.FreeQuantumState.entangle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to entangle two quantum states.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>another_state</strong> (<em>QuantumState</em>) – state to entangle current state with.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Side Effects:</dt><dd><p>Modifies the <cite>entangled_states</cite> field for current state and <cite>another_state</cite>.
+Modifies the <cite>state</cite> field for current state and <cite>another_state</cite>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.kernel.quantum_state.FreeQuantumState.measure">
+<code class="sig-name descname">measure</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">basis</span><span class="p">:</span> <span class="n">Tuple<span class="p">[</span>Tuple<span class="p">[</span>complex<span class="p">]</span><span class="p">]</span></span></em>, <em class="sig-param"><span class="n">rng</span><span class="p">:</span> <span class="n">numpy.random._generator.Generator</span></em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#src.kernel.quantum_state.FreeQuantumState.measure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to measure a single quantum state.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>basis</strong> (<em>Tuple</em><em>[</em><em>Tuple</em><em>[</em><em>complex</em><em>]</em><em>]</em>) – measurement basis, given as list of states (that are themselves lists of complex coefficients).</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>0/1 measurement result, corresponding to one basis vector.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Side Effects:</dt><dd><p>Modifies the <cite>state</cite> field for current and any entangled states.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.kernel.quantum_state.FreeQuantumState.measure_multiple">
+<em class="property">static </em><code class="sig-name descname">measure_multiple</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">basis</span></em>, <em class="sig-param"><span class="n">states</span></em>, <em class="sig-param"><span class="n">rng</span><span class="p">:</span> <span class="n">numpy.random._generator.Generator</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.kernel.quantum_state.FreeQuantumState.measure_multiple" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to measure multiple qubits in a more complex basis.</p>
+<p>May be used for bell state measurement.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>basis</strong> (<em>List</em><em>[</em><em>List</em><em>[</em><em>complex</em><em>]</em><em>]</em>) – list of basis vectors.</p></li>
+<li><p><strong>states</strong> (<em>List</em><em>[</em><em>QuantumState</em><em>]</em>) – list of quantum state objects to measure.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>measurement result in given basis.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Side Effects:</dt><dd><p>Will modify the <cite>state</cite> field of all entangled states.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.kernel.quantum_state.FreeQuantumState.random_noise">
+<code class="sig-name descname">random_noise</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">rng</span><span class="p">:</span> <span class="n">numpy.random._generator.Generator</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.kernel.quantum_state.FreeQuantumState.random_noise" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to add random noise to a single state.</p>
+<p>Chooses a random angle to set the quantum state to (with no phase difference).</p>
+<dl class="simple">
+<dt>Side Effects:</dt><dd><p>Modifies the <cite>state</cite> field.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.kernel.quantum_state.FreeQuantumState.set_state">
+<code class="sig-name descname">set_state</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">state</span><span class="p">:</span> <span class="n">Tuple<span class="p">[</span>complex<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.kernel.quantum_state.FreeQuantumState.set_state" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to change entangled state of multiple quantum states.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>state</strong> (<em>Tuple</em><em>[</em><em>complex</em><em>]</em>) – new coefficients for state. Should be 2^n in length, where n is the length of <cite>entangled_states</cite>.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Side Effects:</dt><dd><p>Modifies the <cite>state</cite> field for current and entangled states.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.kernel.quantum_state.FreeQuantumState.set_state_single">
+<code class="sig-name descname">set_state_single</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">state</span><span class="p">:</span> <span class="n">Tuple<span class="p">[</span>complex<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.kernel.quantum_state.FreeQuantumState.set_state_single" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to unentangle and set the state of a single quantum state object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>state</strong> (<em>Tuple</em><em>[</em><em>complex</em><em>]</em>) – 2-element list of new complex coefficients.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Side Effects:</dt><dd><p>Will remove current state from any entangled states (if present).
+Modifies the <cite>state</cite> field of current state.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="src.kernel.quantum_state.KetState">
+<em class="property">class </em><code class="sig-prename descclassname">src.kernel.quantum_state.</code><code class="sig-name descname">KetState</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">amplitudes</span><span class="p">:</span> <span class="n">List<span class="p">[</span>complex<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">keys</span><span class="p">:</span> <span class="n">List<span class="p">[</span>int<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.kernel.quantum_state.KetState" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to represent an individual quantum state as a ket vector.</p>
+<dl class="py attribute">
+<dt id="src.kernel.quantum_state.KetState.state">
+<code class="sig-name descname">state</code><a class="headerlink" href="#src.kernel.quantum_state.KetState.state" title="Permalink to this definition">¶</a></dt>
+<dd><p>state vector. Should be of length 2 ** len(keys).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>np.array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.kernel.quantum_state.KetState.keys">
+<code class="sig-name descname">keys</code><a class="headerlink" href="#src.kernel.quantum_state.KetState.keys" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of keys (qubits) associated with this state.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>List[int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="src.kernel.quantum_state.State">
+<em class="property">class </em><code class="sig-prename descclassname">src.kernel.quantum_state.</code><code class="sig-name descname">State</code><a class="headerlink" href="#src.kernel.quantum_state.State" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base class for storing quantum states (abstract).</p>
+<dl class="py attribute">
+<dt id="src.kernel.quantum_state.State.state">
+<code class="sig-name descname">state</code><a class="headerlink" href="#src.kernel.quantum_state.State.state" title="Permalink to this definition">¶</a></dt>
+<dd><p>internal representation of the state, may vary by state type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>any</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.kernel.quantum_state.State.keys">
+<code class="sig-name descname">keys</code><a class="headerlink" href="#src.kernel.quantum_state.State.keys" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of keys pointing to the state, for use with a quantum manager.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>List[int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="src.kernel.quantum_state.swap_bits">
+<code class="sig-prename descclassname">src.kernel.quantum_state.</code><code class="sig-name descname">swap_bits</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">num</span></em>, <em class="sig-param"><span class="n">pos1</span></em>, <em class="sig-param"><span class="n">pos2</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.kernel.quantum_state.swap_bits" title="Permalink to this definition">¶</a></dt>
+<dd><p>Swaps bits in num at positions 1 and 2.</p>
+<p>Used by quantum_state.measure_multiple method.</p>
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="quantum_manager.html"
+                        title="previous chapter">Quantum Manager</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../components/top.html"
+                        title="next chapter">Components</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/references/kernel/quantum_state.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../components/top.html" title="Components"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="quantum_manager.html" title="Quantum Manager"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.2.3 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="top.html" >Kernel</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Quantum State</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+    </div>
+  </body>
+</html>

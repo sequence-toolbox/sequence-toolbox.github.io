@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Optical Channel &#8212; SeQUeNCe 0.3.0 documentation</title>
+    <title>Optical Channel &#8212; SeQUeNCe 0.3.2 documentation</title>
     <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     
@@ -18,7 +18,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Photon" href="photon.html" />
-    <link rel="prev" title="Memory" href="memory.html" /> 
+    <link rel="prev" title="Mirror" href="mirror.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -33,9 +33,9 @@
           <a href="photon.html" title="Photon"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="memory.html" title="Memory"
+          <a href="mirror.html" title="Mirror"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" accesskey="U">Components</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Optical Channel</a></li> 
       </ul>
@@ -126,7 +126,7 @@ OpticalChannels must be attached to nodes on both ends.</p>
 <dl class="py attribute">
 <dt id="src.components.optical_channel.ClassicalChannel.delay">
 <code class="sig-name descname">delay</code><a class="headerlink" href="#src.components.optical_channel.ClassicalChannel.delay" title="Permalink to this definition">¶</a></dt>
-<dd><p>delay in message transmission (default distance / light_speed).</p>
+<dd><p>delay (in ps) of message transmission (default distance / light_speed).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>float</p>
@@ -221,7 +221,7 @@ OpticalChannels must be attached to nodes on both ends.</p>
 <dl class="py attribute">
 <dt id="src.components.optical_channel.OpticalChannel.atteunuation">
 <code class="sig-name descname">atteunuation</code><a class="headerlink" href="#src.components.optical_channel.OpticalChannel.atteunuation" title="Permalink to this definition">¶</a></dt>
-<dd><p>attenuation of the fiber (in dB/km).</p>
+<dd><p>attenuation of the fiber (in dB/m).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>float</p>
@@ -323,7 +323,7 @@ This method can be used to perform any necessary functions before simulation.</p
 <dl class="py attribute">
 <dt id="src.components.optical_channel.QuantumChannel.atteunuation">
 <code class="sig-name descname">atteunuation</code><a class="headerlink" href="#src.components.optical_channel.QuantumChannel.atteunuation" title="Permalink to this definition">¶</a></dt>
-<dd><p>attenuation of the fiber (in dB/km).</p>
+<dd><p>attenuation of the fiber (in dB/m).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>float</p>
@@ -467,8 +467,8 @@ This method returns the next available time for transmitting a photon.</p>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
-  <p class="topless"><a href="memory.html"
-                        title="previous chapter">Memory</a></p>
+  <p class="topless"><a href="mirror.html"
+                        title="previous chapter">Mirror</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="photon.html"
                         title="next chapter">Photon</a></p>
@@ -506,15 +506,15 @@ This method returns the next available time for transmitting a photon.</p>
           <a href="photon.html" title="Photon"
              >next</a> |</li>
         <li class="right" >
-          <a href="memory.html" title="Memory"
+          <a href="mirror.html" title="Mirror"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" >Components</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Optical Channel</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2020.
+        &#169; Copyright 2020-2022.
       Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
     </div>
   </body>
