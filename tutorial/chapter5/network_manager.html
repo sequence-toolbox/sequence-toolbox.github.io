@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chapter 5: Network Manager &#8212; SeQUeNCe 0.3.2 documentation</title>
+    <title>Chapter 5: Network Manager &#8212; SeQUeNCe 0.5.0 documentation</title>
     <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     
@@ -35,7 +35,7 @@
         <li class="right" >
           <a href="../chapter4/resource_management.html" title="Chapter 4: Resource Management"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.0 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Chapter 5: Network Manager</a></li> 
       </ul>
     </div>  
@@ -55,7 +55,7 @@
 </ul>
 <p>To achieve this, we will be using an example json file to build our network and will use the network manager on <code class="docutils literal notranslate"><span class="pre">QuantumRouter</span></code> nodes to request entanglement pairs. The json file will create the network topology shown below:</p>
 <p><img alt="topo" src="../../_images/star_network.png" /></p>
-<p>This example is similar to the example jupyter notebook script <code class="docutils literal notranslate"><span class="pre">random_request_network.ipynb</span></code>, without applications and with slightly different paramters. The notebook can be viewed in the <code class="docutils literal notranslate"><span class="pre">example</span></code> directory of the SeQUeNCe download, including already written code and interactive input.</p>
+<p>This example is similar to the example jupyter notebook script <code class="docutils literal notranslate"><span class="pre">random_request_network.ipynb</span></code>, without applications and with slightly different parameters. The notebook can be viewed in the <code class="docutils literal notranslate"><span class="pre">example</span></code> directory of the SeQUeNCe download, including already written code and interactive input.</p>
 <div class="section" id="background">
 <h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h2>
 <p>The Network Management module of sequence is responsible for coordinating the protocols of network nodes, ensuring the proper and efficient completion of application requests. This is done with an internal protocol stack, as shown below:</p>
@@ -75,8 +75,8 @@
 </div>
 <div class="section" id="step-1-create-the-network-configuration-file">
 <h2>Step 1: Create the Network Configuration File<a class="headerlink" href="#step-1-create-the-network-configuration-file" title="Permalink to this headline">¶</a></h2>
-<p>For this example, we will be using a json file to specify the nodes and connectivity of the network. The json file
-should be structured as a dictionary with the following keys:</p>
+<p>For this example, we will be using a json file to specify the nodes and connectivity of the network.
+The json file should be structured as a dictionary with the following keys:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">is_parallel</span></code>, denoting if it’s a parallel or sequential simulation</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">stop_time</span></code>, the stop time of simulation</p></li>
@@ -99,49 +99,52 @@ should be structured as a dictionary with the following keys:</p>
 &quot;stop_time&quot;: 2000000000000
 </pre></div>
 </div>
-<p>Then, we make the <code class="docutils literal notranslate"><span class="pre">nodes</span></code> entry. All fields of the list will have the <code class="docutils literal notranslate"><span class="pre">name</span></code> field required by the node constructor and
-a specification of the node type, along with any more arguments (optional or not) specified by the specific node type.
-We will be using the <code class="docutils literal notranslate"><span class="pre">QuantumRouter</span></code> node type for this tutorial, which already includes all of the necessary hardware
-for entanglement distribution as well as all necessary modules (including network management). The <code class="docutils literal notranslate"><span class="pre">seed</span></code> attribute
-denotes the random seed used for the random number generator on the node, which could guarantee the reproducibility of
-the simulation. The <code class="docutils literal notranslate"><span class="pre">memo_size</span></code> define the size of memory array on the quantum router.</p>
+<p>Next, we will make the <code class="docutils literal notranslate"><span class="pre">nodes</span></code> entry.
+All fields of the list will have the <code class="docutils literal notranslate"><span class="pre">name</span></code> field required by the node constructor and a specification of the node type,
+along with any more arguments (optional or not) specified by the specific node type.
+We will be using the <code class="docutils literal notranslate"><span class="pre">QuantumRouter</span></code> node type for this tutorial,
+which already includes all of the necessary hardware for entanglement distribution as well as all necessary modules (including network management).
+The <code class="docutils literal notranslate"><span class="pre">seed</span></code> attribute denotes the random seed used for the random number generator on the node,
+which can guarantee the reproducibility of the simulation.
+The <code class="docutils literal notranslate"><span class="pre">memo_size</span></code> attribute defines the size of the memory array on the quantum router.</p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span>&quot;nodes&quot;: [
-{
-&quot;name&quot;: &quot;center&quot;,
-&quot;type&quot;: &quot;QuantumRouter&quot;,
-&quot;seed&quot;: 0,
-&quot;memo_size&quot;: 50
-},
-{
-&quot;name&quot;: &quot;end1&quot;,
-&quot;type&quot;: &quot;QuantumRouter&quot;,
-&quot;memo_size&quot;: 50,
-&quot;seed&quot;: 1
-},
-{
-&quot;name&quot;: &quot;end2&quot;,
-&quot;type&quot;: &quot;QuantumRouter&quot;,
-&quot;memo_size&quot;: 50,
-&quot;seed&quot;: 2
-},
-{
-&quot;name&quot;: &quot;end3&quot;,
-&quot;type&quot;: &quot;QuantumRouter&quot;,
-&quot;memo_size&quot;: 50,
-&quot;seed&quot;: 3
-},
-{
-&quot;name&quot;: &quot;end4&quot;,
-&quot;type&quot;: &quot;QuantumRouter&quot;,
-&quot;memo_size&quot;: 50,
-&quot;seed&quot;: 4
-}
+  {
+    &quot;name&quot;: &quot;center&quot;,
+    &quot;type&quot;: &quot;QuantumRouter&quot;,
+    &quot;seed&quot;: 0,
+    &quot;memo_size&quot;: 50
+  },
+  {
+    &quot;name&quot;: &quot;end1&quot;,
+    &quot;type&quot;: &quot;QuantumRouter&quot;,
+    &quot;seed&quot;: 1
+    &quot;memo_size&quot;: 50,
+  },
+  {
+    &quot;name&quot;: &quot;end2&quot;,
+    &quot;type&quot;: &quot;QuantumRouter&quot;,
+    &quot;seed&quot;: 2
+    &quot;memo_size&quot;: 50,
+  },
+  {
+    &quot;name&quot;: &quot;end3&quot;,
+    &quot;type&quot;: &quot;QuantumRouter&quot;,
+    &quot;seed&quot;: 3
+    &quot;memo_size&quot;: 50,
+  },
+  {
+    &quot;name&quot;: &quot;end4&quot;,
+    &quot;type&quot;: &quot;QuantumRouter&quot;,
+    &quot;seed&quot;: 4
+    &quot;memo_size&quot;: 50,
+  }
 ]
 </pre></div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">qconnections</span></code> entry should have multiple entries specifying the name of the two connected nodes, the attenuation
-and length of the fiber. The type of quantum connection should be specified by the attribute <code class="docutils literal notranslate"><span class="pre">type</span></code> . We predefined the
-type <code class="docutils literal notranslate"><span class="pre">meet_in_the_middle</span></code>  that automatically create a BSM node in the middle of node1 and node2.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">qconnections</span></code> entry should have multiple entries specifying the name of the two connected nodes and at least the attenuation and length of the fiber
+(plus any additional keyword arguments).
+The type of quantum connection should be specified by the attribute <code class="docutils literal notranslate"><span class="pre">type</span></code>.
+Here, we use the predefined type <code class="docutils literal notranslate"><span class="pre">meet_in_the_middle</span></code>  that automatically generates a BSM node in the middle of node1 and node2.</p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span>&quot;qconnections&quot;: [
     {
       &quot;node1&quot;: &quot;center&quot;,
@@ -174,9 +177,8 @@ type <code class="docutils literal notranslate"><span class="pre">meet_in_the_mi
 ]
 </pre></div>
 </div>
-<p>Finally, for the classical channels, we will be using the classical connections to create two classical
-channels (<code class="docutils literal notranslate"><span class="pre">node1</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">node2</span></code> and <code class="docutils literal notranslate"><span class="pre">node2</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">node1</span></code>). Two channels have the same delay specified by the
-attribute <code class="docutils literal notranslate"><span class="pre">delay</span></code>.</p>
+<p>Finally, for the classical channels, we will specify two-way <code class="docutils literal notranslate"><span class="pre">cconnections</span></code>.
+The node endpoints are specified by name as <code class="docutils literal notranslate"><span class="pre">node1</span></code> and <code class="docutils literal notranslate"><span class="pre">node2</span></code>, and each communication direction will have the same delay <code class="docutils literal notranslate"><span class="pre">delay</span></code>.</p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span>&quot;cconnections&quot;: [
     {
       &quot;node1&quot;: &quot;center&quot;,
@@ -234,10 +236,11 @@ attribute <code class="docutils literal notranslate"><span class="pre">delay</sp
 </div>
 <div class="section" id="step-2-build-the-network">
 <h2>Step 2: Build the Network<a class="headerlink" href="#step-2-build-the-network" title="Permalink to this headline">¶</a></h2>
-<p>Now, we can move to our script and begin building the experiment from our json file. The file can be loaded with the
-construction function of <code class="docutils literal notranslate"><span class="pre">RouterNetTopo</span></code> . Note that we have the json file saved as <code class="docutils literal notranslate"><span class="pre">star_network.json</span></code> here.
-The <code class="docutils literal notranslate"><span class="pre">RouterNetTopo</span></code> will also create a timeline with 2 seconds of simulation time. We could use
-function <code class="docutils literal notranslate"><span class="pre">get_timeline()</span></code> to get the timeline for the simulation.</p>
+<p>Now, we can move to our script and begin building the experiment from our json file.
+The json file can be loaded with the construction function of <code class="docutils literal notranslate"><span class="pre">RouterNetTopo</span></code>.
+Note that we have the json file saved as <code class="docutils literal notranslate"><span class="pre">star_network.json</span></code> here.
+The <code class="docutils literal notranslate"><span class="pre">RouterNetTopo</span></code> will also create a timeline with 2 seconds of simulation time.
+We use the function <code class="docutils literal notranslate"><span class="pre">get_timeline()</span></code> to get the timeline for the simulation.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sequence.topology.router_net_topo</span> <span class="kn">import</span> <span class="n">RouterNetTopo</span>
 
 
@@ -251,12 +254,12 @@ function <code class="docutils literal notranslate"><span class="pre">get_timeli
 <li><p><code class="docutils literal notranslate"><span class="pre">topology</span></code>, the <code class="docutils literal notranslate"><span class="pre">RouterNetTopo</span></code> object we wish to update.</p></li>
 </ul>
 <p>We will edit a few hardware objects by accessing the hardware fields of network nodes. To access all nodes of a specific type in the network, we can use the <code class="docutils literal notranslate"><span class="pre">topology.get_nodes_by_type</span></code> method. This is useful for editing hardware objects that may only be found on one node type, e.g. memories only found on <code class="docutils literal notranslate"><span class="pre">QuantumRouter</span></code> nodes.</p>
-<p>We may also wish to edit parameters of our entanglement protocols. Since these are created by a node’s resource manager,
-we will need to edit the appropriate fields of the resource manager on each node. This is achieved in much the same way
-as hardware elements.</p>
-<p>For quantum and classical connections, the <code class="docutils literal notranslate"><span class="pre">get_qchannels</span></code> and <code class="docutils literal notranslate"><span class="pre">get_cchannels</span></code>  functions of the topology will return a
-list of quantum channels and classical channels respectively. These provide an iterable list of all connections in the
-network that may be edited directly.</p>
+<p>We may also wish to edit parameters of our entanglement protocols.
+Since these are created by a node’s resource manager,
+we will need to edit the appropriate fields of the resource manager on each node.
+This is achieved in much the same way as hardware elements.</p>
+<p>For quantum and classical connections, the <code class="docutils literal notranslate"><span class="pre">get_qchannels</span></code> and <code class="docutils literal notranslate"><span class="pre">get_cchannels</span></code>  functions of the topology will return a  list of quantum channels and classical channels, respectively.
+These provide an iterable list of all connections in the network that may be edited directly.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">set_parameters</span><span class="p">(</span><span class="n">topology</span><span class="p">:</span> <span class="n">RouterNetTopo</span><span class="p">):</span>
     <span class="c1"># set memory parameters</span>
     <span class="n">MEMO_FREQ</span> <span class="o">=</span> <span class="mf">2e3</span>
@@ -264,20 +267,21 @@ network that may be edited directly.</p>
     <span class="n">MEMO_EFFICIENCY</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="n">MEMO_FIDELITY</span> <span class="o">=</span> <span class="mf">0.9349367588934053</span>
     <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">topology</span><span class="o">.</span><span class="n">get_nodes_by_type</span><span class="p">(</span><span class="n">RouterNetTopo</span><span class="o">.</span><span class="n">QUANTUM_ROUTER</span><span class="p">):</span>
-        <span class="n">node</span><span class="o">.</span><span class="n">memory_array</span><span class="o">.</span><span class="n">update_memory_params</span><span class="p">(</span><span class="s2">&quot;frequency&quot;</span><span class="p">,</span> <span class="n">MEMO_FREQ</span><span class="p">)</span>
-        <span class="n">node</span><span class="o">.</span><span class="n">memory_array</span><span class="o">.</span><span class="n">update_memory_params</span><span class="p">(</span><span class="s2">&quot;coherence_time&quot;</span><span class="p">,</span> <span class="n">MEMO_EXPIRE</span><span class="p">)</span>
-        <span class="n">node</span><span class="o">.</span><span class="n">memory_array</span><span class="o">.</span><span class="n">update_memory_params</span><span class="p">(</span><span class="s2">&quot;efficiency&quot;</span><span class="p">,</span> <span class="n">MEMO_EFFICIENCY</span><span class="p">)</span>
-        <span class="n">node</span><span class="o">.</span><span class="n">memory_array</span><span class="o">.</span><span class="n">update_memory_params</span><span class="p">(</span><span class="s2">&quot;raw_fidelity&quot;</span><span class="p">,</span> <span class="n">MEMO_FIDELITY</span><span class="p">)</span>
+        <span class="n">memory_array</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">get_components_by_type</span><span class="p">(</span><span class="s2">&quot;MemoryArray&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">memory_array</span><span class="o">.</span><span class="n">update_memory_params</span><span class="p">(</span><span class="s2">&quot;frequency&quot;</span><span class="p">,</span> <span class="n">MEMO_FREQ</span><span class="p">)</span>
+        <span class="n">memory_array</span><span class="o">.</span><span class="n">update_memory_params</span><span class="p">(</span><span class="s2">&quot;coherence_time&quot;</span><span class="p">,</span> <span class="n">MEMO_EXPIRE</span><span class="p">)</span>
+        <span class="n">memory_array</span><span class="o">.</span><span class="n">update_memory_params</span><span class="p">(</span><span class="s2">&quot;efficiency&quot;</span><span class="p">,</span> <span class="n">MEMO_EFFICIENCY</span><span class="p">)</span>
+        <span class="n">memory_array</span><span class="o">.</span><span class="n">update_memory_params</span><span class="p">(</span><span class="s2">&quot;raw_fidelity&quot;</span><span class="p">,</span> <span class="n">MEMO_FIDELITY</span><span class="p">)</span>
 
     <span class="c1"># set detector parameters</span>
     <span class="n">DETECTOR_EFFICIENCY</span> <span class="o">=</span> <span class="mf">0.9</span>
     <span class="n">DETECTOR_COUNT_RATE</span> <span class="o">=</span> <span class="mf">5e7</span>
     <span class="n">DETECTOR_RESOLUTION</span> <span class="o">=</span> <span class="mi">100</span>
     <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">topology</span><span class="o">.</span><span class="n">get_nodes_by_type</span><span class="p">(</span><span class="n">RouterNetTopo</span><span class="o">.</span><span class="n">BSM_NODE</span><span class="p">):</span>
-        <span class="n">node</span><span class="o">.</span><span class="n">bsm</span><span class="o">.</span><span class="n">update_detectors_params</span><span class="p">(</span><span class="s2">&quot;efficiency&quot;</span><span class="p">,</span> <span class="n">DETECTOR_EFFICIENCY</span><span class="p">)</span>
-        <span class="n">node</span><span class="o">.</span><span class="n">bsm</span><span class="o">.</span><span class="n">update_detectors_params</span><span class="p">(</span><span class="s2">&quot;count_rate&quot;</span><span class="p">,</span> <span class="n">DETECTOR_COUNT_RATE</span><span class="p">)</span>
-        <span class="n">node</span><span class="o">.</span><span class="n">bsm</span><span class="o">.</span><span class="n">update_detectors_params</span><span class="p">(</span><span class="s2">&quot;time_resolution&quot;</span><span class="p">,</span> <span class="n">DETECTOR_RESOLUTION</span><span class="p">)</span>
-        
+        <span class="n">bsm</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">get_components_by_type</span><span class="p">(</span><span class="s2">&quot;SingleAtomBSM&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">bsm</span><span class="o">.</span><span class="n">update_detectors_params</span><span class="p">(</span><span class="s2">&quot;efficiency&quot;</span><span class="p">,</span> <span class="n">DETECTOR_EFFICIENCY</span><span class="p">)</span>
+        <span class="n">bsm</span><span class="o">.</span><span class="n">update_detectors_params</span><span class="p">(</span><span class="s2">&quot;count_rate&quot;</span><span class="p">,</span> <span class="n">DETECTOR_COUNT_RATE</span><span class="p">)</span>
+        <span class="n">bsm</span><span class="o">.</span><span class="n">update_detectors_params</span><span class="p">(</span><span class="s2">&quot;time_resolution&quot;</span><span class="p">,</span> <span class="n">DETECTOR_RESOLUTION</span><span class="p">)</span>
     <span class="c1"># set entanglement swapping parameters</span>
     <span class="n">SWAP_SUCC_PROB</span> <span class="o">=</span> <span class="mf">0.90</span>
     <span class="n">SWAP_DEGRADATION</span> <span class="o">=</span> <span class="mf">0.99</span>
@@ -302,7 +306,7 @@ network that may be edited directly.</p>
 <h2>Step 3: Making Requests<a class="headerlink" href="#step-3-making-requests" title="Permalink to this headline">¶</a></h2>
 <p>With the network built, we are now ready to make requests of the network manager and start entanglement. The <code class="docutils literal notranslate"><span class="pre">request</span></code> method of the network manager can be used for this. When invoked, it will automatically start the reservation process and create rules as required (see the background section). The method has 5 arguments:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">responder</span></code>, a string name of the other node with whitch to generate entangled pairs</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">responder</span></code>, a string name of the other node with which to generate entangled pairs</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">start_time</span></code>, the simulation time (in <strong>picoseconds</strong>) at which entanglement should begin</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">end_time</span></code>, the simulation time at which entanglement may end and reserved resources released</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">memory_size</span></code>, the number of entangled memory pairs requested</p></li>
@@ -310,16 +314,18 @@ network that may be edited directly.</p>
 </ul>
 <p>We will make one request at one network node, asking for 25 memories to be entangled starting at 1 second and ending at 2 seconds (the end of our simulation). At the end of the simulation we will print out the entanglement state of memories in a manner similar to chapter 4.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># the start and end nodes may be edited as desired </span>
+<span class="n">start_node_name</span> <span class="o">=</span> <span class="s2">&quot;end1&quot;</span>
+<span class="n">end_node_name</span> <span class="o">=</span> <span class="s2">&quot;end2&quot;</span>
 <span class="n">node1</span> <span class="o">=</span> <span class="n">node2</span> <span class="o">=</span> <span class="kc">None</span>
 
 <span class="k">for</span> <span class="n">router</span> <span class="ow">in</span> <span class="n">network_topo</span><span class="o">.</span><span class="n">get_nodes_by_type</span><span class="p">(</span><span class="n">RouterNetTopo</span><span class="o">.</span><span class="n">QUANTUM_ROUTER</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">router</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;end1&quot;</span><span class="p">:</span>
-      	<span class="n">node1</span> <span class="o">=</span> <span class="n">router</span>
-    <span class="k">elif</span> <span class="n">router</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;end2&quot;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">router</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">start_node_name</span><span class="p">:</span>
+        <span class="n">node1</span> <span class="o">=</span> <span class="n">router</span>
+    <span class="k">elif</span> <span class="n">router</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">end_node_name</span><span class="p">:</span>
         <span class="n">node2</span> <span class="o">=</span> <span class="n">router</span>
 
 <span class="n">nm</span> <span class="o">=</span> <span class="n">node1</span><span class="o">.</span><span class="n">network_manager</span>
-<span class="n">nm</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="n">node2</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">start_time</span><span class="o">=</span><span class="mf">1e12</span><span class="p">,</span> <span class="n">end_time</span><span class="o">=</span><span class="mf">10e12</span><span class="p">,</span> <span class="n">memory_size</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">target_fidelity</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
+<span class="n">nm</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="n">start_node_name</span><span class="p">,</span> <span class="n">start_time</span><span class="o">=</span><span class="mf">1e12</span><span class="p">,</span> <span class="n">end_time</span><span class="o">=</span><span class="mf">10e12</span><span class="p">,</span> <span class="n">memory_size</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">target_fidelity</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
 
 <span class="n">tl</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
 <span class="n">tl</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
@@ -397,7 +403,7 @@ network that may be edited directly.</p>
         <li class="right" >
           <a href="../chapter4/resource_management.html" title="Chapter 4: Resource Management"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.0 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Chapter 5: Network Manager</a></li> 
       </ul>
     </div>

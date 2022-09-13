@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BB84 &#8212; SeQUeNCe 0.3.2 documentation</title>
+    <title>BB84 &#8212; SeQUeNCe 0.5.0 documentation</title>
     <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     
@@ -35,7 +35,7 @@
         <li class="right" >
           <a href="top.html" title="Quantum Key Distribution"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" accesskey="U">Quantum Key Distribution</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">BB84</a></li> 
       </ul>
@@ -54,7 +54,7 @@ The BB84 class must be attachedd to a node with suitable hardware, such as a QKD
 Also included in this module are a function to pair protocol instances (required before the start of transmission) and the message type used by the protocol.</p>
 <dl class="py class">
 <dt id="src.qkd.BB84.BB84">
-<em class="property">class </em><code class="sig-prename descclassname">src.qkd.BB84.</code><code class="sig-name descname">BB84</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">own</span><span class="p">:</span> <span class="n">QKDNode</span></em>, <em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">role</span><span class="o">=</span><span class="default_value">- 1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.qkd.BB84.BB84" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">src.qkd.BB84.</code><code class="sig-name descname">BB84</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">own</span><span class="p">:</span> <span class="n">QKDNode</span></em>, <em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">lightsource</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">qsdetector</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">role</span><span class="o">=</span><span class="default_value">- 1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.qkd.BB84.BB84" title="Permalink to this definition">¶</a></dt>
 <dd><p>Implementation of BB84 protocol.</p>
 <p>The BB84 protocol uses photons to create a secure key between two QKD Nodes.</p>
 <dl class="py attribute">
@@ -201,8 +201,8 @@ Also included in this module are a function to pair protocol instances (required
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="src.qkd.BB84.BB84.key_lenghts">
-<code class="sig-name descname">key_lenghts</code><a class="headerlink" href="#src.qkd.BB84.BB84.key_lenghts" title="Permalink to this definition">¶</a></dt>
+<dt id="src.qkd.BB84.BB84.key_lengths">
+<code class="sig-name descname">key_lengths</code><a class="headerlink" href="#src.qkd.BB84.BB84.key_lengths" title="Permalink to this definition">¶</a></dt>
 <dd><p>list of desired key lengths.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -240,7 +240,8 @@ Also included in this module are a function to pair protocol instances (required
 <p>Will calculate qubit parameters and invoke lightsource emit method.
 Also records bits sent for future processing.</p>
 <dl class="simple">
-<dt>Side Effects:</dt><dd><p>Will invoke emit method of node lightsource.
+<dt>Side Effects:</dt><dd><p>Will set destination of photons for local node.
+Will invoke emit method of node lightsource.
 Will schedule another <cite>begin_photon_pulse</cite> event after the emit period.</p>
 </dd>
 </dl>
@@ -381,8 +382,8 @@ Messages of different types contain different information.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="src.qkd.BB84.BB84Message.wavelenght">
-<code class="sig-name descname">wavelenght</code><a class="headerlink" href="#src.qkd.BB84.BB84Message.wavelenght" title="Permalink to this definition">¶</a></dt>
+<dt id="src.qkd.BB84.BB84Message.wavelength">
+<code class="sig-name descname">wavelength</code><a class="headerlink" href="#src.qkd.BB84.BB84Message.wavelength" title="Permalink to this definition">¶</a></dt>
 <dd><p>wavelength (in nm) of photons (if <cite>msg_type == BEGIN_PHOTON_PULSE</cite>).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -486,7 +487,7 @@ Messages of different types contain different information.</p>
         <li class="right" >
           <a href="top.html" title="Quantum Key Distribution"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" >Quantum Key Distribution</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">BB84</a></li> 
       </ul>

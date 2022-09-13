@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chapter 2: Hardware Module &#8212; SeQUeNCe 0.3.2 documentation</title>
+    <title>Chapter 2: Hardware Module &#8212; SeQUeNCe 0.5.0 documentation</title>
     <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     
@@ -35,7 +35,7 @@
         <li class="right" >
           <a href="../chapter1/discrete-event-simulation.html" title="Chapter 1: Discrete Event Simulation"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.0 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Chapter 2: Hardware Module</a></li> 
       </ul>
     </div>  
@@ -53,7 +53,7 @@
 <li><p>Gain familiarity with the sequence <code class="docutils literal notranslate"><span class="pre">topology.node</span></code> module</p></li>
 <li><p>See how networks may be built with sequence</p></li>
 </ul>
-<p>To achieve this, we will construct a couple simple networks and show their functionality. We will also create a custom “protocol” to measure detection events as well as custom node types to hold all of our hardware.</p>
+<p>To achieve this, we will construct a couple simple networks and show their functionality. We will also create custom “protocols” to control and monitor hardware, as well as custom node types to hold all of our components.</p>
 <div class="section" id="example-optical-hardware">
 <h2>Example: Optical Hardware<a class="headerlink" href="#example-optical-hardware" title="Permalink to this headline">¶</a></h2>
 <p>In this example, we will build a simple 2-node network. There will be a quantum memory on one node and a detector on the other node connected by a quantum channel. The topology is shown here:</p>
@@ -65,7 +65,7 @@
 <div class="section" id="step-1-nodes-and-hardware">
 <h3>Step 1: Nodes and Hardware<a class="headerlink" href="#step-1-nodes-and-hardware" title="Permalink to this headline">¶</a></h3>
 <p>To begin, we create our custom node classes. We will make two types - a <code class="docutils literal notranslate"><span class="pre">SenderNode</span></code> to hold the memory and send photons and a <code class="docutils literal notranslate"><span class="pre">ReceiverNode</span></code> to receive and detect photons. Both of our node types will inherit from <code class="docutils literal notranslate"><span class="pre">Node</span></code>, the basic node class from sequence, and we invoke the parent constructor for <code class="docutils literal notranslate"><span class="pre">Node</span></code>. In general, entities (such as nodes and hardware) require a string <code class="docutils literal notranslate"><span class="pre">name</span></code> and a <code class="docutils literal notranslate"><span class="pre">Timeline</span></code> in their constructor, as well as necessary parameters (for more details on timelines, see Tutorial 1).</p>
-<p>Next, we create all of our hardware elements on each node. The detector is created easily, as no specific parameters are required (but we wish to set the <code class="docutils literal notranslate"><span class="pre">efficiency</span></code> to 1 to prevent errors). We’ll put the detector class on the receiver node.</p>
+<p>We will now create our hardware. The detector is created easily, as no specific parameters are required (but we wish to set the <code class="docutils literal notranslate"><span class="pre">efficiency</span></code> to 1 to prevent errors).</p>
 <p>The required parameters for memories are more numerous and are listed here:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">fidelity</span></code>: fidelity of entanglement. This is usually set to 0 when unentangled, but can be set to other values as it is usually replaced when entangled.</p></li>
@@ -74,54 +74,65 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">coherence_time</span></code>: the time for which a memory state (other than down) is viable, given in seconds.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">wavelength</span></code>: the wavelength of emitted photons.</p></li>
 </ul>
-<p>We will add our memory to the sender node class.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>from sequence.kernel.timeline import Timeline
-from sequence.topology.node import Node
-from sequence.components.memory import Memory
-from sequence.components.detector import Detector
-from sequence.components.circuit import Circuit
+<p>Next, we will add each component to the proper node using the <code class="docutils literal notranslate"><span class="pre">add_component</span></code> method.
+This method adds the component to the node’s <code class="docutils literal notranslate"><span class="pre">components</span></code> dictionary, which maps component names to objects.
+It may be accessed by outside protocols to monitor components or get their current state.
+We’ll put the detector on the receiver node, and the memory on the sender node.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sequence.kernel.timeline</span> <span class="kn">import</span> <span class="n">Timeline</span>
+<span class="kn">from</span> <span class="nn">sequence.topology.node</span> <span class="kn">import</span> <span class="n">Node</span>
+<span class="kn">from</span> <span class="nn">sequence.components.memory</span> <span class="kn">import</span> <span class="n">Memory</span>
+<span class="kn">from</span> <span class="nn">sequence.components.detector</span> <span class="kn">import</span> <span class="n">Detector</span>
 
-_meas_circuit = Circuit(1)
-_meas_circuit.measure(0)
+<span class="k">class</span> <span class="nc">SenderNode</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">timeline</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">timeline</span><span class="p">)</span>
+        
+        <span class="n">memory_name</span> <span class="o">=</span> <span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;.memory&quot;</span>
+        <span class="n">memory</span> <span class="o">=</span> <span class="n">Memory</span><span class="p">(</span><span class="n">memory_name</span><span class="p">,</span> <span class="n">timeline</span><span class="p">,</span> <span class="n">fidelity</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">frequency</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                        <span class="n">efficiency</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">coherence_time</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">wavelength</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_component</span><span class="p">(</span><span class="n">memory</span><span class="p">)</span>
+        <span class="n">memory</span><span class="o">.</span><span class="n">add_receiver</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
-class SenderNode(Node):
-    def __init__(self, name: str, timeline: Timeline):
-        super().__init__(name, timeline)
-        from sequence.components.memory import Memory
-        self.memory = Memory(‘node1.memory’, tl, fidelity=0, frequency=0,
-                             efficiency=1, coherence_time=0, wavelength=500)
-        self.memory.owner = self
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">photon</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">send_qubit</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;dst&#39;</span><span class="p">],</span> <span class="n">photon</span><span class="p">)</span>
 
-class ReceiverNode(Node):
-    def __init__(self, name: str, timeline: Timeline):
-        super().__init__(name, timeline)
-        self.detector = Detector(‘node2.detector’, tl, efficiency=1)
-        self.detector.owner = self
+<span class="k">class</span> <span class="nc">ReceiverNode</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">timeline</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">timeline</span><span class="p">)</span>
 
-    def receive_qubit(self, src: str, qubit) -&gt; None:
-        qm = self.timeline.quantum_manager
-        key = qubit.qstate_key
-        meas_res = qm.run_circuit(_meas_circuit, [key], self.get_generator().random())[key]
-        if meas_res:
-            self.detector.get()
+        <span class="n">detector_name</span> <span class="o">=</span> <span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;.detector&quot;</span>
+        <span class="n">detector</span> <span class="o">=</span> <span class="n">Detector</span><span class="p">(</span><span class="n">detector_name</span><span class="p">,</span> <span class="n">timeline</span><span class="p">,</span> <span class="n">efficiency</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_component</span><span class="p">(</span><span class="n">detector</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_first_component</span><span class="p">(</span><span class="n">detector_name</span><span class="p">)</span>
+        <span class="n">detector</span><span class="o">.</span><span class="n">owner</span> <span class="o">=</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="nf">receive_qubit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">qubit</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">first_component_name</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>Notice that we also needed to change the <code class="docutils literal notranslate"><span class="pre">receive_qubit</span></code> method of the base <code class="docutils literal notranslate"><span class="pre">Node</span></code> class.
-This method is invoked by the quantum channel when transmitting photons, and by default is set to do nothing.
+<p>You may notice that the initialization methods make use of a few additional functions, and methods have been added to the node classes.
+These are to establish the internal hardware connections on the node.
+The first of these methods is the <code class="docutils literal notranslate"><span class="pre">Entity.get</span></code> method.
+All physical simulation elements, including optical hardware and nodes, inherit from this class.
+The <code class="docutils literal notranslate"><span class="pre">get</span></code> method is used to receive photons from another entity which may be further processed.
+The <code class="docutils literal notranslate"><span class="pre">add_receiver</span></code> method similarly designates another component (or components) to receive photons from the current entity.
+In our case, we wish to set the memory’s receiver as the <code class="docutils literal notranslate"><span class="pre">SenderNode</span></code>, so that the node may receive emitted photons and direct them to an inter-node quantum channel using <code class="docutils literal notranslate"><span class="pre">send_qubit</span></code>.
+This is performed in the <code class="docutils literal notranslate"><span class="pre">SenderNode.get</span></code> method.
+At the other end of the channel, the <code class="docutils literal notranslate"><span class="pre">receive_qubit</span></code> method is called by a quantum channel on the receiving node of a transmission.
 For this method, the <code class="docutils literal notranslate"><span class="pre">src</span></code> input specifies the name of the node sending the qubit.
 In our case, we don’t care about the source node, so we can ignore it.
-The <code class="docutils literal notranslate"><span class="pre">qubit</span></code> input is the transmitted photon.
-For single atom memories, the memory state heralded by the denotes the presence or absence of a photon.
-This corresponds to the up or down state of the memory.
-We will thus measure the memory state and record the photon accordingly (this will be done automatically in future updates).
-If we measure 0, we must ignore the photon and not record it.
-Otherwise, it is sent to the detector for recording.
-The detector uses the <code class="docutils literal notranslate"><span class="pre">get</span></code> method to receive photons, and this interface is shared by many other optical hardware elements.</p>
+The <code class="docutils literal notranslate"><span class="pre">qubit</span></code> input is the transmitted photon; it is sent to the detector for measurement.
+This is done using the <code class="docutils literal notranslate"><span class="pre">first_component_name</span></code> attribute, which designates a component on a node to receive all incoming photons.</p>
 </div>
-<div class="section" id="step-2-custom-protocol">
-<h3>Step 2: Custom Protocol<a class="headerlink" href="#step-2-custom-protocol" title="Permalink to this headline">¶</a></h3>
-<p>Next, we will create our custom protocol using a custom class. Let’s denote this class as <code class="docutils literal notranslate"><span class="pre">Counter</span></code>, as we will be counting photons detection. The initializing method is very simple, only setting the count to 0. We then proceed to the trigger function, which will handle information from the detector. Normally, the detector will pass two arguments through this function (a reference to the specific detector and info including the detection time), but we are not concerned with these. We only wish to increment our counter.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Counter</span><span class="p">():</span>
+<div class="section" id="step-2-custom-counting-protocol">
+<h3>Step 2: Custom Counting Protocol<a class="headerlink" href="#step-2-custom-counting-protocol" title="Permalink to this headline">¶</a></h3>
+<p>Next, we will create our custom protocols using custom classes.
+Let’s denote the first class as <code class="docutils literal notranslate"><span class="pre">Counter</span></code>, as we will be counting photon detection.
+The initializing method is very simple, only setting the count to 0.
+We then proceed to the trigger function, which will handle information from the detector.
+Normally, the detector will pass two arguments through this function (a reference to the specific detector and info including the detection time), but we are not concerned with these.
+We only wish to increment our counter.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Counter</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
 
@@ -129,13 +140,31 @@ The detector uses the <code class="docutils literal notranslate"><span class="pr
         <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
 </pre></div>
 </div>
+<p>We then add this counter protocol to our receiver node, by modifying the initialization method.
+To have the counter monitor the detector, we invoke the <code class="docutils literal notranslate"><span class="pre">Entity.attach</span></code> method.
+This method ensures that any updates (such as detection events) from an entity are passed to the object specified in the method arguments.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ReceiverNode</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">timeline</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">timeline</span><span class="p">)</span>
+
+        <span class="n">detector_name</span> <span class="o">=</span> <span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;.detector&quot;</span>
+        <span class="n">detector</span> <span class="o">=</span> <span class="n">Detector</span><span class="p">(</span><span class="n">detector_name</span><span class="p">,</span> <span class="n">timeline</span><span class="p">,</span> <span class="n">efficiency</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_component</span><span class="p">(</span><span class="n">detector</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_first_component</span><span class="p">(</span><span class="n">detector_name</span><span class="p">)</span>
+        <span class="n">detector</span><span class="o">.</span><span class="n">owner</span> <span class="o">=</span> <span class="bp">self</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">()</span>
+        <span class="n">detector</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">counter</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The second protocol class is slightly more complicated, and will be activating the quantum memory.
+We will define it later in the tutorial.</p>
 </div>
 <div class="section" id="step-3-build-the-network">
 <h3>Step 3: Build the Network<a class="headerlink" href="#step-3-build-the-network" title="Permalink to this headline">¶</a></h3>
 <p>We are now ready to start writing the main function of our script. The first step is to create the simulation timeline. We will use a 10 second run time, but more or less time may be needed depending on hardware parameters. Note that the runtime is given in <strong>picoseconds</strong>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sequence.kernel.timeline</span> <span class="kn">import</span> <span class="n">Timeline</span>
 <span class="n">tl</span> <span class="o">=</span> <span class="n">Timeline</span><span class="p">(</span><span class="mf">10e12</span><span class="p">)</span>
-<span class="n">tl</span><span class="o">.</span><span class="n">show_progress</span> <span class="o">=</span> <span class="kc">False</span>
 </pre></div>
 </div>
 <p>We can then create our two network nodes using our custom node class. We only need to specify a name for each node and the timeline it belongs to:</p>
@@ -151,23 +180,25 @@ The detector uses the <code class="docutils literal notranslate"><span class="pr
 <span class="n">qc</span><span class="o">.</span><span class="n">set_ends</span><span class="p">(</span><span class="n">node1</span><span class="p">,</span> <span class="n">node2</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Lastly, we’ll create the counter for our detector. We only need to define an instance, and attach it to the detector. When the detector properly detects a photon, it will call the <code class="docutils literal notranslate"><span class="pre">trigger</span></code> method of all attached objects, including our counter.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">counter</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">()</span>
-<span class="n">node2</span><span class="o">.</span><span class="n">detector</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">counter</span><span class="p">)</span>
-</pre></div>
-</div>
 </div>
 <div class="section" id="step-4-measure-memory-once">
 <h3>Step 4: Measure Memory Once<a class="headerlink" href="#step-4-measure-memory-once" title="Permalink to this headline">¶</a></h3>
-<p>With the network built, we are ready to schedule simulation events and run our experiment. The details on scheduling events are covered in Tutorial 1, so we will not focus on them here. Let’s first run one experiment with the memory in the |↑⟩ state and observe the detection time of the single emitted photon. The memory state can be set with the <code class="docutils literal notranslate"><span class="pre">update_state</span></code> method:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">node1</span><span class="o">.</span><span class="n">memory</span><span class="o">.</span><span class="n">update_state</span><span class="p">([</span><span class="nb">complex</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="nb">complex</span><span class="p">(</span><span class="mi">1</span><span class="p">)])</span>
+<p>With the network built, we are ready to schedule simulation events and run our experiment.
+The details on scheduling events are covered in Tutorial 1, so we will not focus on them here.
+Let’s first run one experiment with the memory in the |↑⟩ state and observe the detection time of the single emitted photon.
+We can obtain the memory object using the <code class="docutils literal notranslate"><span class="pre">Node.get_components_by_type</span></code> method, which returns a list of matching components on the node.
+The memory state can then be set with the <code class="docutils literal notranslate"><span class="pre">update_state</span></code> method.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">memories</span> <span class="o">=</span> <span class="n">node1</span><span class="o">.</span><span class="n">get_components_by_type</span><span class="p">(</span><span class="s2">&quot;Memory&quot;</span><span class="p">)</span>
+<span class="n">memory</span> <span class="o">=</span> <span class="n">memories</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">memory</span><span class="o">.</span><span class="n">update_state</span><span class="p">([</span><span class="nb">complex</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="nb">complex</span><span class="p">(</span><span class="mi">1</span><span class="p">)])</span>
 </pre></div>
 </div>
-<p>We set the state of this single memory to a quantum state, given as a complex array of coefficients for the |↑⟩ and |↓⟩ states. Let’s also change our counter slightly to record the detection time. This can be done by accessing the <code class="docutils literal notranslate"><span class="pre">'time'</span></code> field of the detector info:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Counter</span><span class="p">():</span>
+<p>We set the state of this single memory to a quantum state, given as a complex array of coefficients for the |↑⟩ and |↓⟩ states.
+Let’s also change our counter slightly to record the detection time. This can be done by accessing the <code class="docutils literal notranslate"><span class="pre">'time'</span></code> field of the detector info:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Counter</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">time</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">time</span> <span class="o">=</span> <span class="mi">0</span>
 
     <span class="k">def</span> <span class="nf">trigger</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">detector</span><span class="p">,</span> <span class="n">info</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
@@ -178,7 +209,7 @@ The detector uses the <code class="docutils literal notranslate"><span class="pr
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sequence.kernel.process</span> <span class="kn">import</span> <span class="n">Process</span>
 <span class="kn">from</span> <span class="nn">sequence.kernel.event</span> <span class="kn">import</span> <span class="n">Event</span>
 
-<span class="n">process</span> <span class="o">=</span> <span class="n">Process</span><span class="p">(</span><span class="n">node1</span><span class="o">.</span><span class="n">memory</span><span class="p">,</span> <span class="s2">&quot;excite&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;node2&#39;</span><span class="p">])</span>
+<span class="n">process</span> <span class="o">=</span> <span class="n">Process</span><span class="p">(</span><span class="n">memory</span><span class="p">,</span> <span class="s2">&quot;excite&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;node2&quot;</span><span class="p">])</span>
 <span class="n">event</span> <span class="o">=</span> <span class="n">Event</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">process</span><span class="p">)</span>
 <span class="n">tl</span><span class="o">.</span><span class="n">schedule</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
 </pre></div>
@@ -189,40 +220,70 @@ The detector uses the <code class="docutils literal notranslate"><span class="pr
 </pre></div>
 </div>
 <p>We should see that the <code class="docutils literal notranslate"><span class="pre">count</span></code> field of our <code class="docutils literal notranslate"><span class="pre">Counter</span></code> class is now 1, and that we have a detection time greater than 0 resulting from the quantum channel delay. Quantum channel delay is calculated based on the speed of light in an optical fiber and the length of the fiber (delay = L / c). We can view the detection and detection time as follows:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;detection count: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">counter</span><span class="o">.</span><span class="n">count</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;detection time: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">counter</span><span class="o">.</span><span class="n">time</span><span class="p">))</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;detection count: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">node2</span><span class="o">.</span><span class="n">counter</span><span class="o">.</span><span class="n">count</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;detection time: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">node2</span><span class="o">.</span><span class="n">counter</span><span class="o">.</span><span class="n">time</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="step-5-repeated-operation">
 <h3>Step 5: Repeated Operation<a class="headerlink" href="#step-5-repeated-operation" title="Permalink to this headline">¶</a></h3>
 <p>Next, let’s repeatedly set the memeory to the |+⟩ state and record detection events. To give us a clean state, we’ll remove the code we wrote for step 4.</p>
-<p>The events we wish to schedule are all for the memory. We want to first set it to a |+⟩ state with the <code class="docutils literal notranslate"><span class="pre">update_state</span></code> method, and then excite the memory to measure emitted photons with the <code class="docutils literal notranslate"><span class="pre">excite</span></code> method. The <code class="docutils literal notranslate"><span class="pre">update_state</span></code> method will require a plus state as input. The <code class="docutils literal notranslate"><span class="pre">excite</span></code> method needs an argument for the desired destination node, so we’ll supply the name of our <code class="docutils literal notranslate"><span class="pre">node2</span></code>. We’ll schedule both of these at a predetermined frequency <code class="docutils literal notranslate"><span class="pre">FREQUENCY</span></code> (given in Hz) for a set number of trials <code class="docutils literal notranslate"><span class="pre">NUM_TRIALS</span></code>.</p>
+<p>The events we wish to schedule are all for the memory.
+We want to first set it to a |+⟩ state with the <code class="docutils literal notranslate"><span class="pre">update_state</span></code> method, and then excite the memory to measure emitted photons with the <code class="docutils literal notranslate"><span class="pre">excite</span></code> method.
+The <code class="docutils literal notranslate"><span class="pre">update_state</span></code> method will require a plus state as input.
+The <code class="docutils literal notranslate"><span class="pre">excite</span></code> method needs an argument for the desired destination node, so we’ll supply the name of our <code class="docutils literal notranslate"><span class="pre">node2</span></code>.
+We’ll schedule both of these at a predetermined period.</p>
+<p>To manage all of these requirements, we’ll write our second protocol class, the <code class="docutils literal notranslate"><span class="pre">Sender</span></code>.
+The protocol will need a reference to the local node, as well as the name of the memory to trigger.
+Requiring a node and the names of local hardware is typical of protocols in SeQUeNCe.
+We’ll include all memory modification in the <code class="docutils literal notranslate"><span class="pre">start</span></code> method, which will activate the protocol.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
-<span class="kn">from</span> <span class="nn">sequence.kernel.process</span> <span class="kn">import</span> <span class="n">Process</span>
-<span class="kn">from</span> <span class="nn">sequence.kernel.event</span> <span class="kn">import</span> <span class="n">Event</span>
 
-<span class="n">time_bin</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">1e12</span> <span class="o">/</span> <span class="n">FREQUENCY</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">Sender</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">own</span><span class="p">,</span> <span class="n">memory_name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">own</span> <span class="o">=</span> <span class="n">own</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">memory</span> <span class="o">=</span> <span class="n">own</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="n">memory_name</span><span class="p">]</span>
 
-<span class="n">process1</span> <span class="o">=</span> <span class="n">Process</span><span class="p">(</span><span class="n">node1</span><span class="o">.</span><span class="n">memory</span><span class="p">,</span> <span class="s2">&quot;update_state&quot;</span><span class="p">,</span> <span class="p">[[</span><span class="nb">complex</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)),</span> <span class="nb">complex</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="mi">2</span><span class="p">))]])</span>
-<span class="n">process2</span> <span class="o">=</span> <span class="n">Process</span><span class="p">(</span><span class="n">node1</span><span class="o">.</span><span class="n">memory</span><span class="p">,</span> <span class="s2">&quot;excite&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;node2&quot;</span><span class="p">])</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NUM_TRIALS</span><span class="p">):</span>
-    <span class="n">event1</span> <span class="o">=</span> <span class="n">Event</span><span class="p">(</span><span class="n">i</span> <span class="o">*</span> <span class="n">time_bin</span><span class="p">,</span> <span class="n">process1</span><span class="p">)</span>
-    <span class="n">event2</span> <span class="o">=</span> <span class="n">Event</span><span class="p">(</span><span class="n">i</span> <span class="o">*</span> <span class="n">time_bin</span> <span class="o">+</span> <span class="p">(</span><span class="n">time_bin</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span> <span class="n">process2</span><span class="p">)</span>
-    <span class="n">tl</span><span class="o">.</span><span class="n">schedule</span><span class="p">(</span><span class="n">event1</span><span class="p">)</span>
-    <span class="n">tl</span><span class="o">.</span><span class="n">schedule</span><span class="p">(</span><span class="n">event2</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
+        <span class="n">process1</span> <span class="o">=</span> <span class="n">Process</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">memory</span><span class="p">,</span> <span class="s2">&quot;update_state&quot;</span><span class="p">,</span> <span class="p">[[</span><span class="nb">complex</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)),</span> <span class="nb">complex</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">))]])</span>
+        <span class="n">process2</span> <span class="o">=</span> <span class="n">Process</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">memory</span><span class="p">,</span> <span class="s2">&quot;excite&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;node2&quot;</span><span class="p">])</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NUM_TRIALS</span><span class="p">):</span>
+            <span class="n">event1</span> <span class="o">=</span> <span class="n">Event</span><span class="p">(</span><span class="n">i</span> <span class="o">*</span> <span class="n">period</span><span class="p">,</span> <span class="n">process1</span><span class="p">)</span>
+            <span class="n">event2</span> <span class="o">=</span> <span class="n">Event</span><span class="p">(</span><span class="n">i</span> <span class="o">*</span> <span class="n">period</span> <span class="o">+</span> <span class="p">(</span><span class="n">period</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span> <span class="n">process2</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">own</span><span class="o">.</span><span class="n">timeline</span><span class="o">.</span><span class="n">schedule</span><span class="p">(</span><span class="n">event1</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">own</span><span class="o">.</span><span class="n">timeline</span><span class="o">.</span><span class="n">schedule</span><span class="p">(</span><span class="n">event2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We’ll then place this protocol in the <code class="docutils literal notranslate"><span class="pre">SenderNode</span></code> class:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SenderNode</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">timeline</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">timeline</span><span class="p">)</span>
+        <span class="n">memory_name</span> <span class="o">=</span> <span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;.memory&quot;</span>
+        <span class="n">memory</span> <span class="o">=</span> <span class="n">Memory</span><span class="p">(</span><span class="n">memory_name</span><span class="p">,</span> <span class="n">timeline</span><span class="p">,</span> <span class="n">fidelity</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">frequency</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                        <span class="n">efficiency</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">coherence_time</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">wavelength</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_component</span><span class="p">(</span><span class="n">memory</span><span class="p">)</span>
+        <span class="n">memory</span><span class="o">.</span><span class="n">add_receiver</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">sender</span> <span class="o">=</span> <span class="n">Sender</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">memory_name</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">photon</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">send_qubit</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;dst&#39;</span><span class="p">],</span> <span class="n">photon</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="step-6-running-and-output">
 <h3>Step 6: Running and Output<a class="headerlink" href="#step-6-running-and-output" title="Permalink to this headline">¶</a></h3>
-<p>The procedure to initialize and run the timeline is the same as Tutorial 1:</p>
+<p>The procedure to initialize and run the timeline is the same as Tutorial 1.
+We will also add a call to the <code class="docutils literal notranslate"><span class="pre">start</span></code> method of our protocol, using a calculated period.
+We’ll use a predetermined frequency <code class="docutils literal notranslate"><span class="pre">FREQUENCY</span></code> (given in Hz) for a set number of trials <code class="docutils literal notranslate"><span class="pre">NUM_TRIALS</span></code>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tl</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">period</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">1e12</span> <span class="o">/</span> <span class="n">FREQUENCY</span><span class="p">)</span>
+<span class="n">node1</span><span class="o">.</span><span class="n">sender</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="n">period</span><span class="p">)</span>
 <span class="n">tl</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>To access the results of our simulation, we just need the count parameter of our custom counter class. We’ll read it, and present the number of detections we had as a percent of the number of excite operations:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;percent measured: </span><span class="si">{}</span><span class="s2">%&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mi">100</span> <span class="o">*</span> <span class="n">counter</span><span class="o">.</span><span class="n">count</span> <span class="o">/</span> <span class="n">NUM_TRIALS</span><span class="p">))</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;percent measured: </span><span class="si">{}</span><span class="s2">%&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mi">100</span> <span class="o">*</span> <span class="n">node2</span><span class="o">.</span><span class="n">counter</span><span class="o">.</span><span class="n">count</span> <span class="o">/</span> <span class="n">NUM_TRIALS</span><span class="p">))</span>
 </pre></div>
 </div>
 <p>We expect the percent to be about 50%, as we initialized the memory in the |+⟩ state each time. Try messing with parameters to achieve different measurement results!</p>
@@ -356,7 +417,7 @@ The detector uses the <code class="docutils literal notranslate"><span class="pr
 <li><a class="reference internal" href="#example-optical-hardware">Example: Optical Hardware</a><ul>
 <li><a class="reference internal" href="#background">Background</a></li>
 <li><a class="reference internal" href="#step-1-nodes-and-hardware">Step 1: Nodes and Hardware</a></li>
-<li><a class="reference internal" href="#step-2-custom-protocol">Step 2: Custom Protocol</a></li>
+<li><a class="reference internal" href="#step-2-custom-counting-protocol">Step 2: Custom Counting Protocol</a></li>
 <li><a class="reference internal" href="#step-3-build-the-network">Step 3: Build the Network</a></li>
 <li><a class="reference internal" href="#step-4-measure-memory-once">Step 4: Measure Memory Once</a></li>
 <li><a class="reference internal" href="#step-5-repeated-operation">Step 5: Repeated Operation</a></li>
@@ -415,7 +476,7 @@ The detector uses the <code class="docutils literal notranslate"><span class="pr
         <li class="right" >
           <a href="../chapter1/discrete-event-simulation.html" title="Chapter 1: Discrete Event Simulation"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.0 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Chapter 2: Hardware Module</a></li> 
       </ul>
     </div>

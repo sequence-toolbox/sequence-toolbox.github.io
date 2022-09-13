@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nodes &#8212; SeQUeNCe 0.3.2 documentation</title>
+    <title>Nodes &#8212; SeQUeNCe 0.5.0 documentation</title>
     <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     
@@ -35,7 +35,7 @@
         <li class="right" >
           <a href="top.html" title="Topology"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" accesskey="U">Topology</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Nodes</a></li> 
       </ul>
@@ -56,7 +56,8 @@ Node types can be used to collect all the necessary hardware and software for a 
 <dt id="src.topology.node.BSMNode">
 <em class="property">class </em><code class="sig-prename descclassname">src.topology.node.</code><code class="sig-name descname">BSMNode</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">timeline</span><span class="p">:</span> <span class="n">Timeline</span></em>, <em class="sig-param"><span class="n">other_nodes</span><span class="p">:</span> <span class="n">List<span class="p">[</span>str<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.topology.node.BSMNode" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bell state measurement node.</p>
-<p>This node provides bell state measurement and the EntanglementGenerationB protocol for entanglement generation.</p>
+<p>This node provides bell state measurement and the EntanglementGenerationB protocol for entanglement generation.
+Creates a SingleAtomBSM object within local components.</p>
 <dl class="py attribute">
 <dt id="src.topology.node.BSMNode.name">
 <code class="sig-name descname">name</code><a class="headerlink" href="#src.topology.node.BSMNode.name" title="Permalink to this definition">¶</a></dt>
@@ -80,17 +81,6 @@ Node types can be used to collect all the necessary hardware and software for a 
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="src.topology.node.BSMNode.bsm">
-<code class="sig-name descname">bsm</code><a class="headerlink" href="#src.topology.node.BSMNode.bsm" title="Permalink to this definition">¶</a></dt>
-<dd><p>BSM instance object.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="../components/bsm.html#src.components.bsm.SingleAtomBSM" title="src.components.bsm.SingleAtomBSM">SingleAtomBSM</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
 <dt id="src.topology.node.BSMNode.eg">
 <code class="sig-name descname">eg</code><a class="headerlink" href="#src.topology.node.BSMNode.eg" title="Permalink to this definition">¶</a></dt>
 <dd><p>entanglement generation protocol instance.</p>
@@ -104,7 +94,9 @@ Node types can be used to collect all the necessary hardware and software for a 
 <dl class="py method">
 <dt id="src.topology.node.BSMNode.eg_add_others">
 <code class="sig-name descname">eg_add_others</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">other</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.topology.node.BSMNode.eg_add_others" title="Permalink to this definition">¶</a></dt>
-<dd><p>Method to addd other protocols to entanglement generation protocol.</p>
+<dd><p>Method to add other protocols to entanglement generation protocol.</p>
+<p>Local entanglement generation protocol stores name of other protocol for communication.
+NOTE: entanglement generation protocol should be first protocol in protocol list.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>other</strong> (<a class="reference internal" href="../entanglement_management/entanglement_protocol.html#src.entanglement_management.entanglement_protocol.EntanglementProtocol" title="src.entanglement_management.entanglement_protocol.EntanglementProtocol"><em>EntanglementProtocol</em></a>) – other entanglement protocol instance.</p>
@@ -122,21 +114,6 @@ Node types can be used to collect all the necessary hardware and software for a 
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>src</strong> (<em>str</em>) – name of node sending the message.</p></li>
 <li><p><strong>msg</strong> (<a class="reference internal" href="../misc/message.html#src.message.Message" title="src.message.Message"><em>Message</em></a>) – message transmitted from node.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="src.topology.node.BSMNode.receive_qubit">
-<code class="sig-name descname">receive_qubit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">src</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">qubit</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.topology.node.BSMNode.receive_qubit" title="Permalink to this definition">¶</a></dt>
-<dd><p>Method to receive qubit from quantum channel.</p>
-<p>Invokes get method of internal bsm with <cite>qubit</cite> as argument.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>src</strong> (<em>str</em>) – name of node where qubit was sent from.</p></li>
-<li><p><strong>qubit</strong> (<em>any</em>) – transmitted qubit.</p></li>
 </ul>
 </dd>
 </dl>
@@ -188,7 +165,7 @@ Node types can be used to collect all the necessary hardware and software for a 
 <dd><p>mapping of destination node names to quantum channel instances.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>Dict[str, <a class="reference internal" href="../components/optical_channel.html#src.components.optical_channel.ClassicalChannel" title="src.components.optical_channel.ClassicalChannel">ClassicalChannel</a>]</p>
+<dd class="field-odd"><p>Dict[str, <a class="reference internal" href="../components/optical_channel.html#src.components.optical_channel.QuantumChannel" title="src.components.optical_channel.QuantumChannel">QuantumChannel</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -211,6 +188,39 @@ Node types can be used to collect all the necessary hardware and software for a 
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>np.random.Generator</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.topology.node.Node.components">
+<code class="sig-name descname">components</code><a class="headerlink" href="#src.topology.node.Node.components" title="Permalink to this definition">¶</a></dt>
+<dd><p>mapping of local component names to objects.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Dict[str, <a class="reference internal" href="../kernel/entity.html#src.kernel.entity.Entity" title="src.kernel.entity.Entity">Entity</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.topology.node.Node.first_component_name">
+<code class="sig-name descname">first_component_name</code><a class="headerlink" href="#src.topology.node.Node.first_component_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>name of component that first receives incoming qubits.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.topology.node.Node.add_component">
+<code class="sig-name descname">add_component</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">component</span><span class="p">:</span> <span class="n"><a class="reference internal" href="../kernel/entity.html#src.kernel.entity.Entity" title="src.kernel.entity.Entity">src.kernel.entity.Entity</a></span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.topology.node.Node.add_component" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a hardware component to the node.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>component</strong> (<a class="reference internal" href="../kernel/entity.html#src.kernel.entity.Entity" title="src.kernel.entity.Entity"><em>Entity</em></a>) – local hardware component to add.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -278,7 +288,16 @@ This method can be used to perform any necessary functions before simulation.</p
 <dl class="py method">
 <dt id="src.topology.node.Node.receive_qubit">
 <code class="sig-name descname">receive_qubit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">src</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">qubit</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.topology.node.Node.receive_qubit" title="Permalink to this definition">¶</a></dt>
-<dd><p>Method to receive qubits from quantum channel (does nothing for this class).</p>
+<dd><p>Method to receive qubits from quantum channel.</p>
+<p>By default, forwards qubit to hardware element designated by field <cite>receiver_name</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>src</strong> (<em>str</em>) – name of node where qubit was sent from.</p></li>
+<li><p><strong>qubit</strong> (<em>any</em>) – transmitted qubit.</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -323,6 +342,11 @@ The protocol stack is:</p>
 2. Entropy Estimation &lt;= No implementation
 1. Error Correction &lt;= implemented by cascade
 0. Sifting &lt;= implemented by BB84</p>
+<p>Additionally, the <cite>components</cite> dictionary contains the following hardware:</p>
+<ol class="arabic simple">
+<li><p>lightsource (LightSource): laser light source to generate keys.</p></li>
+<li><p>qsdetector (QSDetector): quantum state detector for qubit measurement.</p></li>
+</ol>
 <dl class="py attribute">
 <dt id="src.topology.node.QKDNode.name">
 <code class="sig-name descname">name</code><a class="headerlink" href="#src.topology.node.QKDNode.name" title="Permalink to this definition">¶</a></dt>
@@ -357,23 +381,12 @@ The protocol stack is:</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="src.topology.node.QKDNode.lightsource">
-<code class="sig-name descname">lightsource</code><a class="headerlink" href="#src.topology.node.QKDNode.lightsource" title="Permalink to this definition">¶</a></dt>
-<dd><p>laser light source to generate keys.</p>
+<dt id="src.topology.node.QKDNode.destination">
+<code class="sig-name descname">destination</code><a class="headerlink" href="#src.topology.node.QKDNode.destination" title="Permalink to this definition">¶</a></dt>
+<dd><p>name of destination node for photons</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="../components/light_source.html#src.components.light_source.LightSource" title="src.components.light_source.LightSource">LightSource</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="src.topology.node.QKDNode.qsdetector">
-<code class="sig-name descname">qsdetector</code><a class="headerlink" href="#src.topology.node.QKDNode.qsdetector" title="Permalink to this definition">¶</a></dt>
-<dd><p>quantum state detector for qubit measurement.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="../components/detector.html#src.components.detector.QSDetector" title="src.components.detector.QSDetector">QSDetector</a></p>
+<dd class="field-odd"><p>str</p>
 </dd>
 </dl>
 </dd></dl>
@@ -381,7 +394,7 @@ The protocol stack is:</p>
 <dl class="py attribute">
 <dt id="src.topology.node.QKDNode.protocol_stack">
 <code class="sig-name descname">protocol_stack</code><a class="headerlink" href="#src.topology.node.QKDNode.protocol_stack" title="Permalink to this definition">¶</a></dt>
-<dd><p>protocols for qkdd process.</p>
+<dd><p>protocols for QKD process.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>List[<a class="reference internal" href="../misc/protocol.html#src.protocol.StackProtocol" title="src.protocol.StackProtocol">StackProtocol</a>]</p>
@@ -390,17 +403,34 @@ The protocol stack is:</p>
 </dd></dl>
 
 <dl class="py method">
+<dt id="src.topology.node.QKDNode.get">
+<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">photon</span><span class="p">:</span> <span class="n">Photon</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.topology.node.QKDNode.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method for an entity to receive a photon.</p>
+<p>If entity is a node, may forward to external quantum channel.
+Must be overwritten to be used, or will raise exception.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>photon</strong> (<a class="reference internal" href="../components/photon.html#src.components.photon.Photon" title="src.components.photon.Photon"><em>Photon</em></a>) – photon received by the entity.</p></li>
+<li><p><strong>**kwargs</strong> – other arguments required by a particular hardware component.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt id="src.topology.node.QKDNode.get_bits">
-<code class="sig-name descname">get_bits</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">light_time</span></em>, <em class="sig-param"><span class="n">start_time</span></em>, <em class="sig-param"><span class="n">frequency</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.topology.node.QKDNode.get_bits" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_bits</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">light_time</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">start_time</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">frequency</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">detector_name</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.topology.node.QKDNode.get_bits" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method for QKD protocols to get received qubits from the node.</p>
 <p>Uses the detection times from attached detectors to calculate which bits were received.
 Returns 0/1 for successfully transmitted bits and -1 for lost/ambiguous bits.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>light_time</strong> (<em>int</em>) – time for which qubits were transmitted.</p></li>
+<li><p><strong>light_time</strong> (<em>int</em>) – time duration for which qubits were transmitted.</p></li>
 <li><p><strong>start_time</strong> (<em>int</em>) – time at which qubits were first received.</p></li>
 <li><p><strong>frequency</strong> (<em>float</em>) – frequency of qubit transmission.</p></li>
+<li><p><strong>detector_name</strong> (<em>str</em>) – name of the QSDetector measuring qubits.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -436,14 +466,8 @@ This method can be used to perform any necessary functions before simulation.</p
 </dd></dl>
 
 <dl class="py method">
-<dt id="src.topology.node.QKDNode.receive_qubit">
-<code class="sig-name descname">receive_qubit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">src</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">qubit</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.topology.node.QKDNode.receive_qubit" title="Permalink to this definition">¶</a></dt>
-<dd><p>Method to receive qubits from quantum channel (does nothing for this class).</p>
-</dd></dl>
-
-<dl class="py method">
 <dt id="src.topology.node.QKDNode.set_bases">
-<code class="sig-name descname">set_bases</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">basis_list</span></em>, <em class="sig-param"><span class="n">start_time</span></em>, <em class="sig-param"><span class="n">frequency</span></em>, <em class="sig-param"><span class="n">component</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.topology.node.QKDNode.set_bases" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_bases</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">basis_list</span><span class="p">:</span> <span class="n">List<span class="p">[</span>int<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">start_time</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">frequency</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">component_name</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.topology.node.QKDNode.set_bases" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to set basis list for measurement component.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -451,7 +475,7 @@ This method can be used to perform any necessary functions before simulation.</p
 <li><p><strong>basis_list</strong> (<em>List</em><em>[</em><em>int</em><em>]</em>) – list of bases to measure in.</p></li>
 <li><p><strong>start_time</strong> (<em>int</em>) – time to start measurement.</p></li>
 <li><p><strong>frequency</strong> (<em>float</em>) – frequency with which to measure.</p></li>
-<li><p><strong>component</strong> (<a class="reference internal" href="../kernel/entity.html#src.kernel.entity.Entity" title="src.kernel.entity.Entity"><em>Entity</em></a>) – measurement component to edit (normally a QSDetector).</p></li>
+<li><p><strong>component_name</strong> (<em>str</em>) – name of measurement component to edit (normally a QSDetector).</p></li>
 </ul>
 </dd>
 </dl>
@@ -477,40 +501,8 @@ This method can be used to perform any necessary functions before simulation.</p
 <dt id="src.topology.node.QuantumRouter">
 <em class="property">class </em><code class="sig-prename descclassname">src.topology.node.</code><code class="sig-name descname">QuantumRouter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">tl</span></em>, <em class="sig-param"><span class="n">memo_size</span><span class="o">=</span><span class="default_value">50</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.topology.node.QuantumRouter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Node for entanglement distribution networks.</p>
-<p>This node type comes pre-equipped with memory hardware, along with the default SeQUeNCe modules (sans application).</p>
-<dl class="py attribute">
-<dt id="src.topology.node.QuantumRouter.name">
-<code class="sig-name descname">name</code><a class="headerlink" href="#src.topology.node.QuantumRouter.name" title="Permalink to this definition">¶</a></dt>
-<dd><p>label for node instance.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="src.topology.node.QuantumRouter.timeline">
-<code class="sig-name descname">timeline</code><a class="headerlink" href="#src.topology.node.QuantumRouter.timeline" title="Permalink to this definition">¶</a></dt>
-<dd><p>timeline for simulation.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="../kernel/timeline.html#src.kernel.timeline.Timeline" title="src.kernel.timeline.Timeline">Timeline</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="src.topology.node.QuantumRouter.memory_array">
-<code class="sig-name descname">memory_array</code><a class="headerlink" href="#src.topology.node.QuantumRouter.memory_array" title="Permalink to this definition">¶</a></dt>
-<dd><p>internal memory array object.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="../components/memory.html#src.components.memory.MemoryArray" title="src.components.memory.MemoryArray">MemoryArray</a></p>
-</dd>
-</dl>
-</dd></dl>
-
+<p>This node type comes pre-equipped with memory hardware, along with the default SeQUeNCe modules (sans application).
+By default, a quantum memory array is included in the components of this node.</p>
 <dl class="py attribute">
 <dt id="src.topology.node.QuantumRouter.resource_manager">
 <code class="sig-name descname">resource_manager</code><a class="headerlink" href="#src.topology.node.QuantumRouter.resource_manager" title="Permalink to this definition">¶</a></dt>
@@ -570,6 +562,12 @@ This method can be used to perform any necessary functions before simulation.</p
 </dd></dl>
 
 <dl class="py method">
+<dt id="src.topology.node.QuantumRouter.get">
+<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">photon</span><span class="p">:</span> <span class="n">Photon</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.topology.node.QuantumRouter.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receives photon from last hardware element (in this case, quantum memory).</p>
+</dd></dl>
+
+<dl class="py method">
 <dt id="src.topology.node.QuantumRouter.get_idle_memory">
 <code class="sig-name descname">get_idle_memory</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">info</span><span class="p">:</span> <span class="n">MemoryInfo</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.topology.node.QuantumRouter.get_idle_memory" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method for application to receive available memories.</p>
@@ -578,7 +576,7 @@ This method can be used to perform any necessary functions before simulation.</p
 <dl class="py method">
 <dt id="src.topology.node.QuantumRouter.get_other_reservation">
 <code class="sig-name descname">get_other_reservation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">reservation</span><span class="p">:</span> <span class="n">Reservation</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.topology.node.QuantumRouter.get_other_reservation" title="Permalink to this definition">¶</a></dt>
-<dd><p>Method for application to get another reservation.</p>
+<dd><p>Method for application to receive another reservation.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -624,6 +622,7 @@ This method can be used to perform any necessary functions before simulation.</p
 <dt id="src.topology.node.QuantumRouter.reserve_net_resource">
 <code class="sig-name descname">reserve_net_resource</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">responder</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">start_time</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">end_time</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">memory_size</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">target_fidelity</span><span class="p">:</span> <span class="n">float</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.topology.node.QuantumRouter.reserve_net_resource" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to request a reservation.</p>
+<p>Can be used by local applications.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -696,7 +695,7 @@ This method can be used to perform any necessary functions before simulation.</p
         <li class="right" >
           <a href="top.html" title="Topology"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" >Topology</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Nodes</a></li> 
       </ul>

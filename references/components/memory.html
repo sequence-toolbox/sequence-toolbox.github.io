@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Memory &#8212; SeQUeNCe 0.3.2 documentation</title>
+    <title>Memory &#8212; SeQUeNCe 0.5.0 documentation</title>
     <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     
@@ -35,7 +35,7 @@
         <li class="right" >
           <a href="light_source.html" title="Light Source"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" accesskey="U">Components</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Memory</a></li> 
       </ul>
@@ -53,8 +53,364 @@
 Memories will attempt to send photons through the <cite>send_qubit</cite> interface of nodes.
 Photons should be routed to a BSM device for entanglement generation, or through optical hardware for purification and swapping.</p>
 <dl class="py class">
+<dt id="src.components.memory.AbsorptiveMemory">
+<em class="property">class </em><code class="sig-prename descclassname">src.components.memory.</code><code class="sig-name descname">AbsorptiveMemory</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">timeline</span><span class="p">:</span> <span class="n">Timeline</span></em>, <em class="sig-param"><span class="n">fidelity</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">frequency</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">absorption_efficiency</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">efficiency</span><span class="p">:</span> <span class="n">Callable</span></em>, <em class="sig-param"><span class="n">mode_number</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">coherence_time</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">wavelength</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">overlap_error</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">prepare_time</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">is_spinwave</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">is_reversed</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">destination</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.memory.AbsorptiveMemory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Atomic ensemble absorptive memory.</p>
+<p>This class models an AFC(-spinwave) absorptive memory, where the quantum state is stored as collective excitation of atomic ensemble.
+Retrieved photon sequence might be reversed (only for AFC spinwave), which is physically determine by RF pulses used during spinwave.
+This class will not support qubit state manipulation.
+Before invoking methods like “get” and “retrieve”, must call “prepare” first to prepare the AFC, will take finite simulation time.
+This class models an AFC absorptive memory, where the quantum state is stored as collective excitation of an atomic ensemble.
+This class does not support qubit state manipulation, individual photons should be manipulated instead.
+Before invoking methods like “get” and “retrieve”, need to call “prepare” first to prepare the AFC, will take finite simulation time.
+Rephasing time (predetermined storage time for AFC type) is given by temporal mode number and length of each temporal mode bin.
+Note that for AFC (not spinwave) type, is_reversed must be False.</p>
+<dl class="py attribute">
+<dt id="src.components.memory.AbsorptiveMemory.name">
+<code class="sig-name descname">name</code><a class="headerlink" href="#src.components.memory.AbsorptiveMemory.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>label for memory instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.memory.AbsorptiveMemory.timeline">
+<code class="sig-name descname">timeline</code><a class="headerlink" href="#src.components.memory.AbsorptiveMemory.timeline" title="Permalink to this definition">¶</a></dt>
+<dd><p>timeline for simulation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../kernel/timeline.html#src.kernel.timeline.Timeline" title="src.kernel.timeline.Timeline">Timeline</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.memory.AbsorptiveMemory.fidelity">
+<code class="sig-name descname">fidelity</code><a class="headerlink" href="#src.components.memory.AbsorptiveMemory.fidelity" title="Permalink to this definition">¶</a></dt>
+<dd><p>(current) fidelity of memory’s entanglement.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.memory.AbsorptiveMemory.frequency">
+<code class="sig-name descname">frequency</code><a class="headerlink" href="#src.components.memory.AbsorptiveMemory.frequency" title="Permalink to this definition">¶</a></dt>
+<dd><p>maximum frequency of absorption for memory (total frequency bandwidth of AFC memory) (in Hz).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.memory.AbsorptiveMemory.absorption_efficiency">
+<code class="sig-name descname">absorption_efficiency</code><a class="headerlink" href="#src.components.memory.AbsorptiveMemory.absorption_efficiency" title="Permalink to this definition">¶</a></dt>
+<dd><p>probability of absorbing a photon when arriving at the memory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.memory.AbsorptiveMemory.efficiency">
+<code class="sig-name descname">efficiency</code><a class="headerlink" href="#src.components.memory.AbsorptiveMemory.efficiency" title="Permalink to this definition">¶</a></dt>
+<dd><p>probability of emitting a photon as a function of storage time.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Callable</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.memory.AbsorptiveMemory.mode_number">
+<code class="sig-name descname">mode_number</code><a class="headerlink" href="#src.components.memory.AbsorptiveMemory.mode_number" title="Permalink to this definition">¶</a></dt>
+<dd><p>number of temporal modes available for storing photons, i.e. number of peaks in Atomic Frequency Comb.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.memory.AbsorptiveMemory.mode_bin">
+<code class="sig-name descname">mode_bin</code><a class="headerlink" href="#src.components.memory.AbsorptiveMemory.mode_bin" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.memory.AbsorptiveMemory.coherence_time">
+<code class="sig-name descname">coherence_time</code><a class="headerlink" href="#src.components.memory.AbsorptiveMemory.coherence_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>average usable lifetime of memory (in s).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.memory.AbsorptiveMemory.wavelength">
+<code class="sig-name descname">wavelength</code><a class="headerlink" href="#src.components.memory.AbsorptiveMemory.wavelength" title="Permalink to this definition">¶</a></dt>
+<dd><p>wavelength (in nm) of absorbed and emitted photons.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.memory.AbsorptiveMemory.total_time">
+<code class="sig-name descname">total_time</code><a class="headerlink" href="#src.components.memory.AbsorptiveMemory.total_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>AFC re-phasing time (in ps)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.memory.AbsorptiveMemory.overlap_error">
+<code class="sig-name descname">overlap_error</code><a class="headerlink" href="#src.components.memory.AbsorptiveMemory.overlap_error" title="Permalink to this definition">¶</a></dt>
+<dd><p>error due to photon overlap in one temporal mode, will degrade fidelity.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.memory.AbsorptiveMemory.prepare_time">
+<code class="sig-name descname">prepare_time</code><a class="headerlink" href="#src.components.memory.AbsorptiveMemory.prepare_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>time to prepare AFC (in ps).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.memory.AbsorptiveMemory.photon_counter">
+<code class="sig-name descname">photon_counter</code><a class="headerlink" href="#src.components.memory.AbsorptiveMemory.photon_counter" title="Permalink to this definition">¶</a></dt>
+<dd><p>counts number of detection events.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.memory.AbsorptiveMemory.absorb_start_time">
+<code class="sig-name descname">absorb_start_time</code><a class="headerlink" href="#src.components.memory.AbsorptiveMemory.absorb_start_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>start time (in ps) of photon absorption.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.memory.AbsorptiveMemory.retrieve_start_time">
+<code class="sig-name descname">retrieve_start_time</code><a class="headerlink" href="#src.components.memory.AbsorptiveMemory.retrieve_start_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>start time (in ps) of photon retrieval.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.memory.AbsorptiveMemory.is_spinwave">
+<code class="sig-name descname">is_spinwave</code><a class="headerlink" href="#src.components.memory.AbsorptiveMemory.is_spinwave" title="Permalink to this definition">¶</a></dt>
+<dd><p>determines if the memory is AFC or AFC-spinwave, default False.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.memory.AbsorptiveMemory.is_reversed">
+<code class="sig-name descname">is_reversed</code><a class="headerlink" href="#src.components.memory.AbsorptiveMemory.is_reversed" title="Permalink to this definition">¶</a></dt>
+<dd><p>determines re-emission sequence, physically determined by RF pulses during spinwave, default False.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.memory.AbsorptiveMemory.is_prepared">
+<code class="sig-name descname">is_prepared</code><a class="headerlink" href="#src.components.memory.AbsorptiveMemory.is_prepared" title="Permalink to this definition">¶</a></dt>
+<dd><p>determines if AFC is successfully prepared.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.memory.AbsorptiveMemory.memory_array">
+<code class="sig-name descname">memory_array</code><a class="headerlink" href="#src.components.memory.AbsorptiveMemory.memory_array" title="Permalink to this definition">¶</a></dt>
+<dd><p>memory array aggregating current memory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#src.components.memory.MemoryArray" title="src.components.memory.MemoryArray">MemoryArray</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.memory.AbsorptiveMemory.destination">
+<code class="sig-name descname">destination</code><a class="headerlink" href="#src.components.memory.AbsorptiveMemory.destination" title="Permalink to this definition">¶</a></dt>
+<dd><p>name of predetermined re-emission destination node, default None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.memory.AbsorptiveMemory.entangled_memory">
+<code class="sig-name descname">entangled_memory</code><a class="headerlink" href="#src.components.memory.AbsorptiveMemory.entangled_memory" title="Permalink to this definition">¶</a></dt>
+<dd><p>tracks entanglement state of memory with a memory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Dict[str, Any]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.memory.AbsorptiveMemory.stored_photons">
+<code class="sig-name descname">stored_photons</code><a class="headerlink" href="#src.components.memory.AbsorptiveMemory.stored_photons" title="Permalink to this definition">¶</a></dt>
+<dd><p>photons stored in memory temporal modes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Dict[str, Any]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.components.memory.AbsorptiveMemory.detach">
+<code class="sig-name descname">detach</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">observer</span><span class="p">:</span> <span class="n">EntanglementProtocol</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.memory.AbsorptiveMemory.detach" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to remove an observer.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.components.memory.AbsorptiveMemory.expire">
+<code class="sig-name descname">expire</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.components.memory.AbsorptiveMemory.expire" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to handle memory expiration.</p>
+<dl class="simple">
+<dt>Side Effects:</dt><dd><p>Will notify upper entities of expiration via the <cite>pop</cite> interface.
+Will modify the quantum state of the memory.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.components.memory.AbsorptiveMemory.get">
+<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">photon</span><span class="p">:</span> <span class="n"><a class="reference internal" href="photon.html#src.components.photon.Photon" title="src.components.photon.Photon">src.components.photon.Photon</a></span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.memory.AbsorptiveMemory.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to receive a photon to store in the absorptive memory.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.components.memory.AbsorptiveMemory.get_expire_time">
+<code class="sig-name descname">get_expire_time</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#src.components.memory.AbsorptiveMemory.get_expire_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to get the simulation time when the memory is expired</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.components.memory.AbsorptiveMemory.init">
+<code class="sig-name descname">init</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.components.memory.AbsorptiveMemory.init" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implementation of Entity interface (see base class).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.components.memory.AbsorptiveMemory.notify">
+<code class="sig-name descname">notify</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">msg</span><span class="p">:</span> <span class="n">Dict<span class="p">[</span>str<span class="p">, </span>Any<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.memory.AbsorptiveMemory.notify" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to notify all attached observers of an update.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.components.memory.AbsorptiveMemory.prepare">
+<code class="sig-name descname">prepare</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.components.memory.AbsorptiveMemory.prepare" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to emulate the effect on timeline by AFC preparation.</p>
+<p>Will schedule a preparation event in the future, after which <cite>is_prepared</cite> is set to true.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.components.memory.AbsorptiveMemory.reset">
+<code class="sig-name descname">reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.components.memory.AbsorptiveMemory.reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to clear quantum memory.</p>
+<p>Will reset memory state to no photon stored and will clear entanglement information.</p>
+<dl class="simple">
+<dt>Side Effects:</dt><dd><p>Will modify internal parameters and photon storage information.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.components.memory.AbsorptiveMemory.retrieve">
+<code class="sig-name descname">retrieve</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dst</span><span class="o">=</span><span class="default_value">''</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.memory.AbsorptiveMemory.retrieve" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to re-emit all stored photons in a reverse sequence on demand.</p>
+<p>Efficiency is a function of time.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.components.memory.AbsorptiveMemory.set_memory_array">
+<code class="sig-name descname">set_memory_array</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">memory_array</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#src.components.memory.MemoryArray" title="src.components.memory.MemoryArray">src.components.memory.MemoryArray</a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.memory.AbsorptiveMemory.set_memory_array" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to set the memory array to which the memory belongs</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>memory_array</strong> (<a class="reference internal" href="#src.components.memory.MemoryArray" title="src.components.memory.MemoryArray"><em>MemoryArray</em></a>) – memory array to which the memory belongs</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.components.memory.AbsorptiveMemory.update_expire_time">
+<code class="sig-name descname">update_expire_time</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">time</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.memory.AbsorptiveMemory.update_expire_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to change time of expiration.</p>
+<p>Should not normally be called by protocols.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>time</strong> (<em>int</em>) – new expiration time.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt id="src.components.memory.Memory">
-<em class="property">class </em><code class="sig-prename descclassname">src.components.memory.</code><code class="sig-name descname">Memory</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">timeline</span><span class="p">:</span> <span class="n">Timeline</span></em>, <em class="sig-param"><span class="n">fidelity</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">frequency</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">efficiency</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">coherence_time</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">wavelength</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.memory.Memory" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">src.components.memory.</code><code class="sig-name descname">Memory</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">timeline</span><span class="p">:</span> <span class="n">Timeline</span></em>, <em class="sig-param"><span class="n">fidelity</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">frequency</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">efficiency</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">coherence_time</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">wavelength</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.memory.Memory" title="Permalink to this definition">¶</a></dt>
 <dd><p>Individual single-atom memory.</p>
 <p>This class models a single-atom memory, where the quantum state is stored as the spin of a single ion.
 This class will replace the older implementation once completed.</p>
@@ -136,23 +492,23 @@ This class will replace the older implementation once completed.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="src.components.memory.Memory.entangled_memory">
-<code class="sig-name descname">entangled_memory</code><a class="headerlink" href="#src.components.memory.Memory.entangled_memory" title="Permalink to this definition">¶</a></dt>
-<dd><p>tracks entanglement state of memory.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>Dict[str, Any]</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
 <dt id="src.components.memory.Memory.qstate_key">
 <code class="sig-name descname">qstate_key</code><a class="headerlink" href="#src.components.memory.Memory.qstate_key" title="Permalink to this definition">¶</a></dt>
 <dd><p>key for associated quantum state in timeline’s quantum manager.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.memory.Memory.entangled_memory">
+<code class="sig-name descname">entangled_memory</code><a class="headerlink" href="#src.components.memory.Memory.entangled_memory" title="Permalink to this definition">¶</a></dt>
+<dd><p>tracks entanglement state of memory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Dict[str, Any]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -414,6 +770,17 @@ original Memory class.</p>
 </dl>
 </dd></dl>
 
+<dl class="py attribute">
+<dt id="src.components.memory.MemoryWithRandomCoherenceTime.entangled_memory">
+<code class="sig-name descname">entangled_memory</code><a class="headerlink" href="#src.components.memory.MemoryWithRandomCoherenceTime.entangled_memory" title="Permalink to this definition">¶</a></dt>
+<dd><p>tracks entanglement state of memory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Dict[str, Any]</p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 </div>
@@ -467,7 +834,7 @@ original Memory class.</p>
         <li class="right" >
           <a href="light_source.html" title="Light Source"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" >Components</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Memory</a></li> 
       </ul>

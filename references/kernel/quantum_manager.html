@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quantum Manager &#8212; SeQUeNCe 0.3.2 documentation</title>
+    <title>Quantum Manager &#8212; SeQUeNCe 0.5.0 documentation</title>
     <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     
@@ -35,7 +35,7 @@
         <li class="right" >
           <a href="timeline.html" title="Timeline"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" accesskey="U">Kernel</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Quantum Manager</a></li> 
       </ul>
@@ -58,64 +58,6 @@
 </dl>
 <p>The manager defines an API for interacting with quantum states.</p>
 <dl class="py class">
-<dt id="src.kernel.quantum_manager.DensityState">
-<em class="property">class </em><code class="sig-prename descclassname">src.kernel.quantum_manager.</code><code class="sig-name descname">DensityState</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">state</span><span class="p">:</span> <span class="n">List<span class="p">[</span>List<span class="p">[</span>complex<span class="p">]</span><span class="p">]</span></span></em>, <em class="sig-param"><span class="n">keys</span><span class="p">:</span> <span class="n">List<span class="p">[</span>int<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.kernel.quantum_manager.DensityState" title="Permalink to this definition">¶</a></dt>
-<dd><p>Class inheriting State class to represent an individual quantum state
-as a density matrix.</p>
-<dl class="py attribute">
-<dt id="src.kernel.quantum_manager.DensityState.state">
-<code class="sig-name descname">state</code><a class="headerlink" href="#src.kernel.quantum_manager.DensityState.state" title="Permalink to this definition">¶</a></dt>
-<dd><p>density matrix values. NxN matrix with N = 2 ** len(keys).</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>np.array</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="src.kernel.quantum_manager.DensityState.keys">
-<code class="sig-name descname">keys</code><a class="headerlink" href="#src.kernel.quantum_manager.DensityState.keys" title="Permalink to this definition">¶</a></dt>
-<dd><p>list of keys (qubits) associated with this state.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>List[int]</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt id="src.kernel.quantum_manager.KetState">
-<em class="property">class </em><code class="sig-prename descclassname">src.kernel.quantum_manager.</code><code class="sig-name descname">KetState</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">amplitudes</span><span class="p">:</span> <span class="n">List<span class="p">[</span>complex<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">keys</span><span class="p">:</span> <span class="n">List<span class="p">[</span>int<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.kernel.quantum_manager.KetState" title="Permalink to this definition">¶</a></dt>
-<dd><p>Class inheriting State class to represent an individual quantum state
-as a ket vector.</p>
-<dl class="py attribute">
-<dt id="src.kernel.quantum_manager.KetState.state">
-<code class="sig-name descname">state</code><a class="headerlink" href="#src.kernel.quantum_manager.KetState.state" title="Permalink to this definition">¶</a></dt>
-<dd><p>state vector. Should be of length 2 ** len(keys).</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>np.array</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="src.kernel.quantum_manager.KetState.keys">
-<code class="sig-name descname">keys</code><a class="headerlink" href="#src.kernel.quantum_manager.KetState.keys" title="Permalink to this definition">¶</a></dt>
-<dd><p>list of keys (qubits) associated with this state.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>List[int]</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
 <dt id="src.kernel.quantum_manager.QuantumManager">
 <em class="property">class </em><code class="sig-prename descclassname">src.kernel.quantum_manager.</code><code class="sig-name descname">QuantumManager</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">formalism</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.kernel.quantum_manager.QuantumManager" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class to track and manage quantum states (abstract).</p>
@@ -126,7 +68,7 @@ as a ket vector.</p>
 <dd><p>mapping of state keys to quantum state objects.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>Dict[int, <a class="reference internal" href="#src.kernel.quantum_manager.State" title="src.kernel.quantum_manager.State">State</a>]</p>
+<dd class="field-odd"><p>Dict[int, <a class="reference internal" href="quantum_state.html#src.kernel.quantum_state.State" title="src.kernel.quantum_state.State">State</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -154,7 +96,7 @@ as a ket vector.</p>
 <dd class="field-even"><p>quantum state at supplied key.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="#src.kernel.quantum_manager.State" title="src.kernel.quantum_manager.State">State</a></p>
+<dd class="field-odd"><p><a class="reference internal" href="quantum_state.html#src.kernel.quantum_state.State" title="src.kernel.quantum_state.State">State</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -189,7 +131,7 @@ as a ket vector.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>circuit</strong> (<em>Circuit</em>) – quantum circuit to apply.</p></li>
+<li><p><strong>circuit</strong> (<a class="reference internal" href="../components/circuit.html#src.components.circuit.Circuit" title="src.components.circuit.Circuit"><em>Circuit</em></a>) – quantum circuit to apply.</p></li>
 <li><p><strong>keys</strong> (<em>List</em><em>[</em><em>int</em><em>]</em>) – list of keys for quantum states to apply circuit to.</p></li>
 <li><p><strong>meas_samp</strong> (<em>float</em>) – random sample used for measurement.</p></li>
 </ul>
@@ -247,7 +189,7 @@ as a ket vector.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>circuit</strong> (<em>Circuit</em>) – quantum circuit to apply.</p></li>
+<li><p><strong>circuit</strong> (<a class="reference internal" href="../components/circuit.html#src.components.circuit.Circuit" title="src.components.circuit.Circuit"><em>Circuit</em></a>) – quantum circuit to apply.</p></li>
 <li><p><strong>keys</strong> (<em>List</em><em>[</em><em>int</em><em>]</em>) – list of keys for quantum states to apply circuit to.</p></li>
 <li><p><strong>meas_samp</strong> (<em>float</em>) – random sample used for measurement.</p></li>
 </ul>
@@ -264,12 +206,15 @@ as a ket vector.</p>
 <dl class="py method">
 <dt id="src.kernel.quantum_manager.QuantumManagerDensity.set">
 <code class="sig-name descname">set</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">keys</span><span class="p">:</span> <span class="n">List<span class="p">[</span>int<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">state</span><span class="p">:</span> <span class="n">List<span class="p">[</span>List<span class="p">[</span>complex<span class="p">]</span><span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.kernel.quantum_manager.QuantumManagerDensity.set" title="Permalink to this definition">¶</a></dt>
-<dd><p>Method to set quantum state at a given key(s).</p>
+<dd><p>Method to set the quantum state at the given keys.</p>
+<p>The <cite>state</cite> argument should be passed as List[List[complex]], where each internal list is a row.
+However, the <cite>state</cite> may also be given as a one-dimensional pure state.
+If the list is one-dimensional, will be converted to matrix with the outer product operation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>keys</strong> (<em>List</em><em>[</em><em>int</em><em>]</em>) – key(s) of state(s) to change.</p></li>
-<li><p><strong>amplitudes</strong> (<em>any</em>) – Amplitudes to set state to, type determined by type of subclass.</p></li>
+<li><p><strong>keys</strong> (<em>List</em><em>[</em><em>int</em><em>]</em>) – list of quantum manager keys to modify.</p></li>
+<li><p><strong>state</strong> – quantum state to set input keys to.</p></li>
 </ul>
 </dd>
 </dl>
@@ -305,7 +250,7 @@ as a ket vector.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>circuit</strong> (<em>Circuit</em>) – quantum circuit to apply.</p></li>
+<li><p><strong>circuit</strong> (<a class="reference internal" href="../components/circuit.html#src.components.circuit.Circuit" title="src.components.circuit.Circuit"><em>Circuit</em></a>) – quantum circuit to apply.</p></li>
 <li><p><strong>keys</strong> (<em>List</em><em>[</em><em>int</em><em>]</em>) – list of keys for quantum states to apply circuit to.</p></li>
 <li><p><strong>meas_samp</strong> (<em>float</em>) – random sample used for measurement.</p></li>
 </ul>
@@ -329,34 +274,6 @@ as a ket vector.</p>
 <li><p><strong>keys</strong> (<em>List</em><em>[</em><em>int</em><em>]</em>) – key(s) of state(s) to change.</p></li>
 <li><p><strong>amplitudes</strong> (<em>any</em>) – Amplitudes to set state to, type determined by type of subclass.</p></li>
 </ul>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt id="src.kernel.quantum_manager.State">
-<em class="property">class </em><code class="sig-prename descclassname">src.kernel.quantum_manager.</code><code class="sig-name descname">State</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">state</span></em>, <em class="sig-param"><span class="n">keys</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.kernel.quantum_manager.State" title="Permalink to this definition">¶</a></dt>
-<dd><p>Class to represent state of qubits.</p>
-<dl class="py attribute">
-<dt id="src.kernel.quantum_manager.State.state">
-<code class="sig-name descname">state</code><a class="headerlink" href="#src.kernel.quantum_manager.State.state" title="Permalink to this definition">¶</a></dt>
-<dd><p>internal representation of qubit state. Varies based on formalism.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>any</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="src.kernel.quantum_manager.State.keys">
-<code class="sig-name descname">keys</code><a class="headerlink" href="#src.kernel.quantum_manager.State.keys" title="Permalink to this definition">¶</a></dt>
-<dd><p>associated keys for a quantum manager.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>list[int]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -414,7 +331,7 @@ as a ket vector.</p>
         <li class="right" >
           <a href="timeline.html" title="Timeline"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" >Kernel</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Quantum Manager</a></li> 
       </ul>

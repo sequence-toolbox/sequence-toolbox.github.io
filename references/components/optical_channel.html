@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Optical Channel &#8212; SeQUeNCe 0.3.2 documentation</title>
+    <title>Optical Channel &#8212; SeQUeNCe 0.5.0 documentation</title>
     <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     
@@ -35,7 +35,7 @@
         <li class="right" >
           <a href="mirror.html" title="Mirror"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" accesskey="U">Components</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Optical Channel</a></li> 
       </ul>
@@ -105,17 +105,6 @@ OpticalChannels must be attached to nodes on both ends.</p>
 <dt id="src.components.optical_channel.ClassicalChannel.distance">
 <code class="sig-name descname">distance</code><a class="headerlink" href="#src.components.optical_channel.ClassicalChannel.distance" title="Permalink to this definition">¶</a></dt>
 <dd><p>length of the fiber (in m).</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>float</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="src.components.optical_channel.ClassicalChannel.light_speed">
-<code class="sig-name descname">light_speed</code><a class="headerlink" href="#src.components.optical_channel.ClassicalChannel.light_speed" title="Permalink to this definition">¶</a></dt>
-<dd><p>speed of light within the fiber (in m/ps).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>float</p>
@@ -219,8 +208,8 @@ OpticalChannels must be attached to nodes on both ends.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="src.components.optical_channel.OpticalChannel.atteunuation">
-<code class="sig-name descname">atteunuation</code><a class="headerlink" href="#src.components.optical_channel.OpticalChannel.atteunuation" title="Permalink to this definition">¶</a></dt>
+<dt id="src.components.optical_channel.OpticalChannel.attenuation">
+<code class="sig-name descname">attenuation</code><a class="headerlink" href="#src.components.optical_channel.OpticalChannel.attenuation" title="Permalink to this definition">¶</a></dt>
 <dd><p>attenuation of the fiber (in dB/m).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -274,7 +263,7 @@ This method can be used to perform any necessary functions before simulation.</p
 
 <dl class="py class">
 <dt id="src.components.optical_channel.QuantumChannel">
-<em class="property">class </em><code class="sig-prename descclassname">src.components.optical_channel.</code><code class="sig-name descname">QuantumChannel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">timeline</span><span class="p">:</span> <span class="n">Timeline</span></em>, <em class="sig-param"><span class="n">attenuation</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">distance</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">polarization_fidelity</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">light_speed</span><span class="o">=</span><span class="default_value">0.0002</span></em>, <em class="sig-param"><span class="n">frequency</span><span class="o">=</span><span class="default_value">80000000.0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.optical_channel.QuantumChannel" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">src.components.optical_channel.</code><code class="sig-name descname">QuantumChannel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">timeline</span><span class="p">:</span> <span class="n">Timeline</span></em>, <em class="sig-param"><span class="n">attenuation</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">distance</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">polarization_fidelity</span><span class="o">=</span><span class="default_value">1.0</span></em>, <em class="sig-param"><span class="n">light_speed</span><span class="o">=</span><span class="default_value">0.0002</span></em>, <em class="sig-param"><span class="n">frequency</span><span class="o">=</span><span class="default_value">80000000.0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.optical_channel.QuantumChannel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Optical channel for transmission of photons/qubits.</p>
 <dl class="py attribute">
 <dt id="src.components.optical_channel.QuantumChannel.name">
@@ -321,8 +310,8 @@ This method can be used to perform any necessary functions before simulation.</p
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="src.components.optical_channel.QuantumChannel.atteunuation">
-<code class="sig-name descname">atteunuation</code><a class="headerlink" href="#src.components.optical_channel.QuantumChannel.atteunuation" title="Permalink to this definition">¶</a></dt>
+<dt id="src.components.optical_channel.QuantumChannel.attenuation">
+<code class="sig-name descname">attenuation</code><a class="headerlink" href="#src.components.optical_channel.QuantumChannel.attenuation" title="Permalink to this definition">¶</a></dt>
 <dd><p>attenuation of the fiber (in dB/m).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -508,7 +497,7 @@ This method returns the next available time for transmitting a photon.</p>
         <li class="right" >
           <a href="mirror.html" title="Mirror"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" >Components</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Optical Channel</a></li> 
       </ul>

@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Entity &#8212; SeQUeNCe 0.3.2 documentation</title>
+    <title>Entity &#8212; SeQUeNCe 0.5.0 documentation</title>
     <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     
@@ -35,7 +35,7 @@
         <li class="right" >
           <a href="top.html" title="Kernel"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" accesskey="U">Kernel</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Entity</a></li> 
       </ul>
@@ -56,8 +56,7 @@
 <dd><p>Abstract Entity class.
 Entity should use the provided pseudo random number generator (PRNG) to
 produce reproducible random numbers. As a result, simulations with the same
-seed could reproduce identical results. Function “get_generator” allows to
-get the PRNG.</p>
+seed can reproduce identical results. Function “get_generator” returns the PRNG.</p>
 <dl class="py attribute">
 <dt id="src.kernel.entity.Entity.name">
 <code class="sig-name descname">name</code><a class="headerlink" href="#src.kernel.entity.Entity.name" title="Permalink to this definition">¶</a></dt>
@@ -92,8 +91,8 @@ get the PRNG.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="src.kernel.entity.Entity._observer">
-<code class="sig-name descname">_observer</code><a class="headerlink" href="#src.kernel.entity.Entity._observer" title="Permalink to this definition">¶</a></dt>
+<dt id="src.kernel.entity.Entity._observers">
+<code class="sig-name descname">_observers</code><a class="headerlink" href="#src.kernel.entity.Entity._observers" title="Permalink to this definition">¶</a></dt>
 <dd><p>a list of observers for the entity.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -102,16 +101,43 @@ get the PRNG.</p>
 </dl>
 </dd></dl>
 
+<dl class="py attribute">
+<dt id="src.kernel.entity.Entity._receivers">
+<code class="sig-name descname">_receivers</code><a class="headerlink" href="#src.kernel.entity.Entity._receivers" title="Permalink to this definition">¶</a></dt>
+<dd><p>a list of entities that receive photons from current component.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>List[<a class="reference internal" href="#src.kernel.entity.Entity" title="src.kernel.entity.Entity">Entity</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py method">
 <dt id="src.kernel.entity.Entity.attach">
 <code class="sig-name descname">attach</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">observer</span><span class="p">:</span> <span class="n">Any</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.kernel.entity.Entity.attach" title="Permalink to this definition">¶</a></dt>
-<dd><p>Method to add an ovserver (to receive hardware updates).</p>
+<dd><p>Method to add an observer (to receive hardware updates).</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="src.kernel.entity.Entity.detach">
 <code class="sig-name descname">detach</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">observer</span><span class="p">:</span> <span class="n">Any</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.kernel.entity.Entity.detach" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to remove an observer.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.kernel.entity.Entity.get">
+<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">photon</span><span class="p">:</span> <span class="n">Photon</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.kernel.entity.Entity.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method for an entity to receive a photon.</p>
+<p>If entity is a node, may forward to external quantum channel.
+Must be overwritten to be used, or will raise exception.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>photon</strong> (<a class="reference internal" href="../components/photon.html#src.components.photon.Photon" title="src.components.photon.Photon"><em>Photon</em></a>) – photon received by the entity.</p></li>
+<li><p><strong>**kwargs</strong> – other arguments required by a particular hardware component.</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -195,7 +221,7 @@ This method can be used to perform any necessary functions before simulation.</p
         <li class="right" >
           <a href="top.html" title="Kernel"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" >Kernel</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Entity</a></li> 
       </ul>

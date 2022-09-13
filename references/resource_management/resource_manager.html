@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resource Manager &#8212; SeQUeNCe 0.3.2 documentation</title>
+    <title>Resource Manager &#8212; SeQUeNCe 0.5.0 documentation</title>
     <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     
@@ -35,7 +35,7 @@
         <li class="right" >
           <a href="top.html" title="Resource Management"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" accesskey="U">Resource Management</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Resource Manager</a></li> 
       </ul>
@@ -54,7 +54,7 @@ The manager uses a memory manager and rule manager to track memories and control
 This module also defines the message type used by the resource manager.</p>
 <dl class="py class">
 <dt id="src.resource_management.resource_manager.ResourceManager">
-<em class="property">class </em><code class="sig-prename descclassname">src.resource_management.resource_manager.</code><code class="sig-name descname">ResourceManager</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">owner</span><span class="p">:</span> <span class="n">QuantumRouter</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.resource_management.resource_manager.ResourceManager" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">src.resource_management.resource_manager.</code><code class="sig-name descname">ResourceManager</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">owner</span><span class="p">:</span> <span class="n">QuantumRouter</span></em>, <em class="sig-param"><span class="n">memory_array_name</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.resource_management.resource_manager.ResourceManager" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class to define the resource manager.</p>
 <p>The resource manager uses a memory manager to track memory states for the entanglement protocols.
 It also uses a rule manager to direct the creation and operation of entanglement protocols.</p>
@@ -188,7 +188,6 @@ The resource manager needs to notify the remote node to release the occupied mem
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>init_protocol</strong> (<a class="reference internal" href="../entanglement_management/entanglement_protocol.html#src.entanglement_management.entanglement_protocol.EntanglementProtocol" title="src.entanglement_management.entanglement_protocol.EntanglementProtocol"><em>EntanglementProtocol</em></a>) – protocol holding memory.</p></li>
 <li><p><strong>dst</strong> (<em>str</em>) – name of destination node.</p></li>
 <li><p><strong>memory_id</strong> (<em>str</em>) – name of memory to release.</p></li>
 </ul>
@@ -201,15 +200,13 @@ The resource manager needs to notify the remote node to release the occupied mem
 <code class="sig-name descname">release_remote_protocol</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dst</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">protocol</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.resource_management.resource_manager.ResourceManager.release_remote_protocol" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to release protocols from memories on distant nodes.</p>
 <p>Release the remote protocol ‘protocol’ on the remote node ‘dst’.
-The local protocol was paired with the remote protocol but local
-protocol becomes invalid.
-The resource manager needs to notify the remote node to cancel the
-paired protocol.</p>
+The local protocol was paired with the remote protocol but local protocol becomes invalid.
+The resource manager needs to notify the remote node to cancel the paired protocol.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>dst</strong> (<em>str</em>) – name of the destination node.</p></li>
-<li><p><strong>protocol</strong> (<a class="reference internal" href="../entanglement_management/entanglement_protocol.html#src.entanglement_management.entanglement_protocol.EntanglementProtocol" title="src.entanglement_management.entanglement_protocol.EntanglementProtocol"><em>EntanglementProtocol</em></a>) – protocol to release on node.</p></li>
+<li><p><strong>protocol</strong> (<em>str</em>) – name of protocol to release on node.</p></li>
 </ul>
 </dd>
 </dl>
@@ -227,6 +224,7 @@ The function <cite>req_condition_func</cite> describes the desired protocol.</p>
 <li><p><strong>protocol</strong> (<a class="reference internal" href="../entanglement_management/entanglement_protocol.html#src.entanglement_management.entanglement_protocol.EntanglementProtocol" title="src.entanglement_management.entanglement_protocol.EntanglementProtocol"><em>EntanglementProtocol</em></a>) – protocol sending the request.</p></li>
 <li><p><strong>req_dst</strong> (<em>str</em>) – name of destination node.</p></li>
 <li><p><strong>req_condition_func</strong> (<em>Callable</em><em>[</em><em>[</em><em>List</em><em>[</em><a class="reference internal" href="../entanglement_management/entanglement_protocol.html#src.entanglement_management.entanglement_protocol.EntanglementProtocol" title="src.entanglement_management.entanglement_protocol.EntanglementProtocol"><em>EntanglementProtocol</em></a><em>]</em><em>]</em><em>, </em><a class="reference internal" href="../entanglement_management/entanglement_protocol.html#src.entanglement_management.entanglement_protocol.EntanglementProtocol" title="src.entanglement_management.entanglement_protocol.EntanglementProtocol"><em>EntanglementProtocol</em></a><em>]</em>) – function used to evaluate condition on distant node.</p></li>
+<li><p><strong>req_args</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>) – arguments for req_cond_func.</p></li>
 </ul>
 </dd>
 </dl>
@@ -367,7 +365,7 @@ The function <cite>req_condition_func</cite> describes the desired protocol.</p>
         <li class="right" >
           <a href="top.html" title="Resource Management"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" >Resource Management</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Resource Manager</a></li> 
       </ul>

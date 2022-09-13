@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Switch &#8212; SeQUeNCe 0.3.2 documentation</title>
+    <title>Switch &#8212; SeQUeNCe 0.5.0 documentation</title>
     <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     
@@ -35,7 +35,7 @@
         <li class="right" >
           <a href="spdc_lens.html" title="SPDC Lens"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" accesskey="U">Components</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Switch</a></li> 
       </ul>
@@ -50,7 +50,8 @@
 <span id="switch"></span><h1>Switch<a class="headerlink" href="#module-src.components.switch" title="Permalink to this headline">¶</a></h1>
 <p>Model for simulation of an optical switch.</p>
 <p>This module defines the Switch class for directing the flow of photons.
-The switch is usually created as part of a time bin QSDetector object, but may be used individually.</p>
+The switch is usually created as part of a time bin QSDetector object, and will only accept time bin photons.
+A more general switch class is in development.</p>
 <dl class="py class">
 <dt id="src.components.switch.Switch">
 <em class="property">class </em><code class="sig-prename descclassname">src.components.switch.</code><code class="sig-name descname">Switch</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">timeline</span><span class="p">:</span> <span class="n">Timeline</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.switch.Switch" title="Permalink to this definition">¶</a></dt>
@@ -91,7 +92,7 @@ The switch is usually created as part of a time bin QSDetector object, but may b
 <dl class="py attribute">
 <dt id="src.components.switch.Switch.frequency">
 <code class="sig-name descname">frequency</code><a class="headerlink" href="#src.components.switch.Switch.frequency" title="Permalink to this definition">¶</a></dt>
-<dd><p>frequency with whitch to switch destinations.</p>
+<dd><p>frequency with which to switch destinations.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>float</p>
@@ -110,31 +111,9 @@ The switch is usually created as part of a time bin QSDetector object, but may b
 </dl>
 </dd></dl>
 
-<dl class="py attribute">
-<dt id="src.components.switch.Switch.interferometer">
-<code class="sig-name descname">interferometer</code><a class="headerlink" href="#src.components.switch.Switch.interferometer" title="Permalink to this definition">¶</a></dt>
-<dd><p>linked interferometer to receive photons in basis 1.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="interferometer.html#src.components.interferometer.Interferometer" title="src.components.interferometer.Interferometer">Interferometer</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="src.components.switch.Switch.detector">
-<code class="sig-name descname">detector</code><a class="headerlink" href="#src.components.switch.Switch.detector" title="Permalink to this definition">¶</a></dt>
-<dd><p>linked SPD to receive photons in basis 0.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="detector.html#src.components.detector.Detector" title="src.components.detector.Detector">Detector</a></p>
-</dd>
-</dl>
-</dd></dl>
-
 <dl class="py method">
 <dt id="src.components.switch.Switch.get">
-<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">photon</span><span class="p">:</span> <span class="n"><a class="reference internal" href="photon.html#src.components.photon.Photon" title="src.components.photon.Photon">src.components.photon.Photon</a></span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.components.switch.Switch.get" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">photon</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.components.switch.Switch.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to receive photon for transmission</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -142,7 +121,7 @@ The switch is usually created as part of a time bin QSDetector object, but may b
 </dd>
 </dl>
 <dl class="simple">
-<dt>Side Effects:</dt><dd><p>May call <cite>get</cite> method of attached detector or interferometer.</p>
+<dt>Side Effects:</dt><dd><p>May call <cite>get</cite> method of attached receivers.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -206,7 +185,7 @@ The switch is usually created as part of a time bin QSDetector object, but may b
         <li class="right" >
           <a href="spdc_lens.html" title="SPDC Lens"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" >Components</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Switch</a></li> 
       </ul>

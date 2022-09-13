@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detector &#8212; SeQUeNCe 0.3.2 documentation</title>
+    <title>Detector &#8212; SeQUeNCe 0.5.0 documentation</title>
     <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     
@@ -17,8 +17,8 @@
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Interferometer" href="interferometer.html" />
-    <link rel="prev" title="BSM" href="bsm.html" /> 
+    <link rel="next" title="Fiber Stretcher" href="fiber_stretcher.html" />
+    <link rel="prev" title="Circuit" href="circuit.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -30,12 +30,12 @@
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="interferometer.html" title="Interferometer"
+          <a href="fiber_stretcher.html" title="Fiber Stretcher"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="bsm.html" title="BSM"
+          <a href="circuit.html" title="Circuit"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" accesskey="U">Components</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Detector</a></li> 
       </ul>
@@ -149,11 +149,14 @@ May schedule future calls to self.</p>
 
 <dl class="py method">
 <dt id="src.components.detector.Detector.get">
-<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dark_get</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.components.detector.Detector.get" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">photon</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.components.detector.Detector.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to receive a photon for measurement.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>dark_get</strong> (<em>bool</em>) – Signifies if the call is the result of a false positive dark count event.
+<dd class="field-odd"><p><strong>photon</strong> (<a class="reference internal" href="photon.html#src.components.photon.Photon" title="src.components.photon.Photon"><em>Photon</em></a>) – photon to detect (currently unused)</p>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><p><strong>dark_get</strong> (<em>bool</em>) – Signifies if the call is the result of a false positive dark count event.
 If true, will ignore probability calculations (default false).</p>
 </dd>
 </dl>
@@ -205,6 +208,17 @@ If true, will ignore probability calculations (default false).</p>
 </dd></dl>
 
 <dl class="py attribute">
+<dt id="src.components.detector.QSDetector.componennts">
+<code class="sig-name descname">componennts</code><a class="headerlink" href="#src.components.detector.QSDetector.componennts" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of all aggregated hardware components.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>List[entity]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
 <dt id="src.components.detector.QSDetector.detectors">
 <code class="sig-name descname">detectors</code><a class="headerlink" href="#src.components.detector.QSDetector.detectors" title="Permalink to this definition">¶</a></dt>
 <dd><p>list of attached detectors.</p>
@@ -228,7 +242,7 @@ If true, will ignore probability calculations (default false).</p>
 
 <dl class="py method">
 <dt id="src.components.detector.QSDetector.get">
-<em class="property">abstract </em><code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">photon</span><span class="p">:</span> <span class="n">Photon</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.components.detector.QSDetector.get" title="Permalink to this definition">¶</a></dt>
+<em class="property">abstract </em><code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">photon</span><span class="p">:</span> <span class="n"><a class="reference internal" href="photon.html#src.components.photon.Photon" title="src.components.photon.Photon">src.components.photon.Photon</a></span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.components.detector.QSDetector.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>Abstract method for receiving photons for measurement.</p>
 </dd></dl>
 
@@ -238,6 +252,85 @@ If true, will ignore probability calculations (default false).</p>
 <dd><p>Method to initialize entity (abstract).</p>
 <p>Entity <cite>init</cite> methods are invoked for all timeline entities when the timeline is initialized.
 This method can be used to perform any necessary functions before simulation.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="src.components.detector.QSDetectorFockDirect">
+<em class="property">class </em><code class="sig-prename descclassname">src.components.detector.</code><code class="sig-name descname">QSDetectorFockDirect</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">timeline</span><span class="p">:</span> <span class="n">Timeline</span></em>, <em class="sig-param"><span class="n">src_list</span><span class="p">:</span> <span class="n">List<span class="p">[</span>str<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.detector.QSDetectorFockDirect" title="Permalink to this definition">¶</a></dt>
+<dd><p>QSDetector to directly measure photons in Fock state.</p>
+<p>Used to calculate diagonal density matrix elements.</p>
+<dl class="py attribute">
+<dt id="src.components.detector.QSDetectorFockDirect.name">
+<code class="sig-name descname">name</code><a class="headerlink" href="#src.components.detector.QSDetectorFockDirect.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>label for QSDetector instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.detector.QSDetectorFockDirect.timeline">
+<code class="sig-name descname">timeline</code><a class="headerlink" href="#src.components.detector.QSDetectorFockDirect.timeline" title="Permalink to this definition">¶</a></dt>
+<dd><p>timeline for simulation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../kernel/timeline.html#src.kernel.timeline.Timeline" title="src.kernel.timeline.Timeline">Timeline</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.detector.QSDetectorFockDirect.src_list">
+<code class="sig-name descname">src_list</code><a class="headerlink" href="#src.components.detector.QSDetectorFockDirect.src_list" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>List[int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.detector.QSDetectorFockDirect.detectors">
+<code class="sig-name descname">detectors</code><a class="headerlink" href="#src.components.detector.QSDetectorFockDirect.detectors" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of attached detectors (length 2).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>List[<a class="reference internal" href="#src.components.detector.Detector" title="src.components.detector.Detector">Detector</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.detector.QSDetectorFockDirect.trigger_times">
+<code class="sig-name descname">trigger_times</code><a class="headerlink" href="#src.components.detector.QSDetectorFockDirect.trigger_times" title="Permalink to this definition">¶</a></dt>
+<dd><p>tracks simulation time of detection events for each detector.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>List[List[int]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.components.detector.QSDetectorFockDirect.get">
+<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">photon</span><span class="p">:</span> <span class="n"><a class="reference internal" href="photon.html#src.components.photon.Photon" title="src.components.photon.Photon">src.components.photon.Photon</a></span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.detector.QSDetectorFockDirect.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Abstract method for receiving photons for measurement.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="src.components.detector.QSDetectorFockInterference">
+<em class="property">class </em><code class="sig-prename descclassname">src.components.detector.</code><code class="sig-name descname">QSDetectorFockInterference</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">timeline</span><span class="p">:</span> <span class="n">Timeline</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.detector.QSDetectorFockInterference" title="Permalink to this definition">¶</a></dt>
+<dd><p>WIP</p>
+<dl class="py method">
+<dt id="src.components.detector.QSDetectorFockInterference.get">
+<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">photon</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.detector.QSDetectorFockInterference.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Abstract method for receiving photons for measurement.</p>
 </dd></dl>
 
 </dd></dl>
@@ -305,7 +398,7 @@ Detectors[0] and detectors[1] are directly connected to the beamsplitter.</p>
 
 <dl class="py method">
 <dt id="src.components.detector.QSDetectorPolarization.get">
-<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">photon</span><span class="p">:</span> <span class="n">Photon</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.components.detector.QSDetectorPolarization.get" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">photon</span><span class="p">:</span> <span class="n"><a class="reference internal" href="photon.html#src.components.photon.Photon" title="src.components.photon.Photon">src.components.photon.Photon</a></span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.components.detector.QSDetectorPolarization.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to receive a photon for measurement.</p>
 <p>Forwards the photon to the internal polariaztion beamsplitter.</p>
 <dl class="field-list simple">
@@ -402,7 +495,7 @@ The interferometer is connected to detectors[1] and detectors[2].</p>
 
 <dl class="py method">
 <dt id="src.components.detector.QSDetectorTimeBin.get">
-<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">photon</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.detector.QSDetectorTimeBin.get" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">photon</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.detector.QSDetectorTimeBin.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to receive a photon for measurement.</p>
 <p>Forwards the photon to the internal fiber switch.</p>
 <dl class="field-list simple">
@@ -434,11 +527,11 @@ The interferometer is connected to detectors[1] and detectors[2].</p>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
-  <p class="topless"><a href="bsm.html"
-                        title="previous chapter">BSM</a></p>
+  <p class="topless"><a href="circuit.html"
+                        title="previous chapter">Circuit</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="interferometer.html"
-                        title="next chapter">Interferometer</a></p>
+  <p class="topless"><a href="fiber_stretcher.html"
+                        title="next chapter">Fiber Stretcher</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -470,12 +563,12 @@ The interferometer is connected to detectors[1] and detectors[2].</p>
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="interferometer.html" title="Interferometer"
+          <a href="fiber_stretcher.html" title="Fiber Stretcher"
              >next</a> |</li>
         <li class="right" >
-          <a href="bsm.html" title="BSM"
+          <a href="circuit.html" title="Circuit"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" >Components</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Detector</a></li> 
       </ul>

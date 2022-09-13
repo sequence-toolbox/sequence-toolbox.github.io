@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chapter 4: Resource Management &#8212; SeQUeNCe 0.3.2 documentation</title>
+    <title>Chapter 4: Resource Management &#8212; SeQUeNCe 0.5.0 documentation</title>
     <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     
@@ -35,7 +35,7 @@
         <li class="right" >
           <a href="../chapter3/entangle.html" title="Chapter 3: Entanglement Management"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.0 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Chapter 4: Resource Management</a></li> 
       </ul>
     </div>  
@@ -56,11 +56,17 @@
 <h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h2>
 <p>The Resource Management module in SeQUeNCe is responsible for managing the usage of and flow of information from hardware elements on a node. This is achieved with an internal <strong>memory manager</strong> and <strong>rule manager</strong>, as shown below:</p>
 <p><img alt="rm" src="../../_images/resource_management.png" /></p>
-<p>The memory manager is used to track the current state of all quantum memories (including entanglement, fidelity, etc.) while thie rule manager uses a set of “rules” (containing a priority, condition to be met, and action to take) to direct local protocols.</p>
+<p>The memory manager is used to track the current state of all quantum memories (including entanglement, fidelity, etc.) while the rule manager uses a set of “rules” (containing a priority, condition to be met, and action to take) to direct local protocols.</p>
 </div>
 <div class="section" id="step-1-create-custom-node-type">
 <h2>Step 1: Create custom node type<a class="headerlink" href="#step-1-create-custom-node-type" title="Permalink to this headline">¶</a></h2>
-<p>We will first create a custom node type based on the <code class="docutils literal notranslate"><span class="pre">QuantumRouter</span></code> node from SeQUeNCe. Our node will need to include the memory array hardware and a resource manager, as well as some functions to handle normal operations of the node. The first function we will need to edit is the <code class="docutils literal notranslate"><span class="pre">received_message</span></code> method, similar to other tutorials. In this case we will need to add a line to handle messages for the resource manager. We will also need a method <code class="docutils literal notranslate"><span class="pre">get_idle_memories</span></code>, used by the resource manager to interact with any applications present (see tutorial 6). In our case, we can leave this method empty.</p>
+<p>We will first create a custom node type based on the <code class="docutils literal notranslate"><span class="pre">QuantumRouter</span></code> node from SeQUeNCe.
+Our node will need to include the memory array hardware and a resource manager, as well as some functions to handle normal operations of the node.
+The first function we will need to edit is the <code class="docutils literal notranslate"><span class="pre">received_message</span></code> method, similar to other tutorials.
+In this case we will need to add a line to handle messages for the resource manager.
+We will also need a method <code class="docutils literal notranslate"><span class="pre">get_idle_memories</span></code>, used by the resource manager to interact with any applications present (see tutorial 6).
+In our case, we can leave this method empty.
+Finally, we modify the <code class="docutils literal notranslate"><span class="pre">get</span></code> method as in previous tutorials to direct photons from the memory array.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sequence.topology.node</span> <span class="kn">import</span> <span class="n">Node</span>
 <span class="kn">from</span> <span class="nn">sequence.components.memory</span> <span class="kn">import</span> <span class="n">MemoryArray</span>
 <span class="kn">from</span> <span class="nn">sequence.resource_management.resource_manager</span> <span class="kn">import</span> <span class="n">ResourceManager</span>
@@ -68,9 +74,12 @@
 <span class="k">class</span> <span class="nc">RouterNode</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">tl</span><span class="p">,</span> <span class="n">memo_size</span><span class="o">=</span><span class="mi">50</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">tl</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">memory_array</span> <span class="o">=</span> <span class="n">MemoryArray</span><span class="p">(</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;.MemoryArray&quot;</span><span class="p">,</span> <span class="n">tl</span><span class="p">,</span> <span class="n">num_memories</span><span class="o">=</span><span class="n">memo_size</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">memory_array</span><span class="o">.</span><span class="n">owner</span> <span class="o">=</span> <span class="bp">self</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">resource_manager</span> <span class="o">=</span> <span class="n">ResourceManager</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">memory_array_name</span> <span class="o">=</span> <span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;.MemoryArray&quot;</span>
+        <span class="n">memory_array</span> <span class="o">=</span> <span class="n">MemoryArray</span><span class="p">(</span><span class="n">memory_array_name</span><span class="p">,</span> <span class="n">tl</span><span class="p">,</span> <span class="n">num_memories</span><span class="o">=</span><span class="n">memo_size</span><span class="p">)</span>
+        <span class="n">memory_array</span><span class="o">.</span><span class="n">add_receiver</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_component</span><span class="p">(</span><span class="n">memory_array</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">resource_manager</span> <span class="o">=</span> <span class="n">ResourceManager</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">memory_array_name</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">receive_message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">src</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">msg</span><span class="p">:</span> <span class="s2">&quot;Message&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">msg</span><span class="o">.</span><span class="n">receiver</span> <span class="o">==</span> <span class="s2">&quot;resource_manager&quot;</span><span class="p">:</span>
@@ -88,6 +97,10 @@
 
     <span class="k">def</span> <span class="nf">get_idle_memory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">info</span><span class="p">:</span> <span class="s2">&quot;MemoryInfo&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">photon</span><span class="p">:</span> <span class="s2">&quot;Photon&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">dst</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;dst&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">send_qubit</span><span class="p">(</span><span class="n">dst</span><span class="p">,</span> <span class="n">photon</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -112,7 +125,7 @@ and <code class="docutils literal notranslate"><span class="pre">index_upper</sp
 <p>Rule conditions take 3 arguments:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">memory_info</span></code>, containing the information stored in the memory manager,</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">manager</span></code>, which is a reference to the memory manager, annd</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">manager</span></code>, which is a reference to the memory manager, and</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">args</span></code>, which is a dictionary to store values of other arguments, like <code class="docutils literal notranslate"><span class="pre">index_upper</span></code> and <code class="docutils literal notranslate"><span class="pre">index_lower</span></code></p></li>
 </ul>
 <p>In our case, we will use any memories in the <code class="docutils literal notranslate"><span class="pre">RAW</span></code> (unentangled) state. Other possible memory states are <code class="docutils literal notranslate"><span class="pre">OCCUPIED</span></code> (for
@@ -124,8 +137,8 @@ We will create a variable to store these when we load the rule into the rule man
 </div>
 <div class="section" id="step-3-create-rule-actions-for-flow-1">
 <h2>Step 3: Create Rule Actions for Flow 1<a class="headerlink" href="#step-3-create-rule-actions-for-flow-1" title="Permalink to this headline">¶</a></h2>
-<p>Next, we will dictate what the resource manager should do when our custom condition is met. This is performed with a
-rule action.</p>
+<p>Next, we will dictate what the resource manager should do when our custom condition is met.
+This is performed with a rule action.</p>
 <p>Rule actions are provided one argument by the resource manager: a list of <code class="docutils literal notranslate"><span class="pre">memory_info</span></code> objects that have met the
 condition of the rule. They should return four objects:</p>
 <ol class="simple">
@@ -134,28 +147,27 @@ condition of the rule. They should return four objects:</p>
 <li><p>Requirements that should be met on other nodes, and</p></li>
 <li><p>Arguments for the requirements function.</p></li>
 </ol>
-<p>In our case, we will create an entanglement generation protocol on both nodes and have router 1 confirm that router 2
-has created a protocol. <code class="docutils literal notranslate"><span class="pre">eg_rule_action1</span></code> will give the action for router 1 (including sending a requirement to router
-2), and <code class="docutils literal notranslate"><span class="pre">eg_rule_action2</span></code> will give the action for router 2. The action on router 1 will create
-the <code class="docutils literal notranslate"><span class="pre">EntanglementGenerationA</span></code> protocol and request the corresponding protocol from router 2 by sending the
-function <code class="docutils literal notranslate"><span class="pre">eg_req_func</span></code> and its arguments <code class="docutils literal notranslate"><span class="pre">req_args</span></code>. The <code class="docutils literal notranslate"><span class="pre">req_args</span></code> contain constraints about the target protocol. In
-this example, we use the type of protocol and memory index to filter the proper protocol. The action on router 2 will
-create an <code class="docutils literal notranslate"><span class="pre">EntanglementGenerationA</span></code> protocol and wait for a request from router 1. The <code class="docutils literal notranslate"><span class="pre">mid_name</span></code>
-and <code class="docutils literal notranslate"><span class="pre">other_name</span></code> in <code class="docutils literal notranslate"><span class="pre">args</span></code> define the name of BSM node and the other router used for generating entanglement. Note that
-the name of router 1 will be <code class="docutils literal notranslate"><span class="pre">“r1”</span></code>, the name of router 2 will be <code class="docutils literal notranslate"><span class="pre">“r2”</span></code>, and the name of the intermediate measurement
-node (see tutorial 3 for details) will be <code class="docutils literal notranslate"><span class="pre">“m12”</span></code>, which will be set when loading rules.</p>
+<p>In our case, we will create an entanglement generation protocol on both nodes and have router 1 confirm that router 2  has created a protocol.
+<code class="docutils literal notranslate"><span class="pre">eg_rule_action1</span></code> will give the action for router 1 (including sending a requirement to router  2), and <code class="docutils literal notranslate"><span class="pre">eg_rule_action2</span></code> will give the action for router 2.
+The action on router 1 will create the <code class="docutils literal notranslate"><span class="pre">EntanglementGenerationA</span></code> protocol and request the corresponding protocol from router 2 by sending the function <code class="docutils literal notranslate"><span class="pre">eg_req_func</span></code> and its arguments <code class="docutils literal notranslate"><span class="pre">req_args</span></code>.
+The <code class="docutils literal notranslate"><span class="pre">req_args</span></code> contain constraints about the target protocol.
+In this example, we use the type of protocol and memory index to filter the proper protocol.
+The action on router 2 will create an <code class="docutils literal notranslate"><span class="pre">EntanglementGenerationA</span></code> protocol and wait for a request from router 1.
+The <code class="docutils literal notranslate"><span class="pre">mid_name</span></code> and <code class="docutils literal notranslate"><span class="pre">other_name</span></code> in <code class="docutils literal notranslate"><span class="pre">args</span></code> define the name of BSM node and the other router used for generating entanglement.
+Note that the name of router 1 will be <code class="docutils literal notranslate"><span class="pre">“r1”</span></code>, the name of router 2 will be <code class="docutils literal notranslate"><span class="pre">“r2”</span></code>, and the name of the intermediate measurement node (see tutorial 3 for details) will be <code class="docutils literal notranslate"><span class="pre">“m12”</span></code>, which will be set when loading rules.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sequence.entanglement_management.generation</span> <span class="kn">import</span> <span class="n">EntanglementGenerationA</span>
 
 <span class="k">def</span> <span class="nf">eg_req_func</span><span class="p">(</span><span class="n">protocols</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
     <span class="n">remote_node</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;remote_node&quot;</span><span class="p">]</span>
     <span class="n">index_upper</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;index_upper&quot;</span><span class="p">]</span>
     <span class="n">index_lower</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;index_lower&quot;</span><span class="p">]</span>
+
     <span class="k">for</span> <span class="n">protocol</span> <span class="ow">in</span> <span class="n">protocols</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">protocol</span><span class="p">,</span> <span class="n">EntanglementGenerationA</span><span class="p">):</span>
             <span class="k">continue</span>
-        <span class="n">index_func</span> <span class="o">=</span> <span class="n">protocol</span><span class="o">.</span><span class="n">memory</span><span class="o">.</span><span class="n">owner</span><span class="o">.</span><span class="n">memory_array</span><span class="o">.</span><span class="n">memories</span><span class="o">.</span><span class="n">index</span>
-        <span class="k">if</span> <span class="n">protocol</span><span class="o">.</span><span class="n">remote_node_name</span> <span class="o">==</span> <span class="n">remote_node</span> \
-                <span class="ow">and</span> <span class="n">index_lower</span> <span class="o">&lt;=</span> <span class="n">index_func</span><span class="p">(</span><span class="n">protocol</span><span class="o">.</span><span class="n">memory</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">index_upper</span><span class="p">:</span>
+        <span class="n">mem_arr</span> <span class="o">=</span> <span class="n">protocol</span><span class="o">.</span><span class="n">own</span><span class="o">.</span><span class="n">get_components_by_type</span><span class="p">(</span><span class="s2">&quot;MemoryArray&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">protocol</span><span class="o">.</span><span class="n">remote_node_name</span> <span class="o">==</span> <span class="n">remote_node</span> <span class="ow">and</span> \
+                <span class="n">index_lower</span> <span class="o">&lt;=</span> <span class="n">mem_arr</span><span class="o">.</span><span class="n">memories</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">protocol</span><span class="o">.</span><span class="n">memory</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">index_upper</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">protocol</span>
 
 
@@ -187,11 +199,8 @@ node (see tutorial 3 for details) will be <code class="docutils literal notransl
 </div>
 <div class="section" id="step-4-build-the-network">
 <h2>Step 4: Build the Network<a class="headerlink" href="#step-4-build-the-network" title="Permalink to this headline">¶</a></h2>
-<p>We’ll now actually build our network and get ready to run the simulation. We will include the third router node, as this
-will be used for our second flow, but we will not use it in our first experiment. Also note that we have left the
-timeline <code class="docutils literal notranslate"><span class="pre">show_progress</span></code> attribute as its default true value, unlike previous tutorials. This will show a progress bar
-of the simulation during execution. This is most useful for longer experiments, where a user might wish to estimate the
-time remaining for a simulation.</p>
+<p>We’ll now actually build our network and get ready to run the simulation.
+We will include the third router node, as this will be used for our second flow, but we will not use it in our first experiment:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sequence.kernel.timeline</span> <span class="kn">import</span> <span class="n">Timeline</span>
 <span class="kn">from</span> <span class="nn">sequence.topology.node</span> <span class="kn">import</span> <span class="n">BSMNode</span>
 <span class="kn">from</span> <span class="nn">sequence.components.optical_channel</span> <span class="kn">import</span> <span class="n">ClassicalChannel</span><span class="p">,</span> <span class="n">QuantumChannel</span>
@@ -215,7 +224,7 @@ time remaining for a simulation.</p>
 <span class="n">cc_delay</span> <span class="o">=</span> <span class="mf">1e9</span>
 <span class="k">for</span> <span class="n">node1</span> <span class="ow">in</span> <span class="n">node_list</span><span class="p">:</span>
     <span class="k">for</span> <span class="n">node2</span> <span class="ow">in</span> <span class="n">node_list</span><span class="p">:</span>
-        <span class="n">cc</span> <span class="o">=</span> <span class="n">ClassicalChannel</span><span class="p">(</span><span class="s2">&quot;cc_</span><span class="si">%s</span><span class="s2">_</span><span class="si">%s</span><span class="s2">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">node1</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">node2</span><span class="o">.</span><span class="n">name</span><span class="p">),</span> <span class="n">tl</span><span class="p">,</span> <span class="mf">1e3</span><span class="p">,</span> <span class="n">delay</span><span class="o">=</span><span class="n">cc_delay</span><span class="p">)</span>
+        <span class="n">cc</span> <span class="o">=</span> <span class="n">ClassicalChannel</span><span class="p">(</span><span class="s2">&quot;cc_</span><span class="si">%s</span><span class="s2">_</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">node1</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">node2</span><span class="o">.</span><span class="n">name</span><span class="p">),</span> <span class="n">tl</span><span class="p">,</span> <span class="mf">1e3</span><span class="p">,</span> <span class="n">delay</span><span class="o">=</span><span class="n">cc_delay</span><span class="p">)</span>
         <span class="n">cc</span><span class="o">.</span><span class="n">set_ends</span><span class="p">(</span><span class="n">node1</span><span class="p">,</span> <span class="n">node2</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 
 <span class="c1"># create quantum channels linking r1 and r2 to m1</span>
@@ -248,12 +257,10 @@ generate entanglement. These are specified in the action and condition args.</p>
 <span class="n">action_args</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;mid_name&quot;</span><span class="p">:</span> <span class="s2">&quot;m12&quot;</span><span class="p">,</span> <span class="s2">&quot;other_name&quot;</span><span class="p">:</span> <span class="s2">&quot;r2&quot;</span><span class="p">,</span> <span class="s2">&quot;node_name&quot;</span><span class="p">:</span> <span class="s2">&quot;r1&quot;</span><span class="p">,</span>
                <span class="s2">&quot;index_upper&quot;</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span> <span class="s2">&quot;index_lower&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
 <span class="n">condition_args</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;index_lower&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;index_upper&quot;</span><span class="p">:</span> <span class="mi">9</span><span class="p">}</span>
-<span class="n">rule1</span> <span class="o">=</span> <span class="n">Rule</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">eg_rule_action1</span><span class="p">,</span> <span class="n">eg_rule_condition</span><span class="p">,</span> <span class="n">action_args</span><span class="p">,</span>
-             <span class="n">condition_args</span><span class="p">)</span>
+<span class="n">rule1</span> <span class="o">=</span> <span class="n">Rule</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">eg_rule_action1</span><span class="p">,</span> <span class="n">eg_rule_condition</span><span class="p">,</span> <span class="n">action_args</span><span class="p">,</span> <span class="n">condition_args</span><span class="p">)</span>
 <span class="n">r1</span><span class="o">.</span><span class="n">resource_manager</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">rule1</span><span class="p">)</span>
 <span class="n">action_args2</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;mid_name&quot;</span><span class="p">:</span> <span class="s2">&quot;m12&quot;</span><span class="p">,</span> <span class="s2">&quot;other_name&quot;</span><span class="p">:</span> <span class="s2">&quot;r1&quot;</span><span class="p">}</span>
-<span class="n">rule2</span> <span class="o">=</span> <span class="n">Rule</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">eg_rule_action2</span><span class="p">,</span> <span class="n">eg_rule_condition</span><span class="p">,</span> <span class="n">action_args2</span><span class="p">,</span>
-             <span class="n">condition_args</span><span class="p">)</span>
+<span class="n">rule2</span> <span class="o">=</span> <span class="n">Rule</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">eg_rule_action2</span><span class="p">,</span> <span class="n">eg_rule_condition</span><span class="p">,</span> <span class="n">action_args2</span><span class="p">,</span> <span class="n">condition_args</span><span class="p">)</span>
 <span class="n">r2</span><span class="o">.</span><span class="n">resource_manager</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">rule2</span><span class="p">)</span>
 
 <span class="n">tl</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
@@ -276,7 +283,9 @@ generate entanglement. These are specified in the action and condition args.</p>
 </div>
 <div class="section" id="step-6-flow-2-entanglement-generation">
 <h2>Step 6: Flow 2 Entanglement Generation<a class="headerlink" href="#step-6-flow-2-entanglement-generation" title="Permalink to this headline">¶</a></h2>
-<p>Now, we’ll create the custom rules to control our second flow between routers 1 and 3. The first step is again to set up entanglement generation in a similar manner to the first flow. To do this, we’ll create a function <code class="docutils literal notranslate"><span class="pre">add_eg_rules</span></code> that takes as arguments</p>
+<p>Now, we’ll create the custom rules to control our second flow between routers 1 and 3.
+The first step is again to set up entanglement generation in a similar manner to the first flow.
+To do this, we’ll create a function <code class="docutils literal notranslate"><span class="pre">add_eg_rules</span></code> that takes as arguments</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">index</span></code>, the index of the router (in the path) we will be adding rules to,</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">path</span></code>, a list of router nodes that make up the path of the entanglement flow, and</p></li>
@@ -341,74 +350,75 @@ The arguments for our <code class="docutils literal notranslate"><span class="pr
 </ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sequence.entanglement_management.purification</span> <span class="kn">import</span> <span class="n">BBPSSW</span>
 
-<span class="k">def</span> <span class="nf">add_ep_rules</span><span class="p">(</span><span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">RouterNode</span><span class="p">],</span> <span class="n">target_fidelity</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
-    <span class="n">node_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">node</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">path</span><span class="p">]</span>
-    <span class="n">node_mems</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">],</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">30</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">]]</span>
+<span class="k">def</span> <span class="nf">ep_rule_condition1</span><span class="p">(</span><span class="n">memory_info</span><span class="p">:</span> <span class="s2">&quot;MemoryInfo&quot;</span><span class="p">,</span> <span class="n">manager</span><span class="p">:</span> <span class="s2">&quot;MemoryManager&quot;</span><span class="p">,</span>
+                       <span class="n">args</span><span class="p">):</span>
+    <span class="n">index_upper</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;index_upper&quot;</span><span class="p">]</span>
+    <span class="n">index_lower</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;index_lower&quot;</span><span class="p">]</span>
+    <span class="n">target_fidelity</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;target_fidelity&quot;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">index_lower</span> <span class="o">&lt;=</span> <span class="n">memory_info</span><span class="o">.</span><span class="n">index</span> <span class="o">&lt;=</span> <span class="n">index_upper</span>
+            <span class="ow">and</span> <span class="n">memory_info</span><span class="o">.</span><span class="n">state</span> <span class="o">==</span> <span class="s2">&quot;ENTANGLED&quot;</span>
+            <span class="ow">and</span> <span class="n">memory_info</span><span class="o">.</span><span class="n">fidelity</span> <span class="o">&lt;</span> <span class="n">target_fidelity</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">info</span> <span class="ow">in</span> <span class="n">manager</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">info</span> <span class="o">!=</span> <span class="n">memory_info</span>
+                    <span class="ow">and</span> <span class="n">index_lower</span> <span class="o">&lt;=</span> <span class="n">info</span><span class="o">.</span><span class="n">index</span> <span class="o">&lt;=</span> <span class="n">index_upper</span>
+                    <span class="ow">and</span> <span class="n">info</span><span class="o">.</span><span class="n">state</span> <span class="o">==</span> <span class="s2">&quot;ENTANGLED&quot;</span>
+                    <span class="ow">and</span> <span class="n">info</span><span class="o">.</span><span class="n">remote_node</span> <span class="o">==</span> <span class="n">memory_info</span><span class="o">.</span><span class="n">remote_node</span>
+                    <span class="ow">and</span> <span class="n">info</span><span class="o">.</span><span class="n">fidelity</span> <span class="o">==</span> <span class="n">memory_info</span><span class="o">.</span><span class="n">fidelity</span><span class="p">):</span>
+                <span class="k">assert</span> <span class="n">memory_info</span><span class="o">.</span><span class="n">remote_memo</span> <span class="o">!=</span> <span class="n">info</span><span class="o">.</span><span class="n">remote_memo</span>
+                <span class="k">return</span> <span class="p">[</span><span class="n">memory_info</span><span class="p">,</span> <span class="n">info</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">[]</span>
 
-    <span class="n">node</span> <span class="o">=</span> <span class="n">path</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
-    <span class="n">mem_range</span> <span class="o">=</span> <span class="n">node_mems</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+<span class="k">def</span> <span class="nf">ep_req_func</span><span class="p">(</span><span class="n">protocols</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+    <span class="n">remote1</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;remote1&quot;</span><span class="p">]</span>
+    <span class="n">remote2</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;remote2&quot;</span><span class="p">]</span>
 
-    <span class="k">if</span> <span class="n">index</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">def</span> <span class="nf">ep_rule_condition</span><span class="p">(</span><span class="n">memory_info</span><span class="p">:</span> <span class="s2">&quot;MemoryInfo&quot;</span><span class="p">,</span> <span class="n">manager</span><span class="p">:</span> <span class="s2">&quot;MemoryManager&quot;</span><span class="p">):</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">memory_info</span><span class="o">.</span><span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">mem_range</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">mem_range</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="ow">and</span> <span class="n">memory_info</span><span class="o">.</span><span class="n">state</span> <span class="o">==</span> <span class="s2">&quot;ENTANGLED&quot;</span> <span class="ow">and</span> <span class="n">memory_info</span><span class="o">.</span><span class="n">fidelity</span> <span class="o">&lt;</span> <span class="n">target_fidelity</span><span class="p">):</span>
-                <span class="k">for</span> <span class="n">info</span> <span class="ow">in</span> <span class="n">manager</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="p">(</span><span class="n">info</span> <span class="o">!=</span> <span class="n">memory_info</span> <span class="ow">and</span> <span class="n">info</span><span class="o">.</span><span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">mem_range</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">mem_range</span><span class="p">[</span><span class="mi">1</span><span class="p">])[:</span><span class="mi">10</span><span class="p">]</span>
-                            <span class="ow">and</span> <span class="n">info</span><span class="o">.</span><span class="n">state</span> <span class="o">==</span> <span class="s2">&quot;ENTANGLED&quot;</span> <span class="ow">and</span> <span class="n">info</span><span class="o">.</span><span class="n">remote_node</span> <span class="o">==</span> <span class="n">memory_info</span><span class="o">.</span><span class="n">remote_node</span>
-                            <span class="ow">and</span> <span class="n">info</span><span class="o">.</span><span class="n">fidelity</span> <span class="o">==</span> <span class="n">memory_info</span><span class="o">.</span><span class="n">fidelity</span><span class="p">):</span>
-                        <span class="k">assert</span> <span class="n">memory_info</span><span class="o">.</span><span class="n">remote_memo</span> <span class="o">!=</span> <span class="n">info</span><span class="o">.</span><span class="n">remote_memo</span>
-                        <span class="k">return</span> <span class="p">[</span><span class="n">memory_info</span><span class="p">,</span> <span class="n">info</span><span class="p">]</span>
-            <span class="k">return</span> <span class="p">[]</span>
+    <span class="n">_protocols</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">protocol</span> <span class="ow">in</span> <span class="n">protocols</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">protocol</span><span class="p">,</span> <span class="n">BBPSSW</span><span class="p">):</span>
+            <span class="k">continue</span>
 
-        <span class="k">def</span> <span class="nf">ep_rule_action</span><span class="p">(</span><span class="n">memories_info</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="s2">&quot;MemoryInfo&quot;</span><span class="p">]):</span>
-            <span class="n">memories</span> <span class="o">=</span> <span class="p">[</span><span class="n">info</span><span class="o">.</span><span class="n">memory</span> <span class="k">for</span> <span class="n">info</span> <span class="ow">in</span> <span class="n">memories_info</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">protocol</span><span class="o">.</span><span class="n">kept_memo</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">remote1</span><span class="p">:</span>
+            <span class="n">_protocols</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">protocol</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">protocol</span><span class="o">.</span><span class="n">kept_memo</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">remote2</span><span class="p">:</span>
+            <span class="n">_protocols</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">protocol</span><span class="p">)</span>
 
-            <span class="k">def</span> <span class="nf">req_func</span><span class="p">(</span><span class="n">protocols</span><span class="p">):</span>
-                <span class="n">_protocols</span> <span class="o">=</span> <span class="p">[]</span>
-                <span class="k">for</span> <span class="n">protocol</span> <span class="ow">in</span> <span class="n">protocols</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">protocol</span><span class="p">,</span> <span class="n">BBPSSW</span><span class="p">):</span>
-                        <span class="k">continue</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">_protocols</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
 
-                    <span class="k">if</span> <span class="n">protocol</span><span class="o">.</span><span class="n">kept_memo</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">memories_info</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">remote_memo</span><span class="p">:</span>
-                        <span class="n">_protocols</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">protocol</span><span class="p">)</span>
-                    <span class="k">if</span> <span class="n">protocol</span><span class="o">.</span><span class="n">kept_memo</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">memories_info</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">remote_memo</span><span class="p">:</span>
-                        <span class="n">_protocols</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">protocol</span><span class="p">)</span>
+    <span class="n">protocols</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">_protocols</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">_protocols</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">rule</span><span class="o">.</span><span class="n">protocols</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">_protocols</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">_protocols</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">kept_memo</span><span class="o">.</span><span class="n">detach</span><span class="p">(</span><span class="n">_protocols</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">_protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">meas_memo</span> <span class="o">=</span> <span class="n">_protocols</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">kept_memo</span>
+    <span class="n">_protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">memories</span> <span class="o">=</span> <span class="p">[</span><span class="n">_protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">kept_memo</span><span class="p">,</span>
+                              <span class="n">_protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">meas_memo</span><span class="p">]</span>
+    <span class="n">_protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">_protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;.&quot;</span> <span class="o">+</span> <span class="n">_protocols</span><span class="p">[</span>
+        <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">meas_memo</span><span class="o">.</span><span class="n">name</span>
+    <span class="n">_protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">meas_memo</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">_protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 
-                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">_protocols</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
-                    <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">return</span> <span class="n">_protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
-                <span class="n">protocols</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">_protocols</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-                <span class="n">_protocols</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">rule</span><span class="o">.</span><span class="n">protocols</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">_protocols</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-                <span class="n">_protocols</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">kept_memo</span><span class="o">.</span><span class="n">detach</span><span class="p">(</span><span class="n">_protocols</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-                <span class="n">_protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">meas_memo</span> <span class="o">=</span> <span class="n">_protocols</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">kept_memo</span>
-                <span class="n">_protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">memories</span> <span class="o">=</span> <span class="p">[</span><span class="n">_protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">kept_memo</span><span class="p">,</span> <span class="n">_protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">meas_memo</span><span class="p">]</span>
-                <span class="n">_protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">_protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;.&quot;</span> <span class="o">+</span> <span class="n">_protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">meas_memo</span><span class="o">.</span><span class="n">name</span>
-                <span class="n">_protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">meas_memo</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">_protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-                <span class="n">_protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">t0</span> <span class="o">=</span> <span class="n">_protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">kept_memo</span><span class="o">.</span><span class="n">timeline</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
 
-                <span class="k">return</span> <span class="n">_protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="k">def</span> <span class="nf">ep_rule_action1</span><span class="p">(</span><span class="n">memories_info</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="s2">&quot;MemoryInfo&quot;</span><span class="p">],</span> <span class="n">args</span><span class="p">):</span>
+    <span class="n">memories</span> <span class="o">=</span> <span class="p">[</span><span class="n">info</span><span class="o">.</span><span class="n">memory</span> <span class="k">for</span> <span class="n">info</span> <span class="ow">in</span> <span class="n">memories_info</span><span class="p">]</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;EP.</span><span class="si">%s</span><span class="s2">.</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">memories</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">memories</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">protocol</span> <span class="o">=</span> <span class="n">BBPSSW</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">memories</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">memories</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">dsts</span> <span class="o">=</span> <span class="p">[</span><span class="n">memories_info</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">remote_node</span><span class="p">]</span>
+    <span class="n">req_funcs</span> <span class="o">=</span> <span class="p">[</span><span class="n">ep_req_func</span><span class="p">]</span>
+    <span class="n">req_args</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;remote1&quot;</span><span class="p">:</span> <span class="n">memories_info</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">remote_memo</span><span class="p">,</span>
+                <span class="s2">&quot;remote2&quot;</span><span class="p">:</span> <span class="n">memories_info</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">remote_memo</span><span class="p">}</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">protocol</span><span class="p">,</span> <span class="n">dsts</span><span class="p">,</span> <span class="n">req_funcs</span><span class="p">,</span> <span class="p">[</span><span class="n">req_args</span><span class="p">]]</span>
 
-            <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;EP.</span><span class="si">%s</span><span class="s2">.</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">memories</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">memories</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-            <span class="n">protocol</span> <span class="o">=</span> <span class="n">BBPSSW</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">memories</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">memories</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-            <span class="n">dsts</span> <span class="o">=</span> <span class="p">[</span><span class="n">memories_info</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">remote_node</span><span class="p">]</span>
-            <span class="n">req_funcs</span> <span class="o">=</span> <span class="p">[</span><span class="n">req_func</span><span class="p">]</span>
-            <span class="k">return</span> <span class="p">[</span><span class="n">protocol</span><span class="p">,</span> <span class="n">dsts</span><span class="p">,</span> <span class="n">req_funcs</span><span class="p">]</span>
 
-        <span class="n">rule</span> <span class="o">=</span> <span class="n">Rule</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">ep_rule_action</span><span class="p">,</span> <span class="n">ep_rule_condition</span><span class="p">)</span>
-        <span class="n">node</span><span class="o">.</span><span class="n">resource_manager</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">rule</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">index</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">def</span> <span class="nf">ep_rule_condition</span><span class="p">(</span><span class="n">memory_info</span><span class="p">:</span> <span class="s2">&quot;MemoryInfo&quot;</span><span class="p">,</span> <span class="n">manager</span><span class="p">:</span> <span class="s2">&quot;MemoryManager&quot;</span><span class="p">):</span>
-                <span class="k">if</span> <span class="p">(</span><span class="n">memory_info</span><span class="o">.</span><span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">mem_range</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">mem_range</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-                        <span class="ow">and</span> <span class="n">memory_info</span><span class="o">.</span><span class="n">state</span> <span class="o">==</span> <span class="s2">&quot;ENTANGLED&quot;</span> <span class="ow">and</span> <span class="n">memory_info</span><span class="o">.</span><span class="n">fidelity</span> <span class="o">&lt;</span> <span class="n">target_fidelity</span><span class="p">):</span>
-                    <span class="k">return</span> <span class="p">[</span><span class="n">memory_info</span><span class="p">]</span>
-                <span class="k">return</span> <span class="p">[]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">def</span> <span class="nf">ep_rule_condition</span><span class="p">(</span><span class="n">memory_info</span><span class="p">:</span> <span class="s2">&quot;MemoryInfo&quot;</span><span class="p">,</span> <span class="n">manager</span><span class="p">:</span> <span class="s2">&quot;MemoryManager&quot;</span><span class="p">):</span>
-                <span class="k">if</span> <span class="p">(</span><span class="n">memory_info</span><span class="o">.</span><span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">mem_range</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">mem_range</span><span class="p">[</span><span class="mi">1</span><span class="p">])[</span><span class="mi">10</span><span class="p">:]</span>
-                        <span class="ow">and</span> <span class="n">memory_info</span><span class="o">.</span><span class="n">state</span> <span class="o">==</span> <span class="s2">&quot;ENTANGLED&quot;</span> <span class="ow">and</span> <span class="n">memory_info</span><span class="o">.</span><span class="n">fidelity</span> <span class="o">&lt;</span> <span class="n">target_fidelity</span><span class="p">):</span>
-                    <span class="k">return</span> <span class="p">[</span><span class="n">memory_info</span><span class="p">]</span>
-                <span class="k">return</span> <span class="p">[]</span>
+<span class="k">def</span> <span class="nf">ep_rule_condition2</span><span class="p">(</span><span class="n">memory_info</span><span class="p">:</span> <span class="s2">&quot;MemoryInfo&quot;</span><span class="p">,</span> <span class="n">manager</span><span class="p">:</span> <span class="s2">&quot;MemoryManager&quot;</span><span class="p">,</span>
+                       <span class="n">args</span><span class="p">):</span>
+    <span class="n">index_upper</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;index_upper&quot;</span><span class="p">]</span>
+    <span class="n">index_lower</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;index_lower&quot;</span><span class="p">]</span>
+    <span class="n">target_fidelity</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;target_fidelity&quot;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">index_lower</span> <span class="o">&lt;=</span> <span class="n">memory_info</span><span class="o">.</span><span class="n">index</span> <span class="o">&lt;=</span> <span class="n">index_upper</span>
+            <span class="ow">and</span> <span class="n">memory_info</span><span class="o">.</span><span class="n">state</span> <span class="o">==</span> <span class="s2">&quot;ENTANGLED&quot;</span>
+            <span class="ow">and</span> <span class="n">memory_info</span><span class="o">.</span><span class="n">fidelity</span> <span class="o">&lt;</span> <span class="n">target_fidelity</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">memory_info</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">[]</span>
 
         <span class="k">def</span> <span class="nf">ep_rule_action</span><span class="p">(</span><span class="n">memories_info</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="s2">&quot;MemoryInfo&quot;</span><span class="p">]):</span>
             <span class="n">memories</span> <span class="o">=</span> <span class="p">[</span><span class="n">info</span><span class="o">.</span><span class="n">memory</span> <span class="k">for</span> <span class="n">info</span> <span class="ow">in</span> <span class="n">memories_info</span><span class="p">]</span>
@@ -418,131 +428,123 @@ The arguments for our <code class="docutils literal notranslate"><span class="pr
 
         <span class="n">rule</span> <span class="o">=</span> <span class="n">Rule</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">ep_rule_action</span><span class="p">,</span> <span class="n">ep_rule_condition</span><span class="p">)</span>
         <span class="n">node</span><span class="o">.</span><span class="n">resource_manager</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">rule</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="step-8-flow-2-entanglement-swapping">
-<h2>Step 8: Flow 2 Entanglement Swapping<a class="headerlink" href="#step-8-flow-2-entanglement-swapping" title="Permalink to this headline">¶</a></h2>
-<p>Finally, we’ll generate rules for entanglement swapping. The rules will be a little more complicated as we require different protocols for the intermediate and end routers (see tutorial 3). However, the basic principles of rule creation remain the same, requiring a condition and an action. Our condition will be that we have memory pairs in the <code class="docutils literal notranslate"><span class="pre">ENTANGLED</span></code> state between the intermediate and each end router, and that the fidelity of the memory state is above some threshold. Our arguments will thus be as follows:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">index</span></code>, the index of the router (in the path) we will be adding rules to,</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">path</span></code>, a list of router nodes that make up the path of the entanglement flow,</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">target_fidelity</span></code>, the fidelity of entanglement we wish to achieve,</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">succ_prob</span></code>, the probability of success for the swapping operation, and</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">degredation</span></code>, the degradation of entanglement fidelity after the swapping operation.</p></li>
-</ul>
-<p>Also note that the code to generate swapping rules is much longer than our previous rules. Luckily, this will be done automatically by the network manager in future tutorials.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sequence.entanglement_management.swapping</span> <span class="kn">import</span> <span class="n">EntanglementSwappingA</span><span class="p">,</span> <span class="n">EntanglementSwappingB</span>
 
-<span class="k">def</span> <span class="nf">add_es_rules</span><span class="p">(</span><span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">RouterNode</span><span class="p">],</span> <span class="n">target_fidelity</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">succ_prob</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">degradation</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
-    <span class="n">node_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">node</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">path</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">add_ep_rules</span><span class="p">(</span><span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">RouterNode</span><span class="p">],</span> <span class="n">target_fidelity</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
     <span class="n">node_mems</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">],</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">30</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">]]</span>
 
     <span class="n">node</span> <span class="o">=</span> <span class="n">path</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
     <span class="n">mem_range</span> <span class="o">=</span> <span class="n">node_mems</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
 
-    <span class="k">def</span> <span class="nf">es_rule_actionB</span><span class="p">(</span><span class="n">memories_info</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="s2">&quot;MemoryInfo&quot;</span><span class="p">]):</span>
-        <span class="n">memories</span> <span class="o">=</span> <span class="p">[</span><span class="n">info</span><span class="o">.</span><span class="n">memory</span> <span class="k">for</span> <span class="n">info</span> <span class="ow">in</span> <span class="n">memories_info</span><span class="p">]</span>
-        <span class="n">memory</span> <span class="o">=</span> <span class="n">memories</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="n">protocol</span> <span class="o">=</span> <span class="n">EntanglementSwappingB</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;ESB.&quot;</span> <span class="o">+</span> <span class="n">memory</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">memory</span><span class="p">)</span>
-        <span class="k">return</span> <span class="p">[</span><span class="n">protocol</span><span class="p">,</span> <span class="p">[</span><span class="kc">None</span><span class="p">],</span> <span class="p">[</span><span class="kc">None</span><span class="p">]]</span>
+    <span class="k">if</span> <span class="n">index</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">condition_args</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;index_lower&quot;</span><span class="p">:</span> <span class="n">mem_range</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                          <span class="s2">&quot;index_upper&quot;</span><span class="p">:</span> <span class="n">mem_range</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span>
+                          <span class="s2">&quot;target_fidelity&quot;</span><span class="p">:</span> <span class="n">target_fidelity</span><span class="p">}</span>
 
-    <span class="k">if</span> <span class="n">index</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">def</span> <span class="nf">es_rule_condition</span><span class="p">(</span><span class="n">memory_info</span><span class="p">:</span> <span class="s2">&quot;MemoryInfo&quot;</span><span class="p">,</span> <span class="n">manager</span><span class="p">:</span> <span class="s2">&quot;MemoryManager&quot;</span><span class="p">):</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">memory_info</span><span class="o">.</span><span class="n">state</span> <span class="o">==</span> <span class="s2">&quot;ENTANGLED&quot;</span>
-                    <span class="ow">and</span> <span class="n">memory_info</span><span class="o">.</span><span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">mem_range</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">mem_range</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-                    <span class="ow">and</span> <span class="n">memory_info</span><span class="o">.</span><span class="n">remote_node</span> <span class="o">!=</span> <span class="n">node_names</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-                    <span class="ow">and</span> <span class="n">memory_info</span><span class="o">.</span><span class="n">fidelity</span> <span class="o">&gt;=</span> <span class="n">target_fidelity</span><span class="p">):</span>
-                <span class="k">return</span> <span class="p">[</span><span class="n">memory_info</span><span class="p">]</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">return</span> <span class="p">[]</span>
-
-        <span class="n">rule</span> <span class="o">=</span> <span class="n">Rule</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">es_rule_actionB</span><span class="p">,</span> <span class="n">es_rule_condition</span><span class="p">)</span>
+        <span class="n">rule</span> <span class="o">=</span> <span class="n">Rule</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">ep_rule_action1</span><span class="p">,</span> <span class="n">ep_rule_condition1</span><span class="p">,</span> <span class="p">{},</span> <span class="n">condition_args</span><span class="p">)</span>
         <span class="n">node</span><span class="o">.</span><span class="n">resource_manager</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">rule</span><span class="p">)</span>
 
-    <span class="k">elif</span> <span class="n">index</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="k">def</span> <span class="nf">es_rule_condition</span><span class="p">(</span><span class="n">memory_info</span><span class="p">:</span> <span class="s2">&quot;MemoryInfo&quot;</span><span class="p">,</span> <span class="n">manager</span><span class="p">:</span> <span class="s2">&quot;MemoryManager&quot;</span><span class="p">):</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">memory_info</span><span class="o">.</span><span class="n">state</span> <span class="o">==</span> <span class="s2">&quot;ENTANGLED&quot;</span>
-                    <span class="ow">and</span> <span class="n">memory_info</span><span class="o">.</span><span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">mem_range</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">mem_range</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-                    <span class="ow">and</span> <span class="n">memory_info</span><span class="o">.</span><span class="n">remote_node</span> <span class="o">!=</span> <span class="n">node_names</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-                    <span class="ow">and</span> <span class="n">memory_info</span><span class="o">.</span><span class="n">fidelity</span> <span class="o">&gt;=</span> <span class="n">target_fidelity</span><span class="p">):</span>
-                <span class="k">return</span> <span class="p">[</span><span class="n">memory_info</span><span class="p">]</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">return</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">index</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">condition_args</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;index_lower&quot;</span><span class="p">:</span> <span class="n">mem_range</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                              <span class="s2">&quot;index_upper&quot;</span><span class="p">:</span> <span class="n">mem_range</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span>
+                              <span class="s2">&quot;target_fidelity&quot;</span><span class="p">:</span> <span class="n">target_fidelity</span><span class="p">}</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">condition_args</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;index_lower&quot;</span><span class="p">:</span> <span class="n">mem_range</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">10</span><span class="p">,</span>
+                              <span class="s2">&quot;index_upper&quot;</span><span class="p">:</span> <span class="n">mem_range</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span>
+                              <span class="s2">&quot;target_fidelity&quot;</span><span class="p">:</span> <span class="n">target_fidelity</span><span class="p">}</span>
 
-        <span class="n">rule</span> <span class="o">=</span> <span class="n">Rule</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">es_rule_actionB</span><span class="p">,</span> <span class="n">es_rule_condition</span><span class="p">)</span>
+        <span class="n">rule</span> <span class="o">=</span> <span class="n">Rule</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">ep_rule_action2</span><span class="p">,</span> <span class="n">ep_rule_condition2</span><span class="p">,</span> <span class="p">{},</span> <span class="n">condition_args</span><span class="p">)</span>
         <span class="n">node</span><span class="o">.</span><span class="n">resource_manager</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">rule</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="step-8-flow-2-entanglement-swapping">
+<h2>Step 8: Flow 2 Entanglement Swapping<a class="headerlink" href="#step-8-flow-2-entanglement-swapping" title="Permalink to this headline">¶</a></h2>
+<p>Finally, we’ll generate rules for entanglement swapping.
+The rules will be a little more complicated as we require different protocols for the intermediate and end routers (see tutorial 3).
+However, the basic principles of rule creation remain the same, requiring a condition, an action, and args.
+Our condition will be that we have memory pairs in the <code class="docutils literal notranslate"><span class="pre">ENTANGLED</span></code> state between the intermediate and each end router, and that the fidelity of the memory state is above some threshold.
+For now, we will only define the actions and conditions and leave the rule creation for the script.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sequence.entanglement_management.swapping</span> <span class="kn">import</span> <span class="n">EntanglementSwappingA</span><span class="p">,</span> <span class="n">EntanglementSwappingB</span>
 
+<span class="k">def</span> <span class="nf">es_rule_conditionA</span><span class="p">(</span><span class="n">memory_info</span><span class="p">:</span> <span class="s2">&quot;MemoryInfo&quot;</span><span class="p">,</span> <span class="n">manager</span><span class="p">:</span> <span class="s2">&quot;MemoryManager&quot;</span><span class="p">,</span>
+                       <span class="n">args</span><span class="p">):</span>
+    <span class="n">index_lower</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;index_lower&quot;</span><span class="p">]</span>
+    <span class="n">index_upper</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;index_upper&quot;</span><span class="p">]</span>
+    <span class="n">target_fidelity</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;target_fidelity&quot;</span><span class="p">]</span>
+    <span class="n">left</span><span class="p">,</span> <span class="n">right</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;left&quot;</span><span class="p">],</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;right&quot;</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">memory_info</span><span class="o">.</span><span class="n">state</span> <span class="o">==</span> <span class="s2">&quot;ENTANGLED&quot;</span>
+            <span class="ow">and</span> <span class="n">memory_info</span><span class="o">.</span><span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">index_lower</span><span class="p">,</span> <span class="n">index_upper</span><span class="p">)</span>
+            <span class="ow">and</span> <span class="n">memory_info</span><span class="o">.</span><span class="n">remote_node</span> <span class="o">==</span> <span class="n">left</span>
+            <span class="ow">and</span> <span class="n">memory_info</span><span class="o">.</span><span class="n">fidelity</span> <span class="o">&gt;=</span> <span class="n">target_fidelity</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">info</span> <span class="ow">in</span> <span class="n">manager</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">info</span><span class="o">.</span><span class="n">state</span> <span class="o">==</span> <span class="s2">&quot;ENTANGLED&quot;</span>
+                    <span class="ow">and</span> <span class="n">info</span><span class="o">.</span><span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">index_lower</span><span class="p">,</span> <span class="n">index_upper</span><span class="p">)</span>
+                    <span class="ow">and</span> <span class="n">info</span><span class="o">.</span><span class="n">remote_node</span> <span class="o">==</span> <span class="n">right</span>
+                    <span class="ow">and</span> <span class="n">info</span><span class="o">.</span><span class="n">fidelity</span> <span class="o">&gt;=</span> <span class="n">target_fidelity</span><span class="p">):</span>
+                <span class="k">return</span> <span class="p">[</span><span class="n">memory_info</span><span class="p">,</span> <span class="n">info</span><span class="p">]</span>
+    <span class="k">elif</span> <span class="p">(</span><span class="n">memory_info</span><span class="o">.</span><span class="n">state</span> <span class="o">==</span> <span class="s2">&quot;ENTANGLED&quot;</span>
+          <span class="ow">and</span> <span class="n">memory_info</span><span class="o">.</span><span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">index_lower</span><span class="p">,</span> <span class="n">index_upper</span><span class="p">)</span>
+          <span class="ow">and</span> <span class="n">memory_info</span><span class="o">.</span><span class="n">remote_node</span> <span class="o">==</span> <span class="n">right</span>
+          <span class="ow">and</span> <span class="n">memory_info</span><span class="o">.</span><span class="n">fidelity</span> <span class="o">&gt;=</span> <span class="n">target_fidelity</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">info</span> <span class="ow">in</span> <span class="n">manager</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">info</span><span class="o">.</span><span class="n">state</span> <span class="o">==</span> <span class="s2">&quot;ENTANGLED&quot;</span>
+                    <span class="ow">and</span> <span class="n">info</span><span class="o">.</span><span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">index_lower</span><span class="p">,</span> <span class="n">index_upper</span><span class="p">)</span>
+                    <span class="ow">and</span> <span class="n">info</span><span class="o">.</span><span class="n">remote_node</span> <span class="o">==</span> <span class="n">left</span>
+                    <span class="ow">and</span> <span class="n">info</span><span class="o">.</span><span class="n">fidelity</span> <span class="o">&gt;=</span> <span class="n">target_fidelity</span><span class="p">):</span>
+                <span class="k">return</span> <span class="p">[</span><span class="n">memory_info</span><span class="p">,</span> <span class="n">info</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">[]</span>
+
+
+<span class="k">def</span> <span class="nf">es_req_func</span><span class="p">(</span><span class="n">protocols</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+    <span class="n">target_memo</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;target_memo&quot;</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">protocol</span> <span class="ow">in</span> <span class="n">protocols</span><span class="p">:</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">protocol</span><span class="p">,</span> <span class="n">EntanglementSwappingB</span><span class="p">)</span>
+                <span class="ow">and</span> <span class="n">protocol</span><span class="o">.</span><span class="n">memory</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">target_memo</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">protocol</span>
+
+
+<span class="k">def</span> <span class="nf">es_rule_actionA</span><span class="p">(</span><span class="n">memories_info</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="s2">&quot;MemoryInfo&quot;</span><span class="p">],</span> <span class="n">args</span><span class="p">):</span>
+    <span class="n">succ_prob</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;succ_prob&quot;</span><span class="p">]</span>
+    <span class="n">degradation</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;degradation&quot;</span><span class="p">]</span>
+
+    <span class="n">memories</span> <span class="o">=</span> <span class="p">[</span><span class="n">info</span><span class="o">.</span><span class="n">memory</span> <span class="k">for</span> <span class="n">info</span> <span class="ow">in</span> <span class="n">memories_info</span><span class="p">]</span>
+
+    <span class="n">protocol</span> <span class="o">=</span> <span class="n">EntanglementSwappingA</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;ESA.</span><span class="si">%s</span><span class="s2">.</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span>
+        <span class="n">memories</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">memories</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">),</span>
+                                     <span class="n">memories</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">memories</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                                     <span class="n">success_prob</span><span class="o">=</span><span class="n">succ_prob</span><span class="p">,</span>
+                                     <span class="n">degradation</span><span class="o">=</span><span class="n">degradation</span><span class="p">)</span>
+    <span class="n">dsts</span> <span class="o">=</span> <span class="p">[</span><span class="n">info</span><span class="o">.</span><span class="n">remote_node</span> <span class="k">for</span> <span class="n">info</span> <span class="ow">in</span> <span class="n">memories_info</span><span class="p">]</span>
+    <span class="n">req_funcs</span> <span class="o">=</span> <span class="p">[</span><span class="n">es_req_func</span><span class="p">,</span> <span class="n">es_req_func</span><span class="p">]</span>
+    <span class="n">req_args</span> <span class="o">=</span> <span class="p">[{</span><span class="s2">&quot;target_memo&quot;</span><span class="p">:</span> <span class="n">memories_info</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">remote_memo</span><span class="p">},</span>
+                <span class="p">{</span><span class="s2">&quot;target_memo&quot;</span><span class="p">:</span> <span class="n">memories_info</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">remote_memo</span><span class="p">}]</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">protocol</span><span class="p">,</span> <span class="n">dsts</span><span class="p">,</span> <span class="n">req_funcs</span><span class="p">,</span> <span class="n">req_args</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">es_rule_conditionB</span><span class="p">(</span><span class="n">memory_info</span><span class="p">:</span> <span class="s2">&quot;MemoryInfo&quot;</span><span class="p">,</span> <span class="n">manager</span><span class="p">:</span> <span class="s2">&quot;MemoryManager&quot;</span><span class="p">,</span>
+                       <span class="n">args</span><span class="p">):</span>
+    <span class="n">index_lower</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;index_lower&quot;</span><span class="p">]</span>
+    <span class="n">index_upper</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;index_upper&quot;</span><span class="p">]</span>
+    <span class="n">target_node</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;target_node&quot;</span><span class="p">]</span>
+    <span class="n">target_fidelity</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;target_fidelity&quot;</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">memory_info</span><span class="o">.</span><span class="n">state</span> <span class="o">==</span> <span class="s2">&quot;ENTANGLED&quot;</span>
+            <span class="ow">and</span> <span class="n">memory_info</span><span class="o">.</span><span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">index_lower</span><span class="p">,</span> <span class="n">index_upper</span><span class="p">)</span>
+            <span class="ow">and</span> <span class="n">memory_info</span><span class="o">.</span><span class="n">remote_node</span> <span class="o">!=</span> <span class="n">target_node</span>
+            <span class="ow">and</span> <span class="n">memory_info</span><span class="o">.</span><span class="n">fidelity</span> <span class="o">&gt;=</span> <span class="n">target_fidelity</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">memory_info</span><span class="p">]</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">_path</span> <span class="o">=</span> <span class="n">node_names</span><span class="p">[:]</span>
-        <span class="k">while</span> <span class="n">_path</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">new_path</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">_path</span><span class="p">):</span>
-                <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">i</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
-                    <span class="n">new_path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-            <span class="n">_path</span> <span class="o">=</span> <span class="n">new_path</span>
-        <span class="n">_index</span> <span class="o">=</span> <span class="n">_path</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-        <span class="n">left</span><span class="p">,</span> <span class="n">right</span> <span class="o">=</span> <span class="n">_path</span><span class="p">[</span><span class="n">_index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span> <span class="n">_path</span><span class="p">[</span><span class="n">_index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="k">return</span> <span class="p">[]</span>
 
-        <span class="k">def</span> <span class="nf">es_rule_conditionA</span><span class="p">(</span><span class="n">memory_info</span><span class="p">:</span> <span class="s2">&quot;MemoryInfo&quot;</span><span class="p">,</span> <span class="n">manager</span><span class="p">:</span> <span class="s2">&quot;MemoryManager&quot;</span><span class="p">):</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">memory_info</span><span class="o">.</span><span class="n">state</span> <span class="o">==</span> <span class="s2">&quot;ENTANGLED&quot;</span>
-                    <span class="ow">and</span> <span class="n">memory_info</span><span class="o">.</span><span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">mem_range</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">mem_range</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-                    <span class="ow">and</span> <span class="n">memory_info</span><span class="o">.</span><span class="n">remote_node</span> <span class="o">==</span> <span class="n">left</span>
-                    <span class="ow">and</span> <span class="n">memory_info</span><span class="o">.</span><span class="n">fidelity</span> <span class="o">&gt;=</span> <span class="n">target_fidelity</span><span class="p">):</span>
-                <span class="k">for</span> <span class="n">info</span> <span class="ow">in</span> <span class="n">manager</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="p">(</span><span class="n">info</span><span class="o">.</span><span class="n">state</span> <span class="o">==</span> <span class="s2">&quot;ENTANGLED&quot;</span>
-                            <span class="ow">and</span> <span class="n">info</span><span class="o">.</span><span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">mem_range</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">mem_range</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-                            <span class="ow">and</span> <span class="n">info</span><span class="o">.</span><span class="n">remote_node</span> <span class="o">==</span> <span class="n">right</span>
-                            <span class="ow">and</span> <span class="n">info</span><span class="o">.</span><span class="n">fidelity</span> <span class="o">&gt;=</span> <span class="n">target_fidelity</span><span class="p">):</span>
-                        <span class="k">return</span> <span class="p">[</span><span class="n">memory_info</span><span class="p">,</span> <span class="n">info</span><span class="p">]</span>
-            <span class="k">elif</span> <span class="p">(</span><span class="n">memory_info</span><span class="o">.</span><span class="n">state</span> <span class="o">==</span> <span class="s2">&quot;ENTANGLED&quot;</span>
-                  <span class="ow">and</span> <span class="n">memory_info</span><span class="o">.</span><span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">mem_range</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">mem_range</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-                  <span class="ow">and</span> <span class="n">memory_info</span><span class="o">.</span><span class="n">remote_node</span> <span class="o">==</span> <span class="n">right</span>
-                  <span class="ow">and</span> <span class="n">memory_info</span><span class="o">.</span><span class="n">fidelity</span> <span class="o">&gt;=</span> <span class="n">target_fidelity</span><span class="p">):</span>
-                <span class="k">for</span> <span class="n">info</span> <span class="ow">in</span> <span class="n">manager</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="p">(</span><span class="n">info</span><span class="o">.</span><span class="n">state</span> <span class="o">==</span> <span class="s2">&quot;ENTANGLED&quot;</span>
-                            <span class="ow">and</span> <span class="n">info</span><span class="o">.</span><span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">mem_range</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">mem_range</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-                            <span class="ow">and</span> <span class="n">info</span><span class="o">.</span><span class="n">remote_node</span> <span class="o">==</span> <span class="n">left</span>
-                            <span class="ow">and</span> <span class="n">info</span><span class="o">.</span><span class="n">fidelity</span> <span class="o">&gt;=</span> <span class="n">target_fidelity</span><span class="p">):</span>
-                        <span class="k">return</span> <span class="p">[</span><span class="n">memory_info</span><span class="p">,</span> <span class="n">info</span><span class="p">]</span>
-            <span class="k">return</span> <span class="p">[]</span>
 
-        <span class="k">def</span> <span class="nf">es_rule_actionA</span><span class="p">(</span><span class="n">memories_info</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="s2">&quot;MemoryInfo&quot;</span><span class="p">]):</span>
-            <span class="n">memories</span> <span class="o">=</span> <span class="p">[</span><span class="n">info</span><span class="o">.</span><span class="n">memory</span> <span class="k">for</span> <span class="n">info</span> <span class="ow">in</span> <span class="n">memories_info</span><span class="p">]</span>
-
-            <span class="k">def</span> <span class="nf">req_func1</span><span class="p">(</span><span class="n">protocols</span><span class="p">):</span>
-                <span class="k">for</span> <span class="n">protocol</span> <span class="ow">in</span> <span class="n">protocols</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">protocol</span><span class="p">,</span> <span class="n">EntanglementSwappingB</span><span class="p">)</span>
-                            <span class="ow">and</span> <span class="n">protocol</span><span class="o">.</span><span class="n">memory</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">memories_info</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">remote_memo</span><span class="p">):</span>
-                        <span class="k">return</span> <span class="n">protocol</span>
-
-            <span class="k">def</span> <span class="nf">req_func2</span><span class="p">(</span><span class="n">protocols</span><span class="p">):</span>
-                <span class="k">for</span> <span class="n">protocol</span> <span class="ow">in</span> <span class="n">protocols</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">protocol</span><span class="p">,</span> <span class="n">EntanglementSwappingB</span><span class="p">)</span>
-                            <span class="ow">and</span> <span class="n">protocol</span><span class="o">.</span><span class="n">memory</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">memories_info</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">remote_memo</span><span class="p">):</span>
-                        <span class="k">return</span> <span class="n">protocol</span>
-
-            <span class="n">protocol</span> <span class="o">=</span> <span class="n">EntanglementSwappingA</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;ESA.</span><span class="si">%s</span><span class="s2">.</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">memories</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">memories</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">),</span>
-                                             <span class="n">memories</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">memories</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
-                                             <span class="n">success_prob</span><span class="o">=</span><span class="n">succ_prob</span><span class="p">,</span> <span class="n">degradation</span><span class="o">=</span><span class="n">degradation</span><span class="p">)</span>
-            <span class="n">dsts</span> <span class="o">=</span> <span class="p">[</span><span class="n">info</span><span class="o">.</span><span class="n">remote_node</span> <span class="k">for</span> <span class="n">info</span> <span class="ow">in</span> <span class="n">memories_info</span><span class="p">]</span>
-            <span class="n">req_funcs</span> <span class="o">=</span> <span class="p">[</span><span class="n">req_func1</span><span class="p">,</span> <span class="n">req_func2</span><span class="p">]</span>
-            <span class="k">return</span> <span class="p">[</span><span class="n">protocol</span><span class="p">,</span> <span class="n">dsts</span><span class="p">,</span> <span class="n">req_funcs</span><span class="p">]</span>
-
-        <span class="n">rule</span> <span class="o">=</span> <span class="n">Rule</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">es_rule_actionA</span><span class="p">,</span> <span class="n">es_rule_conditionA</span><span class="p">)</span>
-        <span class="n">node</span><span class="o">.</span><span class="n">resource_manager</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">rule</span><span class="p">)</span>
-
-        <span class="k">def</span> <span class="nf">es_rule_conditionB</span><span class="p">(</span><span class="n">memory_info</span><span class="p">:</span> <span class="s2">&quot;MemoryInfo&quot;</span><span class="p">,</span> <span class="n">manager</span><span class="p">:</span> <span class="s2">&quot;MemoryManager&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="s2">&quot;MemoryInfo&quot;</span><span class="p">]:</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">memory_info</span><span class="o">.</span><span class="n">state</span> <span class="o">==</span> <span class="s2">&quot;ENTANGLED&quot;</span>
-                    <span class="ow">and</span> <span class="n">memory_info</span><span class="o">.</span><span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">mem_range</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">mem_range</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-                    <span class="ow">and</span> <span class="n">memory_info</span><span class="o">.</span><span class="n">remote_node</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">]</span>
-                    <span class="ow">and</span> <span class="n">memory_info</span><span class="o">.</span><span class="n">fidelity</span> <span class="o">&gt;=</span> <span class="n">target_fidelity</span><span class="p">):</span>
-                <span class="k">return</span> <span class="p">[</span><span class="n">memory_info</span><span class="p">]</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">return</span> <span class="p">[]</span>
-
-        <span class="n">rule</span> <span class="o">=</span> <span class="n">Rule</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">es_rule_actionB</span><span class="p">,</span> <span class="n">es_rule_conditionB</span><span class="p">)</span>
-        <span class="n">node</span><span class="o">.</span><span class="n">resource_manager</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">rule</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">es_rule_actionB</span><span class="p">(</span><span class="n">memories_info</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="s2">&quot;MemoryInfo&quot;</span><span class="p">],</span> <span class="n">args</span><span class="p">):</span>
+    <span class="n">memories</span> <span class="o">=</span> <span class="p">[</span><span class="n">info</span><span class="o">.</span><span class="n">memory</span> <span class="k">for</span> <span class="n">info</span> <span class="ow">in</span> <span class="n">memories_info</span><span class="p">]</span>
+    <span class="n">memory</span> <span class="o">=</span> <span class="n">memories</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">protocol</span> <span class="o">=</span> <span class="n">EntanglementSwappingB</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;ESB.&quot;</span> <span class="o">+</span> <span class="n">memory</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">memory</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">protocol</span><span class="p">,</span> <span class="p">[</span><span class="kc">None</span><span class="p">],</span> <span class="p">[</span><span class="kc">None</span><span class="p">],</span> <span class="p">[</span><span class="kc">None</span><span class="p">]]</span>
 </pre></div>
 </div>
 </div>
@@ -551,16 +553,42 @@ The arguments for our <code class="docutils literal notranslate"><span class="pr
 <p>We will now run the simulation again, adding in our new custom rules for the second flow. We will also add code to display memory information on routers 2 and 3. We should observe long-distance entanglement between routers 1 and 3 alongside the short distance entanglement from our first experiment.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tl</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
 
-<span class="c1"># load rules</span>
-<span class="n">rule1</span> <span class="o">=</span> <span class="n">Rule</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">eg_rule_action_f1_1</span><span class="p">,</span> <span class="n">eg_rule_condition_f1</span><span class="p">)</span>
+<span class="c1"># load rules for flow 1</span>
+<span class="n">action_args</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;mid_name&quot;</span><span class="p">:</span> <span class="s2">&quot;m12&quot;</span><span class="p">,</span> <span class="s2">&quot;other_name&quot;</span><span class="p">:</span> <span class="s2">&quot;r2&quot;</span><span class="p">,</span> <span class="s2">&quot;node_name&quot;</span><span class="p">:</span> <span class="s2">&quot;r1&quot;</span><span class="p">,</span>
+               <span class="s2">&quot;index_upper&quot;</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span> <span class="s2">&quot;index_lower&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+<span class="n">condition_args</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;index_lower&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;index_upper&quot;</span><span class="p">:</span> <span class="mi">9</span><span class="p">}</span>
+<span class="n">rule1</span> <span class="o">=</span> <span class="n">Rule</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">eg_rule_action1</span><span class="p">,</span> <span class="n">eg_rule_condition</span><span class="p">,</span> <span class="n">action_args</span><span class="p">,</span> <span class="n">condition_args</span><span class="p">)</span>
 <span class="n">r1</span><span class="o">.</span><span class="n">resource_manager</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">rule1</span><span class="p">)</span>
-<span class="n">rule2</span> <span class="o">=</span> <span class="n">Rule</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">eg_rule_action_f1_2</span><span class="p">,</span> <span class="n">eg_rule_condition_f1</span><span class="p">)</span>
+<span class="n">action_args2</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;mid_name&quot;</span><span class="p">:</span> <span class="s2">&quot;m12&quot;</span><span class="p">,</span> <span class="s2">&quot;other_name&quot;</span><span class="p">:</span> <span class="s2">&quot;r1&quot;</span><span class="p">}</span>
+<span class="n">rule2</span> <span class="o">=</span> <span class="n">Rule</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">eg_rule_action2</span><span class="p">,</span> <span class="n">eg_rule_condition</span><span class="p">,</span> <span class="n">action_args2</span><span class="p">,</span> <span class="n">condition_args</span><span class="p">)</span>
 <span class="n">r2</span><span class="o">.</span><span class="n">resource_manager</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">rule2</span><span class="p">)</span>
 
+<span class="c1"># load rules for flow 2</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
     <span class="n">add_eg_rules</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="p">[</span><span class="n">r1</span><span class="p">,</span> <span class="n">r2</span><span class="p">,</span> <span class="n">r3</span><span class="p">],</span> <span class="p">[</span><span class="n">m12</span><span class="p">,</span> <span class="n">m23</span><span class="p">])</span>
     <span class="n">add_ep_rules</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="p">[</span><span class="n">r1</span><span class="p">,</span> <span class="n">r2</span><span class="p">,</span> <span class="n">r3</span><span class="p">],</span> <span class="mf">0.9</span><span class="p">)</span>
-    <span class="n">add_es_rules</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="p">[</span><span class="n">r1</span><span class="p">,</span> <span class="n">r2</span><span class="p">,</span> <span class="n">r3</span><span class="p">],</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">condition_args</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;index_lower&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+                  <span class="s2">&quot;index_upper&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+                  <span class="s2">&quot;target_node&quot;</span><span class="p">:</span> <span class="n">r3</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                  <span class="s2">&quot;target_fidelity&quot;</span><span class="p">:</span> <span class="mf">0.9</span><span class="p">}</span>
+<span class="n">rule</span> <span class="o">=</span> <span class="n">Rule</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">es_rule_actionB</span><span class="p">,</span> <span class="n">es_rule_conditionB</span><span class="p">,</span> <span class="p">{},</span> <span class="n">condition_args</span><span class="p">)</span>
+<span class="n">r1</span><span class="o">.</span><span class="n">resource_manager</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">rule</span><span class="p">)</span>
+
+<span class="n">condition_args</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;index_lower&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                  <span class="s2">&quot;index_upper&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+                  <span class="s2">&quot;target_node&quot;</span><span class="p">:</span> <span class="n">r1</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                  <span class="s2">&quot;target_fidelity&quot;</span><span class="p">:</span> <span class="mf">0.9</span><span class="p">}</span>
+<span class="n">rule</span> <span class="o">=</span> <span class="n">Rule</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">es_rule_actionB</span><span class="p">,</span> <span class="n">es_rule_conditionB</span><span class="p">,</span> <span class="p">{},</span> <span class="n">condition_args</span><span class="p">)</span>
+<span class="n">r3</span><span class="o">.</span><span class="n">resource_manager</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">rule</span><span class="p">)</span>
+
+<span class="n">action_args</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;succ_prob&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;degradation&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
+<span class="n">condition_args</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;index_lower&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+                  <span class="s2">&quot;index_upper&quot;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+                  <span class="s2">&quot;target_fidelity&quot;</span><span class="p">:</span> <span class="mf">0.9</span><span class="p">,</span>
+                  <span class="s2">&quot;left&quot;</span><span class="p">:</span> <span class="n">r1</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;right&quot;</span><span class="p">:</span> <span class="n">r3</span><span class="o">.</span><span class="n">name</span><span class="p">}</span>
+<span class="n">rule</span> <span class="o">=</span> <span class="n">Rule</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">es_rule_actionA</span><span class="p">,</span> <span class="n">es_rule_conditionA</span><span class="p">,</span> <span class="n">action_args</span><span class="p">,</span> <span class="n">condition_args</span><span class="p">)</span>
+<span class="n">r2</span><span class="o">.</span><span class="n">resource_manager</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">rule</span><span class="p">)</span>
 
 <span class="n">tl</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 
@@ -652,7 +680,7 @@ The arguments for our <code class="docutils literal notranslate"><span class="pr
         <li class="right" >
           <a href="../chapter3/entangle.html" title="Chapter 3: Entanglement Management"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.0 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Chapter 4: Resource Management</a></li> 
       </ul>
     </div>

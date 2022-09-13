@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Random Request &#8212; SeQUeNCe 0.3.2 documentation</title>
+    <title>Random Request &#8212; SeQUeNCe 0.5.0 documentation</title>
     <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     
@@ -35,7 +35,7 @@
         <li class="right" >
           <a href="top.html" title="Application"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" accesskey="U">Application</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Random Request</a></li> 
       </ul>
@@ -55,19 +55,15 @@ Useful for testing network properties and throughputs.</p>
 <dt id="src.app.random_request.RandomRequestApp">
 <em class="property">class </em><code class="sig-prename descclassname">src.app.random_request.</code><code class="sig-name descname">RandomRequestApp</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">node</span><span class="p">:</span> <span class="n"><a class="reference internal" href="../topology/node.html#src.topology.node.QuantumRouter" title="src.topology.node.QuantumRouter">src.topology.node.QuantumRouter</a></span></em>, <em class="sig-param"><span class="n">others</span><span class="p">:</span> <span class="n">List<span class="p">[</span>str<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">seed</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">min_dur</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">max_dur</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">min_size</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">max_size</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">min_fidelity</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">max_fidelity</span><span class="p">:</span> <span class="n">float</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.app.random_request.RandomRequestApp" title="Permalink to this definition">¶</a></dt>
 <dd><p>Code for the random request application.</p>
-<p>This application will create a request for entanglement with a random node
-(and with other random parameters).
+<p>This application will create a request for entanglement with a random node (and with other random parameters).
 If the request is accepted, a new request will be made once it has expired.
 Otherwise, a new request will be made immediately.
-The responder and fidelity of failed request will be kept in the new
-request.</p>
-<p>The RandomRequestApp class inherits three functions from the RequsetApp
-class: get_memory(memory_info), get_throughput(),
-get_other_reservation(reservation). The “get_memory” function consumes the
-memory when the qualified entanglement is generate. The “get_throughput”
-function provides the throughput of the serving reservation. The
-“get_other_reservation” function accepts reservation when node is the
-responder node.</p>
+The responder and fidelity of failed request will be kept in the new request.</p>
+<p>The RandomRequestApp class inherits three functions from the RequsetApp class:
+get_memory(memory_info), get_throughput(), get_other_reservation(reservation).
+The “get_memory” function consumes the memory when the qualified entanglement is generated.
+The “get_throughput” function provides the throughput of the serving reservation.
+The “get_other_reservation” function accepts reservation when node is the responder node.</p>
 <dl class="py attribute">
 <dt id="src.app.random_request.RandomRequestApp.node">
 <code class="sig-name descname">node</code><a class="headerlink" href="#src.app.random_request.RandomRequestApp.node" title="Permalink to this definition">¶</a></dt>
@@ -137,7 +133,7 @@ responder node.</p>
 <dl class="py attribute">
 <dt id="src.app.random_request.RandomRequestApp.all_throughput">
 <code class="sig-name descname">all_throughput</code><a class="headerlink" href="#src.app.random_request.RandomRequestApp.all_throughput" title="Permalink to this definition">¶</a></dt>
-<dd><p>aggregates average rate of memory entanglement per reservation</p>
+<dd><p>aggregates average rate of memory entanglement per reservation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>List[float]</p>
@@ -148,7 +144,7 @@ responder node.</p>
 <dl class="py attribute">
 <dt id="src.app.random_request.RandomRequestApp.reserves">
 <code class="sig-name descname">reserves</code><a class="headerlink" href="#src.app.random_request.RandomRequestApp.reserves" title="Permalink to this definition">¶</a></dt>
-<dd><p>aggregates previous reservations</p>
+<dd><p>aggregates previous reservations.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>List[List[any]]</p>
@@ -170,7 +166,7 @@ responder node.</p>
 <dl class="py attribute">
 <dt id="src.app.random_request.RandomRequestApp.min_dur">
 <code class="sig-name descname">min_dur</code><a class="headerlink" href="#src.app.random_request.RandomRequestApp.min_dur" title="Permalink to this definition">¶</a></dt>
-<dd><p>the minimum duration of request (ps)</p>
+<dd><p>the minimum duration of request (ps).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>int</p>
@@ -181,7 +177,7 @@ responder node.</p>
 <dl class="py attribute">
 <dt id="src.app.random_request.RandomRequestApp.max_dur">
 <code class="sig-name descname">max_dur</code><a class="headerlink" href="#src.app.random_request.RandomRequestApp.max_dur" title="Permalink to this definition">¶</a></dt>
-<dd><p>the maximum duration of request (ps)</p>
+<dd><p>the maximum duration of request (ps).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>int</p>
@@ -192,7 +188,7 @@ responder node.</p>
 <dl class="py attribute">
 <dt id="src.app.random_request.RandomRequestApp.min_size">
 <code class="sig-name descname">min_size</code><a class="headerlink" href="#src.app.random_request.RandomRequestApp.min_size" title="Permalink to this definition">¶</a></dt>
-<dd><p>the minimum required memory of request</p>
+<dd><p>the minimum required memory of request.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>int</p>
@@ -203,7 +199,7 @@ responder node.</p>
 <dl class="py attribute">
 <dt id="src.app.random_request.RandomRequestApp.max_size">
 <code class="sig-name descname">max_size</code><a class="headerlink" href="#src.app.random_request.RandomRequestApp.max_size" title="Permalink to this definition">¶</a></dt>
-<dd><p>the maximum required memory of request</p>
+<dd><p>the maximum required memory of request.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>int</p>
@@ -214,7 +210,7 @@ responder node.</p>
 <dl class="py attribute">
 <dt id="src.app.random_request.RandomRequestApp.min_fidelity">
 <code class="sig-name descname">min_fidelity</code><a class="headerlink" href="#src.app.random_request.RandomRequestApp.min_fidelity" title="Permalink to this definition">¶</a></dt>
-<dd><p>the minimum required fidelity of entanglement</p>
+<dd><p>the minimum required fidelity of entanglement.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>float</p>
@@ -225,7 +221,7 @@ responder node.</p>
 <dl class="py attribute">
 <dt id="src.app.random_request.RandomRequestApp.max_fidelity">
 <code class="sig-name descname">max_fidelity</code><a class="headerlink" href="#src.app.random_request.RandomRequestApp.max_fidelity" title="Permalink to this definition">¶</a></dt>
-<dd><p>the maximum required fidelity of entanglement</p>
+<dd><p>the maximum required fidelity of entanglement.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>float</p>
@@ -341,7 +337,7 @@ responder node.</p>
         <li class="right" >
           <a href="top.html" title="Application"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" >Application</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Random Request</a></li> 
       </ul>

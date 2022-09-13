@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beam Splitter &#8212; SeQUeNCe 0.3.2 documentation</title>
+    <title>Beam Splitter &#8212; SeQUeNCe 0.5.0 documentation</title>
     <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     
@@ -35,7 +35,7 @@
         <li class="right" >
           <a href="top.html" title="Components"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" accesskey="U">Components</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Beam Splitter</a></li> 
       </ul>
@@ -92,17 +92,6 @@ The BeamSplitter class can be configured to measure polarization in different ba
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="src.components.beam_splitter.BeamSplitter.receivers">
-<code class="sig-name descname">receivers</code><a class="headerlink" href="#src.components.beam_splitter.BeamSplitter.receivers" title="Permalink to this definition">¶</a></dt>
-<dd><p>entities to receive transmitted photons.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>List[Entities]</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
 <dt id="src.components.beam_splitter.BeamSplitter.start_time">
 <code class="sig-name descname">start_time</code><a class="headerlink" href="#src.components.beam_splitter.BeamSplitter.start_time" title="Permalink to this definition">¶</a></dt>
 <dd><p>start time (in ps) of photon interaction.</p>
@@ -137,7 +126,7 @@ The BeamSplitter class can be configured to measure polarization in different ba
 
 <dl class="py method">
 <dt id="src.components.beam_splitter.BeamSplitter.get">
-<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">photon</span><span class="p">:</span> <span class="n"><a class="reference internal" href="photon.html#src.components.photon.Photon" title="src.components.photon.Photon">src.components.photon.Photon</a></span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.components.beam_splitter.BeamSplitter.get" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">photon</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.components.beam_splitter.BeamSplitter.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to receive a photon for measurement.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -145,7 +134,7 @@ The BeamSplitter class can be configured to measure polarization in different ba
 </dd>
 </dl>
 <dl class="simple">
-<dt>Side Effects:</dt><dd><p>May call get method of one receiver from the receivers attribute if start_time, frequency, and basis_list attributes are set up properly.</p>
+<dt>Side Effects:</dt><dd><p>May call get method of one receiver.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -158,14 +147,36 @@ The BeamSplitter class can be configured to measure polarization in different ba
 
 <dl class="py method">
 <dt id="src.components.beam_splitter.BeamSplitter.set_basis_list">
-<code class="sig-name descname">set_basis_list</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">basis_list</span><span class="p">:</span> <span class="n">List<span class="p">[</span>int<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">start_time</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">frequency</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.components.beam_splitter.BeamSplitter.set_basis_list" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_basis_list</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">basis_list</span><span class="p">:</span> <span class="n">List<span class="p">[</span>int<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">start_time</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">frequency</span><span class="p">:</span> <span class="n">float</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.components.beam_splitter.BeamSplitter.set_basis_list" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sets the basis_list, start_time, and frequency attributes.</p>
 </dd></dl>
 
+</dd></dl>
+
+<dl class="py class">
+<dt id="src.components.beam_splitter.FockBeamSplitter">
+<em class="property">class </em><code class="sig-prename descclassname">src.components.beam_splitter.</code><code class="sig-name descname">FockBeamSplitter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">timeline</span></em>, <em class="sig-param"><span class="n">fidelity</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.beam_splitter.FockBeamSplitter" title="Permalink to this definition">¶</a></dt>
+<dd><p>WIP</p>
 <dl class="py method">
-<dt id="src.components.beam_splitter.BeamSplitter.set_receiver">
-<code class="sig-name descname">set_receiver</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">index</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">receiver</span><span class="p">:</span> <span class="n"><a class="reference internal" href="../kernel/entity.html#src.kernel.entity.Entity" title="src.kernel.entity.Entity">src.kernel.entity.Entity</a></span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.components.beam_splitter.BeamSplitter.set_receiver" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sets the receivers attribute at the specified index.</p>
+<dt id="src.components.beam_splitter.FockBeamSplitter.get">
+<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">photon</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.components.beam_splitter.FockBeamSplitter.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method for an entity to receive a photon.</p>
+<p>If entity is a node, may forward to external quantum channel.
+Must be overwritten to be used, or will raise exception.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>photon</strong> (<a class="reference internal" href="photon.html#src.components.photon.Photon" title="src.components.photon.Photon"><em>Photon</em></a>) – photon received by the entity.</p></li>
+<li><p><strong>**kwargs</strong> – other arguments required by a particular hardware component.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.components.beam_splitter.FockBeamSplitter.init">
+<code class="sig-name descname">init</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.components.beam_splitter.FockBeamSplitter.init" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implementation of Entity interface (see base class).</p>
 </dd></dl>
 
 </dd></dl>
@@ -221,7 +232,7 @@ The BeamSplitter class can be configured to measure polarization in different ba
         <li class="right" >
           <a href="top.html" title="Components"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" >Components</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Beam Splitter</a></li> 
       </ul>

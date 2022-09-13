@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BSM &#8212; SeQUeNCe 0.3.2 documentation</title>
+    <title>BSM &#8212; SeQUeNCe 0.5.0 documentation</title>
     <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     
@@ -17,7 +17,7 @@
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Detector" href="detector.html" />
+    <link rel="next" title="Circuit" href="circuit.html" />
     <link rel="prev" title="Beam Splitter" href="beam_splitter.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -30,12 +30,12 @@
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="detector.html" title="Detector"
+          <a href="circuit.html" title="Circuit"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="beam_splitter.html" title="Beam Splitter"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" accesskey="U">Components</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">BSM</a></li> 
       </ul>
@@ -52,8 +52,59 @@
 <p>This module defines a template bell state measurement (BSM) class, as well as implementations for polarization, time bin, and memory encoding schemes.
 Also defined is a function to automatically construct a BSM of a specified type.</p>
 <dl class="py class">
+<dt id="src.components.bsm.AbsorptiveBSM">
+<em class="property">class </em><code class="sig-prename descclassname">src.components.bsm.</code><code class="sig-name descname">AbsorptiveBSM</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">timeline</span></em>, <em class="sig-param"><span class="n">phase_error</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">detectors</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.bsm.AbsorptiveBSM" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class modeling a BSM device for absorptive quantum memories.</p>
+<p>Measures photons and manages entanglement state of entangled photons.</p>
+<dl class="py attribute">
+<dt id="src.components.bsm.AbsorptiveBSM.name">
+<code class="sig-name descname">name</code><a class="headerlink" href="#src.components.bsm.AbsorptiveBSM.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>label for BSM instance</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.bsm.AbsorptiveBSM.timeline">
+<code class="sig-name descname">timeline</code><a class="headerlink" href="#src.components.bsm.AbsorptiveBSM.timeline" title="Permalink to this definition">¶</a></dt>
+<dd><p>timeline for simulation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../kernel/timeline.html#src.kernel.timeline.Timeline" title="src.kernel.timeline.Timeline">Timeline</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.components.bsm.AbsorptiveBSM.detectors">
+<code class="sig-name descname">detectors</code><a class="headerlink" href="#src.components.bsm.AbsorptiveBSM.detectors" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of attached photon detection devices (length 2).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>List[<a class="reference internal" href="detector.html#src.components.detector.Detector" title="src.components.detector.Detector">Detector</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.components.bsm.AbsorptiveBSM.trigger">
+<code class="sig-name descname">trigger</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">detector</span><span class="p">:</span> <span class="n"><a class="reference internal" href="detector.html#src.components.detector.Detector" title="src.components.detector.Detector">src.components.detector.Detector</a></span></em>, <em class="sig-param"><span class="n">info</span><span class="p">:</span> <span class="n">Dict<span class="p">[</span>str<span class="p">, </span>Any<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.bsm.AbsorptiveBSM.trigger" title="Permalink to this definition">¶</a></dt>
+<dd><p>See base class.</p>
+<p>This method adds additional side effects not present in the base class.</p>
+<dl class="simple">
+<dt>Side Effects:</dt><dd><p>May send a further message to any attached entities.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt id="src.components.bsm.BSM">
-<em class="property">class </em><code class="sig-prename descclassname">src.components.bsm.</code><code class="sig-name descname">BSM</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">timeline</span></em>, <em class="sig-param"><span class="n">phase_error</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">detectors</span><span class="o">=</span><span class="default_value">[]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.bsm.BSM" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">src.components.bsm.</code><code class="sig-name descname">BSM</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">timeline</span></em>, <em class="sig-param"><span class="n">phase_error</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">detectors</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.bsm.BSM" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parent class for bell state measurement devices.</p>
 <dl class="py attribute">
 <dt id="src.components.bsm.BSM.name">
@@ -112,7 +163,7 @@ Also defined is a function to automatically construct a BSM of a specified type.
 
 <dl class="py method">
 <dt id="src.components.bsm.BSM.get">
-<em class="property">abstract </em><code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">photon</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.bsm.BSM.get" title="Permalink to this definition">¶</a></dt>
+<em class="property">abstract </em><code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">photon</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.bsm.BSM.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to receive a photon for measurement (abstract).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -157,7 +208,7 @@ Also defined is a function to automatically construct a BSM of a specified type.
 
 <dl class="py class">
 <dt id="src.components.bsm.PolarizationBSM">
-<em class="property">class </em><code class="sig-prename descclassname">src.components.bsm.</code><code class="sig-name descname">PolarizationBSM</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">timeline</span></em>, <em class="sig-param"><span class="n">phase_error</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">detectors</span><span class="o">=</span><span class="default_value">[]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.bsm.PolarizationBSM" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">src.components.bsm.</code><code class="sig-name descname">PolarizationBSM</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">timeline</span></em>, <em class="sig-param"><span class="n">phase_error</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">detectors</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.bsm.PolarizationBSM" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class modeling a polarization BSM device.</p>
 <p>Measures incoming photons according to polarization and manages entanglement.</p>
 <dl class="py attribute">
@@ -204,20 +255,9 @@ Also defined is a function to automatically construct a BSM of a specified type.
 </dl>
 </dd></dl>
 
-<dl class="py attribute">
-<dt id="src.components.bsm.PolarizationBSM.resolution">
-<code class="sig-name descname">resolution</code><a class="headerlink" href="#src.components.bsm.PolarizationBSM.resolution" title="Permalink to this definition">¶</a></dt>
-<dd><p>maximum time resolution achievable with attached detectors.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>int</p>
-</dd>
-</dl>
-</dd></dl>
-
 <dl class="py method">
 <dt id="src.components.bsm.PolarizationBSM.get">
-<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">photon</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.bsm.PolarizationBSM.get" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">photon</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.bsm.PolarizationBSM.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>See base class.</p>
 <p>This method adds additional side effects not present in the base class.</p>
 <dl class="simple">
@@ -242,7 +282,7 @@ May alter the quantum state of photon and any stored photons.</p>
 
 <dl class="py class">
 <dt id="src.components.bsm.SingleAtomBSM">
-<em class="property">class </em><code class="sig-prename descclassname">src.components.bsm.</code><code class="sig-name descname">SingleAtomBSM</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">timeline</span></em>, <em class="sig-param"><span class="n">phase_error</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">detectors</span><span class="o">=</span><span class="default_value">[]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.bsm.SingleAtomBSM" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">src.components.bsm.</code><code class="sig-name descname">SingleAtomBSM</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">timeline</span></em>, <em class="sig-param"><span class="n">phase_error</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">detectors</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.bsm.SingleAtomBSM" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class modeling a single atom BSM device.</p>
 <p>Measures incoming photons and manages entanglement of associated memories.</p>
 <dl class="py attribute">
@@ -291,7 +331,7 @@ May alter the quantum state of photon and any stored photons.</p>
 
 <dl class="py method">
 <dt id="src.components.bsm.SingleAtomBSM.get">
-<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">photon</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.bsm.SingleAtomBSM.get" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">photon</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.bsm.SingleAtomBSM.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>See base class.</p>
 <p>This method adds additional side effects not present in the base class.</p>
 <dl class="simple">
@@ -316,7 +356,7 @@ May alter the quantum state of photon and any stored photons, as well as their c
 
 <dl class="py class">
 <dt id="src.components.bsm.TimeBinBSM">
-<em class="property">class </em><code class="sig-prename descclassname">src.components.bsm.</code><code class="sig-name descname">TimeBinBSM</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">timeline</span></em>, <em class="sig-param"><span class="n">phase_error</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">detectors</span><span class="o">=</span><span class="default_value">[]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.bsm.TimeBinBSM" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">src.components.bsm.</code><code class="sig-name descname">TimeBinBSM</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">timeline</span></em>, <em class="sig-param"><span class="n">phase_error</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">detectors</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.bsm.TimeBinBSM" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class modeling a time bin BSM device.</p>
 <p>Measures incoming photons according to time bins and manages entanglement.</p>
 <dl class="py attribute">
@@ -352,20 +392,9 @@ May alter the quantum state of photon and any stored photons, as well as their c
 </dl>
 </dd></dl>
 
-<dl class="py attribute">
-<dt id="src.components.bsm.TimeBinBSM.resolution">
-<code class="sig-name descname">resolution</code><a class="headerlink" href="#src.components.bsm.TimeBinBSM.resolution" title="Permalink to this definition">¶</a></dt>
-<dd><p>maximum time resolution achievable with attached detectors</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>int</p>
-</dd>
-</dl>
-</dd></dl>
-
 <dl class="py method">
 <dt id="src.components.bsm.TimeBinBSM.get">
-<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">photon</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.bsm.TimeBinBSM.get" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">photon</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.bsm.TimeBinBSM.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>See base class.</p>
 <p>This method adds additional side effects not present in the base class.</p>
 <dl class="simple">
@@ -418,8 +447,8 @@ May alter the quantum state of photon and any stored photons.</p>
   <p class="topless"><a href="beam_splitter.html"
                         title="previous chapter">Beam Splitter</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="detector.html"
-                        title="next chapter">Detector</a></p>
+  <p class="topless"><a href="circuit.html"
+                        title="next chapter">Circuit</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -451,12 +480,12 @@ May alter the quantum state of photon and any stored photons.</p>
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="detector.html" title="Detector"
+          <a href="circuit.html" title="Circuit"
              >next</a> |</li>
         <li class="right" >
           <a href="beam_splitter.html" title="Beam Splitter"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.3.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" >Components</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">BSM</a></li> 
       </ul>
