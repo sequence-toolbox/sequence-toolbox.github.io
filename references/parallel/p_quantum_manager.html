@@ -1,0 +1,165 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parallel Quantum Manager &#8212; SeQUeNCe 0.5.1 documentation</title>
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Parallel Quantum Manager</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-parallel.src.p_quantum_manager">
+<span id="parallel-quantum-manager"></span><h1>Parallel Quantum Manager<a class="headerlink" href="#module-parallel.src.p_quantum_manager" title="Permalink to this headline">¶</a></h1>
+<p>This module defines the quantum manager class, to track quantum states.</p>
+<dl class="simple">
+<dt>The states may currently be defined in two possible ways:</dt><dd><ul class="simple">
+<li><p>KetState (with the QuantumManagerKet class)</p></li>
+<li><p>DensityMatrix (with the QuantumManagerDensity class)</p></li>
+</ul>
+</dd>
+</dl>
+<p>The manager defines an API for interacting with quantum states.</p>
+<dl class="py class">
+<dt id="parallel.src.p_quantum_manager.ParallelQuantumManagerDensity">
+<em class="property">class </em><code class="sig-prename descclassname">parallel.src.p_quantum_manager.</code><code class="sig-name descname">ParallelQuantumManagerDensity</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">states</span></em><span class="sig-paren">)</span><a class="headerlink" href="#parallel.src.p_quantum_manager.ParallelQuantumManagerDensity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to track and manage states with the density matrix formalism.</p>
+<dl class="py method">
+<dt id="parallel.src.p_quantum_manager.ParallelQuantumManagerDensity.remove">
+<code class="sig-name descname">remove</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">key</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#parallel.src.p_quantum_manager.ParallelQuantumManagerDensity.remove" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to remove state stored at key.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="parallel.src.p_quantum_manager.ParallelQuantumManagerDensity.run_circuit">
+<code class="sig-name descname">run_circuit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">circuit</span><span class="p">:</span> <span class="n">Circuit</span></em>, <em class="sig-param"><span class="n">keys</span><span class="p">:</span> <span class="n">List<span class="p">[</span>int<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">meas_samp</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; Dict<span class="p">[</span>int<span class="p">, </span>int<span class="p">]</span><a class="headerlink" href="#parallel.src.p_quantum_manager.ParallelQuantumManagerDensity.run_circuit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to run a circuit on a given set of quantum states.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>circuit</strong> (<a class="reference internal" href="../components/circuit.html#src.components.circuit.Circuit" title="src.components.circuit.Circuit"><em>Circuit</em></a>) – quantum circuit to apply.</p></li>
+<li><p><strong>keys</strong> (<em>List</em><em>[</em><em>int</em><em>]</em>) – list of keys for quantum states to apply circuit to.</p></li>
+<li><p><strong>meas_samp</strong> (<em>float</em>) – random sample used for measurement.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>dictionary mapping qstate keys to measurement results.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Dict[int, int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="parallel.src.p_quantum_manager.ParallelQuantumManagerKet">
+<em class="property">class </em><code class="sig-prename descclassname">parallel.src.p_quantum_manager.</code><code class="sig-name descname">ParallelQuantumManagerKet</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">states</span></em><span class="sig-paren">)</span><a class="headerlink" href="#parallel.src.p_quantum_manager.ParallelQuantumManagerKet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to track and manage quantum states with the ket vector formalism.</p>
+<dl class="py method">
+<dt id="parallel.src.p_quantum_manager.ParallelQuantumManagerKet.remove">
+<code class="sig-name descname">remove</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">key</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#parallel.src.p_quantum_manager.ParallelQuantumManagerKet.remove" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to remove state stored at key.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="parallel.src.p_quantum_manager.ParallelQuantumManagerKet.run_circuit">
+<code class="sig-name descname">run_circuit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">circuit</span><span class="p">:</span> <span class="n">Circuit</span></em>, <em class="sig-param"><span class="n">keys</span><span class="p">:</span> <span class="n">List<span class="p">[</span>int<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">meas_samp</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; Dict<span class="p">[</span>int<span class="p">, </span>int<span class="p">]</span><a class="headerlink" href="#parallel.src.p_quantum_manager.ParallelQuantumManagerKet.run_circuit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to run a circuit on a given set of quantum states.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>circuit</strong> (<a class="reference internal" href="../components/circuit.html#src.components.circuit.Circuit" title="src.components.circuit.Circuit"><em>Circuit</em></a>) – quantum circuit to apply.</p></li>
+<li><p><strong>keys</strong> (<em>List</em><em>[</em><em>int</em><em>]</em>) – list of keys for quantum states to apply circuit to.</p></li>
+<li><p><strong>meas_samp</strong> (<em>float</em>) – random sample used for measurement.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>dictionary mapping qstate keys to measurement results.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Dict[int, int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/references/parallel/p_quantum_manager.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Parallel Quantum Manager</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020-2022.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+    </div>
+  </body>
+</html>
