@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prerequisites &amp; Installation &#8212; SeQUeNCe 0.5.1 documentation</title>
+    <title>Prerequisites &amp; Installation &#8212; SeQUeNCe 0.5.2 documentation</title>
     <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     
@@ -35,7 +35,7 @@
         <li class="right" >
           <a href="../../tutorial/chapter6/application.html" title="Chapter 6: Application"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.2 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Prerequisites &amp; Installation</a></li> 
       </ul>
     </div>  
@@ -50,12 +50,25 @@
 <p>This set of three pages will go through the setup and usage of SeQUeNCe’s parallel simulation capabilities. In this first page, we will review how to install the necessary requirements for parallel simulation.</p>
 <div class="section" id="additional-required-installations">
 <h2>Additional Required Installations<a class="headerlink" href="#additional-required-installations" title="Permalink to this headline">¶</a></h2>
-<p>To run the parallel simulations fully in Python, only the MPI for Python library must be installed. The rest of the parallel simulation will work with installation of the SeQUeNCe library.</p>
+<p>To run the parallel simulations fully in Python, the MPI for Python library must be installed.
+The rest of the parallel simulation will then work with installation of the parallel SeQUeNCe library <code class="docutils literal notranslate"><span class="pre">psequence</span></code>.</p>
 <div class="section" id="mpi-for-python">
 <h3>MPI for Python<a class="headerlink" href="#mpi-for-python" title="Permalink to this headline">¶</a></h3>
 <p>Before installing MPI for Python, an implementation of MPI must be installed on your system. Most working MPI implementations can be used, preferably those supporting MPI-3 and built with shared/dynamic libraries. For a few options listed by the MPI for python package, please see <a class="reference external" href="https://mpi4py.readthedocs.io/en/stable/appendix.html#building-mpi">this documentation page</a>.</p>
 <p>After this has been completed, the Python library may be installed as</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip install mpi4py
+</pre></div>
+</div>
+</div>
+<div class="section" id="parallel-sequence">
+<h3>Parallel SeQUeNCe<a class="headerlink" href="#parallel-sequence" title="Permalink to this headline">¶</a></h3>
+<p>After this, the parallel <code class="docutils literal notranslate"><span class="pre">psequence</span></code> package may be installed.
+This is handled in a similar manner to the base package; simply navigate to the parallel folder and run</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip install .
+</pre></div>
+</div>
+<p>Or, using the included makefile,</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ make install
 </pre></div>
 </div>
 </div>
@@ -120,6 +133,7 @@ $ cmake ..
 <li><a class="reference internal" href="#">Prerequisites &amp; Installation</a><ul>
 <li><a class="reference internal" href="#additional-required-installations">Additional Required Installations</a><ul>
 <li><a class="reference internal" href="#mpi-for-python">MPI for Python</a></li>
+<li><a class="reference internal" href="#parallel-sequence">Parallel SeQUeNCe</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#c-quantum-manager-server">C++ Quantum Manager Server</a><ul>
@@ -174,7 +188,7 @@ $ cmake ..
         <li class="right" >
           <a href="../../tutorial/chapter6/application.html" title="Chapter 6: Application"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.2 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Prerequisites &amp; Installation</a></li> 
       </ul>
     </div>
