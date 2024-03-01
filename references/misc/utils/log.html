@@ -1,19 +1,20 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Logging &#8212; SeQUeNCe 0.5.2 documentation</title>
-    <link rel="stylesheet" href="../../../_static/classic.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Logging &#8212; SeQUeNCe 0.6.2 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/classic.css" />
     
-    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
     <script src="../../../_static/jquery.js"></script>
     <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../../_static/doctools.js"></script>
-    <script src="../../../_static/language_data.js"></script>
     
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -35,7 +36,7 @@
         <li class="right" >
           <a href="encoding.html" title="Encoding"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">SeQUeNCe 0.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">SeQUeNCe 0.6.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../top.html" >Miscellaneous</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="top.html" accesskey="U">Utils</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Logging</a></li> 
@@ -47,73 +48,73 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="module-src.utils.log">
-<span id="logging"></span><h1>Logging<a class="headerlink" href="#module-src.utils.log" title="Permalink to this headline">¶</a></h1>
+  <section id="module-src.utils.log">
+<span id="logging"></span><h1>Logging<a class="headerlink" href="#module-src.utils.log" title="Permalink to this heading">¶</a></h1>
 <p>Logging information.</p>
 <p>This module defines the behavior for the default SeQUeNCe logging system.
 The logger used and log format are specified here.
 Modules will use the <cite>logger</cite> attribute as a normal logging system, saving log outputs in a user specified file.
 If a file is not set, no output will be recorded.</p>
 <dl class="py attribute">
-<dt id="src.utils.log.logger">
-<code class="sig-prename descclassname">src.utils.log.</code><code class="sig-name descname">logger</code><a class="headerlink" href="#src.utils.log.logger" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.utils.log.logger">
+<span class="sig-prename descclassname"><span class="pre">src.utils.log.</span></span><span class="sig-name descname"><span class="pre">logger</span></span><a class="headerlink" href="#src.utils.log.logger" title="Permalink to this definition">¶</a></dt>
 <dd><p>logger object used for logging by sequence modules.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Logger</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="src.utils.log.LOG_FORMAT">
-<code class="sig-prename descclassname">src.utils.log.</code><code class="sig-name descname">LOG_FORMAT</code><a class="headerlink" href="#src.utils.log.LOG_FORMAT" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.utils.log.LOG_FORMAT">
+<span class="sig-prename descclassname"><span class="pre">src.utils.log.</span></span><span class="sig-name descname"><span class="pre">LOG_FORMAT</span></span><a class="headerlink" href="#src.utils.log.LOG_FORMAT" title="Permalink to this definition">¶</a></dt>
 <dd><p>formatting string for logging as ‘{real time}     {simulation time}       %{log level}    {module name}   {message}’.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="src.utils.log._log_modules">
-<code class="sig-prename descclassname">src.utils.log.</code><code class="sig-name descname">_log_modules</code><a class="headerlink" href="#src.utils.log._log_modules" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.utils.log._log_modules">
+<span class="sig-prename descclassname"><span class="pre">src.utils.log.</span></span><span class="sig-name descname"><span class="pre">_log_modules</span></span><a class="headerlink" href="#src.utils.log._log_modules" title="Permalink to this definition">¶</a></dt>
 <dd><p>modules to track with logging (given as list of names)</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>List[str]</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py class">
-<dt id="src.utils.log.ContextFilter">
-<em class="property">class </em><code class="sig-prename descclassname">src.utils.log.</code><code class="sig-name descname">ContextFilter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">timeline</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.log.ContextFilter" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.utils.log.ContextFilter">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.utils.log.</span></span><span class="sig-name descname"><span class="pre">ContextFilter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeline</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.log.ContextFilter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Custom filter class to use for the logger.</p>
 <dl class="py method">
-<dt id="src.utils.log.ContextFilter.filter">
-<code class="sig-name descname">filter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">record</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.log.ContextFilter.filter" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.utils.log.ContextFilter.filter">
+<span class="sig-name descname"><span class="pre">filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">record</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.log.ContextFilter.filter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Determine if the specified record is to be logged.</p>
-<p>Is the specified record to be logged? Returns 0 for no, nonzero for
-yes. If deemed appropriate, the record may be modified in-place.</p>
+<p>Returns True if the record should be logged, or False otherwise.
+If deemed appropriate, the record may be modified in-place.</p>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="py function">
-<dt id="src.utils.log.remove_module">
-<code class="sig-prename descclassname">src.utils.log.</code><code class="sig-name descname">remove_module</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">module_name</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.log.remove_module" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.utils.log.remove_module">
+<span class="sig-prename descclassname"><span class="pre">src.utils.log.</span></span><span class="sig-name descname"><span class="pre">remove_module</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">module_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.log.remove_module" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sets a given module to no longer be tracked.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="src.utils.log.set_logger">
-<code class="sig-prename descclassname">src.utils.log.</code><code class="sig-name descname">set_logger</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">timeline</span></em>, <em class="sig-param"><span class="n">logfile</span><span class="o">=</span><span class="default_value">'out.log'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.log.set_logger" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.utils.log.set_logger">
+<span class="sig-prename descclassname"><span class="pre">src.utils.log.</span></span><span class="sig-name descname"><span class="pre">set_logger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeline</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'out.log'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.log.set_logger" title="Permalink to this definition">¶</a></dt>
 <dd><p>Function to link logger to output file.</p>
 <p>The provided timeline is used to add simulation timestamps to the logs.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>name</strong> (<em>str</em>) – name to use for the logger.</p></li>
 <li><p><strong>timeline</strong> (<a class="reference internal" href="../../kernel/timeline.html#src.kernel.timeline.Timeline" title="src.kernel.timeline.Timeline"><em>Timeline</em></a>) – timeline to use for simulation timestamps.</p></li>
@@ -124,23 +125,23 @@ yes. If deemed appropriate, the record may be modified in-place.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="src.utils.log.set_logger_level">
-<code class="sig-prename descclassname">src.utils.log.</code><code class="sig-name descname">set_logger_level</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">level</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.log.set_logger_level" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.utils.log.set_logger_level">
+<span class="sig-prename descclassname"><span class="pre">src.utils.log.</span></span><span class="sig-name descname"><span class="pre">set_logger_level</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.log.set_logger_level" title="Permalink to this definition">¶</a></dt>
 <dd><p>Function to set output level of logger without requiring logging import.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>level</strong> (<em>str</em>) – level to set logger to, given as string (in all caps)</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt id="src.utils.log.track_module">
-<code class="sig-prename descclassname">src.utils.log.</code><code class="sig-name descname">track_module</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">module_name</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.log.track_module" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.utils.log.track_module">
+<span class="sig-prename descclassname"><span class="pre">src.utils.log.</span></span><span class="sig-name descname"><span class="pre">track_module</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">module_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.log.track_module" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sets a given module to be tracked by logger.</p>
 </dd></dl>
 
-</div>
+</section>
 
 
             <div class="clearer"></div>
@@ -149,12 +150,16 @@ yes. If deemed appropriate, the record may be modified in-place.</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="encoding.html"
-                        title="previous chapter">Encoding</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="../../parallel/top.html"
-                        title="next chapter">Parallel</a></p>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="encoding.html"
+                          title="previous chapter">Encoding</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="../../parallel/top.html"
+                          title="next chapter">Parallel</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -166,12 +171,12 @@ yes. If deemed appropriate, the record may be modified in-place.</p>
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../../../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -191,15 +196,15 @@ yes. If deemed appropriate, the record may be modified in-place.</p>
         <li class="right" >
           <a href="encoding.html" title="Encoding"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">SeQUeNCe 0.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">SeQUeNCe 0.6.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../top.html" >Miscellaneous</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="top.html" >Utils</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Logging</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2020-2022.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+        &#169; Copyright 2020-2024.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
     </div>
   </body>
 </html>

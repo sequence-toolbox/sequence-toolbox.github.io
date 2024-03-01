@@ -1,19 +1,20 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Entanglement Protocol &#8212; SeQUeNCe 0.5.2 documentation</title>
-    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Entanglement Protocol &#8212; SeQUeNCe 0.6.2 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/classic.css" />
     
-    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/language_data.js"></script>
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -35,7 +36,7 @@
         <li class="right" >
           <a href="top.html" title="Entanglement Management"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.6.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" accesskey="U">Entanglement Management</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Entanglement Protocol</a></li> 
       </ul>
@@ -46,90 +47,90 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="module-src.entanglement_management.entanglement_protocol">
-<span id="entanglement-protocol"></span><h1>Entanglement Protocol<a class="headerlink" href="#module-src.entanglement_management.entanglement_protocol" title="Permalink to this headline">¶</a></h1>
+  <section id="module-src.entanglement_management.entanglement_protocol">
+<span id="entanglement-protocol"></span><h1>Entanglement Protocol<a class="headerlink" href="#module-src.entanglement_management.entanglement_protocol" title="Permalink to this heading">¶</a></h1>
 <p>Entanglement protocol definition (abstract)</p>
 <dl class="py class">
-<dt id="src.entanglement_management.entanglement_protocol.EntanglementProtocol">
-<em class="property">class </em><code class="sig-prename descclassname">src.entanglement_management.entanglement_protocol.</code><code class="sig-name descname">EntanglementProtocol</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">own</span><span class="p">:</span> <span class="n">Node</span></em>, <em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.entanglement_management.entanglement_protocol.EntanglementProtocol" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.entanglement_management.entanglement_protocol.EntanglementProtocol">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.entanglement_management.entanglement_protocol.</span></span><span class="sig-name descname"><span class="pre">EntanglementProtocol</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">own</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../topology/node.html#src.topology.node.Node" title="src.topology.node.Node"><span class="pre">Node</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.entanglement_management.entanglement_protocol.EntanglementProtocol" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class for all entanglement management protocols.</p>
 <p>Provides an interface for rule attachment, protocol pairing, and memory management.</p>
 <dl class="py attribute">
-<dt id="src.entanglement_management.entanglement_protocol.EntanglementProtocol.own">
-<code class="sig-name descname">own</code><a class="headerlink" href="#src.entanglement_management.entanglement_protocol.EntanglementProtocol.own" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.entanglement_management.entanglement_protocol.EntanglementProtocol.own">
+<span class="sig-name descname"><span class="pre">own</span></span><a class="headerlink" href="#src.entanglement_management.entanglement_protocol.EntanglementProtocol.own" title="Permalink to this definition">¶</a></dt>
 <dd><p>Node object to attach to</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="../topology/node.html#src.topology.node.Node" title="src.topology.node.Node">Node</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="src.entanglement_management.entanglement_protocol.EntanglementProtocol.name">
-<code class="sig-name descname">name</code><a class="headerlink" href="#src.entanglement_management.entanglement_protocol.EntanglementProtocol.name" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.entanglement_management.entanglement_protocol.EntanglementProtocol.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#src.entanglement_management.entanglement_protocol.EntanglementProtocol.name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Name of the protocol instance</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="src.entanglement_management.entanglement_protocol.EntanglementProtocol.rule">
-<code class="sig-name descname">rule</code><a class="headerlink" href="#src.entanglement_management.entanglement_protocol.EntanglementProtocol.rule" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.entanglement_management.entanglement_protocol.EntanglementProtocol.rule">
+<span class="sig-name descname"><span class="pre">rule</span></span><a class="headerlink" href="#src.entanglement_management.entanglement_protocol.EntanglementProtocol.rule" title="Permalink to this definition">¶</a></dt>
 <dd><p>Rule which created this protocol instance (from the rule manager).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="../resource_management/rule_manager.html#src.resource_management.rule_manager.Rule" title="src.resource_management.rule_manager.Rule">Rule</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="src.entanglement_management.entanglement_protocol.EntanglementProtocol.memories">
-<code class="sig-name descname">memories</code><a class="headerlink" href="#src.entanglement_management.entanglement_protocol.EntanglementProtocol.memories" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.entanglement_management.entanglement_protocol.EntanglementProtocol.memories">
+<span class="sig-name descname"><span class="pre">memories</span></span><a class="headerlink" href="#src.entanglement_management.entanglement_protocol.EntanglementProtocol.memories" title="Permalink to this definition">¶</a></dt>
 <dd><p>Any memories being operated on</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>List[<a class="reference internal" href="../components/memory.html#src.components.memory.Memory" title="src.components.memory.Memory">Memory</a>]</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt id="src.entanglement_management.entanglement_protocol.EntanglementProtocol.is_ready">
-<em class="property">abstract </em><code class="sig-name descname">is_ready</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#src.entanglement_management.entanglement_protocol.EntanglementProtocol.is_ready" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.entanglement_management.entanglement_protocol.EntanglementProtocol.is_ready">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_ready</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#src.entanglement_management.entanglement_protocol.EntanglementProtocol.is_ready" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to check if protocol is ready to start (abstract).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>if protocol is ready or not.</p>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>bool</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt id="src.entanglement_management.entanglement_protocol.EntanglementProtocol.memory_expire">
-<em class="property">abstract </em><code class="sig-name descname">memory_expire</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">memory</span><span class="p">:</span> <span class="n">Memory</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.entanglement_management.entanglement_protocol.EntanglementProtocol.memory_expire" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.entanglement_management.entanglement_protocol.EntanglementProtocol.memory_expire">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">memory_expire</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">memory</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../components/memory.html#src.components.memory.Memory" title="src.components.memory.Memory"><span class="pre">Memory</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.entanglement_management.entanglement_protocol.EntanglementProtocol.memory_expire" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to receive a memory expiration event (abstract).</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="src.entanglement_management.entanglement_protocol.EntanglementProtocol.release">
-<code class="sig-name descname">release</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.entanglement_management.entanglement_protocol.EntanglementProtocol.release" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.entanglement_management.entanglement_protocol.EntanglementProtocol.release">
+<span class="sig-name descname"><span class="pre">release</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.entanglement_management.entanglement_protocol.EntanglementProtocol.release" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to release attached memories.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="src.entanglement_management.entanglement_protocol.EntanglementProtocol.set_others">
-<em class="property">abstract </em><code class="sig-name descname">set_others</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">remote_protocol</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">remote_node</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">memories</span><span class="p">:</span> <span class="n">List<span class="p">[</span>str<span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.entanglement_management.entanglement_protocol.EntanglementProtocol.set_others" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.entanglement_management.entanglement_protocol.EntanglementProtocol.set_others">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_others</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">remote_protocol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remote_node</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">memories</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.entanglement_management.entanglement_protocol.EntanglementProtocol.set_others" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to set other entanglement protocol instance.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>remote_protocol</strong> (<em>str</em>) – other protocol name.</p></li>
 <li><p><strong>remote_node</strong> (<em>str</em>) – other node name.</p></li>
@@ -140,17 +141,17 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="src.entanglement_management.entanglement_protocol.EntanglementProtocol.start">
-<em class="property">abstract </em><code class="sig-name descname">start</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.entanglement_management.entanglement_protocol.EntanglementProtocol.start" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.entanglement_management.entanglement_protocol.EntanglementProtocol.start">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">start</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.entanglement_management.entanglement_protocol.EntanglementProtocol.start" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to start entanglement protocol process (abstract).</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="src.entanglement_management.entanglement_protocol.EntanglementProtocol.update_resource_manager">
-<code class="sig-name descname">update_resource_manager</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">memory</span><span class="p">:</span> <span class="n">Memory</span></em>, <em class="sig-param"><span class="n">state</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.entanglement_management.entanglement_protocol.EntanglementProtocol.update_resource_manager" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.entanglement_management.entanglement_protocol.EntanglementProtocol.update_resource_manager">
+<span class="sig-name descname"><span class="pre">update_resource_manager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">memory</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../components/memory.html#src.components.memory.Memory" title="src.components.memory.Memory"><span class="pre">Memory</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.entanglement_management.entanglement_protocol.EntanglementProtocol.update_resource_manager" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to update attached memory to desired state.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>memory</strong> (<a class="reference internal" href="../components/memory.html#src.components.memory.Memory" title="src.components.memory.Memory"><em>Memory</em></a>) – attached memory to update.</p></li>
 <li><p><strong>state</strong> (<em>str</em>) – state memory should be updated to.</p></li>
@@ -165,7 +166,7 @@
 
 </dd></dl>
 
-</div>
+</section>
 
 
             <div class="clearer"></div>
@@ -174,12 +175,16 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="top.html"
-                        title="previous chapter">Entanglement Management</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="generation.html"
-                        title="next chapter">Entanglement Generation</a></p>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="top.html"
+                          title="previous chapter">Entanglement Management</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="generation.html"
+                          title="next chapter">Entanglement Generation</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -191,12 +196,12 @@
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -216,14 +221,14 @@
         <li class="right" >
           <a href="top.html" title="Entanglement Management"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.6.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" >Entanglement Management</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Entanglement Protocol</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2020-2022.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+        &#169; Copyright 2020-2024.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
     </div>
   </body>
 </html>

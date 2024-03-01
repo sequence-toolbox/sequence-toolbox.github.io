@@ -1,19 +1,20 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chapter 3: Entanglement Management &#8212; SeQUeNCe 0.5.2 documentation</title>
-    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Chapter 3: Entanglement Management &#8212; SeQUeNCe 0.6.2 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/classic.css" />
     
-    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/language_data.js"></script>
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -35,7 +36,7 @@
         <li class="right" >
           <a href="../chapter2/hardware.html" title="Chapter 2: Hardware Module"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.6.2 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Chapter 3: Entanglement Management</a></li> 
       </ul>
     </div>  
@@ -45,8 +46,8 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="chapter-3-entanglement-management">
-<h1>Chapter 3: Entanglement Management<a class="headerlink" href="#chapter-3-entanglement-management" title="Permalink to this headline">¶</a></h1>
+  <section id="chapter-3-entanglement-management">
+<h1>Chapter 3: Entanglement Management<a class="headerlink" href="#chapter-3-entanglement-management" title="Permalink to this heading">¶</a></h1>
 <p>In previous chapters, we introduced the usage of hardware models.
 In this chapter, we will use protocols in the entanglement management module to control these hardware devices and change the entanglement state of quantum memories.
 We will also use a simple manager protocol to control the entanglement generation protocols.
@@ -56,8 +57,8 @@ We will show</p>
 <li><p>how to use <code class="docutils literal notranslate"><span class="pre">BBPSSW</span></code> (BBPSSW purification protocol) to improve the fidelity of entanglement</p></li>
 <li><p>how to use <code class="docutils literal notranslate"><span class="pre">EntanglementSwappingA</span></code> and <code class="docutils literal notranslate"><span class="pre">EntanglementSwappingB</span></code> (swapping protocol) to extend the distance of entanglement</p></li>
 </ul>
-<div class="section" id="example-use-entanglementgenerationa-and-bsmnode-to-generate-entanglement">
-<h2>Example: Use <code class="docutils literal notranslate"><span class="pre">EntanglementGenerationA</span></code> and <code class="docutils literal notranslate"><span class="pre">BSMNode</span></code> to generate entanglement<a class="headerlink" href="#example-use-entanglementgenerationa-and-bsmnode-to-generate-entanglement" title="Permalink to this headline">¶</a></h2>
+<section id="example-use-entanglementgenerationa-and-bsmnode-to-generate-entanglement">
+<h2>Example: Use <code class="docutils literal notranslate"><span class="pre">EntanglementGenerationA</span></code> and <code class="docutils literal notranslate"><span class="pre">BSMNode</span></code> to generate entanglement<a class="headerlink" href="#example-use-entanglementgenerationa-and-bsmnode-to-generate-entanglement" title="Permalink to this heading">¶</a></h2>
 <p><img alt="eg_topo" src="../../_images/EG_topo.png" /></p>
 <p>The above figure shows the network topology used in this example.
 The network includes three nodes: one <code class="docutils literal notranslate"><span class="pre">BSMNode</span></code> node and two <code class="docutils literal notranslate"><span class="pre">EntangleGenNode</span></code> nodes.
@@ -76,8 +77,8 @@ Classical channels and nodes create a complete classical graph, which is not sho
 <li><p><strong>Software</strong>: the <code class="docutils literal notranslate"><span class="pre">EntanglementGenerationA</span></code> protocol to excite the controlled memory and determine the quantum state via messages from <code class="docutils literal notranslate"><span class="pre">EntanglementGenerationB</span></code>;
 a <code class="docutils literal notranslate"><span class="pre">SimpleManager</span></code> which uses the <code class="docutils literal notranslate"><span class="pre">update</span></code> function to get the state of the memory after the procedures in <code class="docutils literal notranslate"><span class="pre">EntanglementGenerationA</span></code>.</p></li>
 </ul>
-<div class="section" id="step-1-customize-node">
-<h3>Step 1: Customize Node<a class="headerlink" href="#step-1-customize-node" title="Permalink to this headline">¶</a></h3>
+<section id="step-1-customize-node">
+<h3>Step 1: Customize Node<a class="headerlink" href="#step-1-customize-node" title="Permalink to this heading">¶</a></h3>
 <p>We can import <code class="docutils literal notranslate"><span class="pre">BSMNode</span></code> from SeQUeNCe package and thus only need to define the <code class="docutils literal notranslate"><span class="pre">EntangleGenNode</span></code> class.
 We also define our <code class="docutils literal notranslate"><span class="pre">SimpleManager</span></code>, which will create entanglement protocol instances and monitor their success.
 The code for the <code class="docutils literal notranslate"><span class="pre">EntangleGenNode</span></code> and <code class="docutils literal notranslate"><span class="pre">SimpleManager</span></code> classes is shown below:</p>
@@ -142,17 +143,17 @@ The <code class="docutils literal notranslate"><span class="pre">middle</span></
 <li><p>the name of the remote <code class="docutils literal notranslate"><span class="pre">EntangleGenNode</span></code> involved in entanglement generation</p></li>
 <li><p>the memory used for generating entanglement</p></li>
 </ol>
-<div class="section" id="q-a">
-<h4>Q&amp;A<a class="headerlink" href="#q-a" title="Permalink to this headline">¶</a></h4>
+<section id="q-a">
+<h4>Q&amp;A<a class="headerlink" href="#q-a" title="Permalink to this heading">¶</a></h4>
 <p>Q: Why is the <code class="docutils literal notranslate"><span class="pre">SimpleManager</span></code> necessary?</p>
 <p>A: We have embedded code that calls the <code class="docutils literal notranslate"><span class="pre">update</span></code> function of a <code class="docutils literal notranslate"><span class="pre">resource_manager</span></code> into our current implementations of entanglement protocols.
 We also need a protocol to track which hardware components of the local node should be used.</p>
 <p>Q: Why is the <code class="docutils literal notranslate"><span class="pre">EntanglementGenerationA</span></code> object placed in the list <code class="docutils literal notranslate"><span class="pre">EntangleGenNode.protocols</span></code>?</p>
 <p>A: The implementation of <code class="docutils literal notranslate"><span class="pre">EntanglementGenerationA</span></code> assumes it has been placed in the <code class="docutils literal notranslate"><span class="pre">Node.protocols</span></code> list when it starts.</p>
-</div>
-</div>
-<div class="section" id="step-2-create-network">
-<h3>Step 2: Create Network<a class="headerlink" href="#step-2-create-network" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="step-2-create-network">
+<h3>Step 2: Create Network<a class="headerlink" href="#step-2-create-network" title="Permalink to this heading">¶</a></h3>
 <p>As introduced in the previous chapter, we create nodes and channels to define the network.
 To avoid unnecessary errors, we will set the efficiency of our detectors to 1.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sequence.kernel.timeline</span> <span class="kn">import</span> <span class="n">Timeline</span>
@@ -185,9 +186,9 @@ To avoid unnecessary errors, we will set the efficiency of our detectors to 1.</
         <span class="n">cc</span><span class="o">.</span><span class="n">set_ends</span><span class="p">(</span><span class="n">nodes</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">nodes</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="step-3-configure-and-start-the-entanglementgenerationa-protocol">
-<h3>Step 3: Configure and Start the <code class="docutils literal notranslate"><span class="pre">EntanglementGenerationA</span></code> Protocol<a class="headerlink" href="#step-3-configure-and-start-the-entanglementgenerationa-protocol" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="step-3-configure-and-start-the-entanglementgenerationa-protocol">
+<h3>Step 3: Configure and Start the <code class="docutils literal notranslate"><span class="pre">EntanglementGenerationA</span></code> Protocol<a class="headerlink" href="#step-3-configure-and-start-the-entanglementgenerationa-protocol" title="Permalink to this heading">¶</a></h3>
 <p>First, we will use <code class="docutils literal notranslate"><span class="pre">create_protocol</span></code> to create the instance of the protocol on the node.
 Before we start the protocol, we need to pair the protocols on the two nodes.
 The function <code class="docutils literal notranslate"><span class="pre">pair_protocol</span></code> defined here uses two <code class="docutils literal notranslate"><span class="pre">EntangleGenNode</span></code> as the input and will pair all necessary protocols.
@@ -230,9 +231,9 @@ After the simulation, we can observe two possible states of memory based on the 
 If the protocol generates entanglement successfully, the <code class="docutils literal notranslate"><span class="pre">Memory.entangled_memory</span></code> will present information about the entangled memory.
 The fidelity of entanglements equal <code class="docutils literal notranslate"><span class="pre">0.9</span></code>, as set in the constructor function of <code class="docutils literal notranslate"><span class="pre">Memory</span></code>.
 If the protocol fails, the fidelity of entanglement is <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
-</div>
-<div class="section" id="step-4-try-to-generate-entanglement-multiple-times">
-<h3>Step 4: Try to Generate Entanglement Multiple Times<a class="headerlink" href="#step-4-try-to-generate-entanglement-multiple-times" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="step-4-try-to-generate-entanglement-multiple-times">
+<h3>Step 4: Try to Generate Entanglement Multiple Times<a class="headerlink" href="#step-4-try-to-generate-entanglement-multiple-times" title="Permalink to this heading">¶</a></h3>
 <p>The mechanism of the Barrett-Kok generation protocol can achieve at most 50% success rate.
 We can, however, set the protocol to try multiple times and observe the success rate of protocol.
 We will use the <code class="docutils literal notranslate"><span class="pre">Memory.reset()</span></code> method to reset the state of quantum memories before restarting protocols.</p>
@@ -252,17 +253,17 @@ We will use the <code class="docutils literal notranslate"><span class="pre">Mem
 <span class="c1"># (around 500:500; the exact number depends on the seed of numpy.random)</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="example-use-bbpssw-to-improve-the-fidelity-of-entanglement">
-<h2>Example: Use <code class="docutils literal notranslate"><span class="pre">BBPSSW</span></code> to improve the fidelity of entanglement<a class="headerlink" href="#example-use-bbpssw-to-improve-the-fidelity-of-entanglement" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="example-use-bbpssw-to-improve-the-fidelity-of-entanglement">
+<h2>Example: Use <code class="docutils literal notranslate"><span class="pre">BBPSSW</span></code> to improve the fidelity of entanglement<a class="headerlink" href="#example-use-bbpssw-to-improve-the-fidelity-of-entanglement" title="Permalink to this heading">¶</a></h2>
 <p><img alt="EP_topo" src="../../_images/EP_topo.png" /></p>
 <p>The above figure shows the network topology of this example.
 The network is composed of two <code class="docutils literal notranslate"><span class="pre">PurifyNode</span></code> nodes and one <code class="docutils literal notranslate"><span class="pre">ClassicalChannel</span></code>.
 Two pairs of entangled memories are located at two nodes.
 The <code class="docutils literal notranslate"><span class="pre">BBPSSW</span></code> purification protocol will consume one entanglement to improve the fidelity of the other entanglement.</p>
-<div class="section" id="step-1-customized-node">
-<h3>Step 1: Customized Node<a class="headerlink" href="#step-1-customized-node" title="Permalink to this headline">¶</a></h3>
+<section id="step-1-customized-node">
+<h3>Step 1: Customized Node<a class="headerlink" href="#step-1-customized-node" title="Permalink to this heading">¶</a></h3>
 <p>The custom <code class="docutils literal notranslate"><span class="pre">PurifyNode</span></code> class will inherit the <code class="docutils literal notranslate"><span class="pre">Node</span></code> class from SeQUeNCe.
 Similar to <code class="docutils literal notranslate"><span class="pre">EntangleGenNode</span></code>, we need to define a <code class="docutils literal notranslate"><span class="pre">SimpleManager</span></code> and rewrite the <code class="docutils literal notranslate"><span class="pre">receive_message</span></code> method.
 The <code class="docutils literal notranslate"><span class="pre">kept_memo</span></code> is the memory whose fidelity will be improved by the purification protocol.
@@ -318,9 +319,9 @@ We will also rewrite the code for the manager class to reflect our usage of two 
 <li><p>The memory used as the <code class="docutils literal notranslate"><span class="pre">kept_memo</span></code></p></li>
 <li><p>the memory used as the <code class="docutils literal notranslate"><span class="pre">meas_memo</span></code></p></li>
 </ol>
-</div>
-<div class="section" id="id1">
-<h3>Step 2: Create Network<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="id1">
+<h3>Step 2: Create Network<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h3>
 <p>We can now use the code below to create the simulated network.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tl</span> <span class="o">=</span> <span class="n">Timeline</span><span class="p">()</span>
 
@@ -335,9 +336,9 @@ We will also rewrite the code for the manager class to reflect our usage of two 
 <span class="n">cc1</span><span class="o">.</span><span class="n">set_ends</span><span class="p">(</span><span class="n">node2</span><span class="p">,</span> <span class="n">node1</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="step-3-manually-set-entanglement-states">
-<h3>Step 3: Manually Set Entanglement States<a class="headerlink" href="#step-3-manually-set-entanglement-states" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="step-3-manually-set-entanglement-states">
+<h3>Step 3: Manually Set Entanglement States<a class="headerlink" href="#step-3-manually-set-entanglement-states" title="Permalink to this heading">¶</a></h3>
 <p>To avoid unnecessary modules and operations, we will manually modify the memories to create an entangled state.
 First, we use the <code class="docutils literal notranslate"><span class="pre">Memory.reset()</span></code> to reset the state of memory.
 Then, we assign the identity of the node and memory to which we are entangled in <code class="docutils literal notranslate"><span class="pre">Memory.entangled_memory</span></code> (implemented as a dictionary <code class="docutils literal notranslate"><span class="pre">{'node_id':</span> <span class="pre">str,</span> <span class="pre">'memo_id':</span> <span class="pre">str}</span></code>).
@@ -363,9 +364,9 @@ Finally, we set the fidelity of entanglement.</p>
 <span class="n">entangle_memory</span><span class="p">(</span><span class="n">meas_memo_1</span><span class="p">,</span> <span class="n">meas_memo_2</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="step-4-configure-and-start-bbpssw-protocol">
-<h3>Step 4: Configure and Start BBPSSW Protocol<a class="headerlink" href="#step-4-configure-and-start-bbpssw-protocol" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="step-4-configure-and-start-bbpssw-protocol">
+<h3>Step 4: Configure and Start BBPSSW Protocol<a class="headerlink" href="#step-4-configure-and-start-bbpssw-protocol" title="Permalink to this heading">¶</a></h3>
 <p>Similar to the previous example, we create, pair, and start the protocols.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">pair_protocol</span><span class="p">(</span><span class="n">node1</span><span class="p">:</span> <span class="n">Node</span><span class="p">,</span> <span class="n">node2</span><span class="p">:</span> <span class="n">Node</span><span class="p">):</span>
     <span class="n">p1</span> <span class="o">=</span> <span class="n">node1</span><span class="o">.</span><span class="n">protocols</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -405,9 +406,9 @@ Entanglements with higher fidelities have a higher success rate.</p>
 <p><strong>Note</strong>: The BBPSSW protocol assumes the fidelity of the two entangled pairs are the same.</p>
 <p><strong>Note</strong>: You can inherit the BBPSSW class and overwrite <code class="docutils literal notranslate"><span class="pre">BBPSSW.success_probability(F:</span> <span class="pre">float)</span></code>
 and <code class="docutils literal notranslate"><span class="pre">BBPSSW.improved_fidelity(F:</span> <span class="pre">float)</span></code> to customize the success probability and fidelity improvement of the purification protocol.</p>
-</div>
-<div class="section" id="step-5-try-to-purify-entanglement-multiple-times">
-<h3>Step 5: Try to Purify Entanglement Multiple Times<a class="headerlink" href="#step-5-try-to-purify-entanglement-multiple-times" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="step-5-try-to-purify-entanglement-multiple-times">
+<h3>Step 5: Try to Purify Entanglement Multiple Times<a class="headerlink" href="#step-5-try-to-purify-entanglement-multiple-times" title="Permalink to this heading">¶</a></h3>
 <p>We can run the purification protocol multiple times to observe the state of memory with different purification results.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tl</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
@@ -427,10 +428,10 @@ and <code class="docutils literal notranslate"><span class="pre">BBPSSW.improved
     <span class="nb">print</span><span class="p">(</span><span class="n">meas_memo_1</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">meas_memo_1</span><span class="o">.</span><span class="n">entangled_memory</span><span class="p">,</span> <span class="n">meas_memo_1</span><span class="o">.</span><span class="n">fidelity</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="example-use-entanglementswappinga-and-entanglementswappingb-to-extend-entanglement">
-<h2>Example: Use <code class="docutils literal notranslate"><span class="pre">EntanglementSwappingA</span></code> and <code class="docutils literal notranslate"><span class="pre">EntanglementSwappingB</span></code> to Extend Entanglement<a class="headerlink" href="#example-use-entanglementswappinga-and-entanglementswappingb-to-extend-entanglement" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="example-use-entanglementswappinga-and-entanglementswappingb-to-extend-entanglement">
+<h2>Example: Use <code class="docutils literal notranslate"><span class="pre">EntanglementSwappingA</span></code> and <code class="docutils literal notranslate"><span class="pre">EntanglementSwappingB</span></code> to Extend Entanglement<a class="headerlink" href="#example-use-entanglementswappinga-and-entanglementswappingb-to-extend-entanglement" title="Permalink to this heading">¶</a></h2>
 <p><img alt="ES_topo" src="../../_images/ES_topo.png" /></p>
 <p>The above figure shows the network topology of this example.
 The network consists of two <code class="docutils literal notranslate"><span class="pre">SwapNodeB</span></code> and one <code class="docutils literal notranslate"><span class="pre">SwapNodeA</span></code> connected by classical channels.</p>
@@ -446,8 +447,8 @@ The network consists of two <code class="docutils literal notranslate"><span cla
 </ul>
 <p>The swapping protocols on the three nodes use these two pairs of entangled memories to generate the entanglement between two <code class="docutils literal notranslate"><span class="pre">SwapNodeB</span></code> nodes.
 After the swapping protocol, the two memories on <code class="docutils literal notranslate"><span class="pre">SwapNodeA</span></code> are no longer entangled with the memories on each <code class="docutils literal notranslate"><span class="pre">SwapNodeB</span></code>.</p>
-<div class="section" id="id2">
-<h3>Step 1: Customized Node<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<section id="id2">
+<h3>Step 1: Customized Node<a class="headerlink" href="#id2" title="Permalink to this heading">¶</a></h3>
 <p>The code below shows the implementation of <code class="docutils literal notranslate"><span class="pre">SwapNodeA</span></code>.
 The <code class="docutils literal notranslate"><span class="pre">left_memo</span></code> is the memory entangled with the memory on the left <code class="docutils literal notranslate"><span class="pre">SwapNodeB</span></code>.
 The <code class="docutils literal notranslate"><span class="pre">right_memo</span></code> is the memory entangled with the memory on the right <code class="docutils literal notranslate"><span class="pre">SwapNodeB</span></code>.</p>
@@ -526,9 +527,9 @@ The <code class="docutils literal notranslate"><span class="pre">EntanglementSwa
             <span class="bp">self</span><span class="o">.</span><span class="n">own</span><span class="o">.</span><span class="n">protocols</span> <span class="o">=</span> <span class="p">[</span><span class="n">EntanglementSwappingB</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">own</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">.ESB&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">own</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">memo</span><span class="p">)]</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="id3">
-<h3>Step 2: Create Network<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="id3">
+<h3>Step 2: Create Network<a class="headerlink" href="#id3" title="Permalink to this heading">¶</a></h3>
 <p>We create the three nodes and connect them with classical channels.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tl</span> <span class="o">=</span> <span class="n">Timeline</span><span class="p">()</span>
 
@@ -547,9 +548,9 @@ The <code class="docutils literal notranslate"><span class="pre">EntanglementSwa
         <span class="n">cc</span><span class="o">.</span><span class="n">set_ends</span><span class="p">(</span><span class="n">nodes</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">nodes</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="step-3-manually-set-entanglement-state-and-start-protocol">
-<h3>Step 3: Manually Set Entanglement State and Start Protocol<a class="headerlink" href="#step-3-manually-set-entanglement-state-and-start-protocol" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="step-3-manually-set-entanglement-state-and-start-protocol">
+<h3>Step 3: Manually Set Entanglement State and Start Protocol<a class="headerlink" href="#step-3-manually-set-entanglement-state-and-start-protocol" title="Permalink to this heading">¶</a></h3>
 <p>We will reuse the code for <code class="docutils literal notranslate"><span class="pre">entangle_memory</span></code> from the previous examples to configure the states of hardware and software.
 The <code class="docutils literal notranslate"><span class="pre">pair_protocol</span></code> function is slightly more complicated, as there are more nodes to deal with.
 Because we set the success probability to 1, we can guaruntee a successful result after running the simulation.
@@ -598,9 +599,9 @@ The fidelity of entanglement after swapping will be <code class="docutils litera
 <span class="c1"># 0.8019000000000001</span>
 </pre></div>
 </div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -609,8 +610,9 @@ The fidelity of entanglement after swapping will be <code class="docutils litera
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../../index.html">Table of Contents</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../../index.html">Table of Contents</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">Chapter 3: Entanglement Management</a><ul>
 <li><a class="reference internal" href="#example-use-entanglementgenerationa-and-bsmnode-to-generate-entanglement">Example: Use <code class="docutils literal notranslate"><span class="pre">EntanglementGenerationA</span></code> and <code class="docutils literal notranslate"><span class="pre">BSMNode</span></code> to generate entanglement</a><ul>
 <li><a class="reference internal" href="#step-1-customize-node">Step 1: Customize Node</a><ul>
@@ -640,12 +642,17 @@ The fidelity of entanglement after swapping will be <code class="docutils litera
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="../chapter2/hardware.html"
-                        title="previous chapter">Chapter 2: Hardware Module</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="../chapter4/resource_management.html"
-                        title="next chapter">Chapter 4: Resource Management</a></p>
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="../chapter2/hardware.html"
+                          title="previous chapter">Chapter 2: Hardware Module</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="../chapter4/resource_management.html"
+                          title="next chapter">Chapter 4: Resource Management</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -657,12 +664,12 @@ The fidelity of entanglement after swapping will be <code class="docutils litera
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -682,13 +689,13 @@ The fidelity of entanglement after swapping will be <code class="docutils litera
         <li class="right" >
           <a href="../chapter2/hardware.html" title="Chapter 2: Hardware Module"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.6.2 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Chapter 3: Entanglement Management</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2020-2022.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+        &#169; Copyright 2020-2024.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
     </div>
   </body>
 </html>

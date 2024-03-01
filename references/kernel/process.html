@@ -1,19 +1,20 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Process &#8212; SeQUeNCe 0.5.2 documentation</title>
-    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Process &#8212; SeQUeNCe 0.6.2 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/classic.css" />
     
-    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/language_data.js"></script>
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -35,7 +36,7 @@
         <li class="right" >
           <a href="eventlist.html" title="Event List"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.6.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" accesskey="U">Kernel</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Process</a></li> 
       </ul>
@@ -46,58 +47,58 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="module-src.kernel.process">
-<span id="process"></span><h1>Process<a class="headerlink" href="#module-src.kernel.process" title="Permalink to this headline">¶</a></h1>
+  <section id="module-src.kernel.process">
+<span id="process"></span><h1>Process<a class="headerlink" href="#module-src.kernel.process" title="Permalink to this heading">¶</a></h1>
 <p>Definition of the Process class.</p>
 <p>This module defines a process, which is performed when an event is executed.</p>
 <dl class="py class">
-<dt id="src.kernel.process.Process">
-<em class="property">class </em><code class="sig-prename descclassname">src.kernel.process.</code><code class="sig-name descname">Process</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">owner</span><span class="p">:</span> <span class="n">Any</span></em>, <em class="sig-param"><span class="n">activation_method</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">act_params</span><span class="p">:</span> <span class="n">List<span class="p">[</span>Any<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">act_kwargs</span><span class="o">=</span><span class="default_value">{}</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.kernel.process.Process" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.kernel.process.Process">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.kernel.process.</span></span><span class="sig-name descname"><span class="pre">Process</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">owner</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation_method</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">act_params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">act_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.kernel.process.Process" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class of process.</p>
 <p>The process claims the object of process, the function of object, and the arguments for the function.</p>
 <dl class="py attribute">
-<dt id="src.kernel.process.Process.owner">
-<code class="sig-name descname">owner</code><a class="headerlink" href="#src.kernel.process.Process.owner" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.kernel.process.Process.owner">
+<span class="sig-name descname"><span class="pre">owner</span></span><a class="headerlink" href="#src.kernel.process.Process.owner" title="Permalink to this definition">¶</a></dt>
 <dd><p>the object of process.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Any</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="src.kernel.process.Process.activation_method">
-<code class="sig-name descname">activation_method</code><a class="headerlink" href="#src.kernel.process.Process.activation_method" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.kernel.process.Process.activation_method">
+<span class="sig-name descname"><span class="pre">activation_method</span></span><a class="headerlink" href="#src.kernel.process.Process.activation_method" title="Permalink to this definition">¶</a></dt>
 <dd><p>the function of object.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="src.kernel.process.Process.act_params">
-<code class="sig-name descname">act_params</code><a class="headerlink" href="#src.kernel.process.Process.act_params" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.kernel.process.Process.act_params">
+<span class="sig-name descname"><span class="pre">act_params</span></span><a class="headerlink" href="#src.kernel.process.Process.act_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>the arguments of object.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>List[Any]</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt id="src.kernel.process.Process.run">
-<code class="sig-name descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.kernel.process.Process.run" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.kernel.process.Process.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.kernel.process.Process.run" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to execute process.</p>
 <p>Will run the <cite>activation_method</cite> method of <cite>owner</cite> with <cite>act_params</cite> passed as args.</p>
 </dd></dl>
 
 </dd></dl>
 
-</div>
+</section>
 
 
             <div class="clearer"></div>
@@ -106,12 +107,16 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="eventlist.html"
-                        title="previous chapter">Event List</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="timeline.html"
-                        title="next chapter">Timeline</a></p>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="eventlist.html"
+                          title="previous chapter">Event List</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="timeline.html"
+                          title="next chapter">Timeline</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -123,12 +128,12 @@
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -148,14 +153,14 @@
         <li class="right" >
           <a href="eventlist.html" title="Event List"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.6.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" >Kernel</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Process</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2020-2022.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+        &#169; Copyright 2020-2024.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
     </div>
   </body>
 </html>

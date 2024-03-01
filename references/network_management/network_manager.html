@@ -1,19 +1,20 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Network Manager &#8212; SeQUeNCe 0.5.2 documentation</title>
-    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Network Manager &#8212; SeQUeNCe 0.6.2 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/classic.css" />
     
-    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/language_data.js"></script>
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -35,7 +36,7 @@
         <li class="right" >
           <a href="top.html" title="Network Management"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.6.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" accesskey="U">Network Management</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Network Manager</a></li> 
       </ul>
@@ -46,80 +47,80 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="module-src.network_management.network_manager">
-<span id="network-manager"></span><h1>Network Manager<a class="headerlink" href="#module-src.network_management.network_manager" title="Permalink to this headline">¶</a></h1>
+  <section id="module-src.network_management.network_manager">
+<span id="network-manager"></span><h1>Network Manager<a class="headerlink" href="#module-src.network_management.network_manager" title="Permalink to this heading">¶</a></h1>
 <p>Definition of the Network Manager.</p>
 <p>This module defines the NetworkManager class, an implementation of the SeQUeNCe network management module.
 Also included in this module is the message type used by the network manager and a function for generating network managers with default protocols.</p>
 <dl class="py class">
-<dt id="src.network_management.network_manager.NetworkManager">
-<em class="property">class </em><code class="sig-prename descclassname">src.network_management.network_manager.</code><code class="sig-name descname">NetworkManager</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">owner</span><span class="p">:</span> <span class="n">QuantumRouter</span></em>, <em class="sig-param"><span class="n">protocol_stack</span><span class="p">:</span> <span class="n">List<span class="p">[</span>StackProtocol<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.network_management.network_manager.NetworkManager" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.network_management.network_manager.NetworkManager">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.network_management.network_manager.</span></span><span class="sig-name descname"><span class="pre">NetworkManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">owner</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../topology/node.html#src.topology.node.QuantumRouter" title="src.topology.node.QuantumRouter"><span class="pre">QuantumRouter</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">protocol_stack</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../misc/protocol.html#src.protocol.StackProtocol" title="src.protocol.StackProtocol"><span class="pre">StackProtocol</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.network_management.network_manager.NetworkManager" title="Permalink to this definition">¶</a></dt>
 <dd><p>Network manager implementation class.</p>
 <p>The network manager is responsible for the operations of a node within a broader quantum network.
 This is done through a <cite>protocol_stack</cite> of protocols, which messages are passed and packaged through.</p>
 <dl class="py attribute">
-<dt id="src.network_management.network_manager.NetworkManager.name">
-<code class="sig-name descname">name</code><a class="headerlink" href="#src.network_management.network_manager.NetworkManager.name" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.network_management.network_manager.NetworkManager.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#src.network_management.network_manager.NetworkManager.name" title="Permalink to this definition">¶</a></dt>
 <dd><p>name of the network manager instance.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="src.network_management.network_manager.NetworkManager.owner">
-<code class="sig-name descname">owner</code><a class="headerlink" href="#src.network_management.network_manager.NetworkManager.owner" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.network_management.network_manager.NetworkManager.owner">
+<span class="sig-name descname"><span class="pre">owner</span></span><a class="headerlink" href="#src.network_management.network_manager.NetworkManager.owner" title="Permalink to this definition">¶</a></dt>
 <dd><p>node that protocol instance is attached to.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="../topology/node.html#src.topology.node.QuantumRouter" title="src.topology.node.QuantumRouter">QuantumRouter</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="src.network_management.network_manager.NetworkManager.protocol_stack">
-<code class="sig-name descname">protocol_stack</code><a class="headerlink" href="#src.network_management.network_manager.NetworkManager.protocol_stack" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.network_management.network_manager.NetworkManager.protocol_stack">
+<span class="sig-name descname"><span class="pre">protocol_stack</span></span><a class="headerlink" href="#src.network_management.network_manager.NetworkManager.protocol_stack" title="Permalink to this definition">¶</a></dt>
 <dd><p>network manager protocol stack.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>List[<a class="reference internal" href="../misc/protocol.html#src.protocol.StackProtocol" title="src.protocol.StackProtocol">StackProtocol</a>]</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt id="src.network_management.network_manager.NetworkManager.load_stack">
-<code class="sig-name descname">load_stack</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">stack</span><span class="p">:</span> <span class="n">List<span class="p">[</span>StackProtocol<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.network_management.network_manager.NetworkManager.load_stack" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.network_management.network_manager.NetworkManager.load_stack">
+<span class="sig-name descname"><span class="pre">load_stack</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stack</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../misc/protocol.html#src.protocol.StackProtocol" title="src.protocol.StackProtocol"><span class="pre">StackProtocol</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.network_management.network_manager.NetworkManager.load_stack" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to load a defined protocol stack.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>stack</strong> (<em>List</em><em>[</em><a class="reference internal" href="../misc/protocol.html#src.protocol.StackProtocol" title="src.protocol.StackProtocol"><em>StackProtocol</em></a><em>]</em>) – new protocol stack.</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt id="src.network_management.network_manager.NetworkManager.pop">
-<code class="sig-name descname">pop</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.network_management.network_manager.NetworkManager.pop" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.network_management.network_manager.NetworkManager.pop">
+<span class="sig-name descname"><span class="pre">pop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.network_management.network_manager.NetworkManager.pop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to receive pops from highest protocol in protocol stack.</p>
 <p>Will get reservation from message and attempt to meet it.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Keyword Arguments</dt>
+<dt class="field-odd">Keyword Arguments<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>msg</strong> (<em>any</em>) – message containing reservation.</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt id="src.network_management.network_manager.NetworkManager.push">
-<code class="sig-name descname">push</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.network_management.network_manager.NetworkManager.push" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.network_management.network_manager.NetworkManager.push">
+<span class="sig-name descname"><span class="pre">push</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.network_management.network_manager.NetworkManager.push" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to receive pushes from lowest protocol in protocol stack.</p>
 <p>Will create message to send to another node.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Keyword Arguments</dt>
+<dt class="field-odd">Keyword Arguments<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>msg</strong> (<em>any</em>) – message to deliver.</p></li>
 <li><p><strong>dst</strong> (<em>str</em>) – name of destination node.</p></li>
@@ -129,12 +130,12 @@ This is done through a <cite>protocol_stack</cite> of protocols, which messages 
 </dd></dl>
 
 <dl class="py method">
-<dt id="src.network_management.network_manager.NetworkManager.received_message">
-<code class="sig-name descname">received_message</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">src</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">msg</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#src.network_management.network_manager.NetworkManagerMessage" title="src.network_management.network_manager.NetworkManagerMessage">src.network_management.network_manager.NetworkManagerMessage</a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.network_management.network_manager.NetworkManager.received_message" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.network_management.network_manager.NetworkManager.received_message">
+<span class="sig-name descname"><span class="pre">received_message</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">src</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#src.network_management.network_manager.NetworkManagerMessage" title="src.network_management.network_manager.NetworkManagerMessage"><span class="pre">NetworkManagerMessage</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.network_management.network_manager.NetworkManager.received_message" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to receive transmitted network reservation method.</p>
 <p>Will pop message to lowest protocol in protocol stack.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>src</strong> (<em>str</em>) – name of source node for message.</p></li>
 <li><p><strong>msg</strong> (<a class="reference internal" href="#src.network_management.network_manager.NetworkManagerMessage" title="src.network_management.network_manager.NetworkManagerMessage"><em>NetworkManagerMessage</em></a>) – message received.</p></li>
@@ -148,12 +149,12 @@ This is done through a <cite>protocol_stack</cite> of protocols, which messages 
 </dd></dl>
 
 <dl class="py method">
-<dt id="src.network_management.network_manager.NetworkManager.request">
-<code class="sig-name descname">request</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">responder</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">start_time</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">end_time</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">memory_size</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">target_fidelity</span><span class="p">:</span> <span class="n">float</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.network_management.network_manager.NetworkManager.request" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.network_management.network_manager.NetworkManager.request">
+<span class="sig-name descname"><span class="pre">request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">responder</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">memory_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_fidelity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.network_management.network_manager.NetworkManager.request" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to make an entanglement request.</p>
 <p>Will defer request to top protocol in protocol stack.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>responder</strong> (<em>str</em>) – name of node to establish entanglement with.</p></li>
 <li><p><strong>start_time</strong> (<em>int</em>) – simulation start time of entanglement.</p></li>
@@ -172,37 +173,37 @@ This is done through a <cite>protocol_stack</cite> of protocols, which messages 
 </dd></dl>
 
 <dl class="py class">
-<dt id="src.network_management.network_manager.NetworkManagerMessage">
-<em class="property">class </em><code class="sig-prename descclassname">src.network_management.network_manager.</code><code class="sig-name descname">NetworkManagerMessage</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">msg_type</span><span class="p">:</span> <span class="n">enum.Enum</span></em>, <em class="sig-param"><span class="n">receiver</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">payload</span><span class="p">:</span> <span class="n"><a class="reference internal" href="../misc/message.html#src.message.Message" title="src.message.Message">src.message.Message</a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.network_management.network_manager.NetworkManagerMessage" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.network_management.network_manager.NetworkManagerMessage">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.network_management.network_manager.</span></span><span class="sig-name descname"><span class="pre">NetworkManagerMessage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Enum</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">receiver</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">payload</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../misc/message.html#src.message.Message" title="src.message.Message"><span class="pre">Message</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.network_management.network_manager.NetworkManagerMessage" title="Permalink to this definition">¶</a></dt>
 <dd><p>Message used by the network manager.</p>
 <dl class="py attribute">
-<dt id="src.network_management.network_manager.NetworkManagerMessage.msg_type">
-<code class="sig-name descname">msg_type</code><a class="headerlink" href="#src.network_management.network_manager.NetworkManagerMessage.msg_type" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.network_management.network_manager.NetworkManagerMessage.msg_type">
+<span class="sig-name descname"><span class="pre">msg_type</span></span><a class="headerlink" href="#src.network_management.network_manager.NetworkManagerMessage.msg_type" title="Permalink to this definition">¶</a></dt>
 <dd><p>message type required by base message type.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Enum</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="src.network_management.network_manager.NetworkManagerMessage.receiver">
-<code class="sig-name descname">receiver</code><a class="headerlink" href="#src.network_management.network_manager.NetworkManagerMessage.receiver" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.network_management.network_manager.NetworkManagerMessage.receiver">
+<span class="sig-name descname"><span class="pre">receiver</span></span><a class="headerlink" href="#src.network_management.network_manager.NetworkManagerMessage.receiver" title="Permalink to this definition">¶</a></dt>
 <dd><p>name of destination protocol instance.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="src.network_management.network_manager.NetworkManagerMessage.payload">
-<code class="sig-name descname">payload</code><a class="headerlink" href="#src.network_management.network_manager.NetworkManagerMessage.payload" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.network_management.network_manager.NetworkManagerMessage.payload">
+<span class="sig-name descname"><span class="pre">payload</span></span><a class="headerlink" href="#src.network_management.network_manager.NetworkManagerMessage.payload" title="Permalink to this definition">¶</a></dt>
 <dd><p>message to be passed through destination network manager.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="../misc/message.html#src.message.Message" title="src.message.Message">Message</a></p>
 </dd>
 </dl>
@@ -211,28 +212,28 @@ This is done through a <cite>protocol_stack</cite> of protocols, which messages 
 </dd></dl>
 
 <dl class="py function">
-<dt id="src.network_management.network_manager.NewNetworkManager">
-<code class="sig-prename descclassname">src.network_management.network_manager.</code><code class="sig-name descname">NewNetworkManager</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">owner</span><span class="p">:</span> <span class="n">QuantumRouter</span></em>, <em class="sig-param"><span class="n">memory_array_name</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; NetworkManager<a class="headerlink" href="#src.network_management.network_manager.NewNetworkManager" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.network_management.network_manager.NewNetworkManager">
+<span class="sig-prename descclassname"><span class="pre">src.network_management.network_manager.</span></span><span class="sig-name descname"><span class="pre">NewNetworkManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">owner</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../topology/node.html#src.topology.node.QuantumRouter" title="src.topology.node.QuantumRouter"><span class="pre">QuantumRouter</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">memory_array_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#src.network_management.network_manager.NetworkManager" title="src.network_management.network_manager.NetworkManager"><span class="pre">NetworkManager</span></a></span></span><a class="headerlink" href="#src.network_management.network_manager.NewNetworkManager" title="Permalink to this definition">¶</a></dt>
 <dd><p>Function to create a new network manager.</p>
 <p>Will create a network manager with default protocol stack.
 This stack inclused a reservation and routing protocol.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>owner</strong> (<a class="reference internal" href="../topology/node.html#src.topology.node.QuantumRouter" title="src.topology.node.QuantumRouter"><em>QuantumRouter</em></a>) – node to attach network manager to.</p></li>
 <li><p><strong>memory_array_name</strong> (<em>str</em>) – name of the memory array component on owner.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>network manager object created.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#src.network_management.network_manager.NetworkManager" title="src.network_management.network_manager.NetworkManager">NetworkManager</a></p>
 </dd>
 </dl>
 </dd></dl>
 
-</div>
+</section>
 
 
             <div class="clearer"></div>
@@ -241,12 +242,16 @@ This stack inclused a reservation and routing protocol.</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="top.html"
-                        title="previous chapter">Network Management</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="reservation.html"
-                        title="next chapter">Reservation</a></p>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="top.html"
+                          title="previous chapter">Network Management</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="reservation.html"
+                          title="next chapter">Reservation</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -258,12 +263,12 @@ This stack inclused a reservation and routing protocol.</p>
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -283,14 +288,14 @@ This stack inclused a reservation and routing protocol.</p>
         <li class="right" >
           <a href="top.html" title="Network Management"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.6.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" >Network Management</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Network Manager</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2020-2022.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+        &#169; Copyright 2020-2024.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
     </div>
   </body>
 </html>
