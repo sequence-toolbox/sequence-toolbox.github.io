@@ -1,20 +1,19 @@
 
 <!DOCTYPE html>
 
-<html lang="en">
+<html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-
-    <title>Switch &#8212; SeQUeNCe 0.6.2 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/classic.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Switch &#8212; SeQUeNCe 0.5.2 documentation</title>
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -36,7 +35,7 @@
         <li class="right" >
           <a href="spdc_lens.html" title="SPDC Lens"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.6.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" accesskey="U">Components</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Switch</a></li> 
       </ul>
@@ -47,77 +46,77 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="module-src.components.switch">
-<span id="switch"></span><h1>Switch<a class="headerlink" href="#module-src.components.switch" title="Permalink to this heading">¶</a></h1>
+  <div class="section" id="module-src.components.switch">
+<span id="switch"></span><h1>Switch<a class="headerlink" href="#module-src.components.switch" title="Permalink to this headline">¶</a></h1>
 <p>Model for simulation of an optical switch.</p>
 <p>This module defines the Switch class for directing the flow of photons.
 The switch is usually created as part of a time bin QSDetector object, and will only accept time bin photons.
 A more general switch class is in development.</p>
 <dl class="py class">
-<dt class="sig sig-object py" id="src.components.switch.Switch">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.components.switch.</span></span><span class="sig-name descname"><span class="pre">Switch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeline</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../kernel/timeline.html#src.kernel.timeline.Timeline" title="src.kernel.timeline.Timeline"><span class="pre">Timeline</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.switch.Switch" title="Permalink to this definition">¶</a></dt>
+<dt id="src.components.switch.Switch">
+<em class="property">class </em><code class="sig-prename descclassname">src.components.switch.</code><code class="sig-name descname">Switch</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">timeline</span><span class="p">:</span> <span class="n">Timeline</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.switch.Switch" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class for a simple optical switch.</p>
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.components.switch.Switch.name">
-<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#src.components.switch.Switch.name" title="Permalink to this definition">¶</a></dt>
+<dt id="src.components.switch.Switch.name">
+<code class="sig-name descname">name</code><a class="headerlink" href="#src.components.switch.Switch.name" title="Permalink to this definition">¶</a></dt>
 <dd><p>label for switch instance.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>str</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.components.switch.Switch.timeline">
-<span class="sig-name descname"><span class="pre">timeline</span></span><a class="headerlink" href="#src.components.switch.Switch.timeline" title="Permalink to this definition">¶</a></dt>
+<dt id="src.components.switch.Switch.timeline">
+<code class="sig-name descname">timeline</code><a class="headerlink" href="#src.components.switch.Switch.timeline" title="Permalink to this definition">¶</a></dt>
 <dd><p>timeline for simulation.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference internal" href="../kernel/timeline.html#src.kernel.timeline.Timeline" title="src.kernel.timeline.Timeline">Timeline</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.components.switch.Switch.start_time">
-<span class="sig-name descname"><span class="pre">start_time</span></span><a class="headerlink" href="#src.components.switch.Switch.start_time" title="Permalink to this definition">¶</a></dt>
+<dt id="src.components.switch.Switch.start_time">
+<code class="sig-name descname">start_time</code><a class="headerlink" href="#src.components.switch.Switch.start_time" title="Permalink to this definition">¶</a></dt>
 <dd><p>simulation start time (in ps) for transmission.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.components.switch.Switch.frequency">
-<span class="sig-name descname"><span class="pre">frequency</span></span><a class="headerlink" href="#src.components.switch.Switch.frequency" title="Permalink to this definition">¶</a></dt>
+<dt id="src.components.switch.Switch.frequency">
+<code class="sig-name descname">frequency</code><a class="headerlink" href="#src.components.switch.Switch.frequency" title="Permalink to this definition">¶</a></dt>
 <dd><p>frequency with which to switch destinations.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>float</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.components.switch.Switch.basis_list">
-<span class="sig-name descname"><span class="pre">basis_list</span></span><a class="headerlink" href="#src.components.switch.Switch.basis_list" title="Permalink to this definition">¶</a></dt>
+<dt id="src.components.switch.Switch.basis_list">
+<code class="sig-name descname">basis_list</code><a class="headerlink" href="#src.components.switch.Switch.basis_list" title="Permalink to this definition">¶</a></dt>
 <dd><p>0/1 list denoting which receiver to rout photons to each period.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>List[int]</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.components.switch.Switch.get">
-<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">photon</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.components.switch.Switch.get" title="Permalink to this definition">¶</a></dt>
+<dt id="src.components.switch.Switch.get">
+<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">photon</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.components.switch.Switch.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to receive photon for transmission</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>photon</strong> (<a class="reference internal" href="photon.html#src.components.photon.Photon" title="src.components.photon.Photon"><em>Photon</em></a>) – photon to transmit.</p>
 </dd>
 </dl>
@@ -128,14 +127,14 @@ A more general switch class is in development.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.components.switch.Switch.init">
-<span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.components.switch.Switch.init" title="Permalink to this definition">¶</a></dt>
+<dt id="src.components.switch.Switch.init">
+<code class="sig-name descname">init</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.components.switch.Switch.init" title="Permalink to this definition">¶</a></dt>
 <dd><p>Implementation of Entity interface (see base class).</p>
 </dd></dl>
 
 </dd></dl>
 
-</section>
+</div>
 
 
             <div class="clearer"></div>
@@ -144,16 +143,12 @@ A more general switch class is in development.</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <div>
-    <h4>Previous topic</h4>
-    <p class="topless"><a href="spdc_lens.html"
-                          title="previous chapter">SPDC Lens</a></p>
-  </div>
-  <div>
-    <h4>Next topic</h4>
-    <p class="topless"><a href="../entanglement_management/top.html"
-                          title="next chapter">Entanglement Management</a></p>
-  </div>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="spdc_lens.html"
+                        title="previous chapter">SPDC Lens</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../entanglement_management/top.html"
+                        title="next chapter">Entanglement Management</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -165,12 +160,12 @@ A more general switch class is in development.</p>
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script>document.getElementById('searchbox').style.display = "block"</script>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -190,14 +185,14 @@ A more general switch class is in development.</p>
         <li class="right" >
           <a href="spdc_lens.html" title="SPDC Lens"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.6.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" >Components</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Switch</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2020-2024.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
+        &#169; Copyright 2020-2022.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
     </div>
   </body>
 </html>

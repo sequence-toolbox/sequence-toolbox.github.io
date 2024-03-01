@@ -1,20 +1,19 @@
 
 <!DOCTYPE html>
 
-<html lang="en">
+<html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-
-    <title>Mirror &#8212; SeQUeNCe 0.6.2 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/classic.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mirror &#8212; SeQUeNCe 0.5.2 documentation</title>
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -36,7 +35,7 @@
         <li class="right" >
           <a href="memory.html" title="Memory"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.6.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" accesskey="U">Components</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Mirror</a></li> 
       </ul>
@@ -47,95 +46,95 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="module-src.components.mirror">
-<span id="mirror"></span><h1>Mirror<a class="headerlink" href="#module-src.components.mirror" title="Permalink to this heading">¶</a></h1>
+  <div class="section" id="module-src.components.mirror">
+<span id="mirror"></span><h1>Mirror<a class="headerlink" href="#module-src.components.mirror" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="src.components.mirror.Mirror">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.components.mirror.</span></span><span class="sig-name descname"><span class="pre">Mirror</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeline</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../kernel/timeline.html#src.kernel.timeline.Timeline" title="src.kernel.timeline.Timeline"><span class="pre">Timeline</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">fidelity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.98</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destination</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{'bases':</span> <span class="pre">[((1</span> <span class="pre">+</span> <span class="pre">0j,</span> <span class="pre">0j),</span> <span class="pre">(0j,</span> <span class="pre">1</span> <span class="pre">+</span> <span class="pre">0j)),</span> <span class="pre">((0.7071067811865476</span> <span class="pre">+</span> <span class="pre">0j,</span> <span class="pre">0.7071067811865476</span> <span class="pre">+</span> <span class="pre">0j),</span> <span class="pre">(-</span> <span class="pre">0.7071067811865476</span> <span class="pre">+</span> <span class="pre">0j,</span> <span class="pre">0.7071067811865476</span> <span class="pre">+</span> <span class="pre">0j))],</span> <span class="pre">'name':</span> <span class="pre">'polarization'}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phase_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.mirror.Mirror" title="Permalink to this definition">¶</a></dt>
+<dt id="src.components.mirror.Mirror">
+<em class="property">class </em><code class="sig-prename descclassname">src.components.mirror.</code><code class="sig-name descname">Mirror</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">timeline</span><span class="p">:</span> <span class="n">Timeline</span></em>, <em class="sig-param"><span class="n">fidelity</span><span class="o">=</span><span class="default_value">0.98</span></em>, <em class="sig-param"><span class="n">destination</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">encoding_type</span><span class="o">=</span><span class="default_value">{'bases': [1 + 0j, 0j, 0j, 1 + 0j, 0.7071067811865476 + 0j, 0.7071067811865476 + 0j, - 0.7071067811865476 + 0j, 0.7071067811865476 + 0j], 'name': 'polarization'}</span></em>, <em class="sig-param"><span class="n">phase_error</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.mirror.Mirror" title="Permalink to this definition">¶</a></dt>
 <dd><p>Single photon reflecting device.
 This class models the reflection of a single photon, in the fashion of an experimental mirror.
 Can be attached to many devices to enable different measurement options.</p>
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.components.mirror.Mirror.name">
-<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#src.components.mirror.Mirror.name" title="Permalink to this definition">¶</a></dt>
+<dt id="src.components.mirror.Mirror.name">
+<code class="sig-name descname">name</code><a class="headerlink" href="#src.components.mirror.Mirror.name" title="Permalink to this definition">¶</a></dt>
 <dd><p>label for mirror instance.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>str</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.components.mirror.Mirror.timeline">
-<span class="sig-name descname"><span class="pre">timeline</span></span><a class="headerlink" href="#src.components.mirror.Mirror.timeline" title="Permalink to this definition">¶</a></dt>
+<dt id="src.components.mirror.Mirror.timeline">
+<code class="sig-name descname">timeline</code><a class="headerlink" href="#src.components.mirror.Mirror.timeline" title="Permalink to this definition">¶</a></dt>
 <dd><p>timeline for simulation.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference internal" href="../kernel/timeline.html#src.kernel.timeline.Timeline" title="src.kernel.timeline.Timeline">Timeline</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.components.mirror.Mirror.fidelity">
-<span class="sig-name descname"><span class="pre">fidelity</span></span><a class="headerlink" href="#src.components.mirror.Mirror.fidelity" title="Permalink to this definition">¶</a></dt>
+<dt id="src.components.mirror.Mirror.fidelity">
+<code class="sig-name descname">fidelity</code><a class="headerlink" href="#src.components.mirror.Mirror.fidelity" title="Permalink to this definition">¶</a></dt>
 <dd><p>fraction of qubits not lost on the reflective surface</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>float</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.components.mirror.Mirror.destination">
-<span class="sig-name descname"><span class="pre">destination</span></span><a class="headerlink" href="#src.components.mirror.Mirror.destination" title="Permalink to this definition">¶</a></dt>
+<dt id="src.components.mirror.Mirror.destination">
+<code class="sig-name descname">destination</code><a class="headerlink" href="#src.components.mirror.Mirror.destination" title="Permalink to this definition">¶</a></dt>
 <dd><p>destination node for reflected photons</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>str</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.components.mirror.Mirror.encoding_type">
-<span class="sig-name descname"><span class="pre">encoding_type</span></span><a class="headerlink" href="#src.components.mirror.Mirror.encoding_type" title="Permalink to this definition">¶</a></dt>
+<dt id="src.components.mirror.Mirror.encoding_type">
+<code class="sig-name descname">encoding_type</code><a class="headerlink" href="#src.components.mirror.Mirror.encoding_type" title="Permalink to this definition">¶</a></dt>
 <dd><p>encoding scheme of emitted photons (as defined in the encoding module).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>Dict[str, Any]</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.components.mirror.Mirror.phase_error">
-<span class="sig-name descname"><span class="pre">phase_error</span></span><a class="headerlink" href="#src.components.mirror.Mirror.phase_error" title="Permalink to this definition">¶</a></dt>
+<dt id="src.components.mirror.Mirror.phase_error">
+<code class="sig-name descname">phase_error</code><a class="headerlink" href="#src.components.mirror.Mirror.phase_error" title="Permalink to this definition">¶</a></dt>
 <dd><p>phase error applied to qubits.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>float</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.components.mirror.Mirror.get">
-<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">photon</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.components.mirror.Mirror.get" title="Permalink to this definition">¶</a></dt>
+<dt id="src.components.mirror.Mirror.get">
+<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">photon</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.components.mirror.Mirror.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to get a photon to reflect.</p>
 <p>Will send to destination node specified by destination attribute through owner node.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>photon</strong> (<a class="reference internal" href="photon.html#src.components.photon.Photon" title="src.components.photon.Photon"><em>Photon</em></a>) – photon to reflect</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.components.mirror.Mirror.init">
-<span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.components.mirror.Mirror.init" title="Permalink to this definition">¶</a></dt>
+<dt id="src.components.mirror.Mirror.init">
+<code class="sig-name descname">init</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.components.mirror.Mirror.init" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to initialize entity (abstract).</p>
 <p>Entity <cite>init</cite> methods are invoked for all timeline entities when the timeline is initialized.
 This method can be used to perform any necessary functions before simulation.</p>
@@ -143,7 +142,7 @@ This method can be used to perform any necessary functions before simulation.</p
 
 </dd></dl>
 
-</section>
+</div>
 
 
             <div class="clearer"></div>
@@ -152,16 +151,12 @@ This method can be used to perform any necessary functions before simulation.</p
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <div>
-    <h4>Previous topic</h4>
-    <p class="topless"><a href="memory.html"
-                          title="previous chapter">Memory</a></p>
-  </div>
-  <div>
-    <h4>Next topic</h4>
-    <p class="topless"><a href="optical_channel.html"
-                          title="next chapter">Optical Channel</a></p>
-  </div>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="memory.html"
+                        title="previous chapter">Memory</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="optical_channel.html"
+                        title="next chapter">Optical Channel</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -173,12 +168,12 @@ This method can be used to perform any necessary functions before simulation.</p
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script>document.getElementById('searchbox').style.display = "block"</script>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -198,14 +193,14 @@ This method can be used to perform any necessary functions before simulation.</p
         <li class="right" >
           <a href="memory.html" title="Memory"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.6.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" >Components</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Mirror</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2020-2024.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
+        &#169; Copyright 2020-2022.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
     </div>
   </body>
 </html>

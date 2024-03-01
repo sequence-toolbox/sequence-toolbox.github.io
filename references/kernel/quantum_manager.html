@@ -1,20 +1,19 @@
 
 <!DOCTYPE html>
 
-<html lang="en">
+<html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-
-    <title>Quantum Manager &#8212; SeQUeNCe 0.6.2 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/classic.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Manager &#8212; SeQUeNCe 0.5.2 documentation</title>
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -36,7 +35,7 @@
         <li class="right" >
           <a href="timeline.html" title="Timeline"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.6.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" accesskey="U">Kernel</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Quantum Manager</a></li> 
       </ul>
@@ -47,8 +46,8 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="module-src.kernel.quantum_manager">
-<span id="quantum-manager"></span><h1>Quantum Manager<a class="headerlink" href="#module-src.kernel.quantum_manager" title="Permalink to this heading">¶</a></h1>
+  <div class="section" id="module-src.kernel.quantum_manager">
+<span id="quantum-manager"></span><h1>Quantum Manager<a class="headerlink" href="#module-src.kernel.quantum_manager" title="Permalink to this headline">¶</a></h1>
 <p>This module defines the quantum manager class, to track quantum states.</p>
 <dl class="simple">
 <dt>The states may currently be defined in two possible ways:</dt><dd><ul class="simple">
@@ -59,111 +58,99 @@
 </dl>
 <p>The manager defines an API for interacting with quantum states.</p>
 <dl class="py class">
-<dt class="sig sig-object py" id="src.kernel.quantum_manager.QuantumManager">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.kernel.quantum_manager.</span></span><span class="sig-name descname"><span class="pre">QuantumManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">formalism</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">truncation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.kernel.quantum_manager.QuantumManager" title="Permalink to this definition">¶</a></dt>
+<dt id="src.kernel.quantum_manager.QuantumManager">
+<em class="property">class </em><code class="sig-prename descclassname">src.kernel.quantum_manager.</code><code class="sig-name descname">QuantumManager</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">formalism</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.kernel.quantum_manager.QuantumManager" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class to track and manage quantum states (abstract).</p>
 <p>All states stored are of a single formalism (by default as a ket vector).</p>
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.kernel.quantum_manager.QuantumManager.states">
-<span class="sig-name descname"><span class="pre">states</span></span><a class="headerlink" href="#src.kernel.quantum_manager.QuantumManager.states" title="Permalink to this definition">¶</a></dt>
+<dt id="src.kernel.quantum_manager.QuantumManager.states">
+<code class="sig-name descname">states</code><a class="headerlink" href="#src.kernel.quantum_manager.QuantumManager.states" title="Permalink to this definition">¶</a></dt>
 <dd><p>mapping of state keys to quantum state objects.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>Dict[int, <a class="reference internal" href="quantum_state.html#src.kernel.quantum_state.State" title="src.kernel.quantum_state.State">State</a>]</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.kernel.quantum_manager.QuantumManager.truncation">
-<span class="sig-name descname"><span class="pre">truncation</span></span><a class="headerlink" href="#src.kernel.quantum_manager.QuantumManager.truncation" title="Permalink to this definition">¶</a></dt>
-<dd><p>maximally allowed number of excited states for elementary subsystems.
-Default is 1 for qubit.</p>
+<dt id="src.kernel.quantum_manager.QuantumManager.formalism">
+<code class="sig-name descname">formalism</code><a class="headerlink" href="#src.kernel.quantum_manager.QuantumManager.formalism" title="Permalink to this definition">¶</a></dt>
+<dd><p>formalism used for local quantum state representation.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>int</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="src.kernel.quantum_manager.QuantumManager.dim">
-<span class="sig-name descname"><span class="pre">dim</span></span><a class="headerlink" href="#src.kernel.quantum_manager.QuantumManager.dim" title="Permalink to this definition">¶</a></dt>
-<dd><p>subsystem Hilbert space dimension. dim = truncation + 1</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>int</p>
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.kernel.quantum_manager.QuantumManager.get">
-<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="quantum_state.html#src.kernel.quantum_state.State" title="src.kernel.quantum_state.State"><span class="pre">State</span></a></span></span><a class="headerlink" href="#src.kernel.quantum_manager.QuantumManager.get" title="Permalink to this definition">¶</a></dt>
+<dt id="src.kernel.quantum_manager.QuantumManager.get">
+<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">key</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; State<a class="headerlink" href="#src.kernel.quantum_manager.QuantumManager.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to get quantum state stored at an index.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>key</strong> (<em>int</em>) – key for quantum state.</p>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p>quantum state at supplied key.</p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><a class="reference internal" href="quantum_state.html#src.kernel.quantum_state.State" title="src.kernel.quantum_state.State">State</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.kernel.quantum_manager.QuantumManager.new">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">new</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#src.kernel.quantum_manager.QuantumManager.new" title="Permalink to this definition">¶</a></dt>
+<dt id="src.kernel.quantum_manager.QuantumManager.new">
+<em class="property">abstract </em><code class="sig-name descname">new</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">state</span><span class="p">:</span> <span class="n">any</span></em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#src.kernel.quantum_manager.QuantumManager.new" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to create a new quantum state.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>state</strong> (<em>any</em>) – complex amplitudes of new state. Type depends on type of subclass.</p>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p>key for new state generated.</p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.kernel.quantum_manager.QuantumManager.remove">
-<span class="sig-name descname"><span class="pre">remove</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.kernel.quantum_manager.QuantumManager.remove" title="Permalink to this definition">¶</a></dt>
+<dt id="src.kernel.quantum_manager.QuantumManager.remove">
+<code class="sig-name descname">remove</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">key</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.kernel.quantum_manager.QuantumManager.remove" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to remove state stored at key.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.kernel.quantum_manager.QuantumManager.run_circuit">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">run_circuit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">circuit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../components/circuit.html#src.components.circuit.Circuit" title="src.components.circuit.Circuit"><span class="pre">Circuit</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meas_samp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#src.kernel.quantum_manager.QuantumManager.run_circuit" title="Permalink to this definition">¶</a></dt>
+<dt id="src.kernel.quantum_manager.QuantumManager.run_circuit">
+<em class="property">abstract </em><code class="sig-name descname">run_circuit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">circuit</span><span class="p">:</span> <span class="n">Circuit</span></em>, <em class="sig-param"><span class="n">keys</span><span class="p">:</span> <span class="n">List<span class="p">[</span>int<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">meas_samp</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; Dict<span class="p">[</span>int<span class="p">, </span>int<span class="p">]</span><a class="headerlink" href="#src.kernel.quantum_manager.QuantumManager.run_circuit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to run a circuit on a given set of quantum states.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>circuit</strong> (<a class="reference internal" href="../components/circuit.html#src.components.circuit.Circuit" title="src.components.circuit.Circuit"><em>Circuit</em></a>) – quantum circuit to apply.</p></li>
 <li><p><strong>keys</strong> (<em>List</em><em>[</em><em>int</em><em>]</em>) – list of keys for quantum states to apply circuit to.</p></li>
 <li><p><strong>meas_samp</strong> (<em>float</em>) – random sample used for measurement.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p>dictionary mapping qstate keys to measurement results.</p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>Dict[int, int]</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.kernel.quantum_manager.QuantumManager.set">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amplitudes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.kernel.quantum_manager.QuantumManager.set" title="Permalink to this definition">¶</a></dt>
+<dt id="src.kernel.quantum_manager.QuantumManager.set">
+<em class="property">abstract </em><code class="sig-name descname">set</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">keys</span><span class="p">:</span> <span class="n">List<span class="p">[</span>int<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">amplitudes</span><span class="p">:</span> <span class="n">any</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.kernel.quantum_manager.QuantumManager.set" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to set quantum state at a given key(s).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>keys</strong> (<em>List</em><em>[</em><em>int</em><em>]</em>) – key(s) of state(s) to change.</p></li>
 <li><p><strong>amplitudes</strong> (<em>any</em>) – Amplitudes to set state to, type determined by type of subclass.</p></li>
@@ -175,56 +162,56 @@ Default is 1 for qubit.</p>
 </dd></dl>
 
 <dl class="py class">
-<dt class="sig sig-object py" id="src.kernel.quantum_manager.QuantumManagerDensity">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.kernel.quantum_manager.</span></span><span class="sig-name descname"><span class="pre">QuantumManagerDensity</span></span><a class="headerlink" href="#src.kernel.quantum_manager.QuantumManagerDensity" title="Permalink to this definition">¶</a></dt>
+<dt id="src.kernel.quantum_manager.QuantumManagerDensity">
+<em class="property">class </em><code class="sig-prename descclassname">src.kernel.quantum_manager.</code><code class="sig-name descname">QuantumManagerDensity</code><a class="headerlink" href="#src.kernel.quantum_manager.QuantumManagerDensity" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class to track and manage states with the density matrix formalism.</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="src.kernel.quantum_manager.QuantumManagerDensity.new">
-<span class="sig-name descname"><span class="pre">new</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">([1</span> <span class="pre">+</span> <span class="pre">0j,</span> <span class="pre">0j],</span> <span class="pre">[0j,</span> <span class="pre">0j])</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#src.kernel.quantum_manager.QuantumManagerDensity.new" title="Permalink to this definition">¶</a></dt>
+<dt id="src.kernel.quantum_manager.QuantumManagerDensity.new">
+<code class="sig-name descname">new</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">state</span><span class="o">=</span><span class="default_value">[1 + 0j, 0j], [0j, 0j]</span></em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#src.kernel.quantum_manager.QuantumManagerDensity.new" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to create a new quantum state.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>state</strong> (<em>any</em>) – complex amplitudes of new state. Type depends on type of subclass.</p>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p>key for new state generated.</p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.kernel.quantum_manager.QuantumManagerDensity.run_circuit">
-<span class="sig-name descname"><span class="pre">run_circuit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">circuit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../components/circuit.html#src.components.circuit.Circuit" title="src.components.circuit.Circuit"><span class="pre">Circuit</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meas_samp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#src.kernel.quantum_manager.QuantumManagerDensity.run_circuit" title="Permalink to this definition">¶</a></dt>
+<dt id="src.kernel.quantum_manager.QuantumManagerDensity.run_circuit">
+<code class="sig-name descname">run_circuit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">circuit</span><span class="p">:</span> <span class="n">Circuit</span></em>, <em class="sig-param"><span class="n">keys</span><span class="p">:</span> <span class="n">List<span class="p">[</span>int<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">meas_samp</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; Dict<span class="p">[</span>int<span class="p">, </span>int<span class="p">]</span><a class="headerlink" href="#src.kernel.quantum_manager.QuantumManagerDensity.run_circuit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to run a circuit on a given set of quantum states.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>circuit</strong> (<a class="reference internal" href="../components/circuit.html#src.components.circuit.Circuit" title="src.components.circuit.Circuit"><em>Circuit</em></a>) – quantum circuit to apply.</p></li>
 <li><p><strong>keys</strong> (<em>List</em><em>[</em><em>int</em><em>]</em>) – list of keys for quantum states to apply circuit to.</p></li>
 <li><p><strong>meas_samp</strong> (<em>float</em>) – random sample used for measurement.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p>dictionary mapping qstate keys to measurement results.</p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>Dict[int, int]</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.kernel.quantum_manager.QuantumManagerDensity.set">
-<span class="sig-name descname"><span class="pre">set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">complex</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.kernel.quantum_manager.QuantumManagerDensity.set" title="Permalink to this definition">¶</a></dt>
+<dt id="src.kernel.quantum_manager.QuantumManagerDensity.set">
+<code class="sig-name descname">set</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">keys</span><span class="p">:</span> <span class="n">List<span class="p">[</span>int<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">state</span><span class="p">:</span> <span class="n">List<span class="p">[</span>List<span class="p">[</span>complex<span class="p">]</span><span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.kernel.quantum_manager.QuantumManagerDensity.set" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to set the quantum state at the given keys.</p>
 <p>The <cite>state</cite> argument should be passed as List[List[complex]], where each internal list is a row.
 However, the <cite>state</cite> may also be given as a one-dimensional pure state.
 If the list is one-dimensional, will be converted to matrix with the outer product operation.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>keys</strong> (<em>List</em><em>[</em><em>int</em><em>]</em>) – list of quantum manager keys to modify.</p></li>
 <li><p><strong>state</strong> – quantum state to set input keys to.</p></li>
@@ -236,144 +223,53 @@ If the list is one-dimensional, will be converted to matrix with the outer produ
 </dd></dl>
 
 <dl class="py class">
-<dt class="sig sig-object py" id="src.kernel.quantum_manager.QuantumManagerDensityFock">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.kernel.quantum_manager.</span></span><span class="sig-name descname"><span class="pre">QuantumManagerDensityFock</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">truncation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.kernel.quantum_manager.QuantumManagerDensityFock" title="Permalink to this definition">¶</a></dt>
-<dd><p>Class to track and manage Fock states with the density matrix formalism.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="src.kernel.quantum_manager.QuantumManagerDensityFock.add_loss">
-<span class="sig-name descname"><span class="pre">add_loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss_rate</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.kernel.quantum_manager.QuantumManagerDensityFock.add_loss" title="Permalink to this definition">¶</a></dt>
-<dd><p>Method to apply generalized amplitude damping channel on a <em>single</em> subspace corresponding to <cite>key</cite>.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>key</strong> (<em>int</em>) – key for the subspace experiencing loss.</p></li>
-<li><p><strong>loss_rate</strong> (<em>float</em>) – loss rate for the quantum channel.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="src.kernel.quantum_manager.QuantumManagerDensityFock.build_ladder">
-<span class="sig-name descname"><span class="pre">build_ladder</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.kernel.quantum_manager.QuantumManagerDensityFock.build_ladder" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generate matrix of creation and annihilation (ladder) operators on truncated Hilbert space.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="src.kernel.quantum_manager.QuantumManagerDensityFock.measure">
-<span class="sig-name descname"><span class="pre">measure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">povms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">array</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meas_samp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#src.kernel.quantum_manager.QuantumManagerDensityFock.measure" title="Permalink to this definition">¶</a></dt>
-<dd><p>Method to measure subsystems at given keys in POVM formalism.</p>
-<p>Serves as wrapper for private <cite>_measure</cite> method, performing quantum manager specific operations.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>keys</strong> (<em>List</em><em>[</em><em>int</em><em>]</em>) – list of keys to measure.</p></li>
-<li><p><strong>povms</strong> – (List[array]): list of POVM operators to use for measurement.</p></li>
-<li><p><strong>meas_samp</strong> (<em>float</em>) – random measurement sample to use for computing resultant state.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>measurement as index of matching POVM in supplied tuple.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>int</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="src.kernel.quantum_manager.QuantumManagerDensityFock.new">
-<span class="sig-name descname"><span class="pre">new</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#src.kernel.quantum_manager.QuantumManagerDensityFock.new" title="Permalink to this definition">¶</a></dt>
-<dd><p>Method to create a new state with key</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>state</strong> (<em>Union</em><em>[</em><em>str</em><em>, </em><em>List</em><em>[</em><em>complex</em><em>]</em><em>, </em><em>List</em><em>[</em><em>List</em><em>[</em><em>complex</em><em>]</em><em>]</em><em>]</em>) – amplitudes of new state.
-Default value is ‘gnd’: create zero-excitation state with current truncation.
-Other inputs are passed to the constructor of <cite>DensityState</cite>.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="src.kernel.quantum_manager.QuantumManagerDensityFock.run_circuit">
-<span class="sig-name descname"><span class="pre">run_circuit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">circuit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../components/circuit.html#src.components.circuit.Circuit" title="src.components.circuit.Circuit"><span class="pre">Circuit</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meas_samp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#src.kernel.quantum_manager.QuantumManagerDensityFock.run_circuit" title="Permalink to this definition">¶</a></dt>
-<dd><p>Currently the Fock states do not support quantum circuits.
-This method is only to implement abstract method of parent class and SHOULD NOT be called after instantiation.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="src.kernel.quantum_manager.QuantumManagerDensityFock.set">
-<span class="sig-name descname"><span class="pre">set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">complex</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.kernel.quantum_manager.QuantumManagerDensityFock.set" title="Permalink to this definition">¶</a></dt>
-<dd><p>Method to set the quantum state at the given keys.</p>
-<p>The <cite>state</cite> argument should be passed as List[List[complex]], where each internal list is a row.
-However, the <cite>state</cite> may also be given as a one-dimensional pure state.
-If the list is one-dimensional, will be converted to matrix with the outer product operation.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>keys</strong> (<em>List</em><em>[</em><em>int</em><em>]</em>) – list of quantum manager keys to modify.</p></li>
-<li><p><strong>state</strong> – quantum state to set input keys to.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="src.kernel.quantum_manager.QuantumManagerDensityFock.set_to_zero">
-<span class="sig-name descname"><span class="pre">set_to_zero</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.kernel.quantum_manager.QuantumManagerDensityFock.set_to_zero" title="Permalink to this definition">¶</a></dt>
-<dd><p>set the state to ground (zero) state.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="src.kernel.quantum_manager.QuantumManagerKet">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.kernel.quantum_manager.</span></span><span class="sig-name descname"><span class="pre">QuantumManagerKet</span></span><a class="headerlink" href="#src.kernel.quantum_manager.QuantumManagerKet" title="Permalink to this definition">¶</a></dt>
+<dt id="src.kernel.quantum_manager.QuantumManagerKet">
+<em class="property">class </em><code class="sig-prename descclassname">src.kernel.quantum_manager.</code><code class="sig-name descname">QuantumManagerKet</code><a class="headerlink" href="#src.kernel.quantum_manager.QuantumManagerKet" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class to track and manage quantum states with the ket vector formalism.</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="src.kernel.quantum_manager.QuantumManagerKet.new">
-<span class="sig-name descname"><span class="pre">new</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(1</span> <span class="pre">+</span> <span class="pre">0j,</span> <span class="pre">0j)</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#src.kernel.quantum_manager.QuantumManagerKet.new" title="Permalink to this definition">¶</a></dt>
+<dt id="src.kernel.quantum_manager.QuantumManagerKet.new">
+<code class="sig-name descname">new</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">state</span><span class="o">=</span><span class="default_value">1 + 0j, 0j</span></em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#src.kernel.quantum_manager.QuantumManagerKet.new" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to create a new quantum state.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>state</strong> (<em>any</em>) – complex amplitudes of new state. Type depends on type of subclass.</p>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p>key for new state generated.</p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.kernel.quantum_manager.QuantumManagerKet.run_circuit">
-<span class="sig-name descname"><span class="pre">run_circuit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">circuit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../components/circuit.html#src.components.circuit.Circuit" title="src.components.circuit.Circuit"><span class="pre">Circuit</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meas_samp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#src.kernel.quantum_manager.QuantumManagerKet.run_circuit" title="Permalink to this definition">¶</a></dt>
+<dt id="src.kernel.quantum_manager.QuantumManagerKet.run_circuit">
+<code class="sig-name descname">run_circuit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">circuit</span><span class="p">:</span> <span class="n">Circuit</span></em>, <em class="sig-param"><span class="n">keys</span><span class="p">:</span> <span class="n">List<span class="p">[</span>int<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">meas_samp</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; Dict<span class="p">[</span>int<span class="p">, </span>int<span class="p">]</span><a class="headerlink" href="#src.kernel.quantum_manager.QuantumManagerKet.run_circuit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to run a circuit on a given set of quantum states.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>circuit</strong> (<a class="reference internal" href="../components/circuit.html#src.components.circuit.Circuit" title="src.components.circuit.Circuit"><em>Circuit</em></a>) – quantum circuit to apply.</p></li>
 <li><p><strong>keys</strong> (<em>List</em><em>[</em><em>int</em><em>]</em>) – list of keys for quantum states to apply circuit to.</p></li>
 <li><p><strong>meas_samp</strong> (<em>float</em>) – random sample used for measurement.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p>dictionary mapping qstate keys to measurement results.</p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>Dict[int, int]</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.kernel.quantum_manager.QuantumManagerKet.set">
-<span class="sig-name descname"><span class="pre">set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amplitudes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">complex</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.kernel.quantum_manager.QuantumManagerKet.set" title="Permalink to this definition">¶</a></dt>
+<dt id="src.kernel.quantum_manager.QuantumManagerKet.set">
+<code class="sig-name descname">set</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">keys</span><span class="p">:</span> <span class="n">List<span class="p">[</span>int<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">amplitudes</span><span class="p">:</span> <span class="n">List<span class="p">[</span>complex<span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.kernel.quantum_manager.QuantumManagerKet.set" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to set quantum state at a given key(s).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>keys</strong> (<em>List</em><em>[</em><em>int</em><em>]</em>) – key(s) of state(s) to change.</p></li>
 <li><p><strong>amplitudes</strong> (<em>any</em>) – Amplitudes to set state to, type determined by type of subclass.</p></li>
@@ -384,7 +280,7 @@ If the list is one-dimensional, will be converted to matrix with the outer produ
 
 </dd></dl>
 
-</section>
+</div>
 
 
             <div class="clearer"></div>
@@ -393,16 +289,12 @@ If the list is one-dimensional, will be converted to matrix with the outer produ
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <div>
-    <h4>Previous topic</h4>
-    <p class="topless"><a href="timeline.html"
-                          title="previous chapter">Timeline</a></p>
-  </div>
-  <div>
-    <h4>Next topic</h4>
-    <p class="topless"><a href="quantum_state.html"
-                          title="next chapter">Quantum State</a></p>
-  </div>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="timeline.html"
+                        title="previous chapter">Timeline</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="quantum_state.html"
+                        title="next chapter">Quantum State</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -414,12 +306,12 @@ If the list is one-dimensional, will be converted to matrix with the outer produ
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script>document.getElementById('searchbox').style.display = "block"</script>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -439,14 +331,14 @@ If the list is one-dimensional, will be converted to matrix with the outer produ
         <li class="right" >
           <a href="timeline.html" title="Timeline"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.6.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" >Kernel</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Quantum Manager</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2020-2024.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
+        &#169; Copyright 2020-2022.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
     </div>
   </body>
 </html>

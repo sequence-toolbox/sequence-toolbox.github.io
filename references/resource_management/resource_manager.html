@@ -1,20 +1,19 @@
 
 <!DOCTYPE html>
 
-<html lang="en">
+<html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-
-    <title>Resource Manager &#8212; SeQUeNCe 0.6.2 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/classic.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resource Manager &#8212; SeQUeNCe 0.5.2 documentation</title>
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -36,7 +35,7 @@
         <li class="right" >
           <a href="top.html" title="Resource Management"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.6.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" accesskey="U">Resource Management</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Resource Manager</a></li> 
       </ul>
@@ -47,129 +46,129 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="module-src.resource_management.resource_manager">
-<span id="resource-manager"></span><h1>Resource Manager<a class="headerlink" href="#module-src.resource_management.resource_manager" title="Permalink to this heading">¶</a></h1>
+  <div class="section" id="module-src.resource_management.resource_manager">
+<span id="resource-manager"></span><h1>Resource Manager<a class="headerlink" href="#module-src.resource_management.resource_manager" title="Permalink to this headline">¶</a></h1>
 <p>Definition of resource managemer.</p>
 <p>This module defines the resource manager, which composes the SeQUeNCe resource management module.
 The manager uses a memory manager and rule manager to track memories and control entanglement operations, respectively.
 This module also defines the message type used by the resource manager.</p>
 <dl class="py class">
-<dt class="sig sig-object py" id="src.resource_management.resource_manager.ResourceManager">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.resource_management.resource_manager.</span></span><span class="sig-name descname"><span class="pre">ResourceManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">owner</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../topology/node.html#src.topology.node.QuantumRouter" title="src.topology.node.QuantumRouter"><span class="pre">QuantumRouter</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">memory_array_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.resource_management.resource_manager.ResourceManager" title="Permalink to this definition">¶</a></dt>
+<dt id="src.resource_management.resource_manager.ResourceManager">
+<em class="property">class </em><code class="sig-prename descclassname">src.resource_management.resource_manager.</code><code class="sig-name descname">ResourceManager</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">owner</span><span class="p">:</span> <span class="n">QuantumRouter</span></em>, <em class="sig-param"><span class="n">memory_array_name</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.resource_management.resource_manager.ResourceManager" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class to define the resource manager.</p>
 <p>The resource manager uses a memory manager to track memory states for the entanglement protocols.
 It also uses a rule manager to direct the creation and operation of entanglement protocols.</p>
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.resource_management.resource_manager.ResourceManager.name">
-<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#src.resource_management.resource_manager.ResourceManager.name" title="Permalink to this definition">¶</a></dt>
+<dt id="src.resource_management.resource_manager.ResourceManager.name">
+<code class="sig-name descname">name</code><a class="headerlink" href="#src.resource_management.resource_manager.ResourceManager.name" title="Permalink to this definition">¶</a></dt>
 <dd><p>label for manager instance.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>str</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.resource_management.resource_manager.ResourceManager.owner">
-<span class="sig-name descname"><span class="pre">owner</span></span><a class="headerlink" href="#src.resource_management.resource_manager.ResourceManager.owner" title="Permalink to this definition">¶</a></dt>
+<dt id="src.resource_management.resource_manager.ResourceManager.owner">
+<code class="sig-name descname">owner</code><a class="headerlink" href="#src.resource_management.resource_manager.ResourceManager.owner" title="Permalink to this definition">¶</a></dt>
 <dd><p>node that resource manager is attached to.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference internal" href="../topology/node.html#src.topology.node.QuantumRouter" title="src.topology.node.QuantumRouter">QuantumRouter</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.resource_management.resource_manager.ResourceManager.memory_manager">
-<span class="sig-name descname"><span class="pre">memory_manager</span></span><a class="headerlink" href="#src.resource_management.resource_manager.ResourceManager.memory_manager" title="Permalink to this definition">¶</a></dt>
+<dt id="src.resource_management.resource_manager.ResourceManager.memory_manager">
+<code class="sig-name descname">memory_manager</code><a class="headerlink" href="#src.resource_management.resource_manager.ResourceManager.memory_manager" title="Permalink to this definition">¶</a></dt>
 <dd><p>internal memory manager object.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference internal" href="memory_manager.html#src.resource_management.memory_manager.MemoryManager" title="src.resource_management.memory_manager.MemoryManager">MemoryManager</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.resource_management.resource_manager.ResourceManager.rule_manager">
-<span class="sig-name descname"><span class="pre">rule_manager</span></span><a class="headerlink" href="#src.resource_management.resource_manager.ResourceManager.rule_manager" title="Permalink to this definition">¶</a></dt>
+<dt id="src.resource_management.resource_manager.ResourceManager.rule_manager">
+<code class="sig-name descname">rule_manager</code><a class="headerlink" href="#src.resource_management.resource_manager.ResourceManager.rule_manager" title="Permalink to this definition">¶</a></dt>
 <dd><p>internal rule manager object.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference internal" href="rule_manager.html#src.resource_management.rule_manager.RuleManager" title="src.resource_management.rule_manager.RuleManager">RuleManager</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.resource_management.resource_manager.ResourceManager.pending_protocols">
-<span class="sig-name descname"><span class="pre">pending_protocols</span></span><a class="headerlink" href="#src.resource_management.resource_manager.ResourceManager.pending_protocols" title="Permalink to this definition">¶</a></dt>
+<dt id="src.resource_management.resource_manager.ResourceManager.pending_protocols">
+<code class="sig-name descname">pending_protocols</code><a class="headerlink" href="#src.resource_management.resource_manager.ResourceManager.pending_protocols" title="Permalink to this definition">¶</a></dt>
 <dd><p>list of protocols awaiting a response for a remote resource request.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>List[<a class="reference internal" href="../misc/protocol.html#src.protocol.Protocol" title="src.protocol.Protocol">Protocol</a>]</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.resource_management.resource_manager.ResourceManager.waiting_protocols">
-<span class="sig-name descname"><span class="pre">waiting_protocols</span></span><a class="headerlink" href="#src.resource_management.resource_manager.ResourceManager.waiting_protocols" title="Permalink to this definition">¶</a></dt>
+<dt id="src.resource_management.resource_manager.ResourceManager.waiting_protocols">
+<code class="sig-name descname">waiting_protocols</code><a class="headerlink" href="#src.resource_management.resource_manager.ResourceManager.waiting_protocols" title="Permalink to this definition">¶</a></dt>
 <dd><p>list of protocols awaiting a request from a remote protocol.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>List[<a class="reference internal" href="../misc/protocol.html#src.protocol.Protocol" title="src.protocol.Protocol">Protocol</a>]</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.resource_management.resource_manager.ResourceManager.expire">
-<span class="sig-name descname"><span class="pre">expire</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rule</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="rule_manager.html#src.resource_management.rule_manager.Rule" title="src.resource_management.rule_manager.Rule"><span class="pre">Rule</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.resource_management.resource_manager.ResourceManager.expire" title="Permalink to this definition">¶</a></dt>
+<dt id="src.resource_management.resource_manager.ResourceManager.expire">
+<code class="sig-name descname">expire</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">rule</span><span class="p">:</span> <span class="n">Rule</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.resource_management.resource_manager.ResourceManager.expire" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to remove expired rule.</p>
 <p>Will update rule in rule manager.
 Will also update and modify protocols connected to the rule (if they have already been created).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>rule</strong> (<a class="reference internal" href="rule_manager.html#src.resource_management.rule_manager.Rule" title="src.resource_management.rule_manager.Rule"><em>Rule</em></a>) – rule to remove.</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.resource_management.resource_manager.ResourceManager.load">
-<span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rule</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="rule_manager.html#src.resource_management.rule_manager.Rule" title="src.resource_management.rule_manager.Rule"><span class="pre">Rule</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#src.resource_management.resource_manager.ResourceManager.load" title="Permalink to this definition">¶</a></dt>
+<dt id="src.resource_management.resource_manager.ResourceManager.load">
+<code class="sig-name descname">load</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">rule</span><span class="p">:</span> <span class="n">Rule</span></em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#src.resource_management.resource_manager.ResourceManager.load" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to load rules for entanglement management.</p>
 <p>Attempts to add rules to the rule manager.
 Will automatically execute rule action if conditions met.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>rule</strong> (<a class="reference internal" href="rule_manager.html#src.resource_management.rule_manager.Rule" title="src.resource_management.rule_manager.Rule"><em>Rule</em></a>) – rule to load.</p>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p>if rule was loaded successfully.</p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>bool</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.resource_management.resource_manager.ResourceManager.memory_expire">
-<span class="sig-name descname"><span class="pre">memory_expire</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">memory</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../components/memory.html#src.components.memory.Memory" title="src.components.memory.Memory"><span class="pre">Memory</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.resource_management.resource_manager.ResourceManager.memory_expire" title="Permalink to this definition">¶</a></dt>
+<dt id="src.resource_management.resource_manager.ResourceManager.memory_expire">
+<code class="sig-name descname">memory_expire</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">memory</span><span class="p">:</span> <span class="n">Memory</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.resource_management.resource_manager.ResourceManager.memory_expire" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to receive memory expiration events.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.resource_management.resource_manager.ResourceManager.received_message">
-<span class="sig-name descname"><span class="pre">received_message</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">src</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#src.resource_management.resource_manager.ResourceManagerMessage" title="src.resource_management.resource_manager.ResourceManagerMessage"><span class="pre">ResourceManagerMessage</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.resource_management.resource_manager.ResourceManager.received_message" title="Permalink to this definition">¶</a></dt>
+<dt id="src.resource_management.resource_manager.ResourceManager.received_message">
+<code class="sig-name descname">received_message</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">src</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">msg</span><span class="p">:</span> <span class="n">ResourceManagerMessage</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.resource_management.resource_manager.ResourceManager.received_message" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to receive resoruce manager messages.</p>
 <p>Messages come in 4 types, as detailed in the <cite>ResourceManagerMessage</cite> class.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>src</strong> (<em>str</em>) – name of the node that sent the message.</p></li>
 <li><p><strong>msg</strong> (<a class="reference internal" href="#src.resource_management.resource_manager.ResourceManagerMessage" title="src.resource_management.resource_manager.ResourceManagerMessage"><em>ResourceManagerMessage</em></a>) – message received.</p></li>
@@ -179,15 +178,15 @@ Will automatically execute rule action if conditions met.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.resource_management.resource_manager.ResourceManager.release_remote_memory">
-<span class="sig-name descname"><span class="pre">release_remote_memory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dst</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">memory_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.resource_management.resource_manager.ResourceManager.release_remote_memory" title="Permalink to this definition">¶</a></dt>
+<dt id="src.resource_management.resource_manager.ResourceManager.release_remote_memory">
+<code class="sig-name descname">release_remote_memory</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dst</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">memory_id</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.resource_management.resource_manager.ResourceManager.release_remote_memory" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to release memories on distant nodes.</p>
 <p>Release the remote memory ‘memory_id’ on the node ‘dst’.
 The entanglement protocol of remote memory was paired with the local protocol ‘init_protocol’, but local
 protocol becomes invalid.
 The resource manager needs to notify the remote node to release the occupied memory.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>dst</strong> (<em>str</em>) – name of destination node.</p></li>
 <li><p><strong>memory_id</strong> (<em>str</em>) – name of memory to release.</p></li>
@@ -197,14 +196,14 @@ The resource manager needs to notify the remote node to release the occupied mem
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.resource_management.resource_manager.ResourceManager.release_remote_protocol">
-<span class="sig-name descname"><span class="pre">release_remote_protocol</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dst</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">protocol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.resource_management.resource_manager.ResourceManager.release_remote_protocol" title="Permalink to this definition">¶</a></dt>
+<dt id="src.resource_management.resource_manager.ResourceManager.release_remote_protocol">
+<code class="sig-name descname">release_remote_protocol</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dst</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">protocol</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.resource_management.resource_manager.ResourceManager.release_remote_protocol" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to release protocols from memories on distant nodes.</p>
 <p>Release the remote protocol ‘protocol’ on the remote node ‘dst’.
 The local protocol was paired with the remote protocol but local protocol becomes invalid.
 The resource manager needs to notify the remote node to cancel the paired protocol.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>dst</strong> (<em>str</em>) – name of the destination node.</p></li>
 <li><p><strong>protocol</strong> (<em>str</em>) – name of protocol to release on node.</p></li>
@@ -214,13 +213,13 @@ The resource manager needs to notify the remote node to cancel the paired protoc
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.resource_management.resource_manager.ResourceManager.send_request">
-<span class="sig-name descname"><span class="pre">send_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">protocol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../entanglement_management/entanglement_protocol.html#src.entanglement_management.entanglement_protocol.EntanglementProtocol" title="src.entanglement_management.entanglement_protocol.EntanglementProtocol"><span class="pre">EntanglementProtocol</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">req_dst</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">req_condition_func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">RequestConditionFunc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">req_args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Arguments</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.resource_management.resource_manager.ResourceManager.send_request" title="Permalink to this definition">¶</a></dt>
+<dt id="src.resource_management.resource_manager.ResourceManager.send_request">
+<code class="sig-name descname">send_request</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">protocol</span><span class="p">:</span> <span class="n">‘EntanglementProtocol’</span></em>, <em class="sig-param"><span class="n">req_dst</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">req_condition_func</span><span class="p">:</span> <span class="n">RequestConditionFunc</span></em>, <em class="sig-param"><span class="n">req_args</span><span class="p">:</span> <span class="n">Arguments</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.resource_management.resource_manager.ResourceManager.send_request" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to send protocol request to another node.</p>
 <p>Send the request to pair the local ‘protocol’ with the protocol on the remote node ‘req_dst’.
 The function <cite>req_condition_func</cite> describes the desired protocol.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>protocol</strong> (<a class="reference internal" href="../entanglement_management/entanglement_protocol.html#src.entanglement_management.entanglement_protocol.EntanglementProtocol" title="src.entanglement_management.entanglement_protocol.EntanglementProtocol"><em>EntanglementProtocol</em></a>) – protocol sending the request.</p></li>
 <li><p><strong>req_dst</strong> (<em>str</em>) – name of destination node.</p></li>
@@ -232,11 +231,11 @@ The function <cite>req_condition_func</cite> describes the desired protocol.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.resource_management.resource_manager.ResourceManager.update">
-<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">protocol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../entanglement_management/entanglement_protocol.html#src.entanglement_management.entanglement_protocol.EntanglementProtocol" title="src.entanglement_management.entanglement_protocol.EntanglementProtocol"><span class="pre">EntanglementProtocol</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">memory</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../components/memory.html#src.components.memory.Memory" title="src.components.memory.Memory"><span class="pre">Memory</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.resource_management.resource_manager.ResourceManager.update" title="Permalink to this definition">¶</a></dt>
+<dt id="src.resource_management.resource_manager.ResourceManager.update">
+<code class="sig-name descname">update</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">protocol</span><span class="p">:</span> <span class="n">EntanglementProtocol</span></em>, <em class="sig-param"><span class="n">memory</span><span class="p">:</span> <span class="n">Memory</span></em>, <em class="sig-param"><span class="n">state</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.resource_management.resource_manager.ResourceManager.update" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to update state of memory after completion of entanglement management protocol.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>protocol</strong> (<a class="reference internal" href="../entanglement_management/entanglement_protocol.html#src.entanglement_management.entanglement_protocol.EntanglementProtocol" title="src.entanglement_management.entanglement_protocol.EntanglementProtocol"><em>EntanglementProtocol</em></a>) – concerned protocol.</p></li>
 <li><p><strong>memory</strong> (<a class="reference internal" href="../components/memory.html#src.components.memory.Memory" title="src.components.memory.Memory"><em>Memory</em></a>) – memory to update.</p></li>
@@ -253,8 +252,8 @@ The function <cite>req_condition_func</cite> describes the desired protocol.</p>
 </dd></dl>
 
 <dl class="py class">
-<dt class="sig sig-object py" id="src.resource_management.resource_manager.ResourceManagerMessage">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.resource_management.resource_manager.</span></span><span class="sig-name descname"><span class="pre">ResourceManagerMessage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#src.resource_management.resource_manager.ResourceManagerMsgType" title="src.resource_management.resource_manager.ResourceManagerMsgType"><span class="pre">ResourceManagerMsgType</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.resource_management.resource_manager.ResourceManagerMessage" title="Permalink to this definition">¶</a></dt>
+<dt id="src.resource_management.resource_manager.ResourceManagerMessage">
+<em class="property">class </em><code class="sig-prename descclassname">src.resource_management.resource_manager.</code><code class="sig-name descname">ResourceManagerMessage</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">msg_type</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#src.resource_management.resource_manager.ResourceManagerMsgType" title="src.resource_management.resource_manager.ResourceManagerMsgType">src.resource_management.resource_manager.ResourceManagerMsgType</a></span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.resource_management.resource_manager.ResourceManagerMessage" title="Permalink to this definition">¶</a></dt>
 <dd><p>Message for resource manager communication.</p>
 <p>There are four types of ResourceManagerMessage:</p>
 <ul class="simple">
@@ -264,44 +263,44 @@ The function <cite>req_condition_func</cite> describes the desired protocol.</p>
 <li><p>RELEASE_MEMORY: release the memory on the remote node</p></li>
 </ul>
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.resource_management.resource_manager.ResourceManagerMessage.ini_protocol_name">
-<span class="sig-name descname"><span class="pre">ini_protocol_name</span></span><a class="headerlink" href="#src.resource_management.resource_manager.ResourceManagerMessage.ini_protocol_name" title="Permalink to this definition">¶</a></dt>
+<dt id="src.resource_management.resource_manager.ResourceManagerMessage.ini_protocol_name">
+<code class="sig-name descname">ini_protocol_name</code><a class="headerlink" href="#src.resource_management.resource_manager.ResourceManagerMessage.ini_protocol_name" title="Permalink to this definition">¶</a></dt>
 <dd><p>name of protocol that creates the original REQUEST message.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>str</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.resource_management.resource_manager.ResourceManagerMessage.request_fun">
-<span class="sig-name descname"><span class="pre">request_fun</span></span><a class="headerlink" href="#src.resource_management.resource_manager.ResourceManagerMessage.request_fun" title="Permalink to this definition">¶</a></dt>
+<dt id="src.resource_management.resource_manager.ResourceManagerMessage.request_fun">
+<code class="sig-name descname">request_fun</code><a class="headerlink" href="#src.resource_management.resource_manager.ResourceManagerMessage.request_fun" title="Permalink to this definition">¶</a></dt>
 <dd><p>a function using ResourceManager to search eligible protocols on remote node (if <cite>msg_type</cite> == REQUEST).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>func</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.resource_management.resource_manager.ResourceManagerMessage.is_approved">
-<span class="sig-name descname"><span class="pre">is_approved</span></span><a class="headerlink" href="#src.resource_management.resource_manager.ResourceManagerMessage.is_approved" title="Permalink to this definition">¶</a></dt>
+<dt id="src.resource_management.resource_manager.ResourceManagerMessage.is_approved">
+<code class="sig-name descname">is_approved</code><a class="headerlink" href="#src.resource_management.resource_manager.ResourceManagerMessage.is_approved" title="Permalink to this definition">¶</a></dt>
 <dd><p>acceptance/failure of condition function (if <cite>msg_type</cite> == RESPONSE).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>bool</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.resource_management.resource_manager.ResourceManagerMessage.paired_protocol">
-<span class="sig-name descname"><span class="pre">paired_protocol</span></span><a class="headerlink" href="#src.resource_management.resource_manager.ResourceManagerMessage.paired_protocol" title="Permalink to this definition">¶</a></dt>
+<dt id="src.resource_management.resource_manager.ResourceManagerMessage.paired_protocol">
+<code class="sig-name descname">paired_protocol</code><a class="headerlink" href="#src.resource_management.resource_manager.ResourceManagerMessage.paired_protocol" title="Permalink to this definition">¶</a></dt>
 <dd><p>protocol that is paired with ini_protocol (if <cite>msg-type</cite> == RESPONSE).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>str</p>
 </dd>
 </dl>
@@ -310,12 +309,12 @@ The function <cite>req_condition_func</cite> describes the desired protocol.</p>
 </dd></dl>
 
 <dl class="py class">
-<dt class="sig sig-object py" id="src.resource_management.resource_manager.ResourceManagerMsgType">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.resource_management.resource_manager.</span></span><span class="sig-name descname"><span class="pre">ResourceManagerMsgType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qualname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.resource_management.resource_manager.ResourceManagerMsgType" title="Permalink to this definition">¶</a></dt>
+<dt id="src.resource_management.resource_manager.ResourceManagerMsgType">
+<em class="property">class </em><code class="sig-prename descclassname">src.resource_management.resource_manager.</code><code class="sig-name descname">ResourceManagerMsgType</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.resource_management.resource_manager.ResourceManagerMsgType" title="Permalink to this definition">¶</a></dt>
 <dd><p>Available message types for the ResourceManagerMessage.</p>
 </dd></dl>
 
-</section>
+</div>
 
 
             <div class="clearer"></div>
@@ -324,16 +323,12 @@ The function <cite>req_condition_func</cite> describes the desired protocol.</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <div>
-    <h4>Previous topic</h4>
-    <p class="topless"><a href="top.html"
-                          title="previous chapter">Resource Management</a></p>
-  </div>
-  <div>
-    <h4>Next topic</h4>
-    <p class="topless"><a href="memory_manager.html"
-                          title="next chapter">Memory Manager</a></p>
-  </div>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="top.html"
+                        title="previous chapter">Resource Management</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="memory_manager.html"
+                        title="next chapter">Memory Manager</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -345,12 +340,12 @@ The function <cite>req_condition_func</cite> describes the desired protocol.</p>
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script>document.getElementById('searchbox').style.display = "block"</script>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -370,14 +365,14 @@ The function <cite>req_condition_func</cite> describes the desired protocol.</p>
         <li class="right" >
           <a href="top.html" title="Resource Management"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.6.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" >Resource Management</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Resource Manager</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2020-2024.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
+        &#169; Copyright 2020-2022.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
     </div>
   </body>
 </html>

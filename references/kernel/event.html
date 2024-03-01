@@ -1,20 +1,19 @@
 
 <!DOCTYPE html>
 
-<html lang="en">
+<html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-
-    <title>Event &#8212; SeQUeNCe 0.6.2 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/classic.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event &#8212; SeQUeNCe 0.5.2 documentation</title>
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -36,7 +35,7 @@
         <li class="right" >
           <a href="entity.html" title="Entity"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.6.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" accesskey="U">Kernel</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Event</a></li> 
       </ul>
@@ -47,56 +46,56 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="module-src.kernel.event">
-<span id="event"></span><h1>Event<a class="headerlink" href="#module-src.kernel.event" title="Permalink to this heading">¶</a></h1>
+  <div class="section" id="module-src.kernel.event">
+<span id="event"></span><h1>Event<a class="headerlink" href="#module-src.kernel.event" title="Permalink to this headline">¶</a></h1>
 <p>Definition of the Event class.</p>
 <p>This module defines the Event class, which is executed by the timeline.
 Events should be scheduled through the timeline to take effect.</p>
 <dl class="py class">
-<dt class="sig sig-object py" id="src.kernel.event.Event">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.kernel.event.</span></span><span class="sig-name descname"><span class="pre">Event</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">process</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="process.html#src.kernel.process.Process" title="src.kernel.process.Process"><span class="pre">Process</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">priority</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">inf</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.kernel.event.Event" title="Permalink to this definition">¶</a></dt>
+<dt id="src.kernel.event.Event">
+<em class="property">class </em><code class="sig-prename descclassname">src.kernel.event.</code><code class="sig-name descname">Event</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">time</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">process</span><span class="p">:</span> <span class="n">Process</span></em>, <em class="sig-param"><span class="n">priority</span><span class="o">=</span><span class="default_value">inf</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.kernel.event.Event" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class of events for simulation.</p>
 <p>Events are sorted by their time and priority. Events with lower times come before events with higher times.
 Events with the same time are sorted by their priority from low to high.</p>
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.kernel.event.Event.time">
-<span class="sig-name descname"><span class="pre">time</span></span><a class="headerlink" href="#src.kernel.event.Event.time" title="Permalink to this definition">¶</a></dt>
+<dt id="src.kernel.event.Event.time">
+<code class="sig-name descname">time</code><a class="headerlink" href="#src.kernel.event.Event.time" title="Permalink to this definition">¶</a></dt>
 <dd><p>the execution time of the event.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.kernel.event.Event.process">
-<span class="sig-name descname"><span class="pre">process</span></span><a class="headerlink" href="#src.kernel.event.Event.process" title="Permalink to this definition">¶</a></dt>
+<dt id="src.kernel.event.Event.process">
+<code class="sig-name descname">process</code><a class="headerlink" href="#src.kernel.event.Event.process" title="Permalink to this definition">¶</a></dt>
 <dd><p>the process encapsulated in the event.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference internal" href="process.html#src.kernel.process.Process" title="src.kernel.process.Process">Process</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.kernel.event.Event.priority">
-<span class="sig-name descname"><span class="pre">priority</span></span><a class="headerlink" href="#src.kernel.event.Event.priority" title="Permalink to this definition">¶</a></dt>
+<dt id="src.kernel.event.Event.priority">
+<code class="sig-name descname">priority</code><a class="headerlink" href="#src.kernel.event.Event.priority" title="Permalink to this definition">¶</a></dt>
 <dd><p>the priority of the event, lower value denotes a higher priority.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.kernel.event.Event._is_removed">
-<span class="sig-name descname"><span class="pre">_is_removed</span></span><a class="headerlink" href="#src.kernel.event.Event._is_removed" title="Permalink to this definition">¶</a></dt>
+<dt id="src.kernel.event.Event._is_removed">
+<code class="sig-name descname">_is_removed</code><a class="headerlink" href="#src.kernel.event.Event._is_removed" title="Permalink to this definition">¶</a></dt>
 <dd><p>the flag to denotes if it’s a valid event</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>bool</p>
 </dd>
 </dl>
@@ -104,7 +103,7 @@ Events with the same time are sorted by their priority from low to high.</p>
 
 </dd></dl>
 
-</section>
+</div>
 
 
             <div class="clearer"></div>
@@ -113,16 +112,12 @@ Events with the same time are sorted by their priority from low to high.</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <div>
-    <h4>Previous topic</h4>
-    <p class="topless"><a href="entity.html"
-                          title="previous chapter">Entity</a></p>
-  </div>
-  <div>
-    <h4>Next topic</h4>
-    <p class="topless"><a href="eventlist.html"
-                          title="next chapter">Event List</a></p>
-  </div>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="entity.html"
+                        title="previous chapter">Entity</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="eventlist.html"
+                        title="next chapter">Event List</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -134,12 +129,12 @@ Events with the same time are sorted by their priority from low to high.</p>
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script>document.getElementById('searchbox').style.display = "block"</script>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -159,14 +154,14 @@ Events with the same time are sorted by their priority from low to high.</p>
         <li class="right" >
           <a href="entity.html" title="Entity"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.6.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" >Kernel</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Event</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2020-2024.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
+        &#169; Copyright 2020-2022.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
     </div>
   </body>
 </html>

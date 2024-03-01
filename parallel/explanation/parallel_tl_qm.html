@@ -1,20 +1,19 @@
 
 <!DOCTYPE html>
 
-<html lang="en">
+<html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-
-    <title>Explanation: Parallel Timelines and the Quantum Manager &#8212; SeQUeNCe 0.6.2 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/classic.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explanation: Parallel Timelines and the Quantum Manager &#8212; SeQUeNCe 0.5.2 documentation</title>
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -36,7 +35,7 @@
         <li class="right" >
           <a href="../install/prerequisite.html" title="Prerequisites &amp; Installation"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.6.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.2 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Explanation: Parallel Timelines and the Quantum Manager</a></li> 
       </ul>
     </div>  
@@ -46,13 +45,13 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="explanation-parallel-timelines-and-the-quantum-manager">
-<h1>Explanation: Parallel Timelines and the Quantum Manager<a class="headerlink" href="#explanation-parallel-timelines-and-the-quantum-manager" title="Permalink to this heading">¶</a></h1>
+  <div class="section" id="explanation-parallel-timelines-and-the-quantum-manager">
+<h1>Explanation: Parallel Timelines and the Quantum Manager<a class="headerlink" href="#explanation-parallel-timelines-and-the-quantum-manager" title="Permalink to this headline">¶</a></h1>
 <p>Just like sequential simulation, parallel simulation in SeQUeNCe utilizes timelines to track and execute events on entities.
 However, entities on one process may schedule events for entities on another process, and the entangled nature of quantum states requires that multiple processes may need to access and modify the properties of shared quantum systems.
 SeQUeNCe thus requires a method for communicating events between these timelines and synchronizing quantum states.</p>
-<section id="conservative-synchronization">
-<h2>Conservative Synchronization<a class="headerlink" href="#conservative-synchronization" title="Permalink to this heading">¶</a></h2>
+<div class="section" id="conservative-synchronization">
+<h2>Conservative Synchronization<a class="headerlink" href="#conservative-synchronization" title="Permalink to this headline">¶</a></h2>
 <p>For discrete event simulation of networks, conservative synchronization is an algorithm to ensure that all events on a process are executed in the correct order (even if scheduled by another process).
 The main tool of conservative synchronization is the synchronization window, during which events are exchanged between processes.</p>
 <p>Outside a synchronization window, processes are free to execute events without fear of out-of-order execution up to a lookahead time.
@@ -63,8 +62,8 @@ For quantum networks, qubits are treated in the same way as messages, with the d
 <p><img alt="conservative" src="../../_images/conservative_algorithm_sim.png" /></p>
 <p>And, with respect to wall clock time, is shown here:</p>
 <p><img alt="conservative_wall" src="../../_images/conservative_algorithm_wall.png" /></p>
-<section id="asynchronous-timeline">
-<h3>Asynchronous Timeline<a class="headerlink" href="#asynchronous-timeline" title="Permalink to this heading">¶</a></h3>
+<div class="section" id="asynchronous-timeline">
+<h3>Asynchronous Timeline<a class="headerlink" href="#asynchronous-timeline" title="Permalink to this headline">¶</a></h3>
 <p>A common scheme for building entanglement distribution networks is meet-in-the-middle, where two router nodes are linked to a middle Bell state measurement (BSM) node to generate entanglement.
 Since quantum router nodes must wait for BSM results from the middle node before continuing to distribute entanglement, they may treat the connecting network edge as having a delay equal to the classical delay from the BSM node.
 For such networks, it is thus possible to increase lookahead time (and thus reduce synchronization overhead) by having BSM nodes on a separate timeline (or timelines) that operates asynchronously from the router nodes (executing events in a separate time window).</p>
@@ -76,10 +75,10 @@ An illustration of this process with respect to simulation time is shown below:<
 <p>And with respect to wall clock time is shown here:</p>
 <p><img alt="async_wall" src="../../_images/async_tl2.png" /></p>
 <p>Asynchronous timelines are implemented on the <code class="docutils literal notranslate"><span class="pre">async_tl</span></code> branch.</p>
-</section>
-</section>
-<section id="quantum-manager">
-<h2>Quantum Manager<a class="headerlink" href="#quantum-manager" title="Permalink to this heading">¶</a></h2>
+</div>
+</div>
+<div class="section" id="quantum-manager">
+<h2>Quantum Manager<a class="headerlink" href="#quantum-manager" title="Permalink to this headline">¶</a></h2>
 <p>For quantum states that are unentangled or distributed within a single process, a single quantum manager is sufficient for storage and manipulation.
 Once these states cross a process boundary, however, many processes must communicate for their effective utilization.
 SeQUeNCe thus employs a client-server model for the quantum managers, as shown below:</p>
@@ -87,14 +86,14 @@ SeQUeNCe thus employs a client-server model for the quantum managers, as shown b
 <p>When a process wishes to manipulate or view a shared quantum state, a query is made to the quantum manager using sockets.
 The remote server continuously reads from these sockets and services requests, communicating results back to the client if necessary.
 If the server is running with multiple threads, additional locks are used to ensure that multiple requests do not act on a single quantum state at the same time.</p>
-<section id="interface">
-<h3>Interface<a class="headerlink" href="#interface" title="Permalink to this heading">¶</a></h3>
+<div class="section" id="interface">
+<h3>Interface<a class="headerlink" href="#interface" title="Permalink to this headline">¶</a></h3>
 <p>The interface for the quantum manager client is identical to that for the sequential quantum manager.
 In this way, all hardware and protocol elements on a timeline may access quantum states in the same way they would for sequential simulation.
 Additionally, local quantum states may be manipulated in exactly the same way as sequential simulation.</p>
-</section>
-</section>
-</section>
+</div>
+</div>
+</div>
 
 
             <div class="clearer"></div>
@@ -103,9 +102,8 @@ Additionally, local quantum states may be manipulated in exactly the same way as
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <div>
-    <h3><a href="../../index.html">Table of Contents</a></h3>
-    <ul>
+  <h3><a href="../../index.html">Table of Contents</a></h3>
+  <ul>
 <li><a class="reference internal" href="#">Explanation: Parallel Timelines and the Quantum Manager</a><ul>
 <li><a class="reference internal" href="#conservative-synchronization">Conservative Synchronization</a><ul>
 <li><a class="reference internal" href="#asynchronous-timeline">Asynchronous Timeline</a></li>
@@ -119,17 +117,12 @@ Additionally, local quantum states may be manipulated in exactly the same way as
 </li>
 </ul>
 
-  </div>
-  <div>
-    <h4>Previous topic</h4>
-    <p class="topless"><a href="../install/prerequisite.html"
-                          title="previous chapter">Prerequisites &amp; Installation</a></p>
-  </div>
-  <div>
-    <h4>Next topic</h4>
-    <p class="topless"><a href="../guide/running_script.html"
-                          title="next chapter">Guide: Running a Parallel Script</a></p>
-  </div>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../install/prerequisite.html"
+                        title="previous chapter">Prerequisites &amp; Installation</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../guide/running_script.html"
+                        title="next chapter">Guide: Running a Parallel Script</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -141,12 +134,12 @@ Additionally, local quantum states may be manipulated in exactly the same way as
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script>document.getElementById('searchbox').style.display = "block"</script>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -166,13 +159,13 @@ Additionally, local quantum states may be manipulated in exactly the same way as
         <li class="right" >
           <a href="../install/prerequisite.html" title="Prerequisites &amp; Installation"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.6.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.2 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Explanation: Parallel Timelines and the Quantum Manager</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2020-2024.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
+        &#169; Copyright 2020-2022.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
     </div>
   </body>
 </html>

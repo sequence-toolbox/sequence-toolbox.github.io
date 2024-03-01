@@ -1,20 +1,19 @@
 
 <!DOCTYPE html>
 
-<html lang="en">
+<html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-
-    <title>Photon &#8212; SeQUeNCe 0.6.2 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/classic.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photon &#8212; SeQUeNCe 0.5.2 documentation</title>
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -36,7 +35,7 @@
         <li class="right" >
           <a href="optical_channel.html" title="Optical Channel"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.6.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" accesskey="U">Components</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Photon</a></li> 
       </ul>
@@ -47,101 +46,101 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="module-src.components.photon">
-<span id="photon"></span><h1>Photon<a class="headerlink" href="#module-src.components.photon" title="Permalink to this heading">¶</a></h1>
+  <div class="section" id="module-src.components.photon">
+<span id="photon"></span><h1>Photon<a class="headerlink" href="#module-src.components.photon" title="Permalink to this headline">¶</a></h1>
 <p>Model for single photon.</p>
 <p>This module defines the Photon class for tracking individual photons.
 Photons may be encoded directly with polarization or time bin schemes, or may herald the encoded state of single atom memories.</p>
 <dl class="py class">
-<dt class="sig sig-object py" id="src.components.photon.Photon">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.components.photon.</span></span><span class="sig-name descname"><span class="pre">Photon</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeline</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../kernel/timeline.html#src.kernel.timeline.Timeline" title="src.kernel.timeline.Timeline"><span class="pre">Timeline</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">wavelength</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">location</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{'bases':</span> <span class="pre">[((1</span> <span class="pre">+</span> <span class="pre">0j,</span> <span class="pre">0j),</span> <span class="pre">(0j,</span> <span class="pre">1</span> <span class="pre">+</span> <span class="pre">0j)),</span> <span class="pre">((0.7071067811865476</span> <span class="pre">+</span> <span class="pre">0j,</span> <span class="pre">0.7071067811865476</span> <span class="pre">+</span> <span class="pre">0j),</span> <span class="pre">(-</span> <span class="pre">0.7071067811865476</span> <span class="pre">+</span> <span class="pre">0j,</span> <span class="pre">0.7071067811865476</span> <span class="pre">+</span> <span class="pre">0j))],</span> <span class="pre">'name':</span> <span class="pre">'polarization'}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantum_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_qm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.photon.Photon" title="Permalink to this definition">¶</a></dt>
+<dt id="src.components.photon.Photon">
+<em class="property">class </em><code class="sig-prename descclassname">src.components.photon.</code><code class="sig-name descname">Photon</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">timeline</span><span class="p">:</span> <span class="n">Timeline</span></em>, <em class="sig-param"><span class="n">wavelength</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">location</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">encoding_type</span><span class="o">=</span><span class="default_value">{'bases': [1 + 0j, 0j, 0j, 1 + 0j, 0.7071067811865476 + 0j, 0.7071067811865476 + 0j, - 0.7071067811865476 + 0j, 0.7071067811865476 + 0j], 'name': 'polarization'}</span></em>, <em class="sig-param"><span class="n">quantum_state</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">use_qm</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.photon.Photon" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class for a single photon.</p>
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.components.photon.Photon.name">
-<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#src.components.photon.Photon.name" title="Permalink to this definition">¶</a></dt>
+<dt id="src.components.photon.Photon.name">
+<code class="sig-name descname">name</code><a class="headerlink" href="#src.components.photon.Photon.name" title="Permalink to this definition">¶</a></dt>
 <dd><p>label for photon instance.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>str</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.components.photon.Photon.wavelength">
-<span class="sig-name descname"><span class="pre">wavelength</span></span><a class="headerlink" href="#src.components.photon.Photon.wavelength" title="Permalink to this definition">¶</a></dt>
+<dt id="src.components.photon.Photon.wavelength">
+<code class="sig-name descname">wavelength</code><a class="headerlink" href="#src.components.photon.Photon.wavelength" title="Permalink to this definition">¶</a></dt>
 <dd><p>wavelength of photon (in nm).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>float</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.components.photon.Photon.location">
-<span class="sig-name descname"><span class="pre">location</span></span><a class="headerlink" href="#src.components.photon.Photon.location" title="Permalink to this definition">¶</a></dt>
+<dt id="src.components.photon.Photon.location">
+<code class="sig-name descname">location</code><a class="headerlink" href="#src.components.photon.Photon.location" title="Permalink to this definition">¶</a></dt>
 <dd><p>current location of photon.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference internal" href="../kernel/entity.html#src.kernel.entity.Entity" title="src.kernel.entity.Entity">Entity</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.components.photon.Photon.encoding_type">
-<span class="sig-name descname"><span class="pre">encoding_type</span></span><a class="headerlink" href="#src.components.photon.Photon.encoding_type" title="Permalink to this definition">¶</a></dt>
+<dt id="src.components.photon.Photon.encoding_type">
+<code class="sig-name descname">encoding_type</code><a class="headerlink" href="#src.components.photon.Photon.encoding_type" title="Permalink to this definition">¶</a></dt>
 <dd><p>encoding type of photon (as defined in encoding module).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>Dict[str, Any]</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.components.photon.Photon.quantum_state">
-<span class="sig-name descname"><span class="pre">quantum_state</span></span><a class="headerlink" href="#src.components.photon.Photon.quantum_state" title="Permalink to this definition">¶</a></dt>
+<dt id="src.components.photon.Photon.quantum_state">
+<code class="sig-name descname">quantum_state</code><a class="headerlink" href="#src.components.photon.Photon.quantum_state" title="Permalink to this definition">¶</a></dt>
 <dd><p>quantum state of photon.
 If <cite>use_qm</cite> is false, this will be a QuantumState object.
 Otherwise, it will be an integer key for the quantum manager.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>Union[int, Tuple[complex]]</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.components.photon.Photon.is_null">
-<span class="sig-name descname"><span class="pre">is_null</span></span><a class="headerlink" href="#src.components.photon.Photon.is_null" title="Permalink to this definition">¶</a></dt>
+<dt id="src.components.photon.Photon.is_null">
+<code class="sig-name descname">is_null</code><a class="headerlink" href="#src.components.photon.Photon.is_null" title="Permalink to this definition">¶</a></dt>
 <dd><p>defines whether photon is real or a “ghost” photon (not detectable but used in memory encoding).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>bool</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.components.photon.Photon.loss">
-<span class="sig-name descname"><span class="pre">loss</span></span><a class="headerlink" href="#src.components.photon.Photon.loss" title="Permalink to this definition">¶</a></dt>
+<dt id="src.components.photon.Photon.loss">
+<code class="sig-name descname">loss</code><a class="headerlink" href="#src.components.photon.Photon.loss" title="Permalink to this definition">¶</a></dt>
 <dd><p>similarly defined for memory encoding, used to track loss and improve performance.
 Does not need to be utilized for all encoding schemes.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>float</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.components.photon.Photon.use_qm">
-<span class="sig-name descname"><span class="pre">use_qm</span></span><a class="headerlink" href="#src.components.photon.Photon.use_qm" title="Permalink to this definition">¶</a></dt>
+<dt id="src.components.photon.Photon.use_qm">
+<code class="sig-name descname">use_qm</code><a class="headerlink" href="#src.components.photon.Photon.use_qm" title="Permalink to this definition">¶</a></dt>
 <dd><p>determines if photon stores state locally (False) or uses timeline quantum manager (True).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>bool</p>
 </dd>
 </dl>
@@ -151,64 +150,64 @@ Does not need to be utilized for all encoding schemes.</p>
 This encoding scheme also removes the local timeline reference and sets the quantum state to the local key.
 This is to both facilitate parallel execution and improve the performance of overall simulation.</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="src.components.photon.Photon.combine_state">
-<span class="sig-name descname"><span class="pre">combine_state</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">photon</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.photon.Photon.combine_state" title="Permalink to this definition">¶</a></dt>
-<dd><p>Method to combine quantum states of photons (see <cite>QuantumState</cite> module).</p>
+<dt id="src.components.photon.Photon.entangle">
+<code class="sig-name descname">entangle</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">photon</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.photon.Photon.entangle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to entangle photons (see <cite>QuantumState</cite> module).</p>
 <p>This method does not modify the current state of the photon, but combines the internal quantum state object.
-This ensures that two photons share a quantum state object describing a product space.</p>
+This ensures that two photons share a quantum state object.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.components.photon.Photon.measure">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">measure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">basis</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">photon</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#src.components.photon.Photon" title="src.components.photon.Photon"><span class="pre">Photon</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">rng</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Generator</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.photon.Photon.measure" title="Permalink to this definition">¶</a></dt>
+<dt id="src.components.photon.Photon.measure">
+<em class="property">static </em><code class="sig-name descname">measure</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">basis</span></em>, <em class="sig-param"><span class="n">photon</span><span class="p">:</span> <span class="n">Photon</span></em>, <em class="sig-param"><span class="n">rng</span><span class="p">:</span> <span class="n">Generator</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.photon.Photon.measure" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to measure a photon (see <cite>QuantumState</cite> module).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>basis</strong> (<em>List</em><em>[</em><em>List</em><em>[</em><em>complex</em><em>]</em><em>]</em>) – basis (given as lists of complex coefficients) with which to measure the photon.</p></li>
 <li><p><strong>photon</strong> (<a class="reference internal" href="#src.components.photon.Photon" title="src.components.photon.Photon"><em>Photon</em></a>) – photon to measure.</p></li>
 <li><p><strong>rng</strong> (<em>Generator</em>) – PRNG to use for measurement results.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p>0/1 value giving result of measurement in given basis.</p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.components.photon.Photon.measure_multiple">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">measure_multiple</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">basis</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">photons</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#src.components.photon.Photon" title="src.components.photon.Photon"><span class="pre">Photon</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rng</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Generator</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.photon.Photon.measure_multiple" title="Permalink to this definition">¶</a></dt>
-<dd><p>Method to measure 2 entangled photons (see <cite>FreeQuantumState</cite> module).</p>
+<dt id="src.components.photon.Photon.measure_multiple">
+<em class="property">static </em><code class="sig-name descname">measure_multiple</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">basis</span></em>, <em class="sig-param"><span class="n">photons</span><span class="p">:</span> <span class="n">List<span class="p">[</span>Photon<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">rng</span><span class="p">:</span> <span class="n">Generator</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.photon.Photon.measure_multiple" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to measure 2 entangled photons (see <cite>QuantumState</cite> module).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>basis</strong> (<em>List</em><em>[</em><em>List</em><em>[</em><em>complex</em><em>]</em><em>]</em>) – basis (given as lists of complex coefficients) with which to measure the photons.</p></li>
 <li><p><strong>photons</strong> (<em>List</em><em>[</em><a class="reference internal" href="#src.components.photon.Photon" title="src.components.photon.Photon"><em>Photon</em></a><em>]</em>) – list of 2 photons to measure.</p></li>
 <li><p><strong>rng</strong> (<em>Generator</em>) – PRNG to use for measurement results.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p>0-3 value giving the result of measurement in given basis.</p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.components.photon.Photon.random_noise">
-<span class="sig-name descname"><span class="pre">random_noise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rng</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Generator</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.photon.Photon.random_noise" title="Permalink to this definition">¶</a></dt>
+<dt id="src.components.photon.Photon.random_noise">
+<code class="sig-name descname">random_noise</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">rng</span><span class="p">:</span> <span class="n">Generator</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.photon.Photon.random_noise" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to add random noise to photon’s state (see <cite>QuantumState</cite> module).</p>
 </dd></dl>
 
 </dd></dl>
 
-</section>
+</div>
 
 
             <div class="clearer"></div>
@@ -217,16 +216,12 @@ This ensures that two photons share a quantum state object describing a product 
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <div>
-    <h4>Previous topic</h4>
-    <p class="topless"><a href="optical_channel.html"
-                          title="previous chapter">Optical Channel</a></p>
-  </div>
-  <div>
-    <h4>Next topic</h4>
-    <p class="topless"><a href="spdc_lens.html"
-                          title="next chapter">SPDC Lens</a></p>
-  </div>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="optical_channel.html"
+                        title="previous chapter">Optical Channel</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="spdc_lens.html"
+                        title="next chapter">SPDC Lens</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -238,12 +233,12 @@ This ensures that two photons share a quantum state object describing a product 
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script>document.getElementById('searchbox').style.display = "block"</script>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -263,14 +258,14 @@ This ensures that two photons share a quantum state object describing a product 
         <li class="right" >
           <a href="optical_channel.html" title="Optical Channel"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.6.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" >Components</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Photon</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2020-2024.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
+        &#169; Copyright 2020-2022.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
     </div>
   </body>
 </html>

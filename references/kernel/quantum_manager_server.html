@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quantum Manager Server &#8212; SeQUeNCe 0.5.2 documentation</title>
+    <title>Quantum Manager Server &#8212; SeQUeNCe 0.5.0 documentation</title>
     <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     
@@ -17,7 +17,7 @@
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Process Communication" href="communication.html" />
+    <link rel="next" title="Quantum State" href="quantum_state.html" />
     <link rel="prev" title="Quantum Manager Client" href="quantum_manager_client.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -30,13 +30,13 @@
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="communication.html" title="Process Communication"
+          <a href="quantum_state.html" title="Quantum State"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="quantum_manager_client.html" title="Quantum Manager Client"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.2 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="top.html" accesskey="U">Parallel</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="top.html" accesskey="U">Kernel</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Quantum Manager Server</a></li> 
       </ul>
     </div>  
@@ -46,18 +46,18 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="module-parallel.src.quantum_manager_server">
-<span id="quantum-manager-server"></span><h1>Quantum Manager Server<a class="headerlink" href="#module-parallel.src.quantum_manager_server" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-src.kernel.quantum_manager_server">
+<span id="quantum-manager-server"></span><h1>Quantum Manager Server<a class="headerlink" href="#module-src.kernel.quantum_manager_server" title="Permalink to this headline">¶</a></h1>
 <p>This module defines the function to use for the quantum manager server.</p>
 <p>This function should be started on a separate process for parallel simulation,         using the <cite>mpi_tests/qm_server.py</cite> script or similar.
 Additionally defined are utility functions for socket connections and the messages used by the client/server.</p>
 <dl class="py class">
-<dt id="parallel.src.quantum_manager_server.QuantumManagerMessage">
-<em class="property">class </em><code class="sig-prename descclassname">parallel.src.quantum_manager_server.</code><code class="sig-name descname">QuantumManagerMessage</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">msg_type</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#parallel.src.quantum_manager_server.QuantumManagerMsgType" title="parallel.src.quantum_manager_server.QuantumManagerMsgType">parallel.src.quantum_manager_server.QuantumManagerMsgType</a></span></em>, <em class="sig-param"><span class="n">keys</span><span class="p">:</span> <span class="n">List<span class="p">[</span>int<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">args</span><span class="p">:</span> <span class="n">List<span class="p">[</span>any<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parallel.src.quantum_manager_server.QuantumManagerMessage" title="Permalink to this definition">¶</a></dt>
+<dt id="src.kernel.quantum_manager_server.QuantumManagerMessage">
+<em class="property">class </em><code class="sig-prename descclassname">src.kernel.quantum_manager_server.</code><code class="sig-name descname">QuantumManagerMessage</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">msg_type</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#src.kernel.quantum_manager_server.QuantumManagerMsgType" title="src.kernel.quantum_manager_server.QuantumManagerMsgType">src.kernel.quantum_manager_server.QuantumManagerMsgType</a></span></em>, <em class="sig-param"><span class="n">keys</span><span class="p">:</span> <span class="n">List<span class="p">[</span>int<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">args</span><span class="p">:</span> <span class="n">List<span class="p">[</span>Any<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.kernel.quantum_manager_server.QuantumManagerMessage" title="Permalink to this definition">¶</a></dt>
 <dd><p>Message for quantum manager communication.</p>
 <dl class="py attribute">
-<dt id="parallel.src.quantum_manager_server.QuantumManagerMessage.type">
-<code class="sig-name descname">type</code><a class="headerlink" href="#parallel.src.quantum_manager_server.QuantumManagerMessage.type" title="Permalink to this definition">¶</a></dt>
+<dt id="src.kernel.quantum_manager_server.QuantumManagerMessage.type">
+<code class="sig-name descname">type</code><a class="headerlink" href="#src.kernel.quantum_manager_server.QuantumManagerMessage.type" title="Permalink to this definition">¶</a></dt>
 <dd><p>type of message.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -67,8 +67,8 @@ Additionally defined are utility functions for socket connections and the messag
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="parallel.src.quantum_manager_server.QuantumManagerMessage.keys">
-<code class="sig-name descname">keys</code><a class="headerlink" href="#parallel.src.quantum_manager_server.QuantumManagerMessage.keys" title="Permalink to this definition">¶</a></dt>
+<dt id="src.kernel.quantum_manager_server.QuantumManagerMessage.keys">
+<code class="sig-name descname">keys</code><a class="headerlink" href="#src.kernel.quantum_manager_server.QuantumManagerMessage.keys" title="Permalink to this definition">¶</a></dt>
 <dd><p>list of ALL keys serviced by request.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -78,8 +78,8 @@ Additionally defined are utility functions for socket connections and the messag
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="parallel.src.quantum_manager_server.QuantumManagerMessage.args">
-<code class="sig-name descname">args</code><a class="headerlink" href="#parallel.src.quantum_manager_server.QuantumManagerMessage.args" title="Permalink to this definition">¶</a></dt>
+<dt id="src.kernel.quantum_manager_server.QuantumManagerMessage.args">
+<code class="sig-name descname">args</code><a class="headerlink" href="#src.kernel.quantum_manager_server.QuantumManagerMessage.args" title="Permalink to this definition">¶</a></dt>
 <dd><p>list of other arguments for the request.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -89,8 +89,8 @@ Additionally defined are utility functions for socket connections and the messag
 </dd></dl>
 
 <dl class="py method">
-<dt id="parallel.src.quantum_manager_server.QuantumManagerMessage.deserialize">
-<code class="sig-name descname">deserialize</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">j_data</span></em><span class="sig-paren">)</span><a class="headerlink" href="#parallel.src.quantum_manager_server.QuantumManagerMessage.deserialize" title="Permalink to this definition">¶</a></dt>
+<dt id="src.kernel.quantum_manager_server.QuantumManagerMessage.deserialize">
+<code class="sig-name descname">deserialize</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">j_data</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.kernel.quantum_manager_server.QuantumManagerMessage.deserialize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to reconstruct a message from serialized data.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -100,8 +100,8 @@ Additionally defined are utility functions for socket connections and the messag
 </dd></dl>
 
 <dl class="py method">
-<dt id="parallel.src.quantum_manager_server.QuantumManagerMessage.serialize">
-<code class="sig-name descname">serialize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#parallel.src.quantum_manager_server.QuantumManagerMessage.serialize" title="Permalink to this definition">¶</a></dt>
+<dt id="src.kernel.quantum_manager_server.QuantumManagerMessage.serialize">
+<code class="sig-name descname">serialize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.kernel.quantum_manager_server.QuantumManagerMessage.serialize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Serializes the data stored in the message.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -119,14 +119,14 @@ Additionally defined are utility functions for socket connections and the messag
 </dd></dl>
 
 <dl class="py class">
-<dt id="parallel.src.quantum_manager_server.QuantumManagerMsgType">
-<em class="property">class </em><code class="sig-prename descclassname">parallel.src.quantum_manager_server.</code><code class="sig-name descname">QuantumManagerMsgType</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#parallel.src.quantum_manager_server.QuantumManagerMsgType" title="Permalink to this definition">¶</a></dt>
+<dt id="src.kernel.quantum_manager_server.QuantumManagerMsgType">
+<em class="property">class </em><code class="sig-prename descclassname">src.kernel.quantum_manager_server.</code><code class="sig-name descname">QuantumManagerMsgType</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.kernel.quantum_manager_server.QuantumManagerMsgType" title="Permalink to this definition">¶</a></dt>
 <dd><p>An enumeration.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="parallel.src.quantum_manager_server.start_server">
-<code class="sig-prename descclassname">parallel.src.quantum_manager_server.</code><code class="sig-name descname">start_server</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ip</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">port</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">client_num</span></em>, <em class="sig-param"><span class="n">formalism</span><span class="o">=</span><span class="default_value">'KET'</span></em>, <em class="sig-param"><span class="n">log_file</span><span class="o">=</span><span class="default_value">'server_log.json'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#parallel.src.quantum_manager_server.start_server" title="Permalink to this definition">¶</a></dt>
+<dt id="src.kernel.quantum_manager_server.start_server">
+<code class="sig-prename descclassname">src.kernel.quantum_manager_server.</code><code class="sig-name descname">start_server</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ip</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">port</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">client_num</span></em>, <em class="sig-param"><span class="n">formalism</span><span class="o">=</span><span class="default_value">'KET'</span></em>, <em class="sig-param"><span class="n">log_file</span><span class="o">=</span><span class="default_value">'server_log.json'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.kernel.quantum_manager_server.start_server" title="Permalink to this definition">¶</a></dt>
 <dd><p>Main function to run quantum manager server.</p>
 <p>Will run until all clients have disconnected or <cite>TERMINATE</cite> message received.
 Will block processing until all clients connected.</p>
@@ -156,12 +156,12 @@ Will block processing until all clients connected.</p>
   <p class="topless"><a href="quantum_manager_client.html"
                         title="previous chapter">Quantum Manager Client</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="communication.html"
-                        title="next chapter">Process Communication</a></p>
+  <p class="topless"><a href="quantum_state.html"
+                        title="next chapter">Quantum State</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../../_sources/references/parallel/quantum_manager_server.rst.txt"
+      <li><a href="../../_sources/references/kernel/quantum_manager_server.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -189,13 +189,13 @@ Will block processing until all clients connected.</p>
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="communication.html" title="Process Communication"
+          <a href="quantum_state.html" title="Quantum State"
              >next</a> |</li>
         <li class="right" >
           <a href="quantum_manager_client.html" title="Quantum Manager Client"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.2 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="top.html" >Parallel</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="top.html" >Kernel</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Quantum Manager Server</a></li> 
       </ul>
     </div>

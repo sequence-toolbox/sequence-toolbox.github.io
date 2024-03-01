@@ -1,20 +1,19 @@
 
 <!DOCTYPE html>
 
-<html lang="en">
+<html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-
-    <title>Encoding &#8212; SeQUeNCe 0.6.2 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/classic.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encoding &#8212; SeQUeNCe 0.5.2 documentation</title>
+    <link rel="stylesheet" href="../../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     
-    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
     <script src="../../../_static/jquery.js"></script>
     <script src="../../../_static/underscore.js"></script>
-    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/language_data.js"></script>
     
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -36,7 +35,7 @@
         <li class="right" >
           <a href="top.html" title="Utils"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">SeQUeNCe 0.6.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">SeQUeNCe 0.5.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../top.html" >Miscellaneous</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="top.html" accesskey="U">Utils</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Encoding</a></li> 
@@ -48,56 +47,56 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="module-src.utils.encoding">
-<span id="encoding"></span><h1>Encoding<a class="headerlink" href="#module-src.utils.encoding" title="Permalink to this heading">¶</a></h1>
+  <div class="section" id="module-src.utils.encoding">
+<span id="encoding"></span><h1>Encoding<a class="headerlink" href="#module-src.utils.encoding" title="Permalink to this headline">¶</a></h1>
 <p>Definitions of encoding schemes.</p>
 <p>Encoding schemes are applied to photons and memories to track how quantum information is stored.
 This includes the name of the encoding scheme, bases available, and any other necessary parameters.</p>
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.utils.encoding.polarization">
-<span class="sig-prename descclassname"><span class="pre">src.utils.encoding.</span></span><span class="sig-name descname"><span class="pre">polarization</span></span><a class="headerlink" href="#src.utils.encoding.polarization" title="Permalink to this definition">¶</a></dt>
+<dt id="src.utils.encoding.polarization">
+<code class="sig-prename descclassname">src.utils.encoding.</code><code class="sig-name descname">polarization</code><a class="headerlink" href="#src.utils.encoding.polarization" title="Permalink to this definition">¶</a></dt>
 <dd><p>defines the polarization encoding scheme, including the Z- and X-basis.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>Dict[str, any]</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.utils.encoding.time_bin">
-<span class="sig-prename descclassname"><span class="pre">src.utils.encoding.</span></span><span class="sig-name descname"><span class="pre">time_bin</span></span><a class="headerlink" href="#src.utils.encoding.time_bin" title="Permalink to this definition">¶</a></dt>
+<dt id="src.utils.encoding.time_bin">
+<code class="sig-prename descclassname">src.utils.encoding.</code><code class="sig-name descname">time_bin</code><a class="headerlink" href="#src.utils.encoding.time_bin" title="Permalink to this definition">¶</a></dt>
 <dd><p>defines the time bin encoding scheme, including the Z- and X-basis. Also defines the bin separation time.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>Dict[str, any]</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.utils.encoding.single_atom">
-<span class="sig-prename descclassname"><span class="pre">src.utils.encoding.</span></span><span class="sig-name descname"><span class="pre">single_atom</span></span><a class="headerlink" href="#src.utils.encoding.single_atom" title="Permalink to this definition">¶</a></dt>
+<dt id="src.utils.encoding.single_atom">
+<code class="sig-prename descclassname">src.utils.encoding.</code><code class="sig-name descname">single_atom</code><a class="headerlink" href="#src.utils.encoding.single_atom" title="Permalink to this definition">¶</a></dt>
 <dd><p>defines the emissive memory scheme, including the Z-basis.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>Dict[str, any]</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.utils.encoding.absorptive">
-<span class="sig-prename descclassname"><span class="pre">src.utils.encoding.</span></span><span class="sig-name descname"><span class="pre">absorptive</span></span><a class="headerlink" href="#src.utils.encoding.absorptive" title="Permalink to this definition">¶</a></dt>
+<dt id="src.utils.encoding.absorptive">
+<code class="sig-prename descclassname">src.utils.encoding.</code><code class="sig-name descname">absorptive</code><a class="headerlink" href="#src.utils.encoding.absorptive" title="Permalink to this definition">¶</a></dt>
 <dd><p>defines the absorptive memory scheme, including the Z-basis.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>Dict[str, any]</p>
 </dd>
 </dl>
 </dd></dl>
 
-</section>
+</div>
 
 
             <div class="clearer"></div>
@@ -106,16 +105,12 @@ This includes the name of the encoding scheme, bases available, and any other ne
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <div>
-    <h4>Previous topic</h4>
-    <p class="topless"><a href="top.html"
-                          title="previous chapter">Utils</a></p>
-  </div>
-  <div>
-    <h4>Next topic</h4>
-    <p class="topless"><a href="log.html"
-                          title="next chapter">Logging</a></p>
-  </div>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="top.html"
+                        title="previous chapter">Utils</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="log.html"
+                        title="next chapter">Logging</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -127,12 +122,12 @@ This includes the name of the encoding scheme, bases available, and any other ne
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../../../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script>document.getElementById('searchbox').style.display = "block"</script>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -152,15 +147,15 @@ This includes the name of the encoding scheme, bases available, and any other ne
         <li class="right" >
           <a href="top.html" title="Utils"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">SeQUeNCe 0.6.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">SeQUeNCe 0.5.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../top.html" >Miscellaneous</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="top.html" >Utils</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Encoding</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2020-2024.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
+        &#169; Copyright 2020-2022.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
     </div>
   </body>
 </html>

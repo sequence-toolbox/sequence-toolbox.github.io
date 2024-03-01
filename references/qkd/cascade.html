@@ -1,20 +1,19 @@
 
 <!DOCTYPE html>
 
-<html lang="en">
+<html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-
-    <title>Cascade &#8212; SeQUeNCe 0.6.2 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/classic.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cascade &#8212; SeQUeNCe 0.5.2 documentation</title>
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -36,7 +35,7 @@
         <li class="right" >
           <a href="BB84.html" title="BB84"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.6.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" accesskey="U">Quantum Key Distribution</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Cascade</a></li> 
       </ul>
@@ -47,15 +46,15 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="module-src.qkd.cascade">
-<span id="cascade"></span><h1>Cascade<a class="headerlink" href="#module-src.qkd.cascade" title="Permalink to this heading">¶</a></h1>
+  <div class="section" id="module-src.qkd.cascade">
+<span id="cascade"></span><h1>Cascade<a class="headerlink" href="#module-src.qkd.cascade" title="Permalink to this headline">¶</a></h1>
 <p>Definition of cascade protocol implementation.</p>
 <p>This module provides an implementation of the cascade protocol for error correction.
 The protocol must be provided with a lower-layer protocol for key generation, such as BB84.
 Also included in this module are a function to pair protocol instances (required before the start of transmission) and the message type used by the protocol.</p>
 <dl class="py class">
-<dt class="sig sig-object py" id="src.qkd.cascade.Cascade">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.qkd.cascade.</span></span><span class="sig-name descname"><span class="pre">Cascade</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">own</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../topology/node.html#src.topology.node.QKDNode" title="src.topology.node.QKDNode"><span class="pre">QKDNode</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">w</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">role</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">secure_params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.qkd.cascade.Cascade" title="Permalink to this definition">¶</a></dt>
+<dt id="src.qkd.cascade.Cascade">
+<em class="property">class </em><code class="sig-prename descclassname">src.qkd.cascade.</code><code class="sig-name descname">Cascade</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">own</span><span class="p">:</span> <span class="n">QKDNode</span></em>, <em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">w</span><span class="o">=</span><span class="default_value">4</span></em>, <em class="sig-param"><span class="n">role</span><span class="o">=</span><span class="default_value">- 1</span></em>, <em class="sig-param"><span class="n">secure_params</span><span class="o">=</span><span class="default_value">100</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.qkd.cascade.Cascade" title="Permalink to this definition">¶</a></dt>
 <dd><p>Implementation of cascade error correction protocol.</p>
 <p>The cascade protocol uses checksums to determine if there are errors in a generated key and pinpoint the errors.
 The protocol exists in 3 states:</p>
@@ -65,330 +64,330 @@ The protocol exists in 3 states:</p>
 <li><p>end</p></li>
 </ol>
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.qkd.cascade.Cascade.own">
-<span class="sig-name descname"><span class="pre">own</span></span><a class="headerlink" href="#src.qkd.cascade.Cascade.own" title="Permalink to this definition">¶</a></dt>
+<dt id="src.qkd.cascade.Cascade.own">
+<code class="sig-name descname">own</code><a class="headerlink" href="#src.qkd.cascade.Cascade.own" title="Permalink to this definition">¶</a></dt>
 <dd><p>node that protocol instance is attached to.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference internal" href="../topology/node.html#src.topology.node.QuantumRouter" title="src.topology.node.QuantumRouter">QuantumRouter</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.qkd.cascade.Cascade.name">
-<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#src.qkd.cascade.Cascade.name" title="Permalink to this definition">¶</a></dt>
+<dt id="src.qkd.cascade.Cascade.name">
+<code class="sig-name descname">name</code><a class="headerlink" href="#src.qkd.cascade.Cascade.name" title="Permalink to this definition">¶</a></dt>
 <dd><p>label for protocol instance.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>str</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.qkd.cascade.Cascade.w">
-<span class="sig-name descname"><span class="pre">w</span></span><a class="headerlink" href="#src.qkd.cascade.Cascade.w" title="Permalink to this definition">¶</a></dt>
+<dt id="src.qkd.cascade.Cascade.w">
+<code class="sig-name descname">w</code><a class="headerlink" href="#src.qkd.cascade.Cascade.w" title="Permalink to this definition">¶</a></dt>
 <dd><p>cascade parameter.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.qkd.cascade.Cascade.role">
-<span class="sig-name descname"><span class="pre">role</span></span><a class="headerlink" href="#src.qkd.cascade.Cascade.role" title="Permalink to this definition">¶</a></dt>
+<dt id="src.qkd.cascade.Cascade.role">
+<code class="sig-name descname">role</code><a class="headerlink" href="#src.qkd.cascade.Cascade.role" title="Permalink to this definition">¶</a></dt>
 <dd><p>differentiates “alice” and “bob” protocols.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.qkd.cascade.Cascade.secure_params">
-<span class="sig-name descname"><span class="pre">secure_params</span></span><a class="headerlink" href="#src.qkd.cascade.Cascade.secure_params" title="Permalink to this definition">¶</a></dt>
+<dt id="src.qkd.cascade.Cascade.secure_params">
+<code class="sig-name descname">secure_params</code><a class="headerlink" href="#src.qkd.cascade.Cascade.secure_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>security parameter.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.qkd.cascade.Cascade.another">
-<span class="sig-name descname"><span class="pre">another</span></span><a class="headerlink" href="#src.qkd.cascade.Cascade.another" title="Permalink to this definition">¶</a></dt>
+<dt id="src.qkd.cascade.Cascade.another">
+<code class="sig-name descname">another</code><a class="headerlink" href="#src.qkd.cascade.Cascade.another" title="Permalink to this definition">¶</a></dt>
 <dd><p>reference to paired cascade protocol.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference internal" href="#src.qkd.cascade.Cascade" title="src.qkd.cascade.Cascade">Cascade</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.qkd.cascade.Cascade.state">
-<span class="sig-name descname"><span class="pre">state</span></span><a class="headerlink" href="#src.qkd.cascade.Cascade.state" title="Permalink to this definition">¶</a></dt>
+<dt id="src.qkd.cascade.Cascade.state">
+<code class="sig-name descname">state</code><a class="headerlink" href="#src.qkd.cascade.Cascade.state" title="Permalink to this definition">¶</a></dt>
 <dd><p>current state of protocol.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.qkd.cascade.Cascade.keylen">
-<span class="sig-name descname"><span class="pre">keylen</span></span><a class="headerlink" href="#src.qkd.cascade.Cascade.keylen" title="Permalink to this definition">¶</a></dt>
+<dt id="src.qkd.cascade.Cascade.keylen">
+<code class="sig-name descname">keylen</code><a class="headerlink" href="#src.qkd.cascade.Cascade.keylen" title="Permalink to this definition">¶</a></dt>
 <dd><p>lenght of keys to generate.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.qkd.cascade.Cascade.frame_len">
-<span class="sig-name descname"><span class="pre">frame_len</span></span><a class="headerlink" href="#src.qkd.cascade.Cascade.frame_len" title="Permalink to this definition">¶</a></dt>
+<dt id="src.qkd.cascade.Cascade.frame_len">
+<code class="sig-name descname">frame_len</code><a class="headerlink" href="#src.qkd.cascade.Cascade.frame_len" title="Permalink to this definition">¶</a></dt>
 <dd><p>length of frame to use to generate keys.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.qkd.cascade.Cascade.frame_num">
-<span class="sig-name descname"><span class="pre">frame_num</span></span><a class="headerlink" href="#src.qkd.cascade.Cascade.frame_num" title="Permalink to this definition">¶</a></dt>
+<dt id="src.qkd.cascade.Cascade.frame_num">
+<code class="sig-name descname">frame_num</code><a class="headerlink" href="#src.qkd.cascade.Cascade.frame_num" title="Permalink to this definition">¶</a></dt>
 <dd><p>frame number.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.qkd.cascade.Cascade.run_time">
-<span class="sig-name descname"><span class="pre">run_time</span></span><a class="headerlink" href="#src.qkd.cascade.Cascade.run_time" title="Permalink to this definition">¶</a></dt>
+<dt id="src.qkd.cascade.Cascade.run_time">
+<code class="sig-name descname">run_time</code><a class="headerlink" href="#src.qkd.cascade.Cascade.run_time" title="Permalink to this definition">¶</a></dt>
 <dd><p>time to run protocol.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.qkd.cascade.Cascade.bits">
-<span class="sig-name descname"><span class="pre">bits</span></span><a class="headerlink" href="#src.qkd.cascade.Cascade.bits" title="Permalink to this definition">¶</a></dt>
+<dt id="src.qkd.cascade.Cascade.bits">
+<code class="sig-name descname">bits</code><a class="headerlink" href="#src.qkd.cascade.Cascade.bits" title="Permalink to this definition">¶</a></dt>
 <dd><p>bits to operate on (received from BB84).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>List[int]</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.qkd.cascade.Cascade.t1">
-<span class="sig-name descname"><span class="pre">t1</span></span><a class="headerlink" href="#src.qkd.cascade.Cascade.t1" title="Permalink to this definition">¶</a></dt>
+<dt id="src.qkd.cascade.Cascade.t1">
+<code class="sig-name descname">t1</code><a class="headerlink" href="#src.qkd.cascade.Cascade.t1" title="Permalink to this definition">¶</a></dt>
 <dd><p>cascade parameter.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.qkd.cascade.Cascade.t2">
-<span class="sig-name descname"><span class="pre">t2</span></span><a class="headerlink" href="#src.qkd.cascade.Cascade.t2" title="Permalink to this definition">¶</a></dt>
+<dt id="src.qkd.cascade.Cascade.t2">
+<code class="sig-name descname">t2</code><a class="headerlink" href="#src.qkd.cascade.Cascade.t2" title="Permalink to this definition">¶</a></dt>
 <dd><p>cascade parameter.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.qkd.cascade.Cascade.k1">
-<span class="sig-name descname"><span class="pre">k1</span></span><a class="headerlink" href="#src.qkd.cascade.Cascade.k1" title="Permalink to this definition">¶</a></dt>
+<dt id="src.qkd.cascade.Cascade.k1">
+<code class="sig-name descname">k1</code><a class="headerlink" href="#src.qkd.cascade.Cascade.k1" title="Permalink to this definition">¶</a></dt>
 <dd><p>cascade parameter.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.qkd.cascade.Cascade.checksum_tables">
-<span class="sig-name descname"><span class="pre">checksum_tables</span></span><a class="headerlink" href="#src.qkd.cascade.Cascade.checksum_tables" title="Permalink to this definition">¶</a></dt>
+<dt id="src.qkd.cascade.Cascade.checksum_tables">
+<code class="sig-name descname">checksum_tables</code><a class="headerlink" href="#src.qkd.cascade.Cascade.checksum_tables" title="Permalink to this definition">¶</a></dt>
 <dd><p>lists of generated checksums.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>List[List[int]]</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.qkd.cascade.Cascade.another_checksums">
-<span class="sig-name descname"><span class="pre">another_checksums</span></span><a class="headerlink" href="#src.qkd.cascade.Cascade.another_checksums" title="Permalink to this definition">¶</a></dt>
+<dt id="src.qkd.cascade.Cascade.another_checksums">
+<code class="sig-name descname">another_checksums</code><a class="headerlink" href="#src.qkd.cascade.Cascade.another_checksums" title="Permalink to this definition">¶</a></dt>
 <dd><p>checksums of paired protocol.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>List[List[int]]</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.qkd.cascade.Cascade.index_to_block_id_lists">
-<span class="sig-name descname"><span class="pre">index_to_block_id_lists</span></span><a class="headerlink" href="#src.qkd.cascade.Cascade.index_to_block_id_lists" title="Permalink to this definition">¶</a></dt>
+<dt id="src.qkd.cascade.Cascade.index_to_block_id_lists">
+<code class="sig-name descname">index_to_block_id_lists</code><a class="headerlink" href="#src.qkd.cascade.Cascade.index_to_block_id_lists" title="Permalink to this definition">¶</a></dt>
 <dd><p>store block ids.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>List</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.qkd.cascade.Cascade.block_id_to_index_lists">
-<span class="sig-name descname"><span class="pre">block_id_to_index_lists</span></span><a class="headerlink" href="#src.qkd.cascade.Cascade.block_id_to_index_lists" title="Permalink to this definition">¶</a></dt>
+<dt id="src.qkd.cascade.Cascade.block_id_to_index_lists">
+<code class="sig-name descname">block_id_to_index_lists</code><a class="headerlink" href="#src.qkd.cascade.Cascade.block_id_to_index_lists" title="Permalink to this definition">¶</a></dt>
 <dd><p>store index ids.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>List</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.qkd.cascade.Cascade.time_cost">
-<span class="sig-name descname"><span class="pre">time_cost</span></span><a class="headerlink" href="#src.qkd.cascade.Cascade.time_cost" title="Permalink to this definition">¶</a></dt>
+<dt id="src.qkd.cascade.Cascade.time_cost">
+<code class="sig-name descname">time_cost</code><a class="headerlink" href="#src.qkd.cascade.Cascade.time_cost" title="Permalink to this definition">¶</a></dt>
 <dd><p>time penalty for key generation.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.qkd.cascade.Cascade.setup_time">
-<span class="sig-name descname"><span class="pre">setup_time</span></span><a class="headerlink" href="#src.qkd.cascade.Cascade.setup_time" title="Permalink to this definition">¶</a></dt>
+<dt id="src.qkd.cascade.Cascade.setup_time">
+<code class="sig-name descname">setup_time</code><a class="headerlink" href="#src.qkd.cascade.Cascade.setup_time" title="Permalink to this definition">¶</a></dt>
 <dd><p>time of cascade protocol setup.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.qkd.cascade.Cascade.start_time">
-<span class="sig-name descname"><span class="pre">start_time</span></span><a class="headerlink" href="#src.qkd.cascade.Cascade.start_time" title="Permalink to this definition">¶</a></dt>
+<dt id="src.qkd.cascade.Cascade.start_time">
+<code class="sig-name descname">start_time</code><a class="headerlink" href="#src.qkd.cascade.Cascade.start_time" title="Permalink to this definition">¶</a></dt>
 <dd><p>time to start generating corrected keys.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.qkd.cascade.Cascade.end_time">
-<span class="sig-name descname"><span class="pre">end_time</span></span><a class="headerlink" href="#src.qkd.cascade.Cascade.end_time" title="Permalink to this definition">¶</a></dt>
+<dt id="src.qkd.cascade.Cascade.end_time">
+<code class="sig-name descname">end_time</code><a class="headerlink" href="#src.qkd.cascade.Cascade.end_time" title="Permalink to this definition">¶</a></dt>
 <dd><p>time to stop generating keys.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.qkd.cascade.Cascade.valid_keys">
-<span class="sig-name descname"><span class="pre">valid_keys</span></span><a class="headerlink" href="#src.qkd.cascade.Cascade.valid_keys" title="Permalink to this definition">¶</a></dt>
+<dt id="src.qkd.cascade.Cascade.valid_keys">
+<code class="sig-name descname">valid_keys</code><a class="headerlink" href="#src.qkd.cascade.Cascade.valid_keys" title="Permalink to this definition">¶</a></dt>
 <dd><p>list of keys generated.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>List[int]</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.qkd.cascade.Cascade.throughput">
-<span class="sig-name descname"><span class="pre">throughput</span></span><a class="headerlink" href="#src.qkd.cascade.Cascade.throughput" title="Permalink to this definition">¶</a></dt>
+<dt id="src.qkd.cascade.Cascade.throughput">
+<code class="sig-name descname">throughput</code><a class="headerlink" href="#src.qkd.cascade.Cascade.throughput" title="Permalink to this definition">¶</a></dt>
 <dd><p>protocol throughput in bits/s.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>float</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.qkd.cascade.Cascade.error_bit_rate">
-<span class="sig-name descname"><span class="pre">error_bit_rate</span></span><a class="headerlink" href="#src.qkd.cascade.Cascade.error_bit_rate" title="Permalink to this definition">¶</a></dt>
+<dt id="src.qkd.cascade.Cascade.error_bit_rate">
+<code class="sig-name descname">error_bit_rate</code><a class="headerlink" href="#src.qkd.cascade.Cascade.error_bit_rate" title="Permalink to this definition">¶</a></dt>
 <dd><p>rate of errors in finished keys.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>float</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.qkd.cascade.Cascade.latency">
-<span class="sig-name descname"><span class="pre">latency</span></span><a class="headerlink" href="#src.qkd.cascade.Cascade.latency" title="Permalink to this definition">¶</a></dt>
+<dt id="src.qkd.cascade.Cascade.latency">
+<code class="sig-name descname">latency</code><a class="headerlink" href="#src.qkd.cascade.Cascade.latency" title="Permalink to this definition">¶</a></dt>
 <dd><p>average latency of generated keys.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.qkd.cascade.Cascade.disclosed_bits_counter">
-<span class="sig-name descname"><span class="pre">disclosed_bits_counter</span></span><a class="headerlink" href="#src.qkd.cascade.Cascade.disclosed_bits_counter" title="Permalink to this definition">¶</a></dt>
+<dt id="src.qkd.cascade.Cascade.disclosed_bits_counter">
+<code class="sig-name descname">disclosed_bits_counter</code><a class="headerlink" href="#src.qkd.cascade.Cascade.disclosed_bits_counter" title="Permalink to this definition">¶</a></dt>
 <dd><p>counts revealed bits.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.qkd.cascade.Cascade.privacy_throughput">
-<span class="sig-name descname"><span class="pre">privacy_throughput</span></span><a class="headerlink" href="#src.qkd.cascade.Cascade.privacy_throughput" title="Permalink to this definition">¶</a></dt>
+<dt id="src.qkd.cascade.Cascade.privacy_throughput">
+<code class="sig-name descname">privacy_throughput</code><a class="headerlink" href="#src.qkd.cascade.Cascade.privacy_throughput" title="Permalink to this definition">¶</a></dt>
 <dd><p>throughput of not revealed bits.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.qkd.cascade.Cascade.check_checksum">
-<span class="sig-name descname"><span class="pre">check_checksum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#src.qkd.cascade.Cascade.check_checksum" title="Permalink to this definition">¶</a></dt>
+<dt id="src.qkd.cascade.Cascade.check_checksum">
+<code class="sig-name descname">check_checksum</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">key_id</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#src.qkd.cascade.Cascade.check_checksum" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to check a checksum.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>key_id</strong> (<em>int</em>) – key id to check checksums for.</p>
 </dd>
 </dl>
@@ -400,8 +399,8 @@ WILL send a KEY_IS_VALID method to other cascade protocols.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.qkd.cascade.Cascade.create_checksum_table">
-<span class="sig-name descname"><span class="pre">create_checksum_table</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.qkd.cascade.Cascade.create_checksum_table" title="Permalink to this definition">¶</a></dt>
+<dt id="src.qkd.cascade.Cascade.create_checksum_table">
+<code class="sig-name descname">create_checksum_table</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.qkd.cascade.Cascade.create_checksum_table" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to create checksum tables.</p>
 <p>Initialize checksum_table, index_to_block_id, and block_id_to_index after get key from BB84.</p>
 <dl class="simple">
@@ -411,14 +410,14 @@ WILL send a KEY_IS_VALID method to other cascade protocols.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.qkd.cascade.Cascade.end_cascade">
-<span class="sig-name descname"><span class="pre">end_cascade</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.qkd.cascade.Cascade.end_cascade" title="Permalink to this definition">¶</a></dt>
+<dt id="src.qkd.cascade.Cascade.end_cascade">
+<code class="sig-name descname">end_cascade</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.qkd.cascade.Cascade.end_cascade" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to end cascade protocol.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.qkd.cascade.Cascade.generate_key">
-<span class="sig-name descname"><span class="pre">generate_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">keylen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame_num</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">inf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">inf</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.qkd.cascade.Cascade.generate_key" title="Permalink to this definition">¶</a></dt>
+<dt id="src.qkd.cascade.Cascade.generate_key">
+<code class="sig-name descname">generate_key</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">keylen</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">frame_num</span><span class="o">=</span><span class="default_value">inf</span></em>, <em class="sig-param"><span class="n">run_time</span><span class="o">=</span><span class="default_value">inf</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.qkd.cascade.Cascade.generate_key" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to start key generation.</p>
 <p>The process for generating keys is:</p>
 <ol class="arabic simple">
@@ -426,7 +425,7 @@ WILL send a KEY_IS_VALID method to other cascade protocols.</p>
 <li><p>Generate keylen bits key at 1st pass</p></li>
 </ol>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>keylen</strong> (<em>int</em>) – length of key to generate.</p></li>
 <li><p><strong>frame_num</strong> (<em>int</em>) – number of keys to generate (default inf).</p></li>
@@ -437,13 +436,13 @@ WILL send a KEY_IS_VALID method to other cascade protocols.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.qkd.cascade.Cascade.interactive_binary_search">
-<span class="sig-name descname"><span class="pre">interactive_binary_search</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pass_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">block_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.qkd.cascade.Cascade.interactive_binary_search" title="Permalink to this definition">¶</a></dt>
+<dt id="src.qkd.cascade.Cascade.interactive_binary_search">
+<code class="sig-name descname">interactive_binary_search</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">key_id</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">pass_id</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">block_id</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">start</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">end</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.qkd.cascade.Cascade.interactive_binary_search" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to search for errors in key.</p>
 <p>Split block[start:end] to block[start:(start+end)/2], block[(start+end)/2,end].
 Ask checksums of subblock from sender.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>key_id</strong> (<em>int</em>) – id of key to check.</p></li>
 <li><p><strong>pass_id</strong> (<em>int</em>) – id of pass to check.</p></li>
@@ -460,36 +459,36 @@ Ask checksums of subblock from sender.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.qkd.cascade.Cascade.performance_measure">
-<span class="sig-name descname"><span class="pre">performance_measure</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.qkd.cascade.Cascade.performance_measure" title="Permalink to this definition">¶</a></dt>
+<dt id="src.qkd.cascade.Cascade.performance_measure">
+<code class="sig-name descname">performance_measure</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.qkd.cascade.Cascade.performance_measure" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to record performance metrics.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.qkd.cascade.Cascade.pop">
-<span class="sig-name descname"><span class="pre">pop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.qkd.cascade.Cascade.pop" title="Permalink to this definition">¶</a></dt>
+<dt id="src.qkd.cascade.Cascade.pop">
+<code class="sig-name descname">pop</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">info</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.qkd.cascade.Cascade.pop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Function called by BB84 when it creates a key.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>info</strong> (<em>int</em>) – key received.</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.qkd.cascade.Cascade.push">
-<span class="sig-name descname"><span class="pre">push</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">keylen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame_num</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">inf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">inf</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.qkd.cascade.Cascade.push" title="Permalink to this definition">¶</a></dt>
+<dt id="src.qkd.cascade.Cascade.push">
+<code class="sig-name descname">push</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">keylen</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">frame_num</span><span class="o">=</span><span class="default_value">inf</span></em>, <em class="sig-param"><span class="n">run_time</span><span class="o">=</span><span class="default_value">inf</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.qkd.cascade.Cascade.push" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to receive key generation events.</p>
 <p>Defers to <cite>generate_key</cite> method.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.qkd.cascade.Cascade.received_message">
-<span class="sig-name descname"><span class="pre">received_message</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">src</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../misc/message.html#src.message.Message" title="src.message.Message"><span class="pre">Message</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.qkd.cascade.Cascade.received_message" title="Permalink to this definition">¶</a></dt>
+<dt id="src.qkd.cascade.Cascade.received_message">
+<code class="sig-name descname">received_message</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">src</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">msg</span><span class="p">:</span> <span class="n"><a class="reference internal" href="../misc/message.html#src.message.Message" title="src.message.Message">src.message.Message</a></span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.qkd.cascade.Cascade.received_message" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to receive messages from other protocol instance.</p>
 <p>Different messages will cause different actions.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>src</strong> (<em>str</em>) – name of node that sent the message.</p></li>
 <li><p><strong>msg</strong> (<a class="reference internal" href="../misc/message.html#src.message.Message" title="src.message.Message"><em>Message</em></a>) – message received.</p></li>
@@ -499,168 +498,168 @@ Ask checksums of subblock from sender.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.qkd.cascade.Cascade.send_by_cc">
-<span class="sig-name descname"><span class="pre">send_by_cc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#src.qkd.cascade.CascadeMessage" title="src.qkd.cascade.CascadeMessage"><span class="pre">CascadeMessage</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.qkd.cascade.Cascade.send_by_cc" title="Permalink to this definition">¶</a></dt>
+<dt id="src.qkd.cascade.Cascade.send_by_cc">
+<code class="sig-name descname">send_by_cc</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">message</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#src.qkd.cascade.CascadeMessage" title="src.qkd.cascade.CascadeMessage">src.qkd.cascade.CascadeMessage</a></span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.qkd.cascade.Cascade.send_by_cc" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to send classical messages.</p>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
-<dt class="sig sig-object py" id="src.qkd.cascade.CascadeMessage">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.qkd.cascade.</span></span><span class="sig-name descname"><span class="pre">CascadeMessage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Enum</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">receiver</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.qkd.cascade.CascadeMessage" title="Permalink to this definition">¶</a></dt>
+<dt id="src.qkd.cascade.CascadeMessage">
+<em class="property">class </em><code class="sig-prename descclassname">src.qkd.cascade.</code><code class="sig-name descname">CascadeMessage</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">msg_type</span><span class="p">:</span> <span class="n">enum.Enum</span></em>, <em class="sig-param"><span class="n">receiver</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.qkd.cascade.CascadeMessage" title="Permalink to this definition">¶</a></dt>
 <dd><p>Message used by cascade protocols.</p>
 <p>This message contains all information passed between cascade protocol instances.
 Messages of different types contain different information.</p>
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.qkd.cascade.CascadeMessage.msg_type">
-<span class="sig-name descname"><span class="pre">msg_type</span></span><a class="headerlink" href="#src.qkd.cascade.CascadeMessage.msg_type" title="Permalink to this definition">¶</a></dt>
+<dt id="src.qkd.cascade.CascadeMessage.msg_type">
+<code class="sig-name descname">msg_type</code><a class="headerlink" href="#src.qkd.cascade.CascadeMessage.msg_type" title="Permalink to this definition">¶</a></dt>
 <dd><p>defines the message type.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference internal" href="#src.qkd.cascade.CascadeMsgType" title="src.qkd.cascade.CascadeMsgType">CascadeMsgType</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.qkd.cascade.CascadeMessage.receiver">
-<span class="sig-name descname"><span class="pre">receiver</span></span><a class="headerlink" href="#src.qkd.cascade.CascadeMessage.receiver" title="Permalink to this definition">¶</a></dt>
+<dt id="src.qkd.cascade.CascadeMessage.receiver">
+<code class="sig-name descname">receiver</code><a class="headerlink" href="#src.qkd.cascade.CascadeMessage.receiver" title="Permalink to this definition">¶</a></dt>
 <dd><p>name of destination protocol instance.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>str</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.qkd.cascade.CascadeMessage.key">
-<span class="sig-name descname"><span class="pre">key</span></span><a class="headerlink" href="#src.qkd.cascade.CascadeMessage.key" title="Permalink to this definition">¶</a></dt>
+<dt id="src.qkd.cascade.CascadeMessage.key">
+<code class="sig-name descname">key</code><a class="headerlink" href="#src.qkd.cascade.CascadeMessage.key" title="Permalink to this definition">¶</a></dt>
 <dd><p>initial key sent to establish parameters (if <cite>msg_type == KEY</cite>).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.qkd.cascade.CascadeMessage.k">
-<span class="sig-name descname"><span class="pre">k</span></span><a class="headerlink" href="#src.qkd.cascade.CascadeMessage.k" title="Permalink to this definition">¶</a></dt>
+<dt id="src.qkd.cascade.CascadeMessage.k">
+<code class="sig-name descname">k</code><a class="headerlink" href="#src.qkd.cascade.CascadeMessage.k" title="Permalink to this definition">¶</a></dt>
 <dd><p>cascade parameter (if <cite>msg_type == PARAMS</cite>).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.qkd.cascade.CascadeMessage.keylen">
-<span class="sig-name descname"><span class="pre">keylen</span></span><a class="headerlink" href="#src.qkd.cascade.CascadeMessage.keylen" title="Permalink to this definition">¶</a></dt>
+<dt id="src.qkd.cascade.CascadeMessage.keylen">
+<code class="sig-name descname">keylen</code><a class="headerlink" href="#src.qkd.cascade.CascadeMessage.keylen" title="Permalink to this definition">¶</a></dt>
 <dd><p>length of keys to request from BB84 (if <cite>msg_type == PARAMS or GENERATE_KEY</cite>).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.qkd.cascade.CascadeMessage.frame_num">
-<span class="sig-name descname"><span class="pre">frame_num</span></span><a class="headerlink" href="#src.qkd.cascade.CascadeMessage.frame_num" title="Permalink to this definition">¶</a></dt>
+<dt id="src.qkd.cascade.CascadeMessage.frame_num">
+<code class="sig-name descname">frame_num</code><a class="headerlink" href="#src.qkd.cascade.CascadeMessage.frame_num" title="Permalink to this definition">¶</a></dt>
 <dd><p>number of keys to request (if <cite>msg_type == PARAMS or GENERATE_KEY</cite>).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.qkd.cascade.CascadeMessage.run_time">
-<span class="sig-name descname"><span class="pre">run_time</span></span><a class="headerlink" href="#src.qkd.cascade.CascadeMessage.run_time" title="Permalink to this definition">¶</a></dt>
+<dt id="src.qkd.cascade.CascadeMessage.run_time">
+<code class="sig-name descname">run_time</code><a class="headerlink" href="#src.qkd.cascade.CascadeMessage.run_time" title="Permalink to this definition">¶</a></dt>
 <dd><p>runtime for BB84 (if <cite>msg_type == PARAMS or GENERATE_KEY</cite>).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.qkd.cascade.CascadeMessage.key_id">
-<span class="sig-name descname"><span class="pre">key_id</span></span><a class="headerlink" href="#src.qkd.cascade.CascadeMessage.key_id" title="Permalink to this definition">¶</a></dt>
+<dt id="src.qkd.cascade.CascadeMessage.key_id">
+<code class="sig-name descname">key_id</code><a class="headerlink" href="#src.qkd.cascade.CascadeMessage.key_id" title="Permalink to this definition">¶</a></dt>
 <dd><p>key being processed  (if <cite>msg_type == CHECKSUMS or SEND_FOR_BINARY or RECEIVE_FOR_BINARY or KEY_IS_VALID</cite>).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.qkd.cascade.CascadeMessage.checksums">
-<span class="sig-name descname"><span class="pre">checksums</span></span><a class="headerlink" href="#src.qkd.cascade.CascadeMessage.checksums" title="Permalink to this definition">¶</a></dt>
+<dt id="src.qkd.cascade.CascadeMessage.checksums">
+<code class="sig-name descname">checksums</code><a class="headerlink" href="#src.qkd.cascade.CascadeMessage.checksums" title="Permalink to this definition">¶</a></dt>
 <dd><p>checksum results (if <cite>msg_type == CHECKSUMS</cite>).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.qkd.cascade.CascadeMessage.pass_id">
-<span class="sig-name descname"><span class="pre">pass_id</span></span><a class="headerlink" href="#src.qkd.cascade.CascadeMessage.pass_id" title="Permalink to this definition">¶</a></dt>
+<dt id="src.qkd.cascade.CascadeMessage.pass_id">
+<code class="sig-name descname">pass_id</code><a class="headerlink" href="#src.qkd.cascade.CascadeMessage.pass_id" title="Permalink to this definition">¶</a></dt>
 <dd><p>pass number (if <cite>msg_type == SEND_FOR_BINARY or RECEIVE_FOR_BINARY</cite>).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.qkd.cascade.CascadeMessage.block_id">
-<span class="sig-name descname"><span class="pre">block_id</span></span><a class="headerlink" href="#src.qkd.cascade.CascadeMessage.block_id" title="Permalink to this definition">¶</a></dt>
+<dt id="src.qkd.cascade.CascadeMessage.block_id">
+<code class="sig-name descname">block_id</code><a class="headerlink" href="#src.qkd.cascade.CascadeMessage.block_id" title="Permalink to this definition">¶</a></dt>
 <dd><p>block number (if <cite>msg_type == SEND_FOR_BINARY or RECEIVE_FOR_BINARY</cite>).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.qkd.cascade.CascadeMessage.start">
-<span class="sig-name descname"><span class="pre">start</span></span><a class="headerlink" href="#src.qkd.cascade.CascadeMessage.start" title="Permalink to this definition">¶</a></dt>
+<dt id="src.qkd.cascade.CascadeMessage.start">
+<code class="sig-name descname">start</code><a class="headerlink" href="#src.qkd.cascade.CascadeMessage.start" title="Permalink to this definition">¶</a></dt>
 <dd><p>starting position in key (if <cite>msg_type == SEND_FOR_BINARY or RECEIVE_FOR_BINARY</cite>).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.qkd.cascade.CascadeMessage.end">
-<span class="sig-name descname"><span class="pre">end</span></span><a class="headerlink" href="#src.qkd.cascade.CascadeMessage.end" title="Permalink to this definition">¶</a></dt>
+<dt id="src.qkd.cascade.CascadeMessage.end">
+<code class="sig-name descname">end</code><a class="headerlink" href="#src.qkd.cascade.CascadeMessage.end" title="Permalink to this definition">¶</a></dt>
 <dd><p>ending position in key (if <cite>msg_type == SEND_FOR_BINARY or RECEIVE_FOR_BINARY</cite>).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.qkd.cascade.CascadeMessage.checksum">
-<span class="sig-name descname"><span class="pre">checksum</span></span><a class="headerlink" href="#src.qkd.cascade.CascadeMessage.checksum" title="Permalink to this definition">¶</a></dt>
+<dt id="src.qkd.cascade.CascadeMessage.checksum">
+<code class="sig-name descname">checksum</code><a class="headerlink" href="#src.qkd.cascade.CascadeMessage.checksum" title="Permalink to this definition">¶</a></dt>
 <dd><p>checksum result (if <cite>msg_type == RECEIVE_FOR_BINARY</cite>).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>int</p>
 </dd>
 </dl>
@@ -669,17 +668,17 @@ Messages of different types contain different information.</p>
 </dd></dl>
 
 <dl class="py class">
-<dt class="sig sig-object py" id="src.qkd.cascade.CascadeMsgType">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.qkd.cascade.</span></span><span class="sig-name descname"><span class="pre">CascadeMsgType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qualname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.qkd.cascade.CascadeMsgType" title="Permalink to this definition">¶</a></dt>
+<dt id="src.qkd.cascade.CascadeMsgType">
+<em class="property">class </em><code class="sig-prename descclassname">src.qkd.cascade.</code><code class="sig-name descname">CascadeMsgType</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.qkd.cascade.CascadeMsgType" title="Permalink to this definition">¶</a></dt>
 <dd><p>Defines possible message types for cascade.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="src.qkd.cascade.pair_cascade_protocols">
-<span class="sig-prename descclassname"><span class="pre">src.qkd.cascade.</span></span><span class="sig-name descname"><span class="pre">pair_cascade_protocols</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sender</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#src.qkd.cascade.Cascade" title="src.qkd.cascade.Cascade"><span class="pre">Cascade</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">receiver</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#src.qkd.cascade.Cascade" title="src.qkd.cascade.Cascade"><span class="pre">Cascade</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.qkd.cascade.pair_cascade_protocols" title="Permalink to this definition">¶</a></dt>
+<dt id="src.qkd.cascade.pair_cascade_protocols">
+<code class="sig-prename descclassname">src.qkd.cascade.</code><code class="sig-name descname">pair_cascade_protocols</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sender</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#src.qkd.cascade.Cascade" title="src.qkd.cascade.Cascade">src.qkd.cascade.Cascade</a></span></em>, <em class="sig-param"><span class="n">receiver</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#src.qkd.cascade.Cascade" title="src.qkd.cascade.Cascade">src.qkd.cascade.Cascade</a></span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.qkd.cascade.pair_cascade_protocols" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to pair cascade protocol instance.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>sender</strong> (<a class="reference internal" href="#src.qkd.cascade.Cascade" title="src.qkd.cascade.Cascade"><em>Cascade</em></a>) – cascade protocol on node sending qubits (Alice).</p></li>
 <li><p><strong>receiver</strong> (<a class="reference internal" href="#src.qkd.cascade.Cascade" title="src.qkd.cascade.Cascade"><em>Cascade</em></a>) – cascade protocol on node receiving qubits (Bob).</p></li>
@@ -688,7 +687,7 @@ Messages of different types contain different information.</p>
 </dl>
 </dd></dl>
 
-</section>
+</div>
 
 
             <div class="clearer"></div>
@@ -697,16 +696,12 @@ Messages of different types contain different information.</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <div>
-    <h4>Previous topic</h4>
-    <p class="topless"><a href="BB84.html"
-                          title="previous chapter">BB84</a></p>
-  </div>
-  <div>
-    <h4>Next topic</h4>
-    <p class="topless"><a href="../misc/top.html"
-                          title="next chapter">Miscellaneous</a></p>
-  </div>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="BB84.html"
+                        title="previous chapter">BB84</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../misc/top.html"
+                        title="next chapter">Miscellaneous</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -718,12 +713,12 @@ Messages of different types contain different information.</p>
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script>document.getElementById('searchbox').style.display = "block"</script>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -743,14 +738,14 @@ Messages of different types contain different information.</p>
         <li class="right" >
           <a href="BB84.html" title="BB84"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.6.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" >Quantum Key Distribution</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Cascade</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2020-2024.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
+        &#169; Copyright 2020-2022.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
     </div>
   </body>
 </html>

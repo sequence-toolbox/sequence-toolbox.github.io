@@ -1,20 +1,19 @@
 
 <!DOCTYPE html>
 
-<html lang="en">
+<html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-
-    <title>Event List &#8212; SeQUeNCe 0.6.2 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/classic.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event List &#8212; SeQUeNCe 0.5.2 documentation</title>
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -36,7 +35,7 @@
         <li class="right" >
           <a href="event.html" title="Event"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.6.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" accesskey="U">Kernel</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Event List</a></li> 
       </ul>
@@ -47,43 +46,43 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="module-src.kernel.eventlist">
-<span id="event-list"></span><h1>Event List<a class="headerlink" href="#module-src.kernel.eventlist" title="Permalink to this heading">¶</a></h1>
+  <div class="section" id="module-src.kernel.eventlist">
+<span id="event-list"></span><h1>Event List<a class="headerlink" href="#module-src.kernel.eventlist" title="Permalink to this headline">¶</a></h1>
 <p>Definition of EventList class.</p>
 <p>This module defines the EventList class, used by the timeline to order and execute events.
 EventList is implemented as a min heap ordered by simulation time.</p>
 <dl class="py class">
-<dt class="sig sig-object py" id="src.kernel.eventlist.EventList">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.kernel.eventlist.</span></span><span class="sig-name descname"><span class="pre">EventList</span></span><a class="headerlink" href="#src.kernel.eventlist.EventList" title="Permalink to this definition">¶</a></dt>
+<dt id="src.kernel.eventlist.EventList">
+<em class="property">class </em><code class="sig-prename descclassname">src.kernel.eventlist.</code><code class="sig-name descname">EventList</code><a class="headerlink" href="#src.kernel.eventlist.EventList" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class of event list.</p>
 <p>This class is implemented as a min-heap. The event with the lowest time and priority is placed at the top of heap.</p>
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.kernel.eventlist.EventList.data">
-<span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="#src.kernel.eventlist.EventList.data" title="Permalink to this definition">¶</a></dt>
+<dt id="src.kernel.eventlist.EventList.data">
+<code class="sig-name descname">data</code><a class="headerlink" href="#src.kernel.eventlist.EventList.data" title="Permalink to this definition">¶</a></dt>
 <dd><p>heap storing events.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>List[<a class="reference internal" href="event.html#src.kernel.event.Event" title="src.kernel.event.Event">Event</a>]</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.kernel.eventlist.EventList.remove">
-<span class="sig-name descname"><span class="pre">remove</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="event.html#src.kernel.event.Event" title="src.kernel.event.Event"><span class="pre">Event</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.kernel.eventlist.EventList.remove" title="Permalink to this definition">¶</a></dt>
+<dt id="src.kernel.eventlist.EventList.remove">
+<code class="sig-name descname">remove</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="p">:</span> <span class="n">Event</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.kernel.eventlist.EventList.remove" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to remove events from heap.</p>
 <p>The event is set as the invalid state to save the time of removing event from heap.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.kernel.eventlist.EventList.update_event_time">
-<span class="sig-name descname"><span class="pre">update_event_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="event.html#src.kernel.event.Event" title="src.kernel.event.Event"><span class="pre">Event</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.kernel.eventlist.EventList.update_event_time" title="Permalink to this definition">¶</a></dt>
+<dt id="src.kernel.eventlist.EventList.update_event_time">
+<code class="sig-name descname">update_event_time</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="p">:</span> <span class="n">Event</span></em>, <em class="sig-param"><span class="n">time</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.kernel.eventlist.EventList.update_event_time" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to update the timestamp of event and maintain the min-heap structure.</p>
 </dd></dl>
 
 </dd></dl>
 
-</section>
+</div>
 
 
             <div class="clearer"></div>
@@ -92,16 +91,12 @@ EventList is implemented as a min heap ordered by simulation time.</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <div>
-    <h4>Previous topic</h4>
-    <p class="topless"><a href="event.html"
-                          title="previous chapter">Event</a></p>
-  </div>
-  <div>
-    <h4>Next topic</h4>
-    <p class="topless"><a href="process.html"
-                          title="next chapter">Process</a></p>
-  </div>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="event.html"
+                        title="previous chapter">Event</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="process.html"
+                        title="next chapter">Process</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -113,12 +108,12 @@ EventList is implemented as a min heap ordered by simulation time.</p>
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script>document.getElementById('searchbox').style.display = "block"</script>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -138,14 +133,14 @@ EventList is implemented as a min heap ordered by simulation time.</p>
         <li class="right" >
           <a href="event.html" title="Event"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.6.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" >Kernel</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Event List</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2020-2024.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
+        &#169; Copyright 2020-2022.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
     </div>
   </body>
 </html>

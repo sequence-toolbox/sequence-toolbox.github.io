@@ -1,20 +1,19 @@
 
 <!DOCTYPE html>
 
-<html lang="en">
+<html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-
-    <title>Topology &#8212; SeQUeNCe 0.6.2 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/classic.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topology &#8212; SeQUeNCe 0.5.2 documentation</title>
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -36,7 +35,7 @@
         <li class="right" >
           <a href="node.html" title="Nodes"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.6.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" accesskey="U">Topology</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Topology</a></li> 
       </ul>
@@ -47,58 +46,58 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="module-src.topology.topology">
-<span id="topology"></span><h1>Topology<a class="headerlink" href="#module-src.topology.topology" title="Permalink to this heading">¶</a></h1>
+  <div class="section" id="module-src.topology.topology">
+<span id="topology"></span><h1>Topology<a class="headerlink" href="#module-src.topology.topology" title="Permalink to this headline">¶</a></h1>
 <p>Definition of the Topology class.</p>
 <p>This module provides a definition of the Topology class, which can be used to
 manage a network’s structure.
 Topology instances automatically perform many useful network functions.</p>
 <dl class="py class">
-<dt class="sig sig-object py" id="src.topology.topology.Topology">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.topology.topology.</span></span><span class="sig-name descname"><span class="pre">Topology</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">conf_file_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.topology.topology.Topology" title="Permalink to this definition">¶</a></dt>
+<dt id="src.topology.topology.Topology">
+<em class="property">class </em><code class="sig-prename descclassname">src.topology.topology.</code><code class="sig-name descname">Topology</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">conf_file_name</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.topology.topology.Topology" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class for generating network from configuration file.</p>
 <p>The topology class provides a simple interface for managing the nodes
 and connections in a network.
 A network may also be generated using an external json file.</p>
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.topology.topology.Topology.nodes">
-<span class="sig-name descname"><span class="pre">nodes</span></span><a class="headerlink" href="#src.topology.topology.Topology.nodes" title="Permalink to this definition">¶</a></dt>
+<dt id="src.topology.topology.Topology.nodes">
+<code class="sig-name descname">nodes</code><a class="headerlink" href="#src.topology.topology.Topology.nodes" title="Permalink to this definition">¶</a></dt>
 <dd><p>mapping of type of node to a list of same type node.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>Dict[str, List[<a class="reference internal" href="node.html#src.topology.node.Node" title="src.topology.node.Node">Node</a>]]</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.topology.topology.Topology.qchannels">
-<span class="sig-name descname"><span class="pre">qchannels</span></span><a class="headerlink" href="#src.topology.topology.Topology.qchannels" title="Permalink to this definition">¶</a></dt>
+<dt id="src.topology.topology.Topology.qchannels">
+<code class="sig-name descname">qchannels</code><a class="headerlink" href="#src.topology.topology.Topology.qchannels" title="Permalink to this definition">¶</a></dt>
 <dd><p>list of quantum channel objects in network.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>List[<a class="reference internal" href="../components/optical_channel.html#src.components.optical_channel.QuantumChannel" title="src.components.optical_channel.QuantumChannel">QuantumChannel</a>]</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.topology.topology.Topology.cchannels">
-<span class="sig-name descname"><span class="pre">cchannels</span></span><a class="headerlink" href="#src.topology.topology.Topology.cchannels" title="Permalink to this definition">¶</a></dt>
+<dt id="src.topology.topology.Topology.cchannels">
+<code class="sig-name descname">cchannels</code><a class="headerlink" href="#src.topology.topology.Topology.cchannels" title="Permalink to this definition">¶</a></dt>
 <dd><p>list of classical channel objects in network.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>List[<a class="reference internal" href="../components/optical_channel.html#src.components.optical_channel.ClassicalChannel" title="src.components.optical_channel.ClassicalChannel">ClassicalChannel</a>]</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.topology.topology.Topology.tl">
-<span class="sig-name descname"><span class="pre">tl</span></span><a class="headerlink" href="#src.topology.topology.Topology.tl" title="Permalink to this definition">¶</a></dt>
+<dt id="src.topology.topology.Topology.tl">
+<code class="sig-name descname">tl</code><a class="headerlink" href="#src.topology.topology.Topology.tl" title="Permalink to this definition">¶</a></dt>
 <dd><p>the timeline used for simulation</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference internal" href="../kernel/timeline.html#src.kernel.timeline.Timeline" title="src.kernel.timeline.Timeline">Timeline</a></p>
 </dd>
 </dl>
@@ -106,7 +105,7 @@ A network may also be generated using an external json file.</p>
 
 </dd></dl>
 
-</section>
+</div>
 
 
             <div class="clearer"></div>
@@ -115,16 +114,12 @@ A network may also be generated using an external json file.</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <div>
-    <h4>Previous topic</h4>
-    <p class="topless"><a href="node.html"
-                          title="previous chapter">Nodes</a></p>
-  </div>
-  <div>
-    <h4>Next topic</h4>
-    <p class="topless"><a href="../qkd/top.html"
-                          title="next chapter">Quantum Key Distribution</a></p>
-  </div>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="node.html"
+                        title="previous chapter">Nodes</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../qkd/top.html"
+                        title="next chapter">Quantum Key Distribution</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -136,12 +131,12 @@ A network may also be generated using an external json file.</p>
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script>document.getElementById('searchbox').style.display = "block"</script>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -161,14 +156,14 @@ A network may also be generated using an external json file.</p>
         <li class="right" >
           <a href="node.html" title="Nodes"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.6.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" >Topology</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Topology</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2020-2024.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
+        &#169; Copyright 2020-2022.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
     </div>
   </body>
 </html>

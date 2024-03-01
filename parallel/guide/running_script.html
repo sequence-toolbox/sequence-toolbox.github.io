@@ -1,20 +1,19 @@
 
 <!DOCTYPE html>
 
-<html lang="en">
+<html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-
-    <title>Guide: Running a Parallel Script &#8212; SeQUeNCe 0.6.2 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/classic.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guide: Running a Parallel Script &#8212; SeQUeNCe 0.5.2 documentation</title>
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -36,7 +35,7 @@
         <li class="right" >
           <a href="../explanation/parallel_tl_qm.html" title="Explanation: Parallel Timelines and the Quantum Manager"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.6.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.2 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Guide: Running a Parallel Script</a></li> 
       </ul>
     </div>  
@@ -46,10 +45,10 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="guide-running-a-parallel-script">
-<h1>Guide: Running a Parallel Script<a class="headerlink" href="#guide-running-a-parallel-script" title="Permalink to this heading">¶</a></h1>
-<section id="json-format">
-<h2>JSON Format<a class="headerlink" href="#json-format" title="Permalink to this heading">¶</a></h2>
+  <div class="section" id="guide-running-a-parallel-script">
+<h1>Guide: Running a Parallel Script<a class="headerlink" href="#guide-running-a-parallel-script" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="json-format">
+<h2>JSON Format<a class="headerlink" href="#json-format" title="Permalink to this headline">¶</a></h2>
 <p>A few additions will need to be made to the JSON file to designate a simulation as parallel and facilitate proper allocation of resources. As usual, the name of each field in the JSON is defined by a variable in the <code class="docutils literal notranslate"><span class="pre">Topology</span></code> class or one of its subclasses. For this guide, the <code class="docutils literal notranslate"><span class="pre">RouterNetTopo</span></code> class will be used (such that variable <code class="docutils literal notranslate"><span class="pre">VAR</span></code> refers to <code class="docutils literal notranslate"><span class="pre">RouterNetTopo.VAR</span></code>).</p>
 <p>First, the general parallel settings will need to be listed in the JSON. The variable name for each setting is listed first, followed by the default string value.</p>
 <ul class="simple">
@@ -103,12 +102,12 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-</section>
-<section id="parallel-script-modifications">
-<h2>Parallel Script Modifications<a class="headerlink" href="#parallel-script-modifications" title="Permalink to this heading">¶</a></h2>
+</div>
+<div class="section" id="parallel-script-modifications">
+<h2>Parallel Script Modifications<a class="headerlink" href="#parallel-script-modifications" title="Permalink to this headline">¶</a></h2>
 <p>If a JSON file is being used to set up the simulation network, all that is required for a simulation script is that the method <code class="docutils literal notranslate"><span class="pre">ParallelTimeline.quantum_manager.disconnect_from_server()</span></code> is called after timeline execution finishes. This function closes the socket communication with the server, and allows the server program to record metrics and close once all clients have disconnected. Optionally, additional parallel performance metrics may be added to the script, as described below.</p>
-<section id="additional-parallel-simulation-metrics">
-<h3>Additional Parallel Simulation Metrics<a class="headerlink" href="#additional-parallel-simulation-metrics" title="Permalink to this heading">¶</a></h3>
+<div class="section" id="additional-parallel-simulation-metrics">
+<h3>Additional Parallel Simulation Metrics<a class="headerlink" href="#additional-parallel-simulation-metrics" title="Permalink to this headline">¶</a></h3>
 <p>In addition to the usual metrics, parallel timelines collect a series of metrics relating to parallel simulation. These are:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">sync_counter</span></code>: a count of the number of synchronization events between timelines</p></li>
@@ -124,9 +123,9 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">{message_type}_timer</span></code>: wall-clock time of computation time for each message type</p></li>
 </ul>
 <p>The next section contains information about how to specify the destination file for these metrics.</p>
-</section>
-<section id="simulations-with-no-json-configuration-file">
-<h3>Simulations with No JSON Configuration File<a class="headerlink" href="#simulations-with-no-json-configuration-file" title="Permalink to this heading">¶</a></h3>
+</div>
+<div class="section" id="simulations-with-no-json-configuration-file">
+<h3>Simulations with No JSON Configuration File<a class="headerlink" href="#simulations-with-no-json-configuration-file" title="Permalink to this headline">¶</a></h3>
 <p>If it is required to run a simulation with no input JSON file for network configuration, additional steps should be taken to ensure that the parallel timelines and simulation objects are set up correctly.</p>
 <ol>
 <li><p>Determine a scheme for allocating nodes to processes, and write a function that can determine the process a node should belong to by name during runtime:</p>
@@ -168,12 +167,12 @@
 <li><p>Include a call to <code class="docutils literal notranslate"><span class="pre">ParallelTimeline.quantum_manager.disconnect_from_server()</span></code>, as mentioned previously.</p></li>
 </ol>
 <p>These steps will ensure the proper connectivity of the network without breaks or redundant network elements.</p>
-</section>
-</section>
-<section id="running-scripts-and-the-quantum-manager-server">
-<h2>Running Scripts and the Quantum Manager Server<a class="headerlink" href="#running-scripts-and-the-quantum-manager-server" title="Permalink to this heading">¶</a></h2>
-<section id="python-version">
-<h3>Python Version<a class="headerlink" href="#python-version" title="Permalink to this heading">¶</a></h3>
+</div>
+</div>
+<div class="section" id="running-scripts-and-the-quantum-manager-server">
+<h2>Running Scripts and the Quantum Manager Server<a class="headerlink" href="#running-scripts-and-the-quantum-manager-server" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="python-version">
+<h3>Python Version<a class="headerlink" href="#python-version" title="Permalink to this headline">¶</a></h3>
 <p>To run the Quantum Manager Server in Python with a default configuration, the <code class="docutils literal notranslate"><span class="pre">qm_server.py</span></code> script has been provided. This script takes three arguments:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">ip</span></code>: the IP address the server should use</p></li>
@@ -181,9 +180,9 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">client_num</span></code>: the number of quantum manager clients that will connect to the serve (this is the same as the number of MPI processes used for executing the desired simulation script).</p></li>
 </ul>
 <p>The default configuration includes using Ket vectors for storing quantum state information and writing the server output to the file <code class="docutils literal notranslate"><span class="pre">server_log.json</span></code>. If these parameters need to be changed, a script should be written that directly calls the <code class="docutils literal notranslate"><span class="pre">start_server</span></code> function of the <code class="docutils literal notranslate"><span class="pre">src.kernel.quantum_manager_server</span></code> module with the desired arguments (or the default <code class="docutils literal notranslate"><span class="pre">qm_server.py</span></code> file modified to do so).</p>
-</section>
-<section id="c-version">
-<h3>C++ Version<a class="headerlink" href="#c-version" title="Permalink to this heading">¶</a></h3>
+</div>
+<div class="section" id="c-version">
+<h3>C++ Version<a class="headerlink" href="#c-version" title="Permalink to this headline">¶</a></h3>
 <p>To run the Quantum Manager Server written in C++, first compile and build the server as described in the parallel simulation prerequisites and Installation page. The server may then be run as an executable with the following args:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">ip</span></code>: the IP address the server should use</p></li>
@@ -192,9 +191,9 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">formalism</span></code>: the formalism to use for storing quantum states (so far, only Ket vectors are implemented and this field is ignored).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">log_file</span></code>: the output file for Quantum Manager Server log information.</p></li>
 </ul>
-</section>
-<section id="simulation-scripts">
-<h3>Simulation Scripts<a class="headerlink" href="#simulation-scripts" title="Permalink to this heading">¶</a></h3>
+</div>
+<div class="section" id="simulation-scripts">
+<h3>Simulation Scripts<a class="headerlink" href="#simulation-scripts" title="Permalink to this headline">¶</a></h3>
 <p>Simulation scripts themselves should be run as a separate program using the <code class="docutils literal notranslate"><span class="pre">mpiexec</span></code> command. The <code class="docutils literal notranslate"><span class="pre">-n</span></code> flag may be used to specify the number of processes to use for simulation. After this, the <code class="docutils literal notranslate"><span class="pre">python</span></code> or <code class="docutils literal notranslate"><span class="pre">python3</span></code> command should be entered in the usual manner to run the script:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ mpiexec -n 2 python3 my_script.py [args]
 </pre></div>
@@ -209,9 +208,9 @@
 </ul>
 </li>
 </ul>
-</section>
-</section>
-</section>
+</div>
+</div>
+</div>
 
 
             <div class="clearer"></div>
@@ -220,9 +219,8 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <div>
-    <h3><a href="../../index.html">Table of Contents</a></h3>
-    <ul>
+  <h3><a href="../../index.html">Table of Contents</a></h3>
+  <ul>
 <li><a class="reference internal" href="#">Guide: Running a Parallel Script</a><ul>
 <li><a class="reference internal" href="#json-format">JSON Format</a></li>
 <li><a class="reference internal" href="#parallel-script-modifications">Parallel Script Modifications</a><ul>
@@ -240,17 +238,12 @@
 </li>
 </ul>
 
-  </div>
-  <div>
-    <h4>Previous topic</h4>
-    <p class="topless"><a href="../explanation/parallel_tl_qm.html"
-                          title="previous chapter">Explanation: Parallel Timelines and the Quantum Manager</a></p>
-  </div>
-  <div>
-    <h4>Next topic</h4>
-    <p class="topless"><a href="../../references/kernel/top.html"
-                          title="next chapter">Kernel</a></p>
-  </div>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../explanation/parallel_tl_qm.html"
+                        title="previous chapter">Explanation: Parallel Timelines and the Quantum Manager</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../../references/kernel/top.html"
+                        title="next chapter">Kernel</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -262,12 +255,12 @@
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script>document.getElementById('searchbox').style.display = "block"</script>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -287,13 +280,13 @@
         <li class="right" >
           <a href="../explanation/parallel_tl_qm.html" title="Explanation: Parallel Timelines and the Quantum Manager"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.6.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.2 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Guide: Running a Parallel Script</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2020-2024.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
+        &#169; Copyright 2020-2022.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
     </div>
   </body>
 </html>

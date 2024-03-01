@@ -1,20 +1,19 @@
 
 <!DOCTYPE html>
 
-<html lang="en">
+<html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-
-    <title>Timeline &#8212; SeQUeNCe 0.6.2 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/classic.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timeline &#8212; SeQUeNCe 0.5.2 documentation</title>
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -36,7 +35,7 @@
         <li class="right" >
           <a href="process.html" title="Process"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.6.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" accesskey="U">Kernel</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Timeline</a></li> 
       </ul>
@@ -47,14 +46,14 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="module-src.kernel.timeline">
-<span id="timeline"></span><h1>Timeline<a class="headerlink" href="#module-src.kernel.timeline" title="Permalink to this heading">¶</a></h1>
+  <div class="section" id="module-src.kernel.timeline">
+<span id="timeline"></span><h1>Timeline<a class="headerlink" href="#module-src.kernel.timeline" title="Permalink to this headline">¶</a></h1>
 <p>Definition of main Timeline class.</p>
 <p>This module defines the Timeline class, which provides an interface for the simulation kernel and drives event execution.
 All entities are required to have an attached timeline for simulation.</p>
 <dl class="py class">
-<dt class="sig sig-object py" id="src.kernel.timeline.Timeline">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.kernel.timeline.</span></span><span class="sig-name descname"><span class="pre">Timeline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stop_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">inf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">formalism</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'ket_vector'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">truncation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.kernel.timeline.Timeline" title="Permalink to this definition">¶</a></dt>
+<dt id="src.kernel.timeline.Timeline">
+<em class="property">class </em><code class="sig-prename descclassname">src.kernel.timeline.</code><code class="sig-name descname">Timeline</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">stop_time</span><span class="o">=</span><span class="default_value">inf</span></em>, <em class="sig-param"><span class="n">formalism</span><span class="o">=</span><span class="default_value">'ket_vector'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.kernel.timeline.Timeline" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class for a simulation timeline.</p>
 <p>Timeline holds entities, which are configured before the simulation.
 Before the start of simulation, the timeline must initialize all controlled entities.
@@ -66,126 +65,126 @@ The process of popped event is executed.
 The simulation stops if the timestamp on popped event is equal or larger than the stop time, or if the eventlist is empty.</p>
 <p>To monitor the progress of simulation, the Timeline.show_progress attribute can be modified to show/hide a progress bar.</p>
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.kernel.timeline.Timeline.events">
-<span class="sig-name descname"><span class="pre">events</span></span><a class="headerlink" href="#src.kernel.timeline.Timeline.events" title="Permalink to this definition">¶</a></dt>
+<dt id="src.kernel.timeline.Timeline.events">
+<code class="sig-name descname">events</code><a class="headerlink" href="#src.kernel.timeline.Timeline.events" title="Permalink to this definition">¶</a></dt>
 <dd><p>the event list of timeline.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference internal" href="eventlist.html#src.kernel.eventlist.EventList" title="src.kernel.eventlist.EventList">EventList</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.kernel.timeline.Timeline.entities">
-<span class="sig-name descname"><span class="pre">entities</span></span><a class="headerlink" href="#src.kernel.timeline.Timeline.entities" title="Permalink to this definition">¶</a></dt>
+<dt id="src.kernel.timeline.Timeline.entities">
+<code class="sig-name descname">entities</code><a class="headerlink" href="#src.kernel.timeline.Timeline.entities" title="Permalink to this definition">¶</a></dt>
 <dd><p>the entity list of timeline used for initialization.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>List[<a class="reference internal" href="entity.html#src.kernel.entity.Entity" title="src.kernel.entity.Entity">Entity</a>]</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.kernel.timeline.Timeline.time">
-<span class="sig-name descname"><span class="pre">time</span></span><a class="headerlink" href="#src.kernel.timeline.Timeline.time" title="Permalink to this definition">¶</a></dt>
+<dt id="src.kernel.timeline.Timeline.time">
+<code class="sig-name descname">time</code><a class="headerlink" href="#src.kernel.timeline.Timeline.time" title="Permalink to this definition">¶</a></dt>
 <dd><p>current simulation time (picoseconds).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.kernel.timeline.Timeline.stop_time">
-<span class="sig-name descname"><span class="pre">stop_time</span></span><a class="headerlink" href="#src.kernel.timeline.Timeline.stop_time" title="Permalink to this definition">¶</a></dt>
+<dt id="src.kernel.timeline.Timeline.stop_time">
+<code class="sig-name descname">stop_time</code><a class="headerlink" href="#src.kernel.timeline.Timeline.stop_time" title="Permalink to this definition">¶</a></dt>
 <dd><p>the stop (simulation) time of the simulation.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.kernel.timeline.Timeline.schedule_counter">
-<span class="sig-name descname"><span class="pre">schedule_counter</span></span><a class="headerlink" href="#src.kernel.timeline.Timeline.schedule_counter" title="Permalink to this definition">¶</a></dt>
+<dt id="src.kernel.timeline.Timeline.schedule_counter">
+<code class="sig-name descname">schedule_counter</code><a class="headerlink" href="#src.kernel.timeline.Timeline.schedule_counter" title="Permalink to this definition">¶</a></dt>
 <dd><p>the counter of scheduled events</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.kernel.timeline.Timeline.run_counter">
-<span class="sig-name descname"><span class="pre">run_counter</span></span><a class="headerlink" href="#src.kernel.timeline.Timeline.run_counter" title="Permalink to this definition">¶</a></dt>
+<dt id="src.kernel.timeline.Timeline.run_counter">
+<code class="sig-name descname">run_counter</code><a class="headerlink" href="#src.kernel.timeline.Timeline.run_counter" title="Permalink to this definition">¶</a></dt>
 <dd><p>the counter of executed events</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.kernel.timeline.Timeline.is_running">
-<span class="sig-name descname"><span class="pre">is_running</span></span><a class="headerlink" href="#src.kernel.timeline.Timeline.is_running" title="Permalink to this definition">¶</a></dt>
+<dt id="src.kernel.timeline.Timeline.is_running">
+<code class="sig-name descname">is_running</code><a class="headerlink" href="#src.kernel.timeline.Timeline.is_running" title="Permalink to this definition">¶</a></dt>
 <dd><p>records if the simulation has stopped executing events.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>bool</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.kernel.timeline.Timeline.show_progress">
-<span class="sig-name descname"><span class="pre">show_progress</span></span><a class="headerlink" href="#src.kernel.timeline.Timeline.show_progress" title="Permalink to this definition">¶</a></dt>
+<dt id="src.kernel.timeline.Timeline.show_progress">
+<code class="sig-name descname">show_progress</code><a class="headerlink" href="#src.kernel.timeline.Timeline.show_progress" title="Permalink to this definition">¶</a></dt>
 <dd><p>show/hide the progress bar of simulation.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>bool</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.kernel.timeline.Timeline.quantum_manager">
-<span class="sig-name descname"><span class="pre">quantum_manager</span></span><a class="headerlink" href="#src.kernel.timeline.Timeline.quantum_manager" title="Permalink to this definition">¶</a></dt>
+<dt id="src.kernel.timeline.Timeline.quantum_manager">
+<code class="sig-name descname">quantum_manager</code><a class="headerlink" href="#src.kernel.timeline.Timeline.quantum_manager" title="Permalink to this definition">¶</a></dt>
 <dd><p>quantum state manager.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference internal" href="quantum_manager.html#src.kernel.quantum_manager.QuantumManager" title="src.kernel.quantum_manager.QuantumManager">QuantumManager</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.kernel.timeline.Timeline.init">
-<span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.kernel.timeline.Timeline.init" title="Permalink to this definition">¶</a></dt>
+<dt id="src.kernel.timeline.Timeline.init">
+<code class="sig-name descname">init</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.kernel.timeline.Timeline.init" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to initialize all simulated entities.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.kernel.timeline.Timeline.now">
-<span class="sig-name descname"><span class="pre">now</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#src.kernel.timeline.Timeline.now" title="Permalink to this definition">¶</a></dt>
+<dt id="src.kernel.timeline.Timeline.now">
+<code class="sig-name descname">now</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#src.kernel.timeline.Timeline.now" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns current simulation time.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.kernel.timeline.Timeline.progress_bar">
-<span class="sig-name descname"><span class="pre">progress_bar</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.kernel.timeline.Timeline.progress_bar" title="Permalink to this definition">¶</a></dt>
+<dt id="src.kernel.timeline.Timeline.progress_bar">
+<code class="sig-name descname">progress_bar</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.kernel.timeline.Timeline.progress_bar" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to draw progress bar.</p>
 <p>Progress bar will display the execution time of simulation, as well as the current simulation time.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.kernel.timeline.Timeline.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.kernel.timeline.Timeline.run" title="Permalink to this definition">¶</a></dt>
+<dt id="src.kernel.timeline.Timeline.run">
+<code class="sig-name descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.kernel.timeline.Timeline.run" title="Permalink to this definition">¶</a></dt>
 <dd><p>Main simulation method.</p>
 <p>The <cite>run</cite> method begins simulation of events.
 Events are continuously popped and executed, until the simulation time limit is reached or events are exhausted.
@@ -193,29 +192,29 @@ A progress bar may also be displayed, if the <cite>show_progress</cite> flag is 
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.kernel.timeline.Timeline.schedule">
-<span class="sig-name descname"><span class="pre">schedule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="event.html#src.kernel.event.Event" title="src.kernel.event.Event"><span class="pre">Event</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.kernel.timeline.Timeline.schedule" title="Permalink to this definition">¶</a></dt>
+<dt id="src.kernel.timeline.Timeline.schedule">
+<code class="sig-name descname">schedule</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="p">:</span> <span class="n">Event</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.kernel.timeline.Timeline.schedule" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to schedule an event.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.kernel.timeline.Timeline.seed">
-<span class="sig-name descname"><span class="pre">seed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.kernel.timeline.Timeline.seed" title="Permalink to this definition">¶</a></dt>
+<dt id="src.kernel.timeline.Timeline.seed">
+<code class="sig-name descname">seed</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">seed</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.kernel.timeline.Timeline.seed" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sets random seed for simulation.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.kernel.timeline.Timeline.stop">
-<span class="sig-name descname"><span class="pre">stop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.kernel.timeline.Timeline.stop" title="Permalink to this definition">¶</a></dt>
+<dt id="src.kernel.timeline.Timeline.stop">
+<code class="sig-name descname">stop</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.kernel.timeline.Timeline.stop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to stop simulation.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.kernel.timeline.Timeline.update_event_time">
-<span class="sig-name descname"><span class="pre">update_event_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="event.html#src.kernel.event.Event" title="src.kernel.event.Event"><span class="pre">Event</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.kernel.timeline.Timeline.update_event_time" title="Permalink to this definition">¶</a></dt>
+<dt id="src.kernel.timeline.Timeline.update_event_time">
+<code class="sig-name descname">update_event_time</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="p">:</span> <span class="n">Event</span></em>, <em class="sig-param"><span class="n">time</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.kernel.timeline.Timeline.update_event_time" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to change execution time of an event.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>event</strong> (<a class="reference internal" href="event.html#src.kernel.event.Event" title="src.kernel.event.Event"><em>Event</em></a>) – event to reschedule.</p></li>
 <li><p><strong>time</strong> (<em>int</em>) – new simulation time (should be &gt;= current time).</p></li>
@@ -226,7 +225,7 @@ A progress bar may also be displayed, if the <cite>show_progress</cite> flag is 
 
 </dd></dl>
 
-</section>
+</div>
 
 
             <div class="clearer"></div>
@@ -235,16 +234,12 @@ A progress bar may also be displayed, if the <cite>show_progress</cite> flag is 
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <div>
-    <h4>Previous topic</h4>
-    <p class="topless"><a href="process.html"
-                          title="previous chapter">Process</a></p>
-  </div>
-  <div>
-    <h4>Next topic</h4>
-    <p class="topless"><a href="quantum_manager.html"
-                          title="next chapter">Quantum Manager</a></p>
-  </div>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="process.html"
+                        title="previous chapter">Process</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="quantum_manager.html"
+                        title="next chapter">Quantum Manager</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -256,12 +251,12 @@ A progress bar may also be displayed, if the <cite>show_progress</cite> flag is 
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script>document.getElementById('searchbox').style.display = "block"</script>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -281,14 +276,14 @@ A progress bar may also be displayed, if the <cite>show_progress</cite> flag is 
         <li class="right" >
           <a href="process.html" title="Process"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.6.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" >Kernel</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Timeline</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2020-2024.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
+        &#169; Copyright 2020-2022.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
     </div>
   </body>
 </html>
