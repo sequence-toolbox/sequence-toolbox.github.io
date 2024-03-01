@@ -1,19 +1,20 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Routing &#8212; SeQUeNCe 0.5.2 documentation</title>
-    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Routing &#8212; SeQUeNCe 0.6.2 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/classic.css" />
     
-    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/language_data.js"></script>
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -35,7 +36,7 @@
         <li class="right" >
           <a href="reservation.html" title="Reservation"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.6.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" accesskey="U">Network Management</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Routing</a></li> 
       </ul>
@@ -46,44 +47,44 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="module-src.network_management.routing">
-<span id="routing"></span><h1>Routing<a class="headerlink" href="#module-src.network_management.routing" title="Permalink to this headline">¶</a></h1>
+  <section id="module-src.network_management.routing">
+<span id="routing"></span><h1>Routing<a class="headerlink" href="#module-src.network_management.routing" title="Permalink to this heading">¶</a></h1>
 <p>Definition of Routing protocol.</p>
 <p>This module defines the StaticRouting protocol, which uses a pre-generated static routing table to direct reservation hops.
 Routing tables may be created manually, or generated and installed automatically by the <cite>Topology</cite> class.
 Also included is the message type used by the routing protocol.</p>
 <dl class="py class">
-<dt id="src.network_management.routing.StaticRoutingMessage">
-<em class="property">class </em><code class="sig-prename descclassname">src.network_management.routing.</code><code class="sig-name descname">StaticRoutingMessage</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">msg_type</span><span class="p">:</span> <span class="n">enum.Enum</span></em>, <em class="sig-param"><span class="n">receiver</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">payload</span><span class="p">:</span> <span class="n"><a class="reference internal" href="../misc/message.html#src.message.Message" title="src.message.Message">src.message.Message</a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.network_management.routing.StaticRoutingMessage" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.network_management.routing.StaticRoutingMessage">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.network_management.routing.</span></span><span class="sig-name descname"><span class="pre">StaticRoutingMessage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Enum</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">receiver</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">payload</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../misc/message.html#src.message.Message" title="src.message.Message"><span class="pre">Message</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.network_management.routing.StaticRoutingMessage" title="Permalink to this definition">¶</a></dt>
 <dd><p>Message used for communications between routing protocol instances.</p>
 <dl class="py attribute">
-<dt id="src.network_management.routing.StaticRoutingMessage.msg_type">
-<code class="sig-name descname">msg_type</code><a class="headerlink" href="#src.network_management.routing.StaticRoutingMessage.msg_type" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.network_management.routing.StaticRoutingMessage.msg_type">
+<span class="sig-name descname"><span class="pre">msg_type</span></span><a class="headerlink" href="#src.network_management.routing.StaticRoutingMessage.msg_type" title="Permalink to this definition">¶</a></dt>
 <dd><p>type of message, required by base <cite>Message</cite> class.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Enum</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="src.network_management.routing.StaticRoutingMessage.receiver">
-<code class="sig-name descname">receiver</code><a class="headerlink" href="#src.network_management.routing.StaticRoutingMessage.receiver" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.network_management.routing.StaticRoutingMessage.receiver">
+<span class="sig-name descname"><span class="pre">receiver</span></span><a class="headerlink" href="#src.network_management.routing.StaticRoutingMessage.receiver" title="Permalink to this definition">¶</a></dt>
 <dd><p>name of destination protocol instance.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="src.network_management.routing.StaticRoutingMessage.payload">
-<code class="sig-name descname">payload</code><a class="headerlink" href="#src.network_management.routing.StaticRoutingMessage.payload" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.network_management.routing.StaticRoutingMessage.payload">
+<span class="sig-name descname"><span class="pre">payload</span></span><a class="headerlink" href="#src.network_management.routing.StaticRoutingMessage.payload" title="Permalink to this definition">¶</a></dt>
 <dd><p>message to be delivered to destination.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="../misc/message.html#src.message.Message" title="src.message.Message">Message</a></p>
 </dd>
 </dl>
@@ -92,57 +93,57 @@ Also included is the message type used by the routing protocol.</p>
 </dd></dl>
 
 <dl class="py class">
-<dt id="src.network_management.routing.StaticRoutingProtocol">
-<em class="property">class </em><code class="sig-prename descclassname">src.network_management.routing.</code><code class="sig-name descname">StaticRoutingProtocol</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">own</span><span class="p">:</span> <span class="n">Node</span></em>, <em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">forwarding_table</span><span class="p">:</span> <span class="n">Dict</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.network_management.routing.StaticRoutingProtocol" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.network_management.routing.StaticRoutingProtocol">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.network_management.routing.</span></span><span class="sig-name descname"><span class="pre">StaticRoutingProtocol</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">own</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../topology/node.html#src.topology.node.Node" title="src.topology.node.Node"><span class="pre">Node</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">forwarding_table</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.network_management.routing.StaticRoutingProtocol" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class to route reservation requests.</p>
 <p>The <cite>StaticRoutingProtocol</cite> class uses a static routing table to direct the flow of reservation requests.
 This is usually defined based on the shortest quantum channel length.</p>
 <dl class="py attribute">
-<dt id="src.network_management.routing.StaticRoutingProtocol.own">
-<code class="sig-name descname">own</code><a class="headerlink" href="#src.network_management.routing.StaticRoutingProtocol.own" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.network_management.routing.StaticRoutingProtocol.own">
+<span class="sig-name descname"><span class="pre">own</span></span><a class="headerlink" href="#src.network_management.routing.StaticRoutingProtocol.own" title="Permalink to this definition">¶</a></dt>
 <dd><p>node that protocol instance is attached to.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="../topology/node.html#src.topology.node.Node" title="src.topology.node.Node">Node</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="src.network_management.routing.StaticRoutingProtocol.name">
-<code class="sig-name descname">name</code><a class="headerlink" href="#src.network_management.routing.StaticRoutingProtocol.name" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.network_management.routing.StaticRoutingProtocol.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#src.network_management.routing.StaticRoutingProtocol.name" title="Permalink to this definition">¶</a></dt>
 <dd><p>label for protocol instance.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="src.network_management.routing.StaticRoutingProtocol.forwarding_table">
-<code class="sig-name descname">forwarding_table</code><a class="headerlink" href="#src.network_management.routing.StaticRoutingProtocol.forwarding_table" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.network_management.routing.StaticRoutingProtocol.forwarding_table">
+<span class="sig-name descname"><span class="pre">forwarding_table</span></span><a class="headerlink" href="#src.network_management.routing.StaticRoutingProtocol.forwarding_table" title="Permalink to this definition">¶</a></dt>
 <dd><p>mapping of destination node names to name of node for next hop.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Dict[str, str]</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt id="src.network_management.routing.StaticRoutingProtocol.add_forwarding_rule">
-<code class="sig-name descname">add_forwarding_rule</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dst</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">next_node</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.network_management.routing.StaticRoutingProtocol.add_forwarding_rule" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.network_management.routing.StaticRoutingProtocol.add_forwarding_rule">
+<span class="sig-name descname"><span class="pre">add_forwarding_rule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dst</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">next_node</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.network_management.routing.StaticRoutingProtocol.add_forwarding_rule" title="Permalink to this definition">¶</a></dt>
 <dd><p>Adds mapping {dst: next_node} to forwarding table.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="src.network_management.routing.StaticRoutingProtocol.pop">
-<code class="sig-name descname">pop</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">src</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">msg</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#src.network_management.routing.StaticRoutingMessage" title="src.network_management.routing.StaticRoutingMessage">src.network_management.routing.StaticRoutingMessage</a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.network_management.routing.StaticRoutingProtocol.pop" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.network_management.routing.StaticRoutingProtocol.pop">
+<span class="sig-name descname"><span class="pre">pop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">src</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#src.network_management.routing.StaticRoutingMessage" title="src.network_management.routing.StaticRoutingMessage"><span class="pre">StaticRoutingMessage</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.network_management.routing.StaticRoutingProtocol.pop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Message to receive reservation messages.</p>
 <p>Messages are forwarded to the upper protocol.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>src</strong> (<em>str</em>) – node sending the message.</p></li>
 <li><p><strong>msg</strong> (<a class="reference internal" href="#src.network_management.routing.StaticRoutingMessage" title="src.network_management.routing.StaticRoutingMessage"><em>StaticRoutingMessage</em></a>) – message received.</p></li>
@@ -156,12 +157,12 @@ This is usually defined based on the shortest quantum channel length.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="src.network_management.routing.StaticRoutingProtocol.push">
-<code class="sig-name descname">push</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dst</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">msg</span><span class="p">:</span> <span class="n"><a class="reference internal" href="../misc/message.html#src.message.Message" title="src.message.Message">src.message.Message</a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.network_management.routing.StaticRoutingProtocol.push" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.network_management.routing.StaticRoutingProtocol.push">
+<span class="sig-name descname"><span class="pre">push</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dst</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../misc/message.html#src.message.Message" title="src.message.Message"><span class="pre">Message</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.network_management.routing.StaticRoutingProtocol.push" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to receive message from upper protocols.</p>
 <p>Routing packages the message and forwards it to the next node in the optimal path (determined by the forwarding table).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>dst</strong> (<em>str</em>) – name of destination node.</p></li>
 <li><p><strong>msg</strong> (<a class="reference internal" href="../misc/message.html#src.message.Message" title="src.message.Message"><em>Message</em></a>) – message to relay.</p></li>
@@ -175,20 +176,20 @@ This is usually defined based on the shortest quantum channel length.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="src.network_management.routing.StaticRoutingProtocol.received_message">
-<code class="sig-name descname">received_message</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">src</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">msg</span><span class="p">:</span> <span class="n"><a class="reference internal" href="../misc/message.html#src.message.Message" title="src.message.Message">src.message.Message</a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.network_management.routing.StaticRoutingProtocol.received_message" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.network_management.routing.StaticRoutingProtocol.received_message">
+<span class="sig-name descname"><span class="pre">received_message</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">src</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../misc/message.html#src.message.Message" title="src.message.Message"><span class="pre">Message</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.network_management.routing.StaticRoutingProtocol.received_message" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to directly receive messages from node (should not be used).</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="src.network_management.routing.StaticRoutingProtocol.update_forwarding_rule">
-<code class="sig-name descname">update_forwarding_rule</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dst</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">next_node</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.network_management.routing.StaticRoutingProtocol.update_forwarding_rule" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.network_management.routing.StaticRoutingProtocol.update_forwarding_rule">
+<span class="sig-name descname"><span class="pre">update_forwarding_rule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dst</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">next_node</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.network_management.routing.StaticRoutingProtocol.update_forwarding_rule" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates dst to map to next_node in forwarding table.</p>
 </dd></dl>
 
 </dd></dl>
 
-</div>
+</section>
 
 
             <div class="clearer"></div>
@@ -197,12 +198,16 @@ This is usually defined based on the shortest quantum channel length.</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="reservation.html"
-                        title="previous chapter">Reservation</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="../application/top.html"
-                        title="next chapter">Application</a></p>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="reservation.html"
+                          title="previous chapter">Reservation</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="../application/top.html"
+                          title="next chapter">Application</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -214,12 +219,12 @@ This is usually defined based on the shortest quantum channel length.</p>
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -239,14 +244,14 @@ This is usually defined based on the shortest quantum channel length.</p>
         <li class="right" >
           <a href="reservation.html" title="Reservation"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.6.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" >Network Management</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Routing</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2020-2022.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+        &#169; Copyright 2020-2024.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
     </div>
   </body>
 </html>

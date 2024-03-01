@@ -1,19 +1,20 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chapter 1: Discrete Event Simulation &#8212; SeQUeNCe 0.5.2 documentation</title>
-    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Chapter 1: Discrete Event Simulation &#8212; SeQUeNCe 0.6.2 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/classic.css" />
     
-    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/language_data.js"></script>
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -35,7 +36,7 @@
         <li class="right" >
           <a href="../chapter0/prerequisite.html" title="Prerequisites &amp; Installation"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.6.2 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Chapter 1: Discrete Event Simulation</a></li> 
       </ul>
     </div>  
@@ -45,8 +46,8 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="chapter-1-discrete-event-simulation">
-<h1>Chapter 1: Discrete Event Simulation<a class="headerlink" href="#chapter-1-discrete-event-simulation" title="Permalink to this headline">¶</a></h1>
+  <section id="chapter-1-discrete-event-simulation">
+<h1>Chapter 1: Discrete Event Simulation<a class="headerlink" href="#chapter-1-discrete-event-simulation" title="Permalink to this heading">¶</a></h1>
 <p>SeQUeNCe is a quantum network simulator based on discrete event simulation (<a class="reference external" href="https://en.wikipedia.org/wiki/Discrete-event_simulation">DES</a>).
 DES models systems as a sequence of discrete events.
 In this chapter, we will:</p>
@@ -54,8 +55,8 @@ In this chapter, we will:</p>
 <li><p>Introduce the basic concepts if DES (to avoid going through Wikipedia)</p></li>
 <li><p>Use the API of the SeQUeNCe kernel to simulate a simple system</p></li>
 </ul>
-<div class="section" id="des-background">
-<h2>DES Background<a class="headerlink" href="#des-background" title="Permalink to this headline">¶</a></h2>
+<section id="des-background">
+<h2>DES Background<a class="headerlink" href="#des-background" title="Permalink to this heading">¶</a></h2>
 <p>The <strong>events</strong> in DES define a change of state of the system.
 The kernel of DES schedules and executes events in the simulated system, ordered by their time of occurrence.
 The executed events may generate several new events.</p>
@@ -67,24 +68,24 @@ The robot will repeatedly processes the nearest box (event).
 While the robot is processing some boxes (e.g box 5), a new box (e.g box 12) may be created and placed at the correct position.
 The robot stops work when the belt is empty or a simulation end condition is met.</p>
 <p><img alt="des" src="../../_images/des.png" /></p>
-</div>
-<div class="section" id="example-open-and-close-store">
-<h2>Example: Open and Close Store<a class="headerlink" href="#example-open-and-close-store" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="step-1-create-store-class">
-<h3>Step 1: Create <code class="docutils literal notranslate"><span class="pre">Store</span></code> Class<a class="headerlink" href="#step-1-create-store-class" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="example-open-and-close-store">
+<h2>Example: Open and Close Store<a class="headerlink" href="#example-open-and-close-store" title="Permalink to this heading">¶</a></h2>
+<section id="step-1-create-store-class">
+<h3>Step 1: Create <code class="docutils literal notranslate"><span class="pre">Store</span></code> Class<a class="headerlink" href="#step-1-create-store-class" title="Permalink to this heading">¶</a></h3>
 <p>Let’s use DES to simulate the business hours of a store. First, we create a class for our store:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sequence.kernel.timeline</span> <span class="kn">import</span> <span class="n">Timeline</span>
 
 <span class="k">class</span> <span class="nc">Store</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tl</span><span class="p">:</span> <span class="n">Timeline</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">open</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">opening</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">timeline</span> <span class="o">=</span> <span class="n">tl</span>
 
     <span class="k">def</span> <span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">open</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">opening</span> <span class="o">=</span> <span class="kc">True</span>
 
     <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">open</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">opening</span> <span class="o">=</span> <span class="kc">False</span>
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">Store</span></code> class has two attributes: <code class="docutils literal notranslate"><span class="pre">open</span></code> and <code class="docutils literal notranslate"><span class="pre">timeline</span></code>.
@@ -93,9 +94,9 @@ The <code class="docutils literal notranslate"><span class="pre">timeline</span>
 We will use the <code class="docutils literal notranslate"><span class="pre">timeline</span></code> to bind entities to the DES kernel.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">Store</span></code> class also has two methods: <code class="docutils literal notranslate"><span class="pre">open</span></code> and <code class="docutils literal notranslate"><span class="pre">close</span></code>.
 These two functions change the state of the store.</p>
-</div>
-<div class="section" id="step-2-schedule-events-on-store">
-<h3>Step 2: Schedule Events on <code class="docutils literal notranslate"><span class="pre">Store</span></code><a class="headerlink" href="#step-2-schedule-events-on-store" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="step-2-schedule-events-on-store">
+<h3>Step 2: Schedule Events on <code class="docutils literal notranslate"><span class="pre">Store</span></code><a class="headerlink" href="#step-2-schedule-events-on-store" title="Permalink to this heading">¶</a></h3>
 <p>Let’s define a store that opens at 7:00.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sequence.kernel.event</span> <span class="kn">import</span> <span class="n">Event</span>
 <span class="kn">from</span> <span class="nn">sequence.kernel.process</span> <span class="kn">import</span> <span class="n">Process</span>
@@ -115,17 +116,17 @@ Then, we create a process with the object being <code class="docutils literal no
 The <code class="docutils literal notranslate"><span class="pre">Event</span></code> class uses <code class="docutils literal notranslate"><span class="pre">open_proc</span></code> process to create an event occurring at 7:00.
 The object <code class="docutils literal notranslate"><span class="pre">Timeline</span></code> then schedules the created event in its event list.</p>
 <p><strong>Question</strong>: after the above code executes, what is the state of <code class="docutils literal notranslate"><span class="pre">store</span></code>?</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">store</span><span class="o">.</span><span class="n">open</span><span class="p">)</span> <span class="c1"># False</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">store</span><span class="o">.</span><span class="n">opening</span><span class="p">)</span> <span class="c1"># False</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="step-3-run-simulation">
-<h3>Step 3: Run Simulation<a class="headerlink" href="#step-3-run-simulation" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="step-3-run-simulation">
+<h3>Step 3: Run Simulation<a class="headerlink" href="#step-3-run-simulation" title="Permalink to this heading">¶</a></h3>
 <p>You can observe the state of the store is still closed as the simulator has not executed the <code class="docutils literal notranslate"><span class="pre">open</span></code> function yet.
 We just placed the created <code class="docutils literal notranslate"><span class="pre">event</span></code> into the event list.
 To run the simulation, we need use <code class="docutils literal notranslate"><span class="pre">Timeline.run()</span></code> to process the scheduled events.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tl</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">tl</span><span class="o">.</span><span class="n">now</span><span class="p">(),</span> <span class="n">store</span><span class="o">.</span><span class="n">open</span><span class="p">)</span> <span class="c1"># 7 True</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tl</span><span class="o">.</span><span class="n">now</span><span class="p">(),</span> <span class="n">store</span><span class="o">.</span><span class="n">opening</span><span class="p">)</span> <span class="c1"># 7 True</span>
 </pre></div>
 </div>
 <p>Now, the state of store is updated to the open state.
@@ -137,7 +138,7 @@ When the simulator executes an event, the simulator will update its time to the 
 <span class="n">close_event</span> <span class="o">=</span> <span class="n">Event</span><span class="p">(</span><span class="mi">19</span><span class="p">,</span> <span class="n">close_proc</span><span class="p">)</span>
 <span class="n">tl</span><span class="o">.</span><span class="n">schedule</span><span class="p">(</span><span class="n">close_event</span><span class="p">)</span>
 <span class="n">tl</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">tl</span><span class="o">.</span><span class="n">time</span><span class="p">,</span> <span class="n">store</span><span class="o">.</span><span class="n">open</span><span class="p">)</span> <span class="c1"># 19 False</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tl</span><span class="o">.</span><span class="n">time</span><span class="p">,</span> <span class="n">store</span><span class="o">.</span><span class="n">opening</span><span class="p">)</span> <span class="c1"># 19 False</span>
 </pre></div>
 </div>
 <p><strong>Question</strong>: will the state of <code class="docutils literal notranslate"><span class="pre">store</span></code> change if we schedule <code class="docutils literal notranslate"><span class="pre">close_event</span></code> first, then <code class="docutils literal notranslate"><span class="pre">open_event</span></code>?</p>
@@ -145,24 +146,24 @@ When the simulator executes an event, the simulator will update its time to the 
 <span class="n">tl</span><span class="o">.</span><span class="n">schedule</span><span class="p">(</span><span class="n">open_event</span><span class="p">)</span>
 <span class="n">tl</span><span class="o">.</span><span class="n">schedule</span><span class="p">(</span><span class="n">close_event</span><span class="p">)</span>
 <span class="n">tl</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">tl</span><span class="o">.</span><span class="n">time</span><span class="p">,</span> <span class="n">store</span><span class="o">.</span><span class="n">open</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tl</span><span class="o">.</span><span class="n">time</span><span class="p">,</span> <span class="n">store</span><span class="o">.</span><span class="n">opening</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tl</span><span class="o">.</span><span class="n">time</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="n">tl</span><span class="o">.</span><span class="n">schedule</span><span class="p">(</span><span class="n">close_event</span><span class="p">)</span>
 <span class="n">tl</span><span class="o">.</span><span class="n">schedule</span><span class="p">(</span><span class="n">open_event</span><span class="p">)</span>
 <span class="n">tl</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">tl</span><span class="o">.</span><span class="n">time</span><span class="p">,</span> <span class="n">store</span><span class="o">.</span><span class="n">open</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tl</span><span class="o">.</span><span class="n">time</span><span class="p">,</span> <span class="n">store</span><span class="o">.</span><span class="n">opening</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>You can compare the results of the above programs.
 Both generate the same result (<code class="docutils literal notranslate"><span class="pre">19</span> <span class="pre">False</span></code>), as the order of executing events does not rely on the order of calling the scheduling method.</p>
-</div>
-</div>
-<div class="section" id="example-automatically-open-and-close-store">
-<h2>Example: Automatically Open and Close Store<a class="headerlink" href="#example-automatically-open-and-close-store" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="step-1-upgrade-store-class">
-<h3>Step 1: Upgrade <code class="docutils literal notranslate"><span class="pre">Store</span></code> Class<a class="headerlink" href="#step-1-upgrade-store-class" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="example-automatically-open-and-close-store">
+<h2>Example: Automatically Open and Close Store<a class="headerlink" href="#example-automatically-open-and-close-store" title="Permalink to this heading">¶</a></h2>
+<section id="step-1-upgrade-store-class">
+<h3>Step 1: Upgrade <code class="docutils literal notranslate"><span class="pre">Store</span></code> Class<a class="headerlink" href="#step-1-upgrade-store-class" title="Permalink to this heading">¶</a></h3>
 <p>The previous example allows us to open and close the store manually.
 In this example, we upgrade <code class="docutils literal notranslate"><span class="pre">Store</span></code> to open and close automatically with 12 business hours.
 The code of the upgraded <code class="docutils literal notranslate"><span class="pre">Store</span></code> is shown below.</p>
@@ -172,17 +173,17 @@ The code of the upgraded <code class="docutils literal notranslate"><span class=
 
 <span class="k">class</span> <span class="nc">Store</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tl</span><span class="p">:</span> <span class="n">Timeline</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">open</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">opening</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">timeline</span> <span class="o">=</span> <span class="n">tl</span>
 
     <span class="k">def</span> <span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">open</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">opening</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="n">process</span> <span class="o">=</span> <span class="n">Process</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;close&#39;</span><span class="p">,</span> <span class="p">[])</span>
         <span class="n">event</span> <span class="o">=</span> <span class="n">Event</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">timeline</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">+</span> <span class="mi">12</span><span class="p">,</span> <span class="n">process</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">timeline</span><span class="o">.</span><span class="n">schedule</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">open</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">opening</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="n">process</span> <span class="o">=</span> <span class="n">Process</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;open&#39;</span><span class="p">,</span> <span class="p">[])</span>
         <span class="n">event</span> <span class="o">=</span> <span class="n">Event</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">timeline</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">+</span> <span class="mi">12</span><span class="p">,</span> <span class="n">process</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">timeline</span><span class="o">.</span><span class="n">schedule</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
@@ -190,9 +191,9 @@ The code of the upgraded <code class="docutils literal notranslate"><span class=
 </div>
 <p>The updated <code class="docutils literal notranslate"><span class="pre">Store.open()</span></code>(<code class="docutils literal notranslate"><span class="pre">Store.close()</span></code>) function schedules a <code class="docutils literal notranslate"><span class="pre">Store.close()</span></code> (<code class="docutils literal notranslate"><span class="pre">Store.open()</span></code>) after 12 hours.
 Now, the <code class="docutils literal notranslate"><span class="pre">Store</span></code> can repeatedly open and close every 12 hours.</p>
-</div>
-<div class="section" id="step-2-schedule-initial-event">
-<h3>Step 2: Schedule Initial Event<a class="headerlink" href="#step-2-schedule-initial-event" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="step-2-schedule-initial-event">
+<h3>Step 2: Schedule Initial Event<a class="headerlink" href="#step-2-schedule-initial-event" title="Permalink to this heading">¶</a></h3>
 <p>We can then define a store with an initial state - that the store opens at 7.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tl</span> <span class="o">=</span> <span class="n">Timeline</span><span class="p">()</span>
 <span class="n">tl</span><span class="o">.</span><span class="n">show_progress</span> <span class="o">=</span> <span class="kc">False</span>
@@ -203,9 +204,9 @@ Now, the <code class="docutils literal notranslate"><span class="pre">Store</spa
 </pre></div>
 </div>
 <p>However, if you use <code class="docutils literal notranslate"><span class="pre">tl.run()</span></code> to run the simulation, the simulation will get stuck in an infinite loop.</p>
-</div>
-<div class="section" id="step-3-define-the-condition-of-stopping-simulation-and-run-simulation">
-<h3>Step 3: Define the Condition of Stopping Simulation and Run Simulation<a class="headerlink" href="#step-3-define-the-condition-of-stopping-simulation-and-run-simulation" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="step-3-define-the-condition-of-stopping-simulation-and-run-simulation">
+<h3>Step 3: Define the Condition of Stopping Simulation and Run Simulation<a class="headerlink" href="#step-3-define-the-condition-of-stopping-simulation-and-run-simulation" title="Permalink to this heading">¶</a></h3>
 <p>There are two methods to terminate simulation:</p>
 <ul class="simple">
 <li><p>set the stop time of simulation when creating the <code class="docutils literal notranslate"><span class="pre">Timeline</span></code></p></li>
@@ -220,7 +221,7 @@ Now, the <code class="docutils literal notranslate"><span class="pre">Store</spa
     <span class="k">def</span> <span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">timeline</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="mi">60</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">timeline</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">open</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">opening</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="n">process</span> <span class="o">=</span> <span class="n">Process</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;close&#39;</span><span class="p">,</span> <span class="p">[])</span>
         <span class="n">event</span> <span class="o">=</span> <span class="n">Event</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">timeline</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">+</span> <span class="mi">12</span><span class="p">,</span> <span class="n">process</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">timeline</span><span class="o">.</span><span class="n">schedule</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
@@ -228,7 +229,7 @@ Now, the <code class="docutils literal notranslate"><span class="pre">Store</spa
     <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">timeline</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="mi">60</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">timeline</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">open</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">opening</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="n">process</span> <span class="o">=</span> <span class="n">Process</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;open&#39;</span><span class="p">,</span> <span class="p">[])</span>
         <span class="n">event</span> <span class="o">=</span> <span class="n">Event</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">timeline</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">+</span> <span class="mi">12</span><span class="p">,</span> <span class="n">process</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">timeline</span><span class="o">.</span><span class="n">schedule</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
@@ -246,13 +247,13 @@ Now, the <code class="docutils literal notranslate"><span class="pre">Store</spa
     <span class="n">tl</span><span class="o">.</span><span class="n">schedule</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
     
     <span class="n">tl</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">store</span><span class="o">.</span><span class="n">open</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">store</span><span class="o">.</span><span class="n">opening</span><span class="p">)</span>
 <span class="c1"># True, True, False</span>
 </pre></div>
 </div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -261,8 +262,9 @@ Now, the <code class="docutils literal notranslate"><span class="pre">Store</spa
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../../index.html">Table of Contents</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../../index.html">Table of Contents</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">Chapter 1: Discrete Event Simulation</a><ul>
 <li><a class="reference internal" href="#des-background">DES Background</a></li>
 <li><a class="reference internal" href="#example-open-and-close-store">Example: Open and Close Store</a><ul>
@@ -281,12 +283,17 @@ Now, the <code class="docutils literal notranslate"><span class="pre">Store</spa
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="../chapter0/prerequisite.html"
-                        title="previous chapter">Prerequisites &amp; Installation</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="../chapter2/hardware.html"
-                        title="next chapter">Chapter 2: Hardware Module</a></p>
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="../chapter0/prerequisite.html"
+                          title="previous chapter">Prerequisites &amp; Installation</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="../chapter2/hardware.html"
+                          title="next chapter">Chapter 2: Hardware Module</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -298,12 +305,12 @@ Now, the <code class="docutils literal notranslate"><span class="pre">Store</spa
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -323,13 +330,13 @@ Now, the <code class="docutils literal notranslate"><span class="pre">Store</spa
         <li class="right" >
           <a href="../chapter0/prerequisite.html" title="Prerequisites &amp; Installation"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.6.2 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Chapter 1: Discrete Event Simulation</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2020-2022.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+        &#169; Copyright 2020-2024.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
     </div>
   </body>
 </html>

@@ -1,19 +1,20 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chapter 2: Hardware Module &#8212; SeQUeNCe 0.5.2 documentation</title>
-    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Chapter 2: Hardware Module &#8212; SeQUeNCe 0.6.2 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/classic.css" />
     
-    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/language_data.js"></script>
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -35,7 +36,7 @@
         <li class="right" >
           <a href="../chapter1/discrete-event-simulation.html" title="Chapter 1: Discrete Event Simulation"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.6.2 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Chapter 2: Hardware Module</a></li> 
       </ul>
     </div>  
@@ -45,8 +46,8 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="chapter-2-hardware-module">
-<h1>Chapter 2: Hardware Module<a class="headerlink" href="#chapter-2-hardware-module" title="Permalink to this headline">¶</a></h1>
+  <section id="chapter-2-hardware-module">
+<h1>Chapter 2: Hardware Module<a class="headerlink" href="#chapter-2-hardware-module" title="Permalink to this heading">¶</a></h1>
 <p>In this tutorial we will show some of the tools available in the hardware module of SeQUeNCe. The goal of this tutorial is to</p>
 <ul class="simple">
 <li><p>Gain familiarity with the sequence <code class="docutils literal notranslate"><span class="pre">components</span></code> module</p></li>
@@ -54,16 +55,16 @@
 <li><p>See how networks may be built with sequence</p></li>
 </ul>
 <p>To achieve this, we will construct a couple simple networks and show their functionality. We will also create custom “protocols” to control and monitor hardware, as well as custom node types to hold all of our components.</p>
-<div class="section" id="example-optical-hardware">
-<h2>Example: Optical Hardware<a class="headerlink" href="#example-optical-hardware" title="Permalink to this headline">¶</a></h2>
+<section id="example-optical-hardware">
+<h2>Example: Optical Hardware<a class="headerlink" href="#example-optical-hardware" title="Permalink to this heading">¶</a></h2>
 <p>In this example, we will build a simple 2-node network. There will be a quantum memory on one node and a detector on the other node connected by a quantum channel. The topology is shown here:</p>
 <p><img alt="arch" src="../../_images/hardware_architecture_1.png" /></p>
-<div class="section" id="background">
-<h3>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h3>
+<section id="background">
+<h3>Background<a class="headerlink" href="#background" title="Permalink to this heading">¶</a></h3>
 <p>The hardware used in this tutorial is a single atom quantum memory and a single photon detector (SPD). The quantum memory exists in one of two spin states: spin up (|↑⟩) or down (|↓⟩). When an “excite” operation is applied to the memory, consisting of a short light pulse, a memory in the |↓⟩ state may emit a photon. A memory in the |↑⟩ state will emit no photon. As a quantum device, the memory may also exist in a superposition of states. One example is the |+⟩ = 1/√2(|↑⟩ + |↓⟩) state used in this example, where the memory has an equal probability of being in the up or down spin states with the same phase.</p>
-</div>
-<div class="section" id="step-1-nodes-and-hardware">
-<h3>Step 1: Nodes and Hardware<a class="headerlink" href="#step-1-nodes-and-hardware" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="step-1-nodes-and-hardware">
+<h3>Step 1: Nodes and Hardware<a class="headerlink" href="#step-1-nodes-and-hardware" title="Permalink to this heading">¶</a></h3>
 <p>To begin, we create our custom node classes. We will make two types - a <code class="docutils literal notranslate"><span class="pre">SenderNode</span></code> to hold the memory and send photons and a <code class="docutils literal notranslate"><span class="pre">ReceiverNode</span></code> to receive and detect photons. Both of our node types will inherit from <code class="docutils literal notranslate"><span class="pre">Node</span></code>, the basic node class from sequence, and we invoke the parent constructor for <code class="docutils literal notranslate"><span class="pre">Node</span></code>. In general, entities (such as nodes and hardware) require a string <code class="docutils literal notranslate"><span class="pre">name</span></code> and a <code class="docutils literal notranslate"><span class="pre">Timeline</span></code> in their constructor, as well as necessary parameters (for more details on timelines, see Tutorial 1).</p>
 <p>We will now create our hardware. The detector is created easily, as no specific parameters are required (but we wish to set the <code class="docutils literal notranslate"><span class="pre">efficiency</span></code> to 1 to prevent errors).</p>
 <p>The required parameters for memories are more numerous and are listed here:</p>
@@ -107,7 +108,7 @@ We’ll put the detector on the receiver node, and the memory on the sender node
         <span class="n">detector</span><span class="o">.</span><span class="n">owner</span> <span class="o">=</span> <span class="bp">self</span>
 
     <span class="k">def</span> <span class="nf">receive_qubit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">qubit</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">first_component_name</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">first_component_name</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">qubit</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>You may notice that the initialization methods make use of a few additional functions, and methods have been added to the node classes.
@@ -123,9 +124,9 @@ For this method, the <code class="docutils literal notranslate"><span class="pre
 In our case, we don’t care about the source node, so we can ignore it.
 The <code class="docutils literal notranslate"><span class="pre">qubit</span></code> input is the transmitted photon; it is sent to the detector for measurement.
 This is done using the <code class="docutils literal notranslate"><span class="pre">first_component_name</span></code> attribute, which designates a component on a node to receive all incoming photons.</p>
-</div>
-<div class="section" id="step-2-custom-counting-protocol">
-<h3>Step 2: Custom Counting Protocol<a class="headerlink" href="#step-2-custom-counting-protocol" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="step-2-custom-counting-protocol">
+<h3>Step 2: Custom Counting Protocol<a class="headerlink" href="#step-2-custom-counting-protocol" title="Permalink to this heading">¶</a></h3>
 <p>Next, we will create our custom protocols using custom classes.
 Let’s denote the first class as <code class="docutils literal notranslate"><span class="pre">Counter</span></code>, as we will be counting photon detection.
 The initializing method is very simple, only setting the count to 0.
@@ -159,9 +160,9 @@ This method ensures that any updates (such as detection events) from an entity a
 </div>
 <p>The second protocol class is slightly more complicated, and will be activating the quantum memory.
 We will define it later in the tutorial.</p>
-</div>
-<div class="section" id="step-3-build-the-network">
-<h3>Step 3: Build the Network<a class="headerlink" href="#step-3-build-the-network" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="step-3-build-the-network">
+<h3>Step 3: Build the Network<a class="headerlink" href="#step-3-build-the-network" title="Permalink to this heading">¶</a></h3>
 <p>We are now ready to start writing the main function of our script. The first step is to create the simulation timeline. We will use a 10 second run time, but more or less time may be needed depending on hardware parameters. Note that the runtime is given in <strong>picoseconds</strong>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sequence.kernel.timeline</span> <span class="kn">import</span> <span class="n">Timeline</span>
 <span class="n">tl</span> <span class="o">=</span> <span class="n">Timeline</span><span class="p">(</span><span class="mf">10e12</span><span class="p">)</span>
@@ -180,9 +181,9 @@ We will define it later in the tutorial.</p>
 <span class="n">qc</span><span class="o">.</span><span class="n">set_ends</span><span class="p">(</span><span class="n">node1</span><span class="p">,</span> <span class="n">node2</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="step-4-measure-memory-once">
-<h3>Step 4: Measure Memory Once<a class="headerlink" href="#step-4-measure-memory-once" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="step-4-measure-memory-once">
+<h3>Step 4: Measure Memory Once<a class="headerlink" href="#step-4-measure-memory-once" title="Permalink to this heading">¶</a></h3>
 <p>With the network built, we are ready to schedule simulation events and run our experiment.
 The details on scheduling events are covered in Tutorial 1, so we will not focus on them here.
 Let’s first run one experiment with the memory in the |↑⟩ state and observe the detection time of the single emitted photon.
@@ -224,9 +225,9 @@ Let’s also change our counter slightly to record the detection time. This can 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;detection time: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">node2</span><span class="o">.</span><span class="n">counter</span><span class="o">.</span><span class="n">time</span><span class="p">))</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="step-5-repeated-operation">
-<h3>Step 5: Repeated Operation<a class="headerlink" href="#step-5-repeated-operation" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="step-5-repeated-operation">
+<h3>Step 5: Repeated Operation<a class="headerlink" href="#step-5-repeated-operation" title="Permalink to this heading">¶</a></h3>
 <p>Next, let’s repeatedly set the memeory to the |+⟩ state and record detection events. To give us a clean state, we’ll remove the code we wrote for step 4.</p>
 <p>The events we wish to schedule are all for the memory.
 We want to first set it to a |+⟩ state with the <code class="docutils literal notranslate"><span class="pre">update_state</span></code> method, and then excite the memory to measure emitted photons with the <code class="docutils literal notranslate"><span class="pre">excite</span></code> method.
@@ -270,9 +271,9 @@ We’ll include all memory modification in the <code class="docutils literal not
         <span class="bp">self</span><span class="o">.</span><span class="n">send_qubit</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;dst&#39;</span><span class="p">],</span> <span class="n">photon</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="step-6-running-and-output">
-<h3>Step 6: Running and Output<a class="headerlink" href="#step-6-running-and-output" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="step-6-running-and-output">
+<h3>Step 6: Running and Output<a class="headerlink" href="#step-6-running-and-output" title="Permalink to this heading">¶</a></h3>
 <p>The procedure to initialize and run the timeline is the same as Tutorial 1.
 We will also add a call to the <code class="docutils literal notranslate"><span class="pre">start</span></code> method of our protocol, using a calculated period.
 We’ll use a predetermined frequency <code class="docutils literal notranslate"><span class="pre">FREQUENCY</span></code> (given in Hz) for a set number of trials <code class="docutils literal notranslate"><span class="pre">NUM_TRIALS</span></code>.</p>
@@ -287,15 +288,15 @@ We’ll use a predetermined frequency <code class="docutils literal notranslate"
 </pre></div>
 </div>
 <p>We expect the percent to be about 50%, as we initialized the memory in the |+⟩ state each time. Try messing with parameters to achieve different measurement results!</p>
-</div>
-</div>
-<div class="section" id="example-classical-messaging">
-<h2>Example: Classical Messaging<a class="headerlink" href="#example-classical-messaging" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="example-classical-messaging">
+<h2>Example: Classical Messaging<a class="headerlink" href="#example-classical-messaging" title="Permalink to this heading">¶</a></h2>
 <p>In this example, we will build a simple 2-node network connected with a two-way classical channel. The topology is shown here:</p>
 <p><img alt="net_topo2" src="../../_images/hardware_architecture_2.png" /></p>
 <p>We’ll send a <code class="docutils literal notranslate"><span class="pre">PING</span></code> message from node 1 at time 0, and when we recieve it at node 2, we’ll send back a <code class="docutils literal notranslate"><span class="pre">PONG</span></code>. For both cases we will print out the reception and the time at which we receive the message.</p>
-<div class="section" id="step-1-defining-message-and-protocols">
-<h3>Step 1: Defining Message and Protocols<a class="headerlink" href="#step-1-defining-message-and-protocols" title="Permalink to this headline">¶</a></h3>
+<section id="step-1-defining-message-and-protocols">
+<h3>Step 1: Defining Message and Protocols<a class="headerlink" href="#step-1-defining-message-and-protocols" title="Permalink to this heading">¶</a></h3>
 <p>For this example, we won’t need to add any functions or hardware to the network nodes, so we will use the base <code class="docutils literal notranslate"><span class="pre">Node</span></code> class from SeQUeNCe. We will, however, need to define protocols for our nodes to control and send messages. They will achieve this through the <code class="docutils literal notranslate"><span class="pre">send_message</span></code> and <code class="docutils literal notranslate"><span class="pre">receive_message</span></code> methods of <code class="docutils literal notranslate"><span class="pre">Node</span></code>.</p>
 <p>Our protocols will need a custom message type to work. In sequence, message types are given as native python enums. We construct the message type as follows:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span><span class="p">,</span> <span class="n">auto</span>
@@ -362,9 +363,9 @@ We’ll use a predetermined frequency <code class="docutils literal notranslate"
 <li><p><code class="docutils literal notranslate"><span class="pre">message</span></code>, the <code class="docutils literal notranslate"><span class="pre">Message</span></code> object delivered by the classical channel.</p></li>
 </ul>
 <p>On both protocols, we wish to display when we receive a message. We can see the name of the node receiving the message as well as the time at which it was received (in <strong>picoseconds</strong>). For the <code class="docutils literal notranslate"><span class="pre">PongProtocol</span></code>, we additionally send a <code class="docutils literal notranslate"><span class="pre">PONG</span></code> message back to the starting node.</p>
-</div>
-<div class="section" id="step-2-building-the-network">
-<h3>Step 2: Building the Network<a class="headerlink" href="#step-2-building-the-network" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="step-2-building-the-network">
+<h3>Step 2: Building the Network<a class="headerlink" href="#step-2-building-the-network" title="Permalink to this heading">¶</a></h3>
 <p>We have now already completed the majority of the work required for our experiment! The only thing left is to create our nodes, protocols, and classical channel connection, and then run the experiment (which we will do in the next step). Classical channels in sequence are one-way only, so we will need to define two to achieve our two-way communication.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sequence.kernel.timeline</span> <span class="kn">import</span> <span class="n">Timeline</span>
 <span class="kn">from</span> <span class="nn">sequence.components.optical_channel</span> <span class="kn">import</span> <span class="n">ClassicalChannel</span>
@@ -384,9 +385,9 @@ We’ll use a predetermined frequency <code class="docutils literal notranslate"
 </pre></div>
 </div>
 <p>The classical channel constructor takes a name and timeline followed by the <code class="docutils literal notranslate"><span class="pre">distance</span></code> (in meters) and <code class="docutils literal notranslate"><span class="pre">delay</span></code> of the channel (in picoseconds). Here we set the distance to 1 km and the delay to 1 ms. The <code class="docutils literal notranslate"><span class="pre">set_ends</span></code> method is identical to that for the quantum channel.</p>
-</div>
-<div class="section" id="step-3-scheduling-and-running">
-<h3>Step 3: Scheduling and Running.<a class="headerlink" href="#step-3-scheduling-and-running" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="step-3-scheduling-and-running">
+<h3>Step 3: Scheduling and Running.<a class="headerlink" href="#step-3-scheduling-and-running" title="Permalink to this heading">¶</a></h3>
 <p>We finally schedule the start of our ping-pong communication and run the experiment:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sequence.kernel.process</span> <span class="kn">import</span> <span class="n">Process</span>
 <span class="kn">from</span> <span class="nn">sequence.kernel.event</span> <span class="kn">import</span> <span class="n">Event</span>
@@ -400,9 +401,9 @@ We’ll use a predetermined frequency <code class="docutils literal notranslate"
 </pre></div>
 </div>
 <p>In the output, we see that the <code class="docutils literal notranslate"><span class="pre">PING</span></code> message is received on node 2 first, followed by a <code class="docutils literal notranslate"><span class="pre">PONG</span></code> message received on node 1. The reception times of the messages are at 1 ms and 2 ms of simulation time, respectively, as determined by our classical channel delay.</p>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -411,8 +412,9 @@ We’ll use a predetermined frequency <code class="docutils literal notranslate"
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../../index.html">Table of Contents</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../../index.html">Table of Contents</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">Chapter 2: Hardware Module</a><ul>
 <li><a class="reference internal" href="#example-optical-hardware">Example: Optical Hardware</a><ul>
 <li><a class="reference internal" href="#background">Background</a></li>
@@ -434,12 +436,17 @@ We’ll use a predetermined frequency <code class="docutils literal notranslate"
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="../chapter1/discrete-event-simulation.html"
-                        title="previous chapter">Chapter 1: Discrete Event Simulation</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="../chapter3/entangle.html"
-                        title="next chapter">Chapter 3: Entanglement Management</a></p>
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="../chapter1/discrete-event-simulation.html"
+                          title="previous chapter">Chapter 1: Discrete Event Simulation</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="../chapter3/entangle.html"
+                          title="next chapter">Chapter 3: Entanglement Management</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -451,12 +458,12 @@ We’ll use a predetermined frequency <code class="docutils literal notranslate"
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -476,13 +483,13 @@ We’ll use a predetermined frequency <code class="docutils literal notranslate"
         <li class="right" >
           <a href="../chapter1/discrete-event-simulation.html" title="Chapter 1: Discrete Event Simulation"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.6.2 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Chapter 2: Hardware Module</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2020-2022.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+        &#169; Copyright 2020-2024.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
     </div>
   </body>
 </html>

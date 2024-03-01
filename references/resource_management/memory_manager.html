@@ -1,19 +1,20 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Memory Manager &#8212; SeQUeNCe 0.5.2 documentation</title>
-    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Memory Manager &#8212; SeQUeNCe 0.6.2 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/classic.css" />
     
-    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/language_data.js"></script>
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -35,7 +36,7 @@
         <li class="right" >
           <a href="resource_manager.html" title="Resource Manager"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.6.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" accesskey="U">Resource Management</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Memory Manager</a></li> 
       </ul>
@@ -46,8 +47,8 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="module-src.resource_management.memory_manager">
-<span id="memory-manager"></span><h1>Memory Manager<a class="headerlink" href="#module-src.resource_management.memory_manager" title="Permalink to this headline">¶</a></h1>
+  <section id="module-src.resource_management.memory_manager">
+<span id="memory-manager"></span><h1>Memory Manager<a class="headerlink" href="#module-src.resource_management.memory_manager" title="Permalink to this heading">¶</a></h1>
 <p>Definition of Memory Manager.</p>
 <p>This module provides a definition for the memory manager, which tracks the state of memories on a node.
 There are three states of quantum memory represented by the string: “RAW”, “OCCUPIED”, “ENTANGLED”.</p>
@@ -58,8 +59,8 @@ There are three states of quantum memory represented by the string: “RAW”, �
 </ul>
 <p>This is done through instances of the MemoryInfo class, which track a single memory.</p>
 <dl class="py class">
-<dt id="src.resource_management.memory_manager.MemoryInfo">
-<em class="property">class </em><code class="sig-prename descclassname">src.resource_management.memory_manager.</code><code class="sig-name descname">MemoryInfo</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">memory</span><span class="p">:</span> <span class="n">Memory</span></em>, <em class="sig-param"><span class="n">index</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">state</span><span class="o">=</span><span class="default_value">'RAW'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.resource_management.memory_manager.MemoryInfo" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.resource_management.memory_manager.MemoryInfo">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.resource_management.memory_manager.</span></span><span class="sig-name descname"><span class="pre">MemoryInfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">memory</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../components/memory.html#src.components.memory.Memory" title="src.components.memory.Memory"><span class="pre">Memory</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'RAW'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.resource_management.memory_manager.MemoryInfo" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class to track memory information parameters for memory manager.</p>
 <p>The memory info class chiefly tracks a memory’s entanglement state, in one of 3 allowed states:</p>
 <ul class="simple">
@@ -69,170 +70,170 @@ There are three states of quantum memory represented by the string: “RAW”, �
 </ul>
 <p>The class additionally tracks other memory parameters and properties.</p>
 <dl class="py attribute">
-<dt id="src.resource_management.memory_manager.MemoryInfo.memory">
-<code class="sig-name descname">memory</code><a class="headerlink" href="#src.resource_management.memory_manager.MemoryInfo.memory" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.resource_management.memory_manager.MemoryInfo.memory">
+<span class="sig-name descname"><span class="pre">memory</span></span><a class="headerlink" href="#src.resource_management.memory_manager.MemoryInfo.memory" title="Permalink to this definition">¶</a></dt>
 <dd><p>specific memory being tracked.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="../components/memory.html#src.components.memory.Memory" title="src.components.memory.Memory">Memory</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="src.resource_management.memory_manager.MemoryInfo.index">
-<code class="sig-name descname">index</code><a class="headerlink" href="#src.resource_management.memory_manager.MemoryInfo.index" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.resource_management.memory_manager.MemoryInfo.index">
+<span class="sig-name descname"><span class="pre">index</span></span><a class="headerlink" href="#src.resource_management.memory_manager.MemoryInfo.index" title="Permalink to this definition">¶</a></dt>
 <dd><p>index of memory in memory array.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="src.resource_management.memory_manager.MemoryInfo.state">
-<code class="sig-name descname">state</code><a class="headerlink" href="#src.resource_management.memory_manager.MemoryInfo.state" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.resource_management.memory_manager.MemoryInfo.state">
+<span class="sig-name descname"><span class="pre">state</span></span><a class="headerlink" href="#src.resource_management.memory_manager.MemoryInfo.state" title="Permalink to this definition">¶</a></dt>
 <dd><p>state of memory.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="src.resource_management.memory_manager.MemoryInfo.remote_node">
-<code class="sig-name descname">remote_node</code><a class="headerlink" href="#src.resource_management.memory_manager.MemoryInfo.remote_node" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.resource_management.memory_manager.MemoryInfo.remote_node">
+<span class="sig-name descname"><span class="pre">remote_node</span></span><a class="headerlink" href="#src.resource_management.memory_manager.MemoryInfo.remote_node" title="Permalink to this definition">¶</a></dt>
 <dd><p>name of node holding entangled memory.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="src.resource_management.memory_manager.MemoryInfo.remote_memo">
-<code class="sig-name descname">remote_memo</code><a class="headerlink" href="#src.resource_management.memory_manager.MemoryInfo.remote_memo" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.resource_management.memory_manager.MemoryInfo.remote_memo">
+<span class="sig-name descname"><span class="pre">remote_memo</span></span><a class="headerlink" href="#src.resource_management.memory_manager.MemoryInfo.remote_memo" title="Permalink to this definition">¶</a></dt>
 <dd><p>name of entangled memory on remote node.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="src.resource_management.memory_manager.MemoryInfo.fidelity">
-<code class="sig-name descname">fidelity</code><a class="headerlink" href="#src.resource_management.memory_manager.MemoryInfo.fidelity" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.resource_management.memory_manager.MemoryInfo.fidelity">
+<span class="sig-name descname"><span class="pre">fidelity</span></span><a class="headerlink" href="#src.resource_management.memory_manager.MemoryInfo.fidelity" title="Permalink to this definition">¶</a></dt>
 <dd><p>fidelity of entanglement for memory.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="src.resource_management.memory_manager.MemoryInfo.expire_event">
-<code class="sig-name descname">expire_event</code><a class="headerlink" href="#src.resource_management.memory_manager.MemoryInfo.expire_event" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.resource_management.memory_manager.MemoryInfo.expire_event">
+<span class="sig-name descname"><span class="pre">expire_event</span></span><a class="headerlink" href="#src.resource_management.memory_manager.MemoryInfo.expire_event" title="Permalink to this definition">¶</a></dt>
 <dd><p>expiration event for the memory.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="../kernel/event.html#src.kernel.event.Event" title="src.kernel.event.Event">Event</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="src.resource_management.memory_manager.MemoryInfo.entangle_time">
-<code class="sig-name descname">entangle_time</code><a class="headerlink" href="#src.resource_management.memory_manager.MemoryInfo.entangle_time" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.resource_management.memory_manager.MemoryInfo.entangle_time">
+<span class="sig-name descname"><span class="pre">entangle_time</span></span><a class="headerlink" href="#src.resource_management.memory_manager.MemoryInfo.entangle_time" title="Permalink to this definition">¶</a></dt>
 <dd><p>time at which most recent entanglement is achieved.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt id="src.resource_management.memory_manager.MemoryInfo.to_entangled">
-<code class="sig-name descname">to_entangled</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.resource_management.memory_manager.MemoryInfo.to_entangled" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.resource_management.memory_manager.MemoryInfo.to_entangled">
+<span class="sig-name descname"><span class="pre">to_entangled</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.resource_management.memory_manager.MemoryInfo.to_entangled" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to set memory to entangled state.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="src.resource_management.memory_manager.MemoryInfo.to_occupied">
-<code class="sig-name descname">to_occupied</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.resource_management.memory_manager.MemoryInfo.to_occupied" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.resource_management.memory_manager.MemoryInfo.to_occupied">
+<span class="sig-name descname"><span class="pre">to_occupied</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.resource_management.memory_manager.MemoryInfo.to_occupied" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to set memory to occupied state.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="src.resource_management.memory_manager.MemoryInfo.to_raw">
-<code class="sig-name descname">to_raw</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.resource_management.memory_manager.MemoryInfo.to_raw" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.resource_management.memory_manager.MemoryInfo.to_raw">
+<span class="sig-name descname"><span class="pre">to_raw</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.resource_management.memory_manager.MemoryInfo.to_raw" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to set memory to raw (unentangled) state.</p>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
-<dt id="src.resource_management.memory_manager.MemoryManager">
-<em class="property">class </em><code class="sig-prename descclassname">src.resource_management.memory_manager.</code><code class="sig-name descname">MemoryManager</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">memory_array</span><span class="p">:</span> <span class="n">MemoryArray</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.resource_management.memory_manager.MemoryManager" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.resource_management.memory_manager.MemoryManager">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.resource_management.memory_manager.</span></span><span class="sig-name descname"><span class="pre">MemoryManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">memory_array</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../components/memory.html#src.components.memory.MemoryArray" title="src.components.memory.MemoryArray"><span class="pre">MemoryArray</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.resource_management.memory_manager.MemoryManager" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class to manage a node’s memories.</p>
 <p>The memory manager tracks the entanglement state of a node’s memories, along with other information (such as fidelity).</p>
 <dl class="py attribute">
-<dt id="src.resource_management.memory_manager.MemoryManager.memory_array">
-<code class="sig-name descname">memory_array</code><a class="headerlink" href="#src.resource_management.memory_manager.MemoryManager.memory_array" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.resource_management.memory_manager.MemoryManager.memory_array">
+<span class="sig-name descname"><span class="pre">memory_array</span></span><a class="headerlink" href="#src.resource_management.memory_manager.MemoryManager.memory_array" title="Permalink to this definition">¶</a></dt>
 <dd><p>memory array object to be tracked.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="../components/memory.html#src.components.memory.MemoryArray" title="src.components.memory.MemoryArray">MemoryArray</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="src.resource_management.memory_manager.MemoryManager.memory_map">
-<code class="sig-name descname">memory_map</code><a class="headerlink" href="#src.resource_management.memory_manager.MemoryManager.memory_map" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.resource_management.memory_manager.MemoryManager.memory_map">
+<span class="sig-name descname"><span class="pre">memory_map</span></span><a class="headerlink" href="#src.resource_management.memory_manager.MemoryManager.memory_map" title="Permalink to this definition">¶</a></dt>
 <dd><p>array of memory info objects corresponding to memory array.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>List[<a class="reference internal" href="#src.resource_management.memory_manager.MemoryInfo" title="src.resource_management.memory_manager.MemoryInfo">MemoryInfo</a>]</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="src.resource_management.memory_manager.MemoryManager.resource_manager">
-<code class="sig-name descname">resource_manager</code><a class="headerlink" href="#src.resource_management.memory_manager.MemoryManager.resource_manager" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.resource_management.memory_manager.MemoryManager.resource_manager">
+<span class="sig-name descname"><span class="pre">resource_manager</span></span><a class="headerlink" href="#src.resource_management.memory_manager.MemoryManager.resource_manager" title="Permalink to this definition">¶</a></dt>
 <dd><p>resource manager object using the memory manager.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="resource_manager.html#src.resource_management.resource_manager.ResourceManager" title="src.resource_management.resource_manager.ResourceManager">ResourceManager</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt id="src.resource_management.memory_manager.MemoryManager.get_info_by_memory">
-<code class="sig-name descname">get_info_by_memory</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">memory</span><span class="p">:</span> <span class="n">Memory</span></em><span class="sig-paren">)</span> &#x2192; MemoryInfo<a class="headerlink" href="#src.resource_management.memory_manager.MemoryManager.get_info_by_memory" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.resource_management.memory_manager.MemoryManager.get_info_by_memory">
+<span class="sig-name descname"><span class="pre">get_info_by_memory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">memory</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../components/memory.html#src.components.memory.Memory" title="src.components.memory.Memory"><span class="pre">Memory</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#src.resource_management.memory_manager.MemoryInfo" title="src.resource_management.memory_manager.MemoryInfo"><span class="pre">MemoryInfo</span></a></span></span><a class="headerlink" href="#src.resource_management.memory_manager.MemoryManager.get_info_by_memory" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets memory info object for a desired memory.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="src.resource_management.memory_manager.MemoryManager.set_resource_manager">
-<code class="sig-name descname">set_resource_manager</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">resource_manager</span><span class="p">:</span> <span class="n">ResourceManager</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.resource_management.memory_manager.MemoryManager.set_resource_manager" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.resource_management.memory_manager.MemoryManager.set_resource_manager">
+<span class="sig-name descname"><span class="pre">set_resource_manager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resource_manager</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="resource_manager.html#src.resource_management.resource_manager.ResourceManager" title="src.resource_management.resource_manager.ResourceManager"><span class="pre">ResourceManager</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.resource_management.memory_manager.MemoryManager.set_resource_manager" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to set the resource manager.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="src.resource_management.memory_manager.MemoryManager.update">
-<code class="sig-name descname">update</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">memory</span><span class="p">:</span> <span class="n">Memory</span></em>, <em class="sig-param"><span class="n">state</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.resource_management.memory_manager.MemoryManager.update" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.resource_management.memory_manager.MemoryManager.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">memory</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../components/memory.html#src.components.memory.Memory" title="src.components.memory.Memory"><span class="pre">Memory</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.resource_management.memory_manager.MemoryManager.update" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to update the state of a memory.</p>
 <p>Modifies the memory info object corresponding to the memory.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>memory</strong> (<a class="reference internal" href="../components/memory.html#src.components.memory.Memory" title="src.components.memory.Memory"><em>Memory</em></a>) – memory to update.</p></li>
 <li><p><strong>state</strong> (<em>str</em>) – new state for memory.</p></li>
@@ -243,7 +244,7 @@ There are three states of quantum memory represented by the string: “RAW”, �
 
 </dd></dl>
 
-</div>
+</section>
 
 
             <div class="clearer"></div>
@@ -252,12 +253,16 @@ There are three states of quantum memory represented by the string: “RAW”, �
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="resource_manager.html"
-                        title="previous chapter">Resource Manager</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="rule_manager.html"
-                        title="next chapter">Rule Manager</a></p>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="resource_manager.html"
+                          title="previous chapter">Resource Manager</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="rule_manager.html"
+                          title="next chapter">Rule Manager</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -269,12 +274,12 @@ There are three states of quantum memory represented by the string: “RAW”, �
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -294,14 +299,14 @@ There are three states of quantum memory represented by the string: “RAW”, �
         <li class="right" >
           <a href="resource_manager.html" title="Resource Manager"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.6.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" >Resource Management</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Memory Manager</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2020-2022.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+        &#169; Copyright 2020-2024.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
     </div>
   </body>
 </html>

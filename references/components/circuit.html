@@ -1,19 +1,20 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Circuit &#8212; SeQUeNCe 0.5.2 documentation</title>
-    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Circuit &#8212; SeQUeNCe 0.6.2 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/classic.css" />
     
-    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/language_data.js"></script>
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -35,7 +36,7 @@
         <li class="right" >
           <a href="bsm.html" title="BSM"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.6.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" accesskey="U">Components</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Circuit</a></li> 
       </ul>
@@ -46,56 +47,56 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="module-src.components.circuit">
-<span id="circuit"></span><h1>Circuit<a class="headerlink" href="#module-src.components.circuit" title="Permalink to this headline">¶</a></h1>
+  <section id="module-src.components.circuit">
+<span id="circuit"></span><h1>Circuit<a class="headerlink" href="#module-src.components.circuit" title="Permalink to this heading">¶</a></h1>
 <p>Models for simulation of quantum circuit.</p>
 <p>This module introduces the QuantumCircuit class. The qutip library is used to calculate the unitary matrix of a circuit.</p>
 <dl class="py class">
-<dt id="src.components.circuit.Circuit">
-<em class="property">class </em><code class="sig-prename descclassname">src.components.circuit.</code><code class="sig-name descname">Circuit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">size</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.circuit.Circuit" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.components.circuit.Circuit">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.components.circuit.</span></span><span class="sig-name descname"><span class="pre">Circuit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.components.circuit.Circuit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class for a quantum circuit.</p>
 <dl class="py attribute">
-<dt id="src.components.circuit.Circuit.size">
-<code class="sig-name descname">size</code><a class="headerlink" href="#src.components.circuit.Circuit.size" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.components.circuit.Circuit.size">
+<span class="sig-name descname"><span class="pre">size</span></span><a class="headerlink" href="#src.components.circuit.Circuit.size" title="Permalink to this definition">¶</a></dt>
 <dd><p>the number of qubits in the circuit.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="src.components.circuit.Circuit.gates">
-<code class="sig-name descname">gates</code><a class="headerlink" href="#src.components.circuit.Circuit.gates" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.components.circuit.Circuit.gates">
+<span class="sig-name descname"><span class="pre">gates</span></span><a class="headerlink" href="#src.components.circuit.Circuit.gates" title="Permalink to this definition">¶</a></dt>
 <dd><p>a list of commands bound to register.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>List[GATE_INFO_TYPE]</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="src.components.circuit.Circuit.measured_qubits">
-<code class="sig-name descname">measured_qubits</code><a class="headerlink" href="#src.components.circuit.Circuit.measured_qubits" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.components.circuit.Circuit.measured_qubits">
+<span class="sig-name descname"><span class="pre">measured_qubits</span></span><a class="headerlink" href="#src.components.circuit.Circuit.measured_qubits" title="Permalink to this definition">¶</a></dt>
 <dd><p>a list of indices of measured qubits.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>List[int]</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt id="src.components.circuit.Circuit.get_unitary_matrix">
-<code class="sig-name descname">get_unitary_matrix</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="headerlink" href="#src.components.circuit.Circuit.get_unitary_matrix" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.components.circuit.Circuit.get_unitary_matrix">
+<span class="sig-name descname"><span class="pre">get_unitary_matrix</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="headerlink" href="#src.components.circuit.Circuit.get_unitary_matrix" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to get unitary matrix of circuit without measurement.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>the matrix for the circuit operations.</p>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>np.ndarray</p>
 </dd>
 </dl>
@@ -103,7 +104,7 @@
 
 </dd></dl>
 
-</div>
+</section>
 
 
             <div class="clearer"></div>
@@ -112,12 +113,16 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="bsm.html"
-                        title="previous chapter">BSM</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="detector.html"
-                        title="next chapter">Detector</a></p>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="bsm.html"
+                          title="previous chapter">BSM</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="detector.html"
+                          title="next chapter">Detector</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -129,12 +134,12 @@
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -154,14 +159,14 @@
         <li class="right" >
           <a href="bsm.html" title="BSM"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.6.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" >Components</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Circuit</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2020-2022.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+        &#169; Copyright 2020-2024.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
     </div>
   </body>
 </html>

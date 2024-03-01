@@ -1,19 +1,20 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rule Manager &#8212; SeQUeNCe 0.5.2 documentation</title>
-    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Rule Manager &#8212; SeQUeNCe 0.6.2 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/classic.css" />
     
-    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/language_data.js"></script>
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -35,7 +36,7 @@
         <li class="right" >
           <a href="memory_manager.html" title="Memory Manager"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.6.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" accesskey="U">Resource Management</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Rule Manager</a></li> 
       </ul>
@@ -46,116 +47,116 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="module-src.resource_management.rule_manager">
-<span id="rule-manager"></span><h1>Rule Manager<a class="headerlink" href="#module-src.resource_management.rule_manager" title="Permalink to this headline">¶</a></h1>
+  <section id="module-src.resource_management.rule_manager">
+<span id="rule-manager"></span><h1>Rule Manager<a class="headerlink" href="#module-src.resource_management.rule_manager" title="Permalink to this heading">¶</a></h1>
 <p>Definition of rule manager.</p>
 <p>This module defines the rule manager, which is used by the resource manager to instantiate and control entanglement protocols.
 This is achieved through rules (also defined in this module), which if met define a set of actions to take.</p>
 <dl class="py class">
-<dt id="src.resource_management.rule_manager.Rule">
-<em class="property">class </em><code class="sig-prename descclassname">src.resource_management.rule_manager.</code><code class="sig-name descname">Rule</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">priority</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">action</span><span class="p">:</span> <span class="n">Callable<span class="p">[</span><span class="p">[</span>List<span class="p">[</span>MemoryInfo<span class="p">]</span><span class="p">, </span>Dict<span class="p">[</span>str<span class="p">, </span>Any<span class="p">]</span><span class="p">]</span><span class="p">, </span>Tuple<span class="p">[</span>EntanglementProtocol<span class="p">, </span>List<span class="p">[</span>str<span class="p">]</span><span class="p">, </span>List<span class="p">[</span>Callable<span class="p">[</span><span class="p">[</span>EntanglementProtocol<span class="p">]</span><span class="p">, </span>bool<span class="p">]</span><span class="p">]</span><span class="p">]</span><span class="p">]</span></span></em>, <em class="sig-param"><span class="n">condition</span><span class="p">:</span> <span class="n">typing.Callable[[ForwardRef(‘MemoryInfo’), ForwardRef(‘MemoryManager’), typing.Dict[str, typing.Any]], typing.List[ForwardRef(‘MemoryInfo’)]]</span></em>, <em class="sig-param"><span class="n">action_args</span><span class="p">:</span> <span class="n">Dict<span class="p">[</span>str<span class="p">, </span>Any<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">condition_args</span><span class="p">:</span> <span class="n">Dict<span class="p">[</span>str<span class="p">, </span>Any<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.resource_management.rule_manager.Rule" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.resource_management.rule_manager.Rule">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.resource_management.rule_manager.</span></span><span class="sig-name descname"><span class="pre">Rule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">priority</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">action</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="memory_manager.html#src.resource_management.memory_manager.MemoryInfo" title="src.resource_management.memory_manager.MemoryInfo"><span class="pre">MemoryInfo</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../entanglement_management/entanglement_protocol.html#src.entanglement_management.entanglement_protocol.EntanglementProtocol" title="src.entanglement_management.entanglement_protocol.EntanglementProtocol"><span class="pre">EntanglementProtocol</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../entanglement_management/entanglement_protocol.html#src.entanglement_management.entanglement_protocol.EntanglementProtocol" title="src.entanglement_management.entanglement_protocol.EntanglementProtocol"><span class="pre">EntanglementProtocol</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">condition</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">(typing.Callable[[ForwardRef('MemoryInfo'),</span> <span class="pre">ForwardRef('MemoryManager'),</span> <span class="pre">typing.Dict[str,</span> <span class="pre">typing.Any]],</span> <span class="pre">typing.List[ForwardRef('MemoryInfo')]],)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">action_args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">condition_args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.resource_management.rule_manager.Rule" title="Permalink to this definition">¶</a></dt>
 <dd><p>Definition of rule for the rule manager.</p>
 <p>Rule objects are installed on and interacted with by the rule manager.</p>
 <dl class="py attribute">
-<dt id="src.resource_management.rule_manager.Rule.priority">
-<code class="sig-name descname">priority</code><a class="headerlink" href="#src.resource_management.rule_manager.Rule.priority" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.resource_management.rule_manager.Rule.priority">
+<span class="sig-name descname"><span class="pre">priority</span></span><a class="headerlink" href="#src.resource_management.rule_manager.Rule.priority" title="Permalink to this definition">¶</a></dt>
 <dd><p>priority of the rule, used as a tiebreaker when conditions of multiple rules are met.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="src.resource_management.rule_manager.Rule.action">
-<code class="sig-name descname">action</code><a class="headerlink" href="#src.resource_management.rule_manager.Rule.action" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.resource_management.rule_manager.Rule.action">
+<span class="sig-name descname"><span class="pre">action</span></span><a class="headerlink" href="#src.resource_management.rule_manager.Rule.action" title="Permalink to this definition">¶</a></dt>
 <dd><p>action to take when rule condition is met.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Callable[[List[“MemoryInfo”]], Tuple[“Protocol”, List[“str”], List[Callable[[“Protocol”], bool]]]]</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="src.resource_management.rule_manager.Rule.condition">
-<code class="sig-name descname">condition</code><a class="headerlink" href="#src.resource_management.rule_manager.Rule.condition" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.resource_management.rule_manager.Rule.condition">
+<span class="sig-name descname"><span class="pre">condition</span></span><a class="headerlink" href="#src.resource_management.rule_manager.Rule.condition" title="Permalink to this definition">¶</a></dt>
 <dd><p>condition required by rule.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Callable[[“MemoryInfo”, “MemoryManager”], List[“MemoryInfo”]]</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="src.resource_management.rule_manager.Rule.protocols">
-<code class="sig-name descname">protocols</code><a class="headerlink" href="#src.resource_management.rule_manager.Rule.protocols" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.resource_management.rule_manager.Rule.protocols">
+<span class="sig-name descname"><span class="pre">protocols</span></span><a class="headerlink" href="#src.resource_management.rule_manager.Rule.protocols" title="Permalink to this definition">¶</a></dt>
 <dd><p>protocols created by rule.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>List[Protocols]</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="src.resource_management.rule_manager.Rule.rule_manager">
-<code class="sig-name descname">rule_manager</code><a class="headerlink" href="#src.resource_management.rule_manager.Rule.rule_manager" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.resource_management.rule_manager.Rule.rule_manager">
+<span class="sig-name descname"><span class="pre">rule_manager</span></span><a class="headerlink" href="#src.resource_management.rule_manager.Rule.rule_manager" title="Permalink to this definition">¶</a></dt>
 <dd><p>reference to rule manager object where rule is installed.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#src.resource_management.rule_manager.RuleManager" title="src.resource_management.rule_manager.RuleManager">RuleManager</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="src.resource_management.rule_manager.Rule.reservation">
-<code class="sig-name descname">reservation</code><a class="headerlink" href="#src.resource_management.rule_manager.Rule.reservation" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.resource_management.rule_manager.Rule.reservation">
+<span class="sig-name descname"><span class="pre">reservation</span></span><a class="headerlink" href="#src.resource_management.rule_manager.Rule.reservation" title="Permalink to this definition">¶</a></dt>
 <dd><p>associated reservation.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="../network_management/reservation.html#src.network_management.reservation.Reservation" title="src.network_management.reservation.Reservation">Reservation</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt id="src.resource_management.rule_manager.Rule.do">
-<code class="sig-name descname">do</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">memories_info</span><span class="p">:</span> <span class="n">List<span class="p">[</span>MemoryInfo<span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.resource_management.rule_manager.Rule.do" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.resource_management.rule_manager.Rule.do">
+<span class="sig-name descname"><span class="pre">do</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">memories_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="memory_manager.html#src.resource_management.memory_manager.MemoryInfo" title="src.resource_management.memory_manager.MemoryInfo"><span class="pre">MemoryInfo</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.resource_management.rule_manager.Rule.do" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to perform rule activation and send requirements to other nodes.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>memories_info</strong> (<em>List</em><em>[</em><a class="reference internal" href="memory_manager.html#src.resource_management.memory_manager.MemoryInfo" title="src.resource_management.memory_manager.MemoryInfo"><em>MemoryInfo</em></a><em>]</em>) – list of memory infos for memories meeting requirements.</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt id="src.resource_management.rule_manager.Rule.is_valid">
-<code class="sig-name descname">is_valid</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">memory_info</span><span class="p">:</span> <span class="n">MemoryInfo</span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span>MemoryInfo<span class="p">]</span><a class="headerlink" href="#src.resource_management.rule_manager.Rule.is_valid" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.resource_management.rule_manager.Rule.is_valid">
+<span class="sig-name descname"><span class="pre">is_valid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">memory_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="memory_manager.html#src.resource_management.memory_manager.MemoryInfo" title="src.resource_management.memory_manager.MemoryInfo"><span class="pre">MemoryInfo</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="memory_manager.html#src.resource_management.memory_manager.MemoryInfo" title="src.resource_management.memory_manager.MemoryInfo"><span class="pre">MemoryInfo</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#src.resource_management.rule_manager.Rule.is_valid" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to check for memories meeting condition.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>memory_info</strong> (<a class="reference internal" href="memory_manager.html#src.resource_management.memory_manager.MemoryInfo" title="src.resource_management.memory_manager.MemoryInfo"><em>MemoryInfo</em></a>) – memory info object to test.</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>list of memory info objects meeting requirements of rule.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>List[memory_info]</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt id="src.resource_management.rule_manager.Rule.set_rule_manager">
-<code class="sig-name descname">set_rule_manager</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">rule_manager</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#src.resource_management.rule_manager.RuleManager" title="src.resource_management.rule_manager.RuleManager">src.resource_management.rule_manager.RuleManager</a></span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.resource_management.rule_manager.Rule.set_rule_manager" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.resource_management.rule_manager.Rule.set_rule_manager">
+<span class="sig-name descname"><span class="pre">set_rule_manager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rule_manager</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#src.resource_management.rule_manager.RuleManager" title="src.resource_management.rule_manager.RuleManager"><span class="pre">RuleManager</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.resource_management.rule_manager.Rule.set_rule_manager" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to assign rule to a rule manager.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>rule_manager</strong> (<a class="reference internal" href="#src.resource_management.rule_manager.RuleManager" title="src.resource_management.rule_manager.RuleManager"><em>RuleManager</em></a>) – manager to assign.</p>
 </dd>
 </dl>
@@ -164,74 +165,74 @@ This is achieved through rules (also defined in this module), which if met defin
 </dd></dl>
 
 <dl class="py class">
-<dt id="src.resource_management.rule_manager.RuleManager">
-<em class="property">class </em><code class="sig-prename descclassname">src.resource_management.rule_manager.</code><code class="sig-name descname">RuleManager</code><a class="headerlink" href="#src.resource_management.rule_manager.RuleManager" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.resource_management.rule_manager.RuleManager">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.resource_management.rule_manager.</span></span><span class="sig-name descname"><span class="pre">RuleManager</span></span><a class="headerlink" href="#src.resource_management.rule_manager.RuleManager" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class to manage and follow installed rules.</p>
 <p>The RuleManager checks available rules when the state of a memory is updated.
 Rules that are met have their action executed by the rule manager.</p>
 <dl class="py attribute">
-<dt id="src.resource_management.rule_manager.RuleManager.rules">
-<code class="sig-name descname">rules</code><a class="headerlink" href="#src.resource_management.rule_manager.RuleManager.rules" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.resource_management.rule_manager.RuleManager.rules">
+<span class="sig-name descname"><span class="pre">rules</span></span><a class="headerlink" href="#src.resource_management.rule_manager.RuleManager.rules" title="Permalink to this definition">¶</a></dt>
 <dd><p>List of installed rules.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>List[Rules]</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="src.resource_management.rule_manager.RuleManager.resource_manager">
-<code class="sig-name descname">resource_manager</code><a class="headerlink" href="#src.resource_management.rule_manager.RuleManager.resource_manager" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.resource_management.rule_manager.RuleManager.resource_manager">
+<span class="sig-name descname"><span class="pre">resource_manager</span></span><a class="headerlink" href="#src.resource_management.rule_manager.RuleManager.resource_manager" title="Permalink to this definition">¶</a></dt>
 <dd><p>reference to the resource manager using this rule manager.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="resource_manager.html#src.resource_management.resource_manager.ResourceManager" title="src.resource_management.resource_manager.ResourceManager">ResourceManager</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt id="src.resource_management.rule_manager.RuleManager.expire">
-<code class="sig-name descname">expire</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">rule</span><span class="p">:</span> <span class="n">Rule</span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span>EntanglementProtocol<span class="p">]</span><a class="headerlink" href="#src.resource_management.rule_manager.RuleManager.expire" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.resource_management.rule_manager.RuleManager.expire">
+<span class="sig-name descname"><span class="pre">expire</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rule</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#src.resource_management.rule_manager.Rule" title="src.resource_management.rule_manager.Rule"><span class="pre">Rule</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../entanglement_management/entanglement_protocol.html#src.entanglement_management.entanglement_protocol.EntanglementProtocol" title="src.entanglement_management.entanglement_protocol.EntanglementProtocol"><span class="pre">EntanglementProtocol</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#src.resource_management.rule_manager.RuleManager.expire" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to remove expired protocol.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>rule</strong> (<a class="reference internal" href="#src.resource_management.rule_manager.Rule" title="src.resource_management.rule_manager.Rule"><em>Rule</em></a>) – rule to remove.</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>list of protocols created by rule (if any).</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>List[<a class="reference internal" href="../entanglement_management/entanglement_protocol.html#src.entanglement_management.entanglement_protocol.EntanglementProtocol" title="src.entanglement_management.entanglement_protocol.EntanglementProtocol">EntanglementProtocol</a>]</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt id="src.resource_management.rule_manager.RuleManager.load">
-<code class="sig-name descname">load</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">rule</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#src.resource_management.rule_manager.Rule" title="src.resource_management.rule_manager.Rule">src.resource_management.rule_manager.Rule</a></span></em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#src.resource_management.rule_manager.RuleManager.load" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.resource_management.rule_manager.RuleManager.load">
+<span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rule</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#src.resource_management.rule_manager.Rule" title="src.resource_management.rule_manager.Rule"><span class="pre">Rule</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#src.resource_management.rule_manager.RuleManager.load" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to load rule into ruleset.</p>
 <p>Tries to insert rule into internal <cite>rules</cite> list based on priority.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>rule</strong> (<a class="reference internal" href="#src.resource_management.rule_manager.Rule" title="src.resource_management.rule_manager.Rule"><em>Rule</em></a>) – rule to insert.</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>success of rule insertion.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt id="src.resource_management.rule_manager.RuleManager.set_resource_manager">
-<code class="sig-name descname">set_resource_manager</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">resource_manager</span><span class="p">:</span> <span class="n">ResourceManager</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.resource_management.rule_manager.RuleManager.set_resource_manager" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.resource_management.rule_manager.RuleManager.set_resource_manager">
+<span class="sig-name descname"><span class="pre">set_resource_manager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resource_manager</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="resource_manager.html#src.resource_management.resource_manager.ResourceManager" title="src.resource_management.resource_manager.ResourceManager"><span class="pre">ResourceManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.resource_management.rule_manager.RuleManager.set_resource_manager" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to set overseeing resource manager.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>resource_manager</strong> (<a class="reference internal" href="resource_manager.html#src.resource_management.resource_manager.ResourceManager" title="src.resource_management.resource_manager.ResourceManager"><em>ResourceManager</em></a>) – resource manager to attach to.</p>
 </dd>
 </dl>
@@ -239,7 +240,7 @@ Rules that are met have their action executed by the rule manager.</p>
 
 </dd></dl>
 
-</div>
+</section>
 
 
             <div class="clearer"></div>
@@ -248,12 +249,16 @@ Rules that are met have their action executed by the rule manager.</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="memory_manager.html"
-                        title="previous chapter">Memory Manager</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="../network_management/top.html"
-                        title="next chapter">Network Management</a></p>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="memory_manager.html"
+                          title="previous chapter">Memory Manager</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="../network_management/top.html"
+                          title="next chapter">Network Management</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -265,12 +270,12 @@ Rules that are met have their action executed by the rule manager.</p>
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -290,14 +295,14 @@ Rules that are met have their action executed by the rule manager.</p>
         <li class="right" >
           <a href="memory_manager.html" title="Memory Manager"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.6.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" >Resource Management</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Rule Manager</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2020-2022.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+        &#169; Copyright 2020-2024.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
     </div>
   </body>
 </html>

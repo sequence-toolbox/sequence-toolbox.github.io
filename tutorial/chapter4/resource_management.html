@@ -1,19 +1,20 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chapter 4: Resource Management &#8212; SeQUeNCe 0.5.2 documentation</title>
-    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Chapter 4: Resource Management &#8212; SeQUeNCe 0.6.2 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/classic.css" />
     
-    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/language_data.js"></script>
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -35,7 +36,7 @@
         <li class="right" >
           <a href="../chapter3/entangle.html" title="Chapter 3: Entanglement Management"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.6.2 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Chapter 4: Resource Management</a></li> 
       </ul>
     </div>  
@@ -45,21 +46,21 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="chapter-4-resource-management">
-<h1>Chapter 4: Resource Management<a class="headerlink" href="#chapter-4-resource-management" title="Permalink to this headline">¶</a></h1>
+  <section id="chapter-4-resource-management">
+<h1>Chapter 4: Resource Management<a class="headerlink" href="#chapter-4-resource-management" title="Permalink to this heading">¶</a></h1>
 <p>In this tutorial, we will show the usual operation of the Resource Management module included in SeQUeNCe. We’re going to build a linear, three-node network and create two entanglement flows. The network, including flows, is shown below:</p>
 <p><img alt="topo" src="../../_images/two_flow_linear_topo.png" /></p>
 <p>We’ll be using custom rules to create our two flows. Each flow will attempt to entangle 10 pairs, so we will reserve the memories as follows, with green denoting flow 1 and red denoting flow 2:</p>
 <p><img alt="mems" src="../../_images/memory_reservation.png" /></p>
 <p>We will also be creating a custom node class to meet the requirements of this experiment, in a similar manner to past tutorials.</p>
-<div class="section" id="background">
-<h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h2>
-<p>The Resource Management module in SeQUeNCe is responsible for managing the usage of and flow of information from hardware elements on a node. This is achieved with an internal <strong>memory manager</strong> and <strong>rule manager</strong>, as shown below:</p>
+<section id="background">
+<h2>Background<a class="headerlink" href="#background" title="Permalink to this heading">¶</a></h2>
+<p>The Resource Management module in SeQUeNCe is responsible for managing the usage of quantum memory and flow of information from hardware elements on a node. This is achieved with an internal <strong>memory manager</strong> and <strong>rule manager</strong>, as shown below:</p>
 <p><img alt="rm" src="../../_images/resource_management.png" /></p>
 <p>The memory manager is used to track the current state of all quantum memories (including entanglement, fidelity, etc.) while the rule manager uses a set of “rules” (containing a priority, condition to be met, and action to take) to direct local protocols.</p>
-</div>
-<div class="section" id="step-1-create-custom-node-type">
-<h2>Step 1: Create custom node type<a class="headerlink" href="#step-1-create-custom-node-type" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="step-1-create-custom-node-type">
+<h2>Step 1: Create custom node type<a class="headerlink" href="#step-1-create-custom-node-type" title="Permalink to this heading">¶</a></h2>
 <p>We will first create a custom node type based on the <code class="docutils literal notranslate"><span class="pre">QuantumRouter</span></code> node from SeQUeNCe.
 Our node will need to include the memory array hardware and a resource manager, as well as some functions to handle normal operations of the node.
 The first function we will need to edit is the <code class="docutils literal notranslate"><span class="pre">received_message</span></code> method, similar to other tutorials.
@@ -103,9 +104,9 @@ Finally, we modify the <code class="docutils literal notranslate"><span class="p
         <span class="bp">self</span><span class="o">.</span><span class="n">send_qubit</span><span class="p">(</span><span class="n">dst</span><span class="p">,</span> <span class="n">photon</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="step-2-create-rule-conditions-for-flow-1">
-<h2>Step 2: Create Rule Conditions for Flow 1<a class="headerlink" href="#step-2-create-rule-conditions-for-flow-1" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="step-2-create-rule-conditions-for-flow-1">
+<h2>Step 2: Create Rule Conditions for Flow 1<a class="headerlink" href="#step-2-create-rule-conditions-for-flow-1" title="Permalink to this heading">¶</a></h2>
 <p>We’re going to focus on custom rules for the short-range entanglement between routers 1 and 2 first. Our first step is
 to define the rule conditions for this process that will be used by the resource manager to generate entanglement. In
 our case, we will simply use all available memories with the indices <code class="docutils literal notranslate"><span class="pre">{0</span> <span class="pre">...</span> <span class="pre">9}</span></code> to generate entanglement between the
@@ -134,9 +135,9 @@ memory). If our desired condition is met, we will return the <code class="docuti
 nothing.</p>
 <p>The arguments for <code class="docutils literal notranslate"><span class="pre">args</span></code> for flow 1 are shown in the bottom comment.
 We will create a variable to store these when we load the rule into the rule manager.</p>
-</div>
-<div class="section" id="step-3-create-rule-actions-for-flow-1">
-<h2>Step 3: Create Rule Actions for Flow 1<a class="headerlink" href="#step-3-create-rule-actions-for-flow-1" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="step-3-create-rule-actions-for-flow-1">
+<h2>Step 3: Create Rule Actions for Flow 1<a class="headerlink" href="#step-3-create-rule-actions-for-flow-1" title="Permalink to this heading">¶</a></h2>
 <p>Next, we will dictate what the resource manager should do when our custom condition is met.
 This is performed with a rule action.</p>
 <p>Rule actions are provided one argument by the resource manager: a list of <code class="docutils literal notranslate"><span class="pre">memory_info</span></code> objects that have met the
@@ -196,9 +197,9 @@ Note that the name of router 1 will be <code class="docutils literal notranslate
     <span class="k">return</span> <span class="p">[</span><span class="n">protocol</span><span class="p">,</span> <span class="p">[</span><span class="kc">None</span><span class="p">],</span> <span class="p">[</span><span class="kc">None</span><span class="p">],</span> <span class="p">[</span><span class="kc">None</span><span class="p">]]</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="step-4-build-the-network">
-<h2>Step 4: Build the Network<a class="headerlink" href="#step-4-build-the-network" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="step-4-build-the-network">
+<h2>Step 4: Build the Network<a class="headerlink" href="#step-4-build-the-network" title="Permalink to this heading">¶</a></h2>
 <p>We’ll now actually build our network and get ready to run the simulation.
 We will include the third router node, as this will be used for our second flow, but we will not use it in our first experiment:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sequence.kernel.timeline</span> <span class="kn">import</span> <span class="n">Timeline</span>
@@ -241,9 +242,9 @@ We will include the third router node, as this will be used for our second flow,
 <span class="n">qc4</span><span class="o">.</span><span class="n">set_ends</span><span class="p">(</span><span class="n">r3</span><span class="p">,</span> <span class="n">m23</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="step-5-run-the-simulation-with-1-flow">
-<h2>Step 5: Run the Simulation with 1 Flow<a class="headerlink" href="#step-5-run-the-simulation-with-1-flow" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="step-5-run-the-simulation-with-1-flow">
+<h2>Step 5: Run the Simulation with 1 Flow<a class="headerlink" href="#step-5-run-the-simulation-with-1-flow" title="Permalink to this heading">¶</a></h2>
 <p>Finally, we can run our initial simulation, including installation of our custom rules. We will start our entanglement
 flow at the beginning of the simulation by installing the rules. Rules are created with a priority, rule action, rule
 condition, and arguments of action and condition, while rules are installed with the <code class="docutils literal notranslate"><span class="pre">load</span></code> method of the resource
@@ -280,9 +281,9 @@ generate entanglement. These are specified in the action and condition args.</p>
 <li><p>The time at which it was entangled.</p></li>
 </ul>
 <p>We should notice that all of the memories 0-9 are entangled with router 2 within a short time.</p>
-</div>
-<div class="section" id="step-6-flow-2-entanglement-generation">
-<h2>Step 6: Flow 2 Entanglement Generation<a class="headerlink" href="#step-6-flow-2-entanglement-generation" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="step-6-flow-2-entanglement-generation">
+<h2>Step 6: Flow 2 Entanglement Generation<a class="headerlink" href="#step-6-flow-2-entanglement-generation" title="Permalink to this heading">¶</a></h2>
 <p>Now, we’ll create the custom rules to control our second flow between routers 1 and 3.
 The first step is again to set up entanglement generation in a similar manner to the first flow.
 To do this, we’ll create a function <code class="docutils literal notranslate"><span class="pre">add_eg_rules</span></code> that takes as arguments</p>
@@ -336,9 +337,9 @@ arguments.</p>
     <span class="n">node</span><span class="o">.</span><span class="n">resource_manager</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">rule</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="step-7-flow-2-entanglement-purification">
-<h2>Step 7: Flow 2 Entanglement Purification<a class="headerlink" href="#step-7-flow-2-entanglement-purification" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="step-7-flow-2-entanglement-purification">
+<h2>Step 7: Flow 2 Entanglement Purification<a class="headerlink" href="#step-7-flow-2-entanglement-purification" title="Permalink to this heading">¶</a></h2>
 <p>We’ll next create rules for entanglement purification. Our rule conditions will be a little different,
 as we will want memories to be in the <code class="docutils literal notranslate"><span class="pre">ENTANGLED</span></code> state with fidelity below some threshold (that we wish to improve).
 Each protocol will also need two memories, one of which will be consumed while the fidelity of the other increases.
@@ -420,14 +421,11 @@ The arguments for our <code class="docutils literal notranslate"><span class="pr
         <span class="k">return</span> <span class="p">[</span><span class="n">memory_info</span><span class="p">]</span>
     <span class="k">return</span> <span class="p">[]</span>
 
-        <span class="k">def</span> <span class="nf">ep_rule_action</span><span class="p">(</span><span class="n">memories_info</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="s2">&quot;MemoryInfo&quot;</span><span class="p">]):</span>
-            <span class="n">memories</span> <span class="o">=</span> <span class="p">[</span><span class="n">info</span><span class="o">.</span><span class="n">memory</span> <span class="k">for</span> <span class="n">info</span> <span class="ow">in</span> <span class="n">memories_info</span><span class="p">]</span>
-            <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;EP.</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">memories</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-            <span class="n">protocol</span> <span class="o">=</span> <span class="n">BBPSSW</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">memories</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="kc">None</span><span class="p">)</span>
-            <span class="k">return</span> <span class="n">protocol</span><span class="p">,</span> <span class="p">[</span><span class="kc">None</span><span class="p">],</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span>
-
-        <span class="n">rule</span> <span class="o">=</span> <span class="n">Rule</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">ep_rule_action</span><span class="p">,</span> <span class="n">ep_rule_condition</span><span class="p">)</span>
-        <span class="n">node</span><span class="o">.</span><span class="n">resource_manager</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">rule</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">ep_rule_action2</span><span class="p">(</span><span class="n">memories_info</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="s2">&quot;MemoryInfo&quot;</span><span class="p">],</span> <span class="n">args</span><span class="p">):</span>
+    <span class="n">memories</span> <span class="o">=</span> <span class="p">[</span><span class="n">info</span><span class="o">.</span><span class="n">memory</span> <span class="k">for</span> <span class="n">info</span> <span class="ow">in</span> <span class="n">memories_info</span><span class="p">]</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;EP.</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">memories</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">protocol</span> <span class="o">=</span> <span class="n">BBPSSW</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">memories</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">protocol</span><span class="p">,</span> <span class="p">[</span><span class="kc">None</span><span class="p">],</span> <span class="p">[</span><span class="kc">None</span><span class="p">],</span> <span class="p">[</span><span class="kc">None</span><span class="p">]]</span>
 
 
 <span class="k">def</span> <span class="nf">add_ep_rules</span><span class="p">(</span><span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">RouterNode</span><span class="p">],</span> <span class="n">target_fidelity</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
@@ -458,9 +456,9 @@ The arguments for our <code class="docutils literal notranslate"><span class="pr
         <span class="n">node</span><span class="o">.</span><span class="n">resource_manager</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">rule</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="step-8-flow-2-entanglement-swapping">
-<h2>Step 8: Flow 2 Entanglement Swapping<a class="headerlink" href="#step-8-flow-2-entanglement-swapping" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="step-8-flow-2-entanglement-swapping">
+<h2>Step 8: Flow 2 Entanglement Swapping<a class="headerlink" href="#step-8-flow-2-entanglement-swapping" title="Permalink to this heading">¶</a></h2>
 <p>Finally, we’ll generate rules for entanglement swapping.
 The rules will be a little more complicated as we require different protocols for the intermediate and end routers (see tutorial 3).
 However, the basic principles of rule creation remain the same, requiring a condition, an action, and args.
@@ -547,9 +545,9 @@ For now, we will only define the actions and conditions and leave the rule creat
     <span class="k">return</span> <span class="p">[</span><span class="n">protocol</span><span class="p">,</span> <span class="p">[</span><span class="kc">None</span><span class="p">],</span> <span class="p">[</span><span class="kc">None</span><span class="p">],</span> <span class="p">[</span><span class="kc">None</span><span class="p">]]</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="step-9-run-the-simulation-again">
-<h2>Step 9: Run the Simulation Again<a class="headerlink" href="#step-9-run-the-simulation-again" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="step-9-run-the-simulation-again">
+<h2>Step 9: Run the Simulation Again<a class="headerlink" href="#step-9-run-the-simulation-again" title="Permalink to this heading">¶</a></h2>
 <p>We will now run the simulation again, adding in our new custom rules for the second flow. We will also add code to display memory information on routers 2 and 3. We should observe long-distance entanglement between routers 1 and 3 alongside the short distance entanglement from our first experiment.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tl</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
 
@@ -611,8 +609,8 @@ For now, we will only define the actions and conditions and leave the rule creat
                                          <span class="nb">str</span><span class="p">(</span><span class="n">info</span><span class="o">.</span><span class="n">fidelity</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">info</span><span class="o">.</span><span class="n">entangle_time</span> <span class="o">*</span> <span class="mf">1e-12</span><span class="p">)))</span>
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -621,8 +619,9 @@ For now, we will only define the actions and conditions and leave the rule creat
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../../index.html">Table of Contents</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../../index.html">Table of Contents</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">Chapter 4: Resource Management</a><ul>
 <li><a class="reference internal" href="#background">Background</a></li>
 <li><a class="reference internal" href="#step-1-create-custom-node-type">Step 1: Create custom node type</a></li>
@@ -638,12 +637,17 @@ For now, we will only define the actions and conditions and leave the rule creat
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="../chapter3/entangle.html"
-                        title="previous chapter">Chapter 3: Entanglement Management</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="../chapter5/network_manager.html"
-                        title="next chapter">Chapter 5: Network Manager</a></p>
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="../chapter3/entangle.html"
+                          title="previous chapter">Chapter 3: Entanglement Management</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="../chapter5/network_manager.html"
+                          title="next chapter">Chapter 5: Network Manager</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -655,12 +659,12 @@ For now, we will only define the actions and conditions and leave the rule creat
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -680,13 +684,13 @@ For now, we will only define the actions and conditions and leave the rule creat
         <li class="right" >
           <a href="../chapter3/entangle.html" title="Chapter 3: Entanglement Management"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.6.2 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Chapter 4: Resource Management</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2020-2022.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+        &#169; Copyright 2020-2024.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
     </div>
   </body>
 </html>

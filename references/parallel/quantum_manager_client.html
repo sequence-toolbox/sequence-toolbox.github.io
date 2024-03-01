@@ -1,19 +1,20 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quantum Manager Client &#8212; SeQUeNCe 0.5.2 documentation</title>
-    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Quantum Manager Client &#8212; SeQUeNCe 0.6.2 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/classic.css" />
     
-    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/language_data.js"></script>
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -35,7 +36,7 @@
         <li class="right" >
           <a href="p_quantum_manager.html" title="Parallel Quantum Manager"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.6.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" accesskey="U">Parallel</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Quantum Manager Client</a></li> 
       </ul>
@@ -46,86 +47,86 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="module-parallel.src.quantum_manager_client">
-<span id="quantum-manager-client"></span><h1>Quantum Manager Client<a class="headerlink" href="#module-parallel.src.quantum_manager_client" title="Permalink to this headline">¶</a></h1>
+  <section id="module-parallel.src.quantum_manager_client">
+<span id="quantum-manager-client"></span><h1>Quantum Manager Client<a class="headerlink" href="#module-parallel.src.quantum_manager_client" title="Permalink to this heading">¶</a></h1>
 <p>This module defines the QuantumManagerClient class.</p>
 <p>This client provides the same interface as the QuantumManager class for manipulating qubits.
 Qubits only managed by the local process are stored within a QuantumManager class instance.
 Qubits managed or accessed between processes are stored on a remote quantum manager server.</p>
 <dl class="py class">
-<dt id="parallel.src.quantum_manager_client.QuantumManagerClient">
-<em class="property">class </em><code class="sig-prename descclassname">parallel.src.quantum_manager_client.</code><code class="sig-name descname">QuantumManagerClient</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">formalism</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">ip</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">port</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="headerlink" href="#parallel.src.quantum_manager_client.QuantumManagerClient" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="parallel.src.quantum_manager_client.QuantumManagerClient">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">parallel.src.quantum_manager_client.</span></span><span class="sig-name descname"><span class="pre">QuantumManagerClient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">formalism</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ip</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parallel.src.quantum_manager_client.QuantumManagerClient" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class to process interactions with remote quantum manager server.</p>
 <p>Unless otherwise noted, the operation of all functions are the same as those of the QuantumManagerClass.</p>
 <dl class="py attribute">
-<dt id="parallel.src.quantum_manager_client.QuantumManagerClient.formalism">
-<code class="sig-name descname">formalism</code><a class="headerlink" href="#parallel.src.quantum_manager_client.QuantumManagerClient.formalism" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="parallel.src.quantum_manager_client.QuantumManagerClient.formalism">
+<span class="sig-name descname"><span class="pre">formalism</span></span><a class="headerlink" href="#parallel.src.quantum_manager_client.QuantumManagerClient.formalism" title="Permalink to this definition">¶</a></dt>
 <dd><p>formalism to use for quantum manager (must match server).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="parallel.src.quantum_manager_client.QuantumManagerClient.ip">
-<code class="sig-name descname">ip</code><a class="headerlink" href="#parallel.src.quantum_manager_client.QuantumManagerClient.ip" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="parallel.src.quantum_manager_client.QuantumManagerClient.ip">
+<span class="sig-name descname"><span class="pre">ip</span></span><a class="headerlink" href="#parallel.src.quantum_manager_client.QuantumManagerClient.ip" title="Permalink to this definition">¶</a></dt>
 <dd><p>ip address of quantum manager server.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="parallel.src.quantum_manager_client.QuantumManagerClient.port">
-<code class="sig-name descname">port</code><a class="headerlink" href="#parallel.src.quantum_manager_client.QuantumManagerClient.port" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="parallel.src.quantum_manager_client.QuantumManagerClient.port">
+<span class="sig-name descname"><span class="pre">port</span></span><a class="headerlink" href="#parallel.src.quantum_manager_client.QuantumManagerClient.port" title="Permalink to this definition">¶</a></dt>
 <dd><p>port of quantum manager server.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="parallel.src.quantum_manager_client.QuantumManagerClient.socket">
-<code class="sig-name descname">socket</code><a class="headerlink" href="#parallel.src.quantum_manager_client.QuantumManagerClient.socket" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="parallel.src.quantum_manager_client.QuantumManagerClient.socket">
+<span class="sig-name descname"><span class="pre">socket</span></span><a class="headerlink" href="#parallel.src.quantum_manager_client.QuantumManagerClient.socket" title="Permalink to this definition">¶</a></dt>
 <dd><p>socket for communication with server.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>socket</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="parallel.src.quantum_manager_client.QuantumManagerClient.managed_qubits">
-<code class="sig-name descname">managed_qubits</code><a class="headerlink" href="#parallel.src.quantum_manager_client.QuantumManagerClient.managed_qubits" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="parallel.src.quantum_manager_client.QuantumManagerClient.managed_qubits">
+<span class="sig-name descname"><span class="pre">managed_qubits</span></span><a class="headerlink" href="#parallel.src.quantum_manager_client.QuantumManagerClient.managed_qubits" title="Permalink to this definition">¶</a></dt>
 <dd><p>keys for all qubits managed locally by client.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>set</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="parallel.src.quantum_manager_client.QuantumManagerClient.message_buffer">
-<code class="sig-name descname">message_buffer</code><a class="headerlink" href="#parallel.src.quantum_manager_client.QuantumManagerClient.message_buffer" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="parallel.src.quantum_manager_client.QuantumManagerClient.message_buffer">
+<span class="sig-name descname"><span class="pre">message_buffer</span></span><a class="headerlink" href="#parallel.src.quantum_manager_client.QuantumManagerClient.message_buffer" title="Permalink to this definition">¶</a></dt>
 <dd><p>list of messages to send to quantum manager server.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>List</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt id="parallel.src.quantum_manager_client.QuantumManagerClient.disconnect_from_server">
-<code class="sig-name descname">disconnect_from_server</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#parallel.src.quantum_manager_client.QuantumManagerClient.disconnect_from_server" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="parallel.src.quantum_manager_client.QuantumManagerClient.disconnect_from_server">
+<span class="sig-name descname"><span class="pre">disconnect_from_server</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#parallel.src.quantum_manager_client.QuantumManagerClient.disconnect_from_server" title="Permalink to this definition">¶</a></dt>
 <dd><p>Closes socket connection with quantum manager server.</p>
 <p>Uses a message of type <cite>QuantumManagerServer.CLOSE</cite>.</p>
 <dl class="simple">
@@ -135,8 +136,8 @@ Qubits managed or accessed between processes are stored on a remote quantum mana
 </dd></dl>
 
 <dl class="py method">
-<dt id="parallel.src.quantum_manager_client.QuantumManagerClient.kill">
-<code class="sig-name descname">kill</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#parallel.src.quantum_manager_client.QuantumManagerClient.kill" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="parallel.src.quantum_manager_client.QuantumManagerClient.kill">
+<span class="sig-name descname"><span class="pre">kill</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#parallel.src.quantum_manager_client.QuantumManagerClient.kill" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to terminate the connected server.</p>
 <p>Uses a message of type <cite>QuantumManagerMsgType.TERMINATE</cite>.</p>
 <dl class="simple">
@@ -146,11 +147,11 @@ Qubits managed or accessed between processes are stored on a remote quantum mana
 </dd></dl>
 
 <dl class="py method">
-<dt id="parallel.src.quantum_manager_client.QuantumManagerClient.move_manage_to_server">
-<code class="sig-name descname">move_manage_to_server</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">qubit_key</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">sync_state</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#parallel.src.quantum_manager_client.QuantumManagerClient.move_manage_to_server" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="parallel.src.quantum_manager_client.QuantumManagerClient.move_manage_to_server">
+<span class="sig-name descname"><span class="pre">move_manage_to_server</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qubit_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sync_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parallel.src.quantum_manager_client.QuantumManagerClient.move_manage_to_server" title="Permalink to this definition">¶</a></dt>
 <dd><p>Move management of a qubit from the local quantum manager to quantum manager server.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>qubit_key</strong> (<em>int</em>) – qubit key to move.</p></li>
 <li><p><strong>sync_state</strong> (<em>bool</em>) – indicates if server state should be set to match local (default <cite>True</cite>).</p></li>
@@ -160,17 +161,17 @@ Qubits managed or accessed between processes are stored on a remote quantum mana
 </dd></dl>
 
 <dl class="py method">
-<dt id="parallel.src.quantum_manager_client.QuantumManagerClient.new">
-<code class="sig-name descname">new</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">state</span><span class="o">=</span><span class="default_value">1 + 0j, 0j</span></em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#parallel.src.quantum_manager_client.QuantumManagerClient.new" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="parallel.src.quantum_manager_client.QuantumManagerClient.new">
+<span class="sig-name descname"><span class="pre">new</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(1</span> <span class="pre">+</span> <span class="pre">0j,</span> <span class="pre">0j)</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#parallel.src.quantum_manager_client.QuantumManagerClient.new" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to get a new state from server.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>state</strong> (<em>List</em>) – if None, state will be in default state. Otherwise, must match formalism of server.</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>key for the new state generated.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>int</p>
 </dd>
 </dl>
@@ -178,7 +179,7 @@ Qubits managed or accessed between processes are stored on a remote quantum mana
 
 </dd></dl>
 
-</div>
+</section>
 
 
             <div class="clearer"></div>
@@ -187,12 +188,16 @@ Qubits managed or accessed between processes are stored on a remote quantum mana
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="p_quantum_manager.html"
-                        title="previous chapter">Parallel Quantum Manager</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="quantum_manager_server.html"
-                        title="next chapter">Quantum Manager Server</a></p>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="p_quantum_manager.html"
+                          title="previous chapter">Parallel Quantum Manager</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="quantum_manager_server.html"
+                          title="next chapter">Quantum Manager Server</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -204,12 +209,12 @@ Qubits managed or accessed between processes are stored on a remote quantum mana
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -229,14 +234,14 @@ Qubits managed or accessed between processes are stored on a remote quantum mana
         <li class="right" >
           <a href="p_quantum_manager.html" title="Parallel Quantum Manager"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">SeQUeNCe 0.6.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="top.html" >Parallel</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Quantum Manager Client</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2020-2022.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+        &#169; Copyright 2020-2024.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
     </div>
   </body>
 </html>
